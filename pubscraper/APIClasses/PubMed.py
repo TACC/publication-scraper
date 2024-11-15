@@ -1,6 +1,10 @@
 import requests
 import json
 import time
+import logging
+
+format_str=f'[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s'
+logging.basicConfig(level=logging.DEBUG, format=format_str)
 
 
 class Publication:
@@ -11,7 +15,6 @@ class Publication:
         self.authors = authors
 
 
-# FIXME: passing an empty string for a name should remove it from the list!!
 class PubMed:
     def __init__(self):
         self.search_url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi'
@@ -20,13 +23,28 @@ class PubMed:
     def get_UIDs_by_author(self, author_name, rows=10):
         """
         Retrieve a given author's UID publications.
-        :param author_name: name of author
+        :param author_name: name of author {firstName} {lastName}
         :param rows: number of results to return (default is 10)
         :return: A list of UIDs corresponding to papers written by the author
         """
         # prepare Entrez query
-        entrez_author_name = author_name.replace(" ", "+")
-        entrez_author_name += "[author]"
+        if author_name == "":
+            logging.warning("get_UIDs_by_author received an empty string for author search!")
+            return None
+
+        # PubMed searches by {lastName} {firstInitial}{midInitial}
+        # searching by {firstName} {lastName} will always yield no results!
+        split_name = author_name.split()
+        if len(split_name) == 1:
+            entrez_author_name = split_name[0] + "[author]"
+        else:
+            entrez_author_name = split_name[-1] + "+"
+            for name in split_name[:-1]:
+                entrez_author_name += "{initial}".format(initial = name[0])
+            # entrez_author_name = author_name.replace(" ", "+")
+            entrez_author_name += "[Author Name]"
+        logging.info(f'searching for publications by {entrez_author_name}')
+
         params = {
             'db':'pmc',
             'term': entrez_author_name,
@@ -37,15 +55,20 @@ class PubMed:
         response = requests.get(self.search_url, params=params)
 
         if response.status_code != 200:
-            print(f"Error fetching data from PubMed: {response.status_code}")
-            return
+            logging.error(f'Error fetching data from PubMed: {response.status_code}')
+            # print(f"Error fetching data from PubMed: {response.status_code}")
+            return None
 
         data = response.json()
+        logging.debug(json.dumps(data, indent=2))
         id_list = data['esearchresult']['idlist']
 
         if not id_list:
+            logging.warning(f"Received no UIDs for author {author_name}, returning None")
+            logging.debug(f'passed "{entrez_author_name}" to PubMed API')
             return None
 
+        logging.debug(f"received the following UIDs: {id_list}")
         return id_list
 
     def get_summary_by_UIDs(self, UIDs):
@@ -110,6 +133,9 @@ def search_multiple_authors(authors):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
+
+        if author == "":
+            continue
 
         try:
             publications = pubmed.get_publications_by_author(author)
