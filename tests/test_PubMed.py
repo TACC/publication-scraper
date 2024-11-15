@@ -42,3 +42,14 @@ def test_fullname():
         if "BiasNet" in pub['title']:
             biasnet_found = True
     assert biasnet_found == True
+
+def test_result_parity():
+    results_one = PubMed.search_multiple_authors(['william joseph allen'])
+    results_two = PubMed.search_multiple_authors(['w j allen'])
+    pubs_found_one = results_one['william joseph allen']
+    pubs_found_two = results_two['w j allen']
+    assert pubs_found_one == pubs_found_two
+
+def test_limit_number_of_results():
+    results = PubMed.search_multiple_authors(['w j allen'], 2)
+    assert len(results['w j allen']) == 2

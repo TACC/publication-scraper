@@ -4,15 +4,7 @@ import time
 import logging
 
 format_str=f'[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s'
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
-
-class Publication:
-    def __init__(self, journal, pub_date, title, authors):
-        self.journal = journal,
-        self.pub_date = pub_date,
-        self.title = title,
-        self.authors = authors
+logging.basicConfig(level=logging.WARNING, format=format_str)
 
 
 class PubMed:
@@ -29,7 +21,7 @@ class PubMed:
         """
         # prepare Entrez query
         if author_name == "":
-            logging.warning("get_UIDs_by_author received an empty string for author search!")
+            logging.warning("received empty string for author name, returning None")
             return None
 
         # PubMed searches by {lastName} {firstInitial}{midInitial}
@@ -78,6 +70,7 @@ class PubMed:
         :return: a list of Publication instances holding summary data for each publication
         """
         if not UIDs:
+            logging.warning("received no UIDs, returning None")
             return None
         
         # join UIDs list into one 'csv' string
@@ -90,7 +83,7 @@ class PubMed:
 
         response = requests.get(self.summary_url, params=params)
         if response.status_code != 200:
-            print(f'Error fetching summaries from PubMed: {response.status_code}')
+            logging.error(f"Error fetching summaries from PubMed: {response.status_code}")
             return
 
         data = response.json()
@@ -127,7 +120,7 @@ class PubMed:
         return summary_info
 
 
-def search_multiple_authors(authors):
+def search_multiple_authors(authors, rows=10):
     pubmed = PubMed()
     all_results = {}
 
@@ -135,13 +128,14 @@ def search_multiple_authors(authors):
         print(f"Searching for publications by {author}...")
 
         if author == "":
+            logging.warning("received empty string for author name, continuing...")
             continue
 
         try:
-            publications = pubmed.get_publications_by_author(author)
+            publications = pubmed.get_publications_by_author(author, rows)
             all_results[author] = publications
         except Exception as e:
-            print(f"Error fetching data for {author}: {e}")
+            logging.error(f"Error fetching data for {author}: {e}")
         time.sleep(0.4)    # avoids RESPONSE 429 (rate limit violation)
 
     return all_results
