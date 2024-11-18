@@ -1,5 +1,11 @@
 import requests
 import json
+import re
+import logging
+
+# Set up basic logging
+format_str = "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
+logging.basicConfig(level=logging.DEBUG, format=format_str)
 
 class Elsevier:
     def __init__(self, api_key):
@@ -10,6 +16,34 @@ class Elsevier:
         self.base_url = "https://api.elsevier.com/content/search/scopus"
         self.api_key = api_key
 
+    def normalize_author_name(self, author_name):
+        """
+        Normalize author name to the most consistent format for querying the Elsevier API.
+        :param author_name: Author's name (either in "First Last" or "Last, First" format).
+        :return: Standardized author name in the "First Last" format.
+        """
+        # Trim leading/trailing whitespace and normalize to lowercase
+        author_name = author_name.strip().lower()
+
+        # Case 1: If the name is in "Last, First" format (e.g., "MOORE, T. C.")
+        match = re.match(r"^([A-Za-z]+),\s*([A-Za-z]+(?:\s+[A-Za-z]+)?)\s*$", author_name)
+        if match:
+            last_name = match.group(1)
+            first_name = match.group(2)
+            # We standardize "T. C." as "Timothy C."
+            first_name = " ".join([name.capitalize() for name in first_name.split()])
+            return f"{first_name} {last_name}"
+
+        # Case 2: If the name is already in "First Last" format (e.g., "Timothy C. Moore")
+        # Normalize initials and spaces, and handle cases like "Wei H. Chen" or "Wei H Cheng"
+        name_parts = author_name.split()
+
+        # Standardize initials (remove periods and capitalize correctly)
+        name_parts = [part.capitalize() if '.' not in part else part.replace('.', '').capitalize() for part in name_parts]
+
+        # If initials are present, treat the full name as "First Last" format
+        return " ".join(name_parts)
+
     def get_publications_by_author(self, author_name, rows=10):
         """
         Retrieve publications from Elsevier by author name.
@@ -17,9 +51,16 @@ class Elsevier:
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
+        if not author_name.strip():
+            logging.warning("Received empty string for author name, skipping search.")
+            return None
+
+        # Normalize the author name
+        normalized_name = self.normalize_author_name(author_name)
+
         # Prepare the query parameters
         params = {
-            'query': f'AUTHOR-NAME({author_name})',
+            'query': f'AUTHOR-NAME({normalized_name})',
             'count': rows,
             'apiKey': self.api_key
         }
@@ -28,13 +69,16 @@ class Elsevier:
         headers = {
             "Accept": "application/json"
         }
+
+        # Send the request to the Springer API
         response = requests.get(self.base_url, headers=headers, params=params)
 
-        # Check if the request was successful
+        # Check if the response was successful
         if response.status_code != 200:
-            raise Exception(f"Error fetching data from Elsevier API: {response.status_code}")
+            logging.error(f"Error fetching data from Elsevier API: {response.status_code}")
+            return None
 
-        # Parse the JSON response
+        # Log the raw response for debugging
         data = response.json()
 
         # Extract publication records
@@ -67,10 +111,10 @@ class Elsevier:
                 'authors': ", ".join(authors),
             }
             publications.append(publication)
-
+        
         return publications
 
-def search_multiple_authors(api_key, authors):
+def search_multiple_authors(api_key, authors, limit=10):
     """
     Search for publications by multiple authors.
     :param api_key: Elsevier API key
@@ -82,19 +126,23 @@ def search_multiple_authors(api_key, authors):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
+        if author == "":
+            logging.warning("Received empty string for author name, continuing...")
+            continue
         try:
             # Get publications for each author
-            publications = elsevier_api.get_publications_by_author(author)
-            all_results[author] = publications
+            publications = elsevier_api.get_publications_by_author(author,rows=limit)
+            all_results[author] = publications if publications else []
         except Exception as e:
-            print(f"Error fetching data for {author}: {e}")
+            logging.error(f"Error fetching data for {author}: {e}")
+            all_results[author] = []  # On error, return an empty list for the author
 
     return all_results
 
 if __name__ == "__main__":
     # Get API key
-    api_key = input("Enter your Elsevier API key: ")
-
+    api_key = ""
+    
     # Input: list of author names (comma-separated input)
     author_names = input("Enter author names (comma-separated): ").split(',')
 
