@@ -1,3 +1,6 @@
 tests/__pycache__/
 pubscraper/APIClasses/__pycache__/
 pubscraper/__pycache__
+bin/
+lib/
+pyvenv.cfg
