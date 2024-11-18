@@ -1,5 +1,11 @@
 import requests
 import json
+import re
+import logging
+
+# Set up basic logging
+format_str = "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
+logging.basicConfig(level=logging.DEBUG, format=format_str)
 
 class Wiley:
     def __init__(self, api_key):
@@ -10,16 +16,46 @@ class Wiley:
         self.base_url = "https://api.wiley.com/api/v1/articles" 
         self.api_key = api_key
 
+    def normalize_author_name(self, author_name):
+        """
+        Normalize author name to the most consistent format for querying the Springer API.
+        :param author_name: Author's name (either in "First Last" or "Last, First" format).
+        :return: Standardized author name in the "First Last" format.
+        """
+        # Trim leading/trailing whitespace
+        author_name = author_name.strip()
+        
+        # Case 1: If the name is in "Last, First" format (e.g., "MOORE, T. C.")
+        match = re.match(r"^([A-Za-z]+),\s*([A-Za-z]+(?:\s+[A-Za-z]+)?)\s*(.*)$", author_name)
+        if match:
+            last_name = match.group(1)
+            first_name = match.group(2)
+            # We standardize "T. C." as "Timothy C."
+            first_name = " ".join([name.capitalize() for name in first_name.split()])
+            return f"{first_name} {last_name}"
+
+        # Case 2: If the name is already in "First Last" format (e.g., "Timothy C. Moore")
+        # Just return the name as is, with proper capitalization
+        return " ".join([name.capitalize() for name in author_name.split()])
+    
+
     def get_publications_by_author(self, author_name, rows=10):
         """
-        Retrieve publications from Wiley by author name.
-        :param author_name: The name of the author to search for
+        Retrieve publications from Springer by author name, with flexible search options.
+        :param author_name: The name of the author to search for (full name, initials, etc.)
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
+        if author_name.strip() == "":
+            logging.warning("Received empty string for author name in search query, returning None")
+            return None
+
+        # Normalize the author name before querying
+        normalized_name = self.normalize_author_name(author_name)
+
         # Prepare the query parameters
         params = {
-            'author': author_name,
+            'author': normalized_name,
             'count': rows,
         }
 
@@ -33,7 +69,8 @@ class Wiley:
 
         # Check if the request was successful
         if response.status_code != 200:
-            raise Exception(f"Error fetching data from Wiley API: {response.status_code}")
+            logging.error(f"Error fetching data from Springer API: {response.status_code}")
+            return None
 
         # Parse the JSON response
         data = response.json()
@@ -63,7 +100,7 @@ class Wiley:
 
         return publications
 
-def search_multiple_authors(api_key, authors):
+def search_multiple_authors(api_key, authors, limit=10):
     """
     Search for publications by multiple authors.
     :param api_key: Wiley API key
@@ -75,12 +112,15 @@ def search_multiple_authors(api_key, authors):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
+        if author == "":
+            logging.warning("Received empty string for author name, continuing...")
+            continue
         try:
             # Get publications for each author
             publications = wiley_api.get_publications_by_author(author)
             all_results[author] = publications
         except Exception as e:
-            print(f"Error fetching data for {author}: {e}")
+            logging.error(f"Error fetching data for {author}: {e}")
 
     return all_results
 
