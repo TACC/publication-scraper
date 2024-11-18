@@ -4,3 +4,4 @@ pubscraper/__pycache__
 bin/
 lib/
 pyvenv.cfg
+include/
