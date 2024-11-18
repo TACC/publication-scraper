@@ -147,8 +147,6 @@ def search_multiple_authors(authors, rows=10):
 
 
 def main():
-    # authors = ['albert', 'albert einstein', 'albert einsten']
-    # authors = ['albert einstein']
     author_names = input("Enter author names (comma-separated): ").split(",")
     author_names = [name.strip() for name in author_names]
 
