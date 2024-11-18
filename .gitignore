@@ -5,3 +5,5 @@ bin/
 lib/
 pyvenv.cfg
 include/
+*/.coverage
+.coverage
