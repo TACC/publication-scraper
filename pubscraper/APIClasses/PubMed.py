@@ -24,6 +24,7 @@ class PubMed:
         # prepare Entrez query
 
         if rows < 0:
+            logging.error(f"Rows must be a postive number (received {rows})")
             raise ValueError("Rows must be a positive number")
 
         if author_name == "":
