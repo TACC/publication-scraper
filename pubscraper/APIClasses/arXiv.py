@@ -13,6 +13,26 @@ class ArxivAPI:
         Initialize the arXiv API client.
         """
         self.base_url = "http://export.arxiv.org/api/query"
+
+    def standardize_author_name(self, author_name):
+        """
+        Standardize author names to handle variations like "T C Moore", "Timothy C Moore", and "Timothy C. Moore".
+        :param author_name: The name to standardize
+        :return: Standardized author name in the format "Timothy C. Moore"
+        """
+        name_parts = author_name.split()
+        
+        # If the author has a middle initial, ensure it is followed by a dot
+        if len(name_parts) == 3 and len(name_parts[1]) == 1:
+            # Make sure the middle initial is followed by a dot
+            middle_name = name_parts[1] + "."
+            return f"{name_parts[0]} {middle_name} {name_parts[2]}"
+        elif len(name_parts) == 2:  # No middle name, just first and last name
+            return f"{name_parts[0]} {name_parts[1]}"
+        else:
+            # Handle other cases (like middle name fully spelled out)
+            return " ".join(name_parts)
+
     
     def get_publications_by_author(self, author_name, start=0, max_results=10):
         """
@@ -63,26 +83,6 @@ class ArxivAPI:
                 publications.append(paper)
 
         return publications
-
-    def standardize_author_name(self, author_name):
-        """
-        Standardize author names to handle variations like "T C Moore", "Timothy C Moore", and "Timothy C. Moore".
-        :param author_name: The name to standardize
-        :return: Standardized author name in the format "Timothy C. Moore"
-        """
-        name_parts = author_name.split()
-        
-        # If the author has a middle initial, ensure it is followed by a dot
-        if len(name_parts) == 3 and len(name_parts[1]) == 1:
-            # Make sure the middle initial is followed by a dot
-            middle_name = name_parts[1] + "."
-            return f"{name_parts[0]} {middle_name} {name_parts[2]}"
-        elif len(name_parts) == 2:  # No middle name, just first and last name
-            return f"{name_parts[0]} {name_parts[1]}"
-        else:
-            # Handle other cases (like middle name fully spelled out)
-            return " ".join(name_parts)
-
     def get_text(self, element, tag, default=""):
         """
         Safely extract text from an XML element, returning a default value if the element is not found.

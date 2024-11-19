@@ -56,7 +56,7 @@ class Wiley:
         # Prepare the query parameters
         params = {
             'author': normalized_name,
-            'count': rows,
+            'count': rows, 
         }
 
         # Set the headers with the API key for authentication

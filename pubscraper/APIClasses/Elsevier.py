@@ -38,8 +38,9 @@ class Elsevier:
         # Normalize initials and spaces, and handle cases like "Wei H. Chen" or "Wei H Cheng"
         name_parts = author_name.split()
 
-        # Standardize initials (remove periods and capitalize correctly)
-        name_parts = [part.capitalize() if '.' not in part else part.replace('.', '').capitalize() for part in name_parts]
+        # Standardize initials
+        name_parts = [part.capitalize() if '.' not in part else part.capitalize() for part in name_parts]
+
 
         # If initials are present, treat the full name as "First Last" format
         return " ".join(name_parts)
