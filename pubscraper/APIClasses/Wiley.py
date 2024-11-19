@@ -16,27 +16,27 @@ class Wiley:
         self.base_url = "https://api.wiley.com/api/v1/articles" 
         self.api_key = api_key
 
-    def normalize_author_name(self, author_name):
+    def standardize_author_name(self, author_name):
         """
-        Normalize author name to the most consistent format for querying the Springer API.
-        :param author_name: Author's name (either in "First Last" or "Last, First" format).
-        :return: Standardized author name in the "First Last" format.
+        Standardize author names to handle variations like "T C Moore", "Timothy C Moore", and "Timothy C. Moore".
+        :param author_name: The name to standardize
+        :return: Standardized author name in the format "Timothy C. Moore"
         """
-        # Trim leading/trailing whitespace
-        author_name = author_name.strip()
+        name_parts = author_name.split()
         
-        # Case 1: If the name is in "Last, First" format (e.g., "MOORE, T. C.")
-        match = re.match(r"^([A-Za-z]+),\s*([A-Za-z]+(?:\s+[A-Za-z]+)?)\s*(.*)$", author_name)
-        if match:
-            last_name = match.group(1)
-            first_name = match.group(2)
-            # We standardize "T. C." as "Timothy C."
-            first_name = " ".join([name.capitalize() for name in first_name.split()])
-            return f"{first_name} {last_name}"
-
-        # Case 2: If the name is already in "First Last" format (e.g., "Timothy C. Moore")
-        # Just return the name as is, with proper capitalization
-        return " ".join([name.capitalize() for name in author_name.split()])
+        # Capitalize each part of the name
+        name_parts = [part.capitalize() for part in name_parts]
+        
+        # If the author has a middle initial, ensure it is followed by a dot
+        if len(name_parts) == 3 and len(name_parts[1]) == 1:
+            # Make sure the middle initial is followed by a dot
+            middle_name = name_parts[1] + "."
+            return f"{name_parts[0]} {middle_name} {name_parts[2]}"
+        elif len(name_parts) == 2:  # No middle name, just first and last name
+            return f"{name_parts[0]} {name_parts[1]}"
+        else:
+            # Handle other cases (like middle name fully spelled out)
+            return " ".join(name_parts)
     
 
     def get_publications_by_author(self, author_name, rows=10):

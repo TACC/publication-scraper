@@ -22,6 +22,9 @@ class ArxivAPI:
         """
         name_parts = author_name.split()
         
+        # Capitalize each part of the name
+        name_parts = [part.capitalize() for part in name_parts]
+        
         # If the author has a middle initial, ensure it is followed by a dot
         if len(name_parts) == 3 and len(name_parts[1]) == 1:
             # Make sure the middle initial is followed by a dot
