@@ -5,7 +5,9 @@ import logging
 format_str = (
     "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
 )
-logging.basicConfig(level=logging.WARNING, format=format_str)
+logging.basicConfig(level=logging.INFO, format=format_str)
+
+# NOTE: we might want to limit results to works published after TACC was founded
 
 
 class CrossRef:
@@ -16,10 +18,12 @@ class CrossRef:
     def extract_journal(self, publication_item):
         try:
             journal = publication_item["container-title"][0]
-            logging.info(f"Successfully extracted journal: {journal}")
+            logging.debug(f"Successfully extracted journal: {journal}")
             return journal
         except KeyError:
-            logging.error(f"Error fetching container-title from {publication_item}")
+            logging.warning(
+                f"Error fetching container-title from {publication_item} \n"
+            )
             return None
 
     def extract_authors(self, publication_item):
@@ -28,36 +32,47 @@ class CrossRef:
             try:
                 name = author["given"] + " " + author["family"]
             except KeyError:
-                name = author["family"]
-            except Exception:
-                logging.error(f"No author name found in {author}")
+                try:
+                    name = author["family"]
+                except KeyError:
+                    logging.warning(f"No author name found in {author} \n")
+                    return None
+                logging.warning(f"No author name found in {author} \n")
                 return None
             authors.append(name)
-            logging.info(f"added {name} to author list")
-        return authors
+            logging.debug(f"added {name} to author list")
+        return (",").join(authors)
 
     def extract_publication_date(self, publication_item):
         logging.debug(json.dumps(publication_item, indent=2))
         try:
             date_list = publication_item["published-print"]["date-parts"][0]
             date_list = [str(date) for date in date_list]
-            logging.info(f"Successfully extracted date_list: {date_list}")
-            date_string = "-".join(date_list)
+            logging.debug(f"Successfully extracted date_list: {date_list}")
+            date_string = "/".join(date_list)
             return date_string
         except KeyError:  # query does NOT contain publication date
-            logging.error(f"Error fetching published-print fron {publication_item}")
+            logging.warning(
+                f"Error fetching published-print from {publication_item} \n"
+            )
             return None
 
     def extract_title(self, publication_item):
         try:
             title = publication_item["title"][0]
-            logging.info(f"Successfuly extracted title: {title}")
+            logging.debug(f"Successfuly extracted title: {title}")
             return title
         except KeyError:
-            logging.error(f"Error fetching title from {publication_item}")
+            logging.warning(f"Error fetching title from {publication_item} \n")
             return None
 
-    def get_publications_by_author(self, author_name, rows=10):
+    def is_valid_pub(self, pub: dict[str, str]) -> bool:
+        for item in pub:
+            if pub[item] is None:
+                return False
+        return True
+
+    def get_publications_by_author(self, author_name, rows=10, offset=0):
         """
         Given the name of an author, search CrossRef for works written by
         that author name
@@ -67,17 +82,21 @@ class CrossRef:
         publication date, title, and list of authors for each publication
         """
 
+        logging.info(f"requesting {rows} publications from {author_name}")
+
         if rows < 0:
             logging.error(f"Rows must be a positive number (received {rows})")
             raise ValueError("Rows must be a positive number")
 
         if author_name == "":
             logging.warning("received empty string for author name, returning None")
+            return None
 
         params = {
             "query.author": author_name.replace(" ", "+"),
-            "rows": "10",
+            "rows": rows,
             "select": "author,title,container-title,published-print",
+            "offset": offset,
         }
 
         response = requests.get(self.base_url, params=params)
@@ -88,6 +107,8 @@ class CrossRef:
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
+
+        total_results = data["message"]["total-results"]
 
         publications = []
 
@@ -103,9 +124,44 @@ class CrossRef:
                 "title": title,
                 "authors": authors,
             }
-            publications.append(pub)
 
-        return publications
+            if self.is_valid_pub(pub):
+                publications.append(pub)
+
+        logging.info(
+            f"found {len(publications)} valid publications for author {author_name}"
+        )
+
+        return total_results, publications
+
+    def aggregate_publications(self, author: str, rows: int):
+        publications = []
+        desired_rows = rows
+        offset = len(publications)
+        logging.info(
+            f"Initial request: requesting {rows} publications from {author} (offset = {offset})"
+        )
+        while len(publications) < desired_rows:
+            total_results, pubs = self.get_publications_by_author(author, rows, offset)
+            logging.info(f"Received {len(pubs)} valid publications for {author}")
+            publications += pubs
+
+            if total_results < rows:
+                logging.warning(
+                    f"Requested {rows} publications from {author}, found {total_results}"
+                )
+                return publications or None
+
+            offset += rows
+            rows -= len(pubs)
+            logging.info(
+                f"Requesting {rows} more publications by {author} (offset = {offset})"
+            )
+
+        logging.info(
+            f"Retrieved {len(publications)} publications by {author} from CrossRef"
+        )
+        return publications or None
 
 
 def search_multiple_authors(authors: list[str], rows: int = 10):
@@ -119,7 +175,7 @@ def search_multiple_authors(authors: list[str], rows: int = 10):
             logging.warning("Received empty string for author name, continuing...")
 
         try:
-            publications = crossref.get_publications_by_author(author, rows)
+            publications = crossref.aggregate_publications(author, rows)
             all_results[author] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}, {e}")
@@ -131,7 +187,7 @@ def main() -> None:
     author_names = input("Enter author names(comma-separated): ").split(",")
     author_names = [name.strip() for name in author_names]
 
-    result = search_multiple_authors(author_names, 1)
+    result = search_multiple_authors(author_names, 10)
     print(json.dumps(result, indent=2))
 
 
