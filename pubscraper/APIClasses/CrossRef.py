@@ -5,9 +5,16 @@ import logging
 format_str = (
     "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
 )
-logging.basicConfig(level=logging.INFO, format=format_str)
+logging.basicConfig(level=logging.debug, format=format_str)
 
 # NOTE: we might want to limit results to works published after TACC was founded
+
+"""
+Many results from CrossRef are are missing dadta we're interested in. Currently,
+we skip over results with missing data and make another request. If we requested
+10 rows, we repeat this process until we have 10 valid publications for each author.
+This is a slow process, and we should think about better solutions
+"""
 
 
 class CrossRef:
@@ -38,13 +45,12 @@ class CrossRef:
                     logging.warning(f"No author name found in {author} \n")
                     return None
                 logging.warning(f"No author name found in {author} \n")
-                return None
             authors.append(name)
             logging.debug(f"added {name} to author list")
         return (",").join(authors)
 
     def extract_publication_date(self, publication_item):
-        logging.debug(json.dumps(publication_item, indent=2))
+        # logging.debug(json.dumps(publication_item, indent=2))
         try:
             date_list = publication_item["published-print"]["date-parts"][0]
             date_list = [str(date) for date in date_list]
@@ -97,6 +103,7 @@ class CrossRef:
             "rows": rows,
             "select": "author,title,container-title,published-print",
             "offset": offset,
+            "mailto": "jlh7459@my.utexas.edu",
         }
 
         response = requests.get(self.base_url, params=params)
