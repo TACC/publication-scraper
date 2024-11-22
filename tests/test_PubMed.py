@@ -89,3 +89,4 @@ def test_HTTP_failure_summaries():
 
 def test_failure_multiple_authors():
     empty_results = PubMed.search_multiple_authors(["kelsey", "erik"], -1)
+    assert empty_results == {}

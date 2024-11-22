@@ -16,12 +16,17 @@ class PubMed:
 
     def get_UIDs_by_author(self, author_name, rows=10):
         """
-        Retrieve a given author's UID publications.
+        Retrieve a given author's UID publications
         :param author_name: name of author {firstName} {lastName}
         :param rows: number of results to return (default is 10)
         :return: A list of UIDs corresponding to papers written by the author
         """
         # prepare Entrez query
+
+        if rows < 0:
+            logging.error(f"Rows must be a postive number (received {rows})")
+            raise ValueError("Rows must be a positive number")
+
         if author_name == "":
             logging.warning("received empty string for author name, returning None")
             return None
@@ -49,6 +54,7 @@ class PubMed:
 
         if response.status_code != 200:
             logging.error(f"Error fetching data from PubMed: {response.status_code}")
+            return None
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
@@ -111,6 +117,13 @@ class PubMed:
         return publications
 
     def get_publications_by_author(self, author_name, rows=10):
+        """
+        Given the name of an author, search PubMed Central for
+        works written by that author name
+        :params author_name: name of author to search
+        :params rows: maximum number of publications to return (default is 10)
+        :return: a list of publication objects/dicts holding summary data for each publication
+        """
         UIDs = self.get_UIDs_by_author(author_name, rows)
         summary_info = self.get_summary_by_UIDs(UIDs)
 
@@ -118,6 +131,12 @@ class PubMed:
 
 
 def search_multiple_authors(authors, rows=10):
+    """
+    Search PubMed Central for works written by multiple authors
+    :params authors: list of author names
+    :params rows: maximum number of publications to return per author (default is 10)
+    :return: a dict {author_name: {summary_info}} for each author
+    """
     pubmed = PubMed()
     all_results = {}
 
