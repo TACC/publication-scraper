@@ -59,3 +59,33 @@ def test_result_parity():
 def test_limit_number_of_results():
     results = PubMed.search_multiple_authors(["w j allen"], 2)
     assert len(results["w j allen"]) == 2
+
+
+def test_should_fail():
+    pb = PubMed.PubMed()
+    with pytest.raises(Exception):
+        pb.get_UIDs_by_author("w j allen", -1)
+
+
+def test_bad_author_name():
+    pb = PubMed.PubMed()
+    result = pb.get_UIDs_by_author("")
+    assert result is None
+
+
+def test_HTTP_failure_UIDs():
+    pb = PubMed.PubMed()
+    pb.search_url = "https://httpstat.us/500"
+    result = pb.get_UIDs_by_author("joe hendrix", 1)
+    assert result is None
+
+
+def test_HTTP_failure_summaries():
+    pb = PubMed.PubMed()
+    pb.summary_url = "https://httpstat.us/500"
+    result = pb.get_summary_by_UIDs(["12345"])
+    assert result is None
+
+
+def test_failure_multiple_authors():
+    empty_results = PubMed.search_multiple_authors(["kelsey", "erik"], -1)
