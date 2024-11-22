@@ -4,7 +4,7 @@ import time
 import logging
 
 format_str = (
-    f"[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
+    "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
 )
 logging.basicConfig(level=logging.DEBUG, format=format_str)
 
@@ -35,7 +35,6 @@ class PubMed:
             entrez_author_name = split_name[-1] + "+"
             for name in split_name[:-1]:
                 entrez_author_name += "{initial}".format(initial=name[0])
-            # entrez_author_name = author_name.replace(" ", "+")
             entrez_author_name += "[Author Name]"
         logging.info(f"searching for publications by {entrez_author_name}")
 
@@ -50,8 +49,6 @@ class PubMed:
 
         if response.status_code != 200:
             logging.error(f"Error fetching data from PubMed: {response.status_code}")
-            # print(f"Error fetching data from PubMed: {response.status_code}")
-            return None
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
@@ -71,7 +68,8 @@ class PubMed:
         """
         Given a list of UIDs, retrieve summary information for each UID
         :params UIDs: a list of UIDs
-        :return: a list of Publication instances holding summary data for each publication
+        :return: a list of publication objects/dicts holding UID, journal
+        name, publication date, title, and a list of authors for each publication
         """
         if not UIDs:
             logging.warning("received no UIDs, returning None")
@@ -101,12 +99,6 @@ class PubMed:
             for author_object in summary_object["authors"]:
                 author_list.append(author_object["name"])
 
-            # pub = Publication(
-            #     journal=summary_object['fulljournalname'],
-            #     pub_date=summary_object['sortdate'],
-            #     title=summary_object['title'],
-            #     authors=author_list
-            # )
             pub = {
                 "id": uid,
                 "journal": summary_object["fulljournalname"],
@@ -147,8 +139,6 @@ def search_multiple_authors(authors, rows=10):
 
 
 def main():
-    # authors = ['albert', 'albert einstein', 'albert einsten']
-    # authors = ['albert einstein']
     author_names = input("Enter author names (comma-separated): ").split(",")
     author_names = [name.strip() for name in author_names]
 
