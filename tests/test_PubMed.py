@@ -1,6 +1,7 @@
 import pytest
 from pubscraper.APIClasses import PubMed
 
+
 def test_skip_empty_name():
     results = PubMed.search_multiple_authors([""])
     assert results == {}
