@@ -59,12 +59,14 @@ class Springer:
             'api_key': self.api_key
         }
 
-        # Send the request to the Springer API
-        response = requests.get(self.base_url, params=params)
-
-        if response.status_code != 200:
-            logging.error(f"Error fetching data from Springer API: {response.status_code}")
+        # Error handling when interacting with Springer APIs.
+        try:
+            response = requests.get(self.base_url, params=params, timeout=10)  # Send the request to the Springer API
+            response.raise_for_status()  # Raises HTTP Error for bad responses
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Springer API Request error: {e}")
             return None
+
 
         # Parse the JSON response
         data = response.json()
