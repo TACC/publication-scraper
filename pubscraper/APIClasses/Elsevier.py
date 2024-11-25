@@ -1,6 +1,5 @@
 import requests
 import json
-import re
 import logging
 
 # Set up basic logging
@@ -51,7 +50,7 @@ class Elsevier:
             return None
 
         # Normalize the author name
-        normalized_name = self.normalize_author_name(author_name)
+        normalized_name = self.standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {
@@ -136,7 +135,7 @@ def search_multiple_authors(api_key, authors, limit=10):
 
 if __name__ == "__main__":
     # Get API key
-    api_key = ""
+    api_key = "55173f3f651a1757034a3756070c8399"
     
     # Input: list of author names (comma-separated input)
     author_names = input("Enter author names (comma-separated): ").split(',')
