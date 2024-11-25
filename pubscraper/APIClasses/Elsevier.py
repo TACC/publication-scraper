@@ -67,7 +67,7 @@ class Elsevier:
         
         # Error handling when interacting with Elsevier APIs.
         try:
-            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)  # Send the request to the Springer API
+            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)  # Send the request to the Elsevier API
             response.raise_for_status()  # Raises HTTP Error for bad responses
         except requests.exceptions.RequestException as e:
             logging.error(f"Elsevier API Request error: {e}")
