@@ -71,7 +71,8 @@ class ArxivAPI:
         publications = []
 
         for entry in root.findall("{http://www.w3.org/2005/Atom}entry"):
-            authors = [self.get_text(author, "{http://www.w3.org/2005/Atom}name") for author in entry.findall("{http://www.w3.org/2005/Atom}author")]
+            authors = ", ".join([self.get_text(author, "{http://www.w3.org/2005/Atom}name") for author in entry.findall("{http://www.w3.org/2005/Atom}author")])
+
 
             # Check if the exact author name is in the authors list
             if author_name_standardized in authors:
