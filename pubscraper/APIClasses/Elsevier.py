@@ -137,7 +137,7 @@ def search_multiple_authors(api_key, authors, limit=10):
 
 if __name__ == "__main__":
     # Get API key
-    api_key = "55173f3f651a1757034a3756070c8399"
+    api_key = ""
     
     # Input: list of author names (comma-separated input)
     author_names = input("Enter author names (comma-separated): ").split(',')
