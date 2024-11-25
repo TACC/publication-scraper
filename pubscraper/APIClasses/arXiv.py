@@ -59,12 +59,14 @@ class ArxivAPI:
             'max_results': max_results
         }
 
-        # Send the request to the arXiv API
-        response = requests.get(self.base_url, params=params)
 
-        if response.status_code != 200:
-            logging.error(f"Error fetching data from arXiv API: {response.status_code}")
-            return None
+        # Error handling when interacting with arXiv APIs.
+        try:
+            response = requests.get(self.base_url, params=params, timeout=10)  # Send the request to the arXiv API
+            response.raise_for_status()  # Raises HTTP Error for bad responses
+        except requests.exceptions.RequestException as e:
+            logging.error(f"arXiv API Request error: {e}")
+
 
         # Parse the XML response
         root = ET.fromstring(response.text)
@@ -72,7 +74,6 @@ class ArxivAPI:
 
         for entry in root.findall("{http://www.w3.org/2005/Atom}entry"):
             authors = ", ".join([self.get_text(author, "{http://www.w3.org/2005/Atom}name") for author in entry.findall("{http://www.w3.org/2005/Atom}author")])
-
 
             # Check if the exact author name is in the authors list
             if author_name_standardized in authors:
