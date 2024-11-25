@@ -1,7 +1,6 @@
 import requests
 import logging
 import json
-import re
 
 format_str = "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.DEBUG, format=format_str)
