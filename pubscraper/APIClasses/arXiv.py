@@ -10,18 +10,23 @@ class ArxivAPI:
         self.base_url = "http://export.arxiv.org/api/query"
 
     def standardize_author_name(self, author_name):
+        """Standardize the author's name to ensure consistency."""
         name_parts = author_name.split()
         name_parts = [part.capitalize() for part in name_parts]
         
         if len(name_parts) == 3 and len(name_parts[1]) == 1:
+            # Initial + last name (e.g., Timothy C Moore -> Timothy C. Moore)
             middle_name = name_parts[1] + "."
             return f"{name_parts[0]} {middle_name} {name_parts[2]}"
         elif len(name_parts) == 2:
+            # First name + Last name (e.g., Timothy Moore -> Timothy Moore)
             return f"{name_parts[0]} {name_parts[1]}"
         else:
+            # Handle other formats (e.g., just first name, last name, etc.)
             return " ".join(name_parts)
 
     def get_publications_by_author(self, author_name, start=0, max_results=10):
+        """Fetch publications from arXiv for a standardized author name."""
         if author_name.strip() == "":
             logging.warning("Received empty string for author name in search query, returning None")
             return None
@@ -38,6 +43,7 @@ class ArxivAPI:
             response.raise_for_status()
         except requests.exceptions.RequestException as e:
             logging.error(f"arXiv API Request error: {e}")
+            return []
 
         root = ET.fromstring(response.text)
         publications = []
@@ -58,6 +64,7 @@ class ArxivAPI:
         return publications
 
     def get_text(self, element, tag, default=""):
+        """Helper method to safely get text from XML elements."""
         if element is not None:
             found_element = element.find(tag)
             if found_element is not None:
@@ -74,8 +81,14 @@ def search_multiple_authors(authors, max_results=10):
         if not author.strip():  # Skip empty author names
             continue
         try:
+            # Get the publications for this author
             publications = arxiv_api.get_publications_by_author(author, max_results=max_results)
-            all_results[author] = publications
+            
+            # Standardize the name to keep it consistent in the results
+            standardized_name = arxiv_api.standardize_author_name(author)
+            
+            # Store the publications using the standardized name
+            all_results[standardized_name] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")
             all_results[author] = []
