@@ -1,13 +1,16 @@
 import requests
 import json
-import re
 import logging
+from Base import Base
 
 # Set up basic logging
-format_str = "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
+format_str = (
+    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
+)
 logging.basicConfig(level=logging.DEBUG, format=format_str)
 
-class Elsevier:
+
+class Elsevier(Base):
     def __init__(self, api_key):
         """
         Initialize the Elsevier API client.
@@ -23,10 +26,10 @@ class Elsevier:
         :return: Standardized author name in the format "Timothy C. Moore"
         """
         name_parts = author_name.split()
-        
+
         # Capitalize each part of the name
         name_parts = [part.capitalize() for part in name_parts]
-        
+
         # If the author has a middle initial, ensure it is followed by a dot
         if len(name_parts) == 3 and len(name_parts[1]) == 1:
             # Make sure the middle initial is followed by a dot
@@ -37,7 +40,6 @@ class Elsevier:
         else:
             # Handle other cases (like middle name fully spelled out)
             return " ".join(name_parts)
-
 
     def get_publications_by_author(self, author_name, rows=10):
         """
@@ -55,22 +57,22 @@ class Elsevier:
 
         # Prepare the query parameters
         params = {
-            'query': f'AUTHOR-NAME({normalized_name})',
-            'count': rows,
-            'apiKey': self.api_key
+            "query": f"AUTHOR-NAME({normalized_name})",
+            "count": rows,
+            "apiKey": self.api_key,
         }
 
         # Send the request to the Elsevier API
-        headers = {
-            "Accept": "application/json"
-        }
+        headers = {"Accept": "application/json"}
 
         # Send the request to the Springer API
         response = requests.get(self.base_url, headers=headers, params=params)
 
         # Check if the response was successful
         if response.status_code != 200:
-            logging.error(f"Error fetching data from Elsevier API: {response.status_code}")
+            logging.error(
+                f"Error fetching data from Elsevier API: {response.status_code}"
+            )
             return None
 
         # Log the raw response for debugging
@@ -78,36 +80,39 @@ class Elsevier:
 
         # Extract publication records
         publications = []
-        for record in data.get('search-results', {}).get('entry', []):
+        for record in data.get("search-results", {}).get("entry", []):
             # Get basic publication details
-            title = record.get('dc:title', 'No title available')
-            publication_name = record.get('prism:publicationName', 'No journal available')
-            publication_date = record.get('prism:coverDate', 'No date available')
-            content_type = record.get('subtypeDescription', 'No type available')
-            doi = record.get('prism:doi', 'No DOI available')
+            title = record.get("dc:title", "No title available")
+            publication_name = record.get(
+                "prism:publicationName", "No journal available"
+            )
+            publication_date = record.get("prism:coverDate", "No date available")
+            content_type = record.get("subtypeDescription", "No type available")
+            doi = record.get("prism:doi", "No DOI available")
 
             # Get authors (ensure multiple authors are captured)
             authors = []
-            if 'author' in record:
-                for author in record['author']:
-                    author_name = author.get('authname', '')
+            if "author" in record:
+                for author in record["author"]:
+                    author_name = author.get("authname", "")
                     if author_name:
                         authors.append(author_name)
-            elif 'dc:creator' in record:
-                authors.append(record['dc:creator'])
+            elif "dc:creator" in record:
+                authors.append(record["dc:creator"])
 
             # Create a dictionary with the relevant information
             publication = {
-                'doi': doi,
-                'journal': publication_name,
-                'content_type': content_type,
-                'publication_date': publication_date,
-                'title': title,
-                'authors': ", ".join(authors),
+                "doi": doi,
+                "journal": publication_name,
+                "content_type": content_type,
+                "publication_date": publication_date,
+                "title": title,
+                "authors": ", ".join(authors),
             }
             publications.append(publication)
-        
+
         return publications
+
 
 def search_multiple_authors(api_key, authors, limit=10):
     """
@@ -126,7 +131,7 @@ def search_multiple_authors(api_key, authors, limit=10):
             continue
         try:
             # Get publications for each author
-            publications = elsevier_api.get_publications_by_author(author,rows=limit)
+            publications = elsevier_api.get_publications_by_author(author, rows=limit)
             all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")
@@ -134,12 +139,13 @@ def search_multiple_authors(api_key, authors, limit=10):
 
     return all_results
 
+
 if __name__ == "__main__":
     # Get API key
     api_key = ""
-    
+
     # Input: list of author names (comma-separated input)
-    author_names = input("Enter author names (comma-separated): ").split(',')
+    author_names = input("Enter author names (comma-separated): ").split(",")
 
     # Strip any leading/trailing whitespace
     author_names = [name.strip() for name in author_names]

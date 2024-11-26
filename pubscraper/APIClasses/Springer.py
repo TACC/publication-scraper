@@ -1,12 +1,15 @@
 import requests
 import logging
 import json
-import re
+from Base import Base
 
-format_str = "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
+format_str = (
+    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
+)
 logging.basicConfig(level=logging.DEBUG, format=format_str)
 
-class Springer:
+
+class Springer(Base):
     def __init__(self, api_key):
         """
         Initialize the Springer (springernature) API client.
@@ -14,7 +17,6 @@ class Springer:
         """
         self.base_url = "https://api.springernature.com/openaccess/json"
         self.api_key = api_key
-    
 
     def standardize_author_name(self, author_name):
         """
@@ -23,10 +25,10 @@ class Springer:
         :return: Standardized author name in the format "Timothy C. Moore"
         """
         name_parts = author_name.split()
-        
+
         # Capitalize each part of the name
         name_parts = [part.capitalize() for part in name_parts]
-        
+
         # If the author has a middle initial, ensure it is followed by a dot
         if len(name_parts) == 3 and len(name_parts[1]) == 1:
             # Make sure the middle initial is followed by a dot
@@ -46,7 +48,9 @@ class Springer:
         :return: A list of dictionaries containing publication details
         """
         if author_name.strip() == "":
-            logging.warning("Received empty string for author name in search query, returning None")
+            logging.warning(
+                "Received empty string for author name in search query, returning None"
+            )
             return None
 
         # Normalize the author name before querying
@@ -54,16 +58,18 @@ class Springer:
 
         # Prepare the query parameters
         params = {
-            'q': normalized_name,  # Author query (normalized format)
-            'p': rows,  # Limit number of results
-            'api_key': self.api_key
+            "q": normalized_name,  # Author query (normalized format)
+            "p": rows,  # Limit number of results
+            "api_key": self.api_key,
         }
 
         # Send the request to the Springer API
         response = requests.get(self.base_url, params=params)
 
         if response.status_code != 200:
-            logging.error(f"Error fetching data from Springer API: {response.status_code}")
+            logging.error(
+                f"Error fetching data from Springer API: {response.status_code}"
+            )
             return None
 
         # Parse the JSON response
@@ -71,24 +77,24 @@ class Springer:
 
         # Extract publication records
         publications = []
-        for record in data.get('records', []):
-            title = record.get('title', 'No title available')
-            publication_name = record.get('publicationName', 'No journal available')
-            publication_date = record.get('publicationDate', 'No date available')
-            content_type = record.get('contentType', 'No type available')
-            doi = record.get('doi', 'No DOI available')
+        for record in data.get("records", []):
+            title = record.get("title", "No title available")
+            publication_name = record.get("publicationName", "No journal available")
+            publication_date = record.get("publicationDate", "No date available")
+            content_type = record.get("contentType", "No type available")
+            doi = record.get("doi", "No DOI available")
 
-            creators = record.get('creators', [])
-            authors = [creator.get('creator', '') for creator in creators]
+            creators = record.get("creators", [])
+            authors = [creator.get("creator", "") for creator in creators]
 
             if all([title, authors, publication_date, publication_name]):
                 publication = {
-                    'doi': doi,
-                    'journal': publication_name,
-                    'content_type': content_type,
-                    'publication_date': publication_date,
-                    'title': title,
-                    'authors': ", ".join(authors),
+                    "doi": doi,
+                    "journal": publication_name,
+                    "content_type": content_type,
+                    "publication_date": publication_date,
+                    "title": title,
+                    "authors": ", ".join(authors),
                 }
                 publications.append(publication)
 
@@ -120,19 +126,21 @@ def search_multiple_authors(api_key, authors, limit=10):
 
     return all_results
 
+
 # Example usage:
 if __name__ == "__main__":
     # Get API key
     api_key = ""
-    
+
     # Input: list of author names (comma-separated input)
-    author_names = input("Enter author names (comma-separated): ").split(',')
-    
+    author_names = input("Enter author names (comma-separated): ").split(",")
+
     # Strip any leading/trailing whitespace
     author_names = [name.strip() for name in author_names]
-    
+
     # Get results for all authors
     results = search_multiple_authors(api_key, author_names)
-    
+
     # Output the results in JSON format
     print(json.dumps(results, indent=4))
+
