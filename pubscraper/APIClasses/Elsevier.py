@@ -1,7 +1,8 @@
 import requests
 import json
 import logging
-from Base import Base
+
+from pubscraper.APIClasses.Base import Base
 import config
 
 # Set up basic logging

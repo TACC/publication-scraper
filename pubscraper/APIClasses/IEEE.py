@@ -1,6 +1,7 @@
 import requests
 import json
-from Base import Base
+
+from pubscraper.APIClasses.Base import Base
 import config
 
 

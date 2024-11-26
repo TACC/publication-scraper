@@ -2,7 +2,8 @@ import requests
 import json
 import time
 import logging
-from Base import Base
+
+from pubscraper.APIClasses.Base import Base
 import config
 
 format_str = (

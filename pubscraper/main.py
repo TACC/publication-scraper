@@ -1,13 +1,13 @@
 import json
 from APIClasses.PubMed import PubMed
-from APIClasses.Springer import Springer
+from APIClasses.arXiv import ArxivAPI
 
 
 def main():
     author_names = input("Enter author names(comma-separated): ").split(",")
     author_names = [name.strip() for name in author_names]
 
-    apis = [PubMed(), Springer()]
+    apis = [PubMed(), ArxivAPI()]
     authors_and_pubs = []
 
     for author in author_names:
@@ -25,3 +25,7 @@ def main():
 
     print(json.dumps(authors_and_pubs, indent=2))
     return authors_and_pubs
+
+
+if __name__ == "__main__":
+    main()

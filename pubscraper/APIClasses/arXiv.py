@@ -2,7 +2,8 @@ import xml.etree.ElementTree as ET
 import json
 import logging
 import requests
-from Base import Base
+
+from pubscraper.APIClasses.Base import Base
 import config
 
 
