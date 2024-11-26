@@ -3,6 +3,7 @@ import json
 import logging
 import requests
 from Base import Base
+import config
 
 
 format_str = (
@@ -16,7 +17,7 @@ class ArxivAPI(Base):
         """
         Initialize the arXiv API client.
         """
-        self.base_url = "http://export.arxiv.org/api/query"
+        self.base_url = config.ARXIV_URL
 
     def standardize_author_name(self, author_name):
         """

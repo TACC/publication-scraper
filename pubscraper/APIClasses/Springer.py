@@ -2,6 +2,7 @@ import requests
 import logging
 import json
 from Base import Base
+import config
 
 format_str = (
     "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
@@ -15,7 +16,7 @@ class Springer(Base):
         Initialize the Springer (springernature) API client.
         :param api_key: Your Springer API key
         """
-        self.base_url = "https://api.springernature.com/openaccess/json"
+        self.base_url = config.SPRINGER_URL
         self.api_key = api_key
 
     def standardize_author_name(self, author_name):
@@ -143,4 +144,3 @@ if __name__ == "__main__":
 
     # Output the results in JSON format
     print(json.dumps(results, indent=4))
-

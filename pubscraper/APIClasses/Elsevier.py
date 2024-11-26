@@ -2,6 +2,7 @@ import requests
 import json
 import logging
 from Base import Base
+import config
 
 # Set up basic logging
 format_str = (
@@ -16,7 +17,7 @@ class Elsevier(Base):
         Initialize the Elsevier API client.
         :param api_key: Your Elsevier API key
         """
-        self.base_url = "https://api.elsevier.com/content/search/scopus"
+        self.base_url = config.ELSEVIER_URL
         self.api_key = api_key
 
     def standardize_author_name(self, author_name):

@@ -2,6 +2,7 @@ import requests
 import logging
 import json
 from Base import Base
+import config
 
 format_str = (
     "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
@@ -15,7 +16,7 @@ class MDPI(Base):
         Initialize the MDPI API client.
         :param api_key: Your MDPI API key (if required, can be None for public access).
         """
-        self.base_url = "https://api.mdpi.com/v1/articles"
+        self.base_url = config.MDPI_URL
         self.api_key = api_key
 
     def standardize_author_name(self, author_name):

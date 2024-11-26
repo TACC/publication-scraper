@@ -1,11 +1,12 @@
 import requests
 import json
 from Base import Base
+import config
 
 
 class IEEEXplore(Base):
     def __init__(self):
-        self.base_url = "https://ieeexplore.ieee.org/api/v1/search/articles"
+        self.base_url = config.IEEE_URL
 
     def get_publications_by_author(self, author_name, rows=10):
         """

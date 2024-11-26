@@ -3,6 +3,7 @@ import json
 import time
 import logging
 from Base import Base
+import config
 
 format_str = (
     "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
@@ -12,8 +13,8 @@ logging.basicConfig(level=logging.DEBUG, format=format_str)
 
 class PubMed(Base):
     def __init__(self):
-        self.search_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
-        self.summary_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+        self.search_url = config.PUBMED_SEARCH_URL
+        self.summary_url = config.PUBMED_SUMMARY_URL
 
     def get_UIDs_by_author(self, author_name, rows=10):
         """

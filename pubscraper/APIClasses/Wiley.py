@@ -2,6 +2,7 @@ import requests
 import json
 import logging
 from Base import Base
+import config
 
 # Set up basic logging
 format_str = (
@@ -16,7 +17,7 @@ class Wiley(Base):
         Initialize the Wiley Online Library API client.
         :param api_key: Your Wiley API key
         """
-        self.base_url = "https://api.wiley.com/api/v1/articles"
+        self.base_url = config.WILEY_URL
         self.api_key = api_key
 
     def standardize_author_name(self, author_name):
@@ -145,4 +146,3 @@ if __name__ == "__main__":
 
     # Output the results in JSON format
     print(json.dumps(results, indent=4))
-
