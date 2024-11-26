@@ -56,7 +56,7 @@ class Springer(Base):
             return None
 
         # Normalize the author name before querying
-        normalized_name = self.normalize_author_name(author_name)
+        normalized_name = self.standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {
@@ -65,6 +65,12 @@ class Springer(Base):
             "api_key": self.api_key,
         }
 
+        # Error handling when interacting with Springer APIs.
+        try:
+            response = requests.get(self.base_url, params=params, timeout=10)  # Send the request to the Springer API
+            response.raise_for_status()  # Raises HTTP Error for bad responses
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Springer API Request error: {e}")
         # Send the request to the Springer API
         response = requests.get(self.base_url, params=params)
 
@@ -73,6 +79,7 @@ class Springer(Base):
                 f"Error fetching data from Springer API: {response.status_code}"
             )
             return None
+
 
         # Parse the JSON response
         data = response.json()

@@ -55,7 +55,7 @@ class Elsevier(Base):
             return None
 
         # Normalize the author name
-        normalized_name = self.normalize_author_name(author_name)
+        normalized_name = self.standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {
@@ -66,16 +66,15 @@ class Elsevier(Base):
 
         # Send the request to the Elsevier API
         headers = {"Accept": "application/json"}
-
-        # Send the request to the Springer API
-        response = requests.get(self.base_url, headers=headers, params=params)
-
-        # Check if the response was successful
-        if response.status_code != 200:
-            logging.error(
-                f"Error fetching data from Elsevier API: {response.status_code}"
-            )
+        
+        # Error handling when interacting with Elsevier APIs.
+        try:
+            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)  # Send the request to the Elsevier API
+            response.raise_for_status()  # Raises HTTP Error for bad responses
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Elsevier API Request error: {e}")
             return None
+        
 
         # Log the raw response for debugging
         data = response.json()

@@ -57,7 +57,7 @@ class Wiley(Base):
             return None
 
         # Normalize the author name before querying
-        normalized_name = self.normalize_author_name(author_name)
+        normalized_name = self.standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {
@@ -68,15 +68,14 @@ class Wiley(Base):
         # Set the headers with the API key for authentication
         headers = {"Authorization": f"Bearer {self.api_key}"}
 
-        # Send the request to the Wiley API
-        response = requests.get(self.base_url, params=params, headers=headers)
-
-        # Check if the request was successful
-        if response.status_code != 200:
-            logging.error(
-                f"Error fetching data from Springer API: {response.status_code}"
-            )
+        # Error handling when interacting with Wiley APIs.
+        try:
+            response = requests.get(self.base_url, params=params, headers=headers, timeout=10)  # Send the request to the Wiley API
+            response.raise_for_status()  # Raises HTTP Error for bad responses
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Wiley API Request error: {e}")
             return None
+        
 
         # Parse the JSON response
         data = response.json()

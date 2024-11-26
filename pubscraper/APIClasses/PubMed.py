@@ -53,11 +53,15 @@ class PubMed(Base):
             "retmode": "JSON",
         }
 
-        response = requests.get(self.search_url, params=params)
-
-        if response.status_code != 200:
-            logging.error(f"Error fetching data from PubMed: {response.status_code}")
+        
+        # Error handling when interacting with PubMed APIs.
+        try:
+            response = requests.get(self.search_url, params=params, timeout=10)  # Send the request to the PubMed API
+            response.raise_for_status()  # Raises HTTP Error for bad responses
+        except requests.exceptions.RequestException as e:
+            logging.error(f"PubMed API Request error: {e}")
             return None
+
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
@@ -91,13 +95,17 @@ class PubMed(Base):
             "id": stringified_UIDs,
             "retmode": "JSON",
         }
+        
 
+        # Error handling when interacting with PubMed APIs.
+        try:
+            response = requests.get(self.search_url, params=params, timeout=10)  # Send the request to the PubMed API
+            response.raise_for_status()  # Raises HTTP Error for bad responses
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Error fetching summaries from PubMed: {e}")
+            return None
         response = requests.get(self.summary_url, params=params)
-        if response.status_code != 200:
-            logging.error(
-                f"Error fetching summaries from PubMed: {response.status_code}"
-            )
-            return
+        
 
         data = response.json()
 
