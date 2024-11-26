@@ -66,7 +66,6 @@ class Elsevier(Base):
 
         # Send the request to the Elsevier API
         headers = {"Accept": "application/json"}
-
         
         # Error handling when interacting with Elsevier APIs.
         try:
