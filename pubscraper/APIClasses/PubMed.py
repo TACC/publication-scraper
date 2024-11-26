@@ -3,13 +3,16 @@ import json
 import time
 import logging
 
+# from pubscraper.APIClasses.Base import Base
+from Base import Base
+
 format_str = (
     "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
 )
 logging.basicConfig(level=logging.DEBUG, format=format_str)
 
 
-class PubMed:
+class PubMed(Base):
     def __init__(self):
         self.search_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
         self.summary_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
