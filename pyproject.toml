@@ -10,6 +10,8 @@ packages = [{include = "APIClasses", from = "pubscraper"}]
 python = "^3.12"
 requests = "^2.32.3"
 pytest = "^8.3.3"
+click = "^8.1.7"
+click-loglevel = "^0.5.0"
 
 [tool.poetry.scripts]
 pubscraper = "pubscraper.main:main"

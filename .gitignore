@@ -11,3 +11,4 @@ include/
 secrets.json
 __pycache__/
 dist/
+.DS_Store
