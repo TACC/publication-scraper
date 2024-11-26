@@ -9,4 +9,5 @@ include/
 */.coverage
 .coverage
 secrets.json
-__pycache__
+__pycache__/
+dist/
