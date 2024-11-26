@@ -61,6 +61,13 @@ def set_log_file(ctx, param, value):
     default=10,
     help="Specify max number of publications to receive for each author",
 )
+# TODO:
+# - read in an input file instead of accepting input from stdin
+# - store API keys in secret.json DO NOT PUBLISH
+# - write README documentation, including secrets file and installation/running
+# -     (see Erik's pi example)
+# - uhhhhhh write tests (figure out how to write tests for a CLtool)
+# - did Magret trycatch our HTTP requests?
 def main(log_level, log_file, number):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
