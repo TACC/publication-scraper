@@ -22,7 +22,6 @@ def mock_arxiv_response(entries):
     </feed>
     """
 
-
 def test_skip_empty_name(mock_api):
     """Test skipping empty author names."""
     results = arXiv.search_multiple_authors([""])
@@ -63,11 +62,9 @@ def test_partial_empty_input(mock_api):
     )
     results = arXiv.search_multiple_authors(["Albert", ""])
     
-    # Ensure that only the valid author "albert" is included
-    assert len(results) == 1  # Only "albert" should have results
-    assert "Albert" in results  # "albert" should be in the results
-    assert len(mock_api.calls) == 1  # Only one call should be made for "albert"
-
+    assert len(results) == 1 
+    assert "Albert" in results
+    assert len(mock_api.calls) == 1 
 
 
 def test_search_all_names(mock_api):
@@ -136,7 +133,6 @@ def test_search_all_names(mock_api):
     assert "Allen" in results
 
 
-
 def test_no_results_for_name(mock_api):
     """Test that an author with no results returns None."""
     mock_api.add(
@@ -155,7 +151,6 @@ def test_no_results_for_name(mock_api):
 
     results = arXiv.search_multiple_authors(["Magert O. Adekunle"])
     assert results.get("Magert O. Adekunle") == []
-
 
 
 def test_limit_number_of_results(mock_api):
@@ -187,6 +182,3 @@ def test_limit_number_of_results(mock_api):
 
     results = arXiv.search_multiple_authors(["Timothy C. Moore"], max_results=2)
     assert len(results["Timothy C. Moore"]) == 2
-
-
-    """Test searching with initials and last name finds a specific paper."""
