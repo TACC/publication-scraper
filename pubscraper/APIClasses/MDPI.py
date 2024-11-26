@@ -56,7 +56,7 @@ class MDPI(Base):
             return None
 
         # Normalize the author name before querying
-        normalized_name = self.normalize_author_name(author_name)
+        normalized_name = self.standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {

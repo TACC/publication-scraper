@@ -8,11 +8,12 @@ from version import __version__
 import config
 from APIClasses.PubMed import PubMed
 from APIClasses.arXiv import ArxivAPI
+from APIClasses.MDPI import MDPI
 
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
 LOG_LEVEL = config.LOGGER_LEVEL
 logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 
 def set_logging_level(ctx, param, value):
@@ -69,7 +70,7 @@ def main(log_level, log_file, number):
 
     logger.debug(f"Requesting {number} publications for each author")
 
-    apis = [PubMed(), ArxivAPI()]
+    apis = [PubMed(), ArxivAPI(), MDPI()]
     authors_and_pubs = []
 
     for author in author_names:
