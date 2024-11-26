@@ -1,4 +1,6 @@
 import xml.etree.ElementTree as ET
+import json
+import logging
 import requests
 
 from pubscraper.APIClasses.Base import Base
