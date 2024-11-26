@@ -8,3 +8,7 @@ pyvenv.cfg
 include/
 */.coverage
 .coverage
+secrets.json
+__pycache__/
+dist/
+.DS_Store

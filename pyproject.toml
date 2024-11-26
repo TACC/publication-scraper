@@ -1,16 +1,28 @@
 [tool.poetry]
-name = "publication-scraper"
+name = "pubscraper"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
+packages = [{include = "APIClasses", from = "pubscraper"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "^2.32.3"
 pytest = "^8.3.3"
+click = "^8.1.7"
+click-loglevel = "^0.5.0"
 
+[tool.poetry.scripts]
+pubscraper = "pubscraper.main:main"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+pythonpath = ["pubscraper/APIClasses"]
+testpaths = ["tests"]
+
+[tool.poetry_bumpversion.file."pubscraper/version.py"]
