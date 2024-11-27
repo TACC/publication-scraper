@@ -5,19 +5,16 @@ import logging
 from pubscraper.APIClasses.Base import Base
 import config
 
-# Set up basic logging
-format_str = (
-    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
 
 class Wiley(Base):
-    def __init__(self, api_key):
+    def __init__(self):
         """
         Initialize the Wiley Online Library API client.
-        :param api_key: Your Wiley API key
         """
+        with open("secrets.json") as f:
+            secrets = json.load(f)
+            api_key = secrets["Wiley"]
+
         self.base_url = config.WILEY_URL
         self.api_key = api_key
 
@@ -57,7 +54,7 @@ class Wiley(Base):
             return None
 
         # Normalize the author name before querying
-        normalized_name = self.normalize_author_name(author_name)
+        normalized_name = self.standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {

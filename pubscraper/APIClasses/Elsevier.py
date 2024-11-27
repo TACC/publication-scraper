@@ -5,19 +5,16 @@ import logging
 from pubscraper.APIClasses.Base import Base
 import config
 
-# Set up basic logging
-format_str = (
-    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
 
 class Elsevier(Base):
-    def __init__(self, api_key):
+    def __init__(self):
         """
         Initialize the Elsevier API client.
-        :param api_key: Your Elsevier API key
         """
+        with open("secrets.json") as f:
+            secrets = json.load(f)
+            api_key = secrets["Elsevier"]
+
         self.base_url = config.ELSEVIER_URL
         self.api_key = api_key
 
@@ -55,7 +52,7 @@ class Elsevier(Base):
             return None
 
         # Normalize the author name
-        normalized_name = self.normalize_author_name(author_name)
+        normalized_name = self.standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {
@@ -116,14 +113,14 @@ class Elsevier(Base):
         return publications
 
 
-def search_multiple_authors(api_key, authors, limit=10):
+def search_multiple_authors(authors, limit=10):
     """
     Search for publications by multiple authors.
     :param api_key: Elsevier API key
     :param authors: List of author names to search for
     :return: Dictionary with results for each author
     """
-    elsevier_api = Elsevier(api_key)
+    elsevier_api = Elsevier()
     all_results = {}  # Dictionary to hold results for all authors
 
     for author in authors:

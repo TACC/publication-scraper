@@ -8,9 +8,13 @@ from click_loglevel import LogLevel
 
 from version import __version__
 import config
+
 from APIClasses.PubMed import PubMed
 from APIClasses.arXiv import ArxivAPI
 from APIClasses.MDPI import MDPI
+from APIClasses.Elsevier import Elsevier
+from APIClasses.Springer import Springer
+from APIClasses.Wiley import Wiley
 
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
 LOG_LEVEL = config.LOGGER_LEVEL
@@ -92,7 +96,7 @@ def main(log_level, log_file, input_file, number, output_file):
 
     logger.debug(f"Requesting {number} publications for each author")
 
-    apis = [PubMed(), ArxivAPI(), MDPI()]
+    apis = [PubMed(), ArxivAPI(), MDPI(), Elsevier(), Springer(), Wiley()]
     authors_and_pubs = []
 
     for author in author_names:
@@ -123,7 +127,7 @@ def main(log_level, log_file, input_file, number, output_file):
 
     fout = open(output_file, "w")
     fout.write(json.dumps(authors_and_pubs, indent=2))
-    logger.debug(f"wrote results to {output_file}")
+    logger.info(f"wrote results to {output_file}")
     return 0
 
 
