@@ -1,5 +1,6 @@
 import json
 import logging
+import csv
 
 import click
 from click_loglevel import LogLevel
@@ -54,6 +55,7 @@ def set_log_file(ctx, param, value):
     callback=set_log_file,
     help="Set the log file",
 )
+# @click.option("-i", "--input",)
 @click.option(
     "-n",
     "--number",
@@ -61,6 +63,7 @@ def set_log_file(ctx, param, value):
     default=10,
     help="Specify max number of publications to receive for each author",
 )
+# TODO: batch author names to circumvent rate limits?
 # TODO:
 # - read in an input file instead of accepting input from stdin
 # - store API keys in secret.json DO NOT PUBLISH
@@ -72,8 +75,12 @@ def main(log_level, log_file, number):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
-    author_names = input("Enter author names(comma-separated): ").split(",")
-    author_names = [name.strip() for name in author_names]
+
+    author_names = []
+    with open("input.csv", newline="") as csvfile:
+        name_reader = csv.reader(csvfile)
+        for row in name_reader:
+            author_names.append(row[0])
 
     logger.debug(f"Requesting {number} publications for each author")
 
@@ -93,6 +100,8 @@ def main(log_level, log_file, number):
 
         authors_and_pubs.append(results)
 
+    # NOTE: main,py currently returns a list of dicts. it will eventually return a TabLib
+    # object and the final output will be user-configurable through the command line
     print(json.dumps(authors_and_pubs, indent=2))
     return authors_and_pubs
 
