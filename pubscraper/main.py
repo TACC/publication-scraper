@@ -1,6 +1,7 @@
 import json
 import logging
 import csv
+import os
 
 import click
 from click_loglevel import LogLevel
@@ -55,7 +56,10 @@ def set_log_file(ctx, param, value):
     callback=set_log_file,
     help="Set the log file",
 )
-# @click.option("-i", "--input",)
+@click.option(
+    "-i", "--input_file", type=str, default="input.csv", help="Specify input file"
+)
+@click.option("-o", "--output_file", default="output.json", help="Specify output file")
 @click.option(
     "-n",
     "--number",
@@ -71,16 +75,20 @@ def set_log_file(ctx, param, value):
 # -     (see Erik's pi example)
 # - uhhhhhh write tests (figure out how to write tests for a CLtool)
 # - did Magret trycatch our HTTP requests?
-def main(log_level, log_file, number):
+def main(log_level, log_file, input_file, number, output_file):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
 
     author_names = []
-    with open("input.csv", newline="") as csvfile:
-        name_reader = csv.reader(csvfile)
-        for row in name_reader:
-            author_names.append(row[0])
+    try:
+        with open(input_file, newline="") as csvfile:
+            name_reader = csv.reader(csvfile)
+            for row in name_reader:
+                author_names.append(row[0])
+    except FileNotFoundError:
+        logger.error(f"Couldn't read input file {input_file}, exiting")
+        return 1
 
     logger.debug(f"Requesting {number} publications for each author")
 
@@ -100,10 +108,23 @@ def main(log_level, log_file, number):
 
         authors_and_pubs.append(results)
 
-    # NOTE: main,py currently returns a list of dicts. it will eventually return a TabLib
+    logger.info(f"Found publications for {len(authors_and_pubs)} authors")
+
+    # NOTE: main,py currently writes output to a JSON file. it will eventually return a TabLib
     # object and the final output will be user-configurable through the command line
-    print(json.dumps(authors_and_pubs, indent=2))
-    return authors_and_pubs
+    logger.debug(f"Results: {(json.dumps(authors_and_pubs, indent=2))}")
+
+    logger.debug(f"Writing results to {output_file}")
+    try:
+        os.remove(output_file)
+        logger.debug(f"successfully removed {output_file}")
+    except:
+        logger.warning(f"could not remove {output_file}")
+
+    fout = open(output_file, "w")
+    fout.write(json.dumps(authors_and_pubs, indent=2))
+    logger.debug(f"wrote results to {output_file}")
+    return 0
 
 
 if __name__ == "__main__":

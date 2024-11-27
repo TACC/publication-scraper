@@ -44,7 +44,6 @@ class PubMed(Base):
             for name in split_name[:-1]:
                 entrez_author_name += "{initial}".format(initial=name[0])
             entrez_author_name += "[Author Name]"
-        logging.info(f"searching for publications by {entrez_author_name}")
 
         params = {
             "db": "pmc",
