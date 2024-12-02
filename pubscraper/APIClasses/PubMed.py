@@ -9,7 +9,7 @@ import config
 format_str = (
     "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
 )
-logging.basicConfig(level=logging.DEBUG, format=format_str)
+logging.basicConfig(level=logging.INFO, format=format_str)
 
 
 class PubMed(Base):
@@ -143,7 +143,7 @@ def search_multiple_authors(authors, rows=10):
     all_results = {}
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
+        logging.info(f"Searching for publications by {author}...")
 
         if author == "":
             logging.warning("received empty string for author name, continuing...")
