@@ -70,9 +70,7 @@ class Wiley(Base):
 
         # Check if the request was successful
         if response.status_code != 200:
-            logging.error(
-                f"Error fetching data from Springer API: {response.status_code}"
-            )
+            logging.error(f"Error fetching data from Wiley API: {response.status_code}")
             return None
 
         # Parse the JSON response

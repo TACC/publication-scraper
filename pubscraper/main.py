@@ -10,11 +10,12 @@ from version import __version__
 import config
 
 from APIClasses.PubMed import PubMed
-from APIClasses.arXiv import ArxivAPI
+from APIClasses.arXiv import ArXiv
 from APIClasses.MDPI import MDPI
 from APIClasses.Elsevier import Elsevier
 from APIClasses.Springer import Springer
 from APIClasses.Wiley import Wiley
+from APIClasses.CrossRef import CrossRef
 
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
 LOG_LEVEL = config.LOGGER_LEVEL
@@ -71,6 +72,17 @@ def set_log_file(ctx, param, value):
     default=10,
     help="Specify max number of publications to receive for each author",
 )
+@click.option(
+    "--apis",
+    "-a",
+    type=click.Choice(
+        ["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef"],
+        case_sensitive=False,
+    ),
+    multiple=True,
+    default=["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef"],
+    show_default=True,
+)
 # TODO: batch author names to circumvent rate limits?
 # TODO:
 # - read in an input file instead of accepting input from stdin
@@ -79,7 +91,7 @@ def set_log_file(ctx, param, value):
 # -     (see Erik's pi example)
 # - uhhhhhh write tests (figure out how to write tests for a CLtool)
 # - did Magret trycatch our HTTP requests?
-def main(log_level, log_file, input_file, number, output_file):
+def main(log_level, log_file, input_file, number, output_file, apis):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
@@ -94,16 +106,27 @@ def main(log_level, log_file, input_file, number, output_file):
         logger.error(f"Couldn't read input file {input_file}, exiting")
         return 1
 
+    logger.debug(f"Querying the following APIs: {apis}")
     logger.debug(f"Requesting {number} publications for each author")
 
-    apis = [PubMed(), ArxivAPI(), MDPI(), Elsevier(), Springer(), Wiley()]
+    available_apis = {
+        "PubMed": PubMed(),
+        "ArXiv": ArXiv(),
+        "MDPI": MDPI(),
+        "Elsevier": Elsevier(),
+        "Springer": Springer(),
+        "Wiley": Wiley(),
+        "CrossRef": CrossRef(),
+    }
     authors_and_pubs = []
 
     for author in author_names:
         results = {author: []}
         # FIXME: these names are too similar and confusing
         authors_pubs = []
-        for api in apis:
+        for api_name in apis:
+            api = available_apis[api_name]
+            # api = class_name()
             pubs_found = api.get_publications_by_author(author, number)
             if pubs_found is not None:
                 authors_pubs += pubs_found
@@ -122,7 +145,7 @@ def main(log_level, log_file, input_file, number, output_file):
     try:
         os.remove(output_file)
         logger.debug(f"successfully removed {output_file}")
-    except:
+    except Exception:
         logger.warning(f"could not remove {output_file}")
 
     fout = open(output_file, "w")

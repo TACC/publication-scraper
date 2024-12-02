@@ -6,11 +6,6 @@ import logging
 from pubscraper.APIClasses.Base import Base
 import config
 
-format_str = (
-    "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.INFO, format=format_str)
-
 
 class PubMed(Base):
     def __init__(self):
