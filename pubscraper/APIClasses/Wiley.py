@@ -4,6 +4,9 @@ import logging
 import xml.etree.ElementTree as ET
 import json
 
+from pubscraper.APIClasses.Base import Base
+import config
+
 # Set up basic logging
 format_str = (
     "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
@@ -11,9 +14,12 @@ format_str = (
 logging.basicConfig(level=logging.DEBUG, format=format_str)
 
 
-class Wiley:
+class Wiley(Base):
     def __init__(self):
-        self.base_url = "https://onlinelibrary.wiley.com/action/sru"
+        """
+        Initialize the Elsevier API client.
+        """
+        self.base_url = config.WILEY_URL
 
     def standardize_author_name(self, author_name):
         """
@@ -26,7 +32,10 @@ class Wiley:
 
         # If the author has a middle initial, ensure it is followed by a dot
         if len(name_parts) == 3 and len(name_parts[1]) == 1:
-            middle_name = name_parts[1] + "."
+            middle_name = name_parts[1]
+            # Ensure the middle initial ends with a dot
+            if not middle_name.endswith("."):
+                middle_name += "."
             return f"{name_parts[0]} {middle_name} {name_parts[2]}"
         elif len(name_parts) == 2:
             return f"{name_parts[0]} {name_parts[1]}"
@@ -35,10 +44,10 @@ class Wiley:
 
     def get_publications_by_author(self, author_name, rows=10):
         if not author_name.strip():
-            logging.warning("Empty author name provided.")
+            logging.warning("Received empty string for author name in search query, returning None")
             return None
 
-        # Standardize the author name
+        # Standardize the author name for query
         author_name_standardized = self.standardize_author_name(author_name)
         encoded_author = urllib.parse.quote(author_name_standardized)
 
@@ -104,7 +113,7 @@ def search_multiple_authors(authors, limit=10):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
-        if author == "":
+        if not author.strip():  # Skip empty author names
             logging.warning("Received empty string for author name, continuing...")
             continue
         try:
@@ -113,7 +122,7 @@ def search_multiple_authors(authors, limit=10):
             all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")
-            all_results[author] = []  # On error, return an empty list for the author
+            all_results[author] = []
 
     return all_results
 
