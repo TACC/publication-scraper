@@ -85,12 +85,8 @@ def set_log_file(ctx, param, value):
 )
 # TODO: batch author names to circumvent rate limits?
 # TODO:
-# - read in an input file instead of accepting input from stdin
-# - store API keys in secret.json DO NOT PUBLISH
-# - write README documentation, including secrets file and installation/running
-# -     (see Erik's pi example)
-# - uhhhhhh write tests (figure out how to write tests for a CLtool)
-# - did Magret trycatch our HTTP requests?
+# - write tests (figure out how to write tests for a CLtool)
+# - trycatch our HTTP requests
 def main(log_level, log_file, input_file, number, output_file, apis):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
