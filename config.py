@@ -9,7 +9,8 @@ MDPI_URL = "https://api.mdpi.com/v1/articles"
 PUBMED_SEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 PUBMED_SUMMARY_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
 SPRINGER_URL = "https://api.springernature.com/openaccess/json"
-WILEY_URL = "https://api.wiley.com/api/v1/articles"
+WILEY_URL = "https://onlinelibrary.wiley.com/action/sru"
 ARXIV_URL = "http://export.arxiv.org/api/query"
+PLOS_URL = "https://api.plos.org/search"
 
-API_LIST = ["Elsevier", "IEEE", "MDPI", "PubMed", "Springer", "Wiley", "arXiv"]
+API_LIST = ["Elsevier", "IEEE", "MDPI", "PubMed", "Springer", "Wiley", "arXiv", "PLOS"]

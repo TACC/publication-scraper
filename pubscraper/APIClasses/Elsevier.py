@@ -63,16 +63,15 @@ class Elsevier(Base):
 
         # Send the request to the Elsevier API
         headers = {"Accept": "application/json"}
-
-        # Send the request to the Springer API
-        response = requests.get(self.base_url, headers=headers, params=params)
-
-        # Check if the response was successful
-        if response.status_code != 200:
-            logging.error(
-                f"Error fetching data from Elsevier API: {response.status_code}"
-            )
+        
+        # Error handling when interacting with Elsevier APIs, Raises HTTP Error for bad responses
+        try:
+            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)  
+            response.raise_for_status()  
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Elsevier API Request error: {e}")
             return None
+        
 
         # Log the raw response for debugging
         data = response.json()
