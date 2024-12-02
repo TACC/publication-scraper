@@ -9,13 +9,15 @@ packages = [{include = "APIClasses", from = "pubscraper"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "^2.32.3"
-pytest = "^8.3.3"
 click = "^8.1.7"
 click-loglevel = "^0.5.0"
-responses = "^0.25.3"
 
 [tool.poetry.scripts]
 pubscraper = "pubscraper.main:main"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+responses = "^0.25.3"
 
 [build-system]
 requires = ["poetry-core"]
