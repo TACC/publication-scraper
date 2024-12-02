@@ -43,7 +43,7 @@ class PLOS:
         # Extract publication records
         publications = []
         for doc in data['response']['docs']:
-            id = doc.get('id', 'No ID available')
+            doi = doc.get('id', 'No ID available')
             journal = doc.get('journal', 'No journal available')
             article_type = doc.get('article_type', 'No article type available')
             publication_date = doc.get('publication_date', 'No date available')
@@ -53,7 +53,7 @@ class PLOS:
             # Create a dictionary with the relevant information
             if all([title, authors, publication_date, journal]):
                 publication = {
-                    'id': id,
+                    'doi': doi,
                     'journal': journal,
                     'article_type': article_type,
                     'publication_date': publication_date,

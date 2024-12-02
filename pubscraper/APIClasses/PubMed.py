@@ -117,7 +117,7 @@ class PubMed(Base):
                 author_list.append(author_object["name"])
 
             pub = {
-                "id": uid,
+                "doi": uid,
                 "journal": summary_object["fulljournalname"],
                 "publication_date": summary_object["sortdate"],
                 "title": summary_object["title"],
