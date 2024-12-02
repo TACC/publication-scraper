@@ -67,10 +67,10 @@ class Elsevier(Base):
         # Send the request to the Elsevier API
         headers = {"Accept": "application/json"}
         
-        # Error handling when interacting with Elsevier APIs.
+        # Error handling when interacting with Elsevier APIs, Raises HTTP Error for bad responses
         try:
-            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)  # Send the request to the Elsevier API
-            response.raise_for_status()  # Raises HTTP Error for bad responses
+            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)  
+            response.raise_for_status()  
         except requests.exceptions.RequestException as e:
             logging.error(f"Elsevier API Request error: {e}")
             return None

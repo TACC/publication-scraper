@@ -21,11 +21,7 @@ class Springer(Base):
         self.api_key = api_key
 
     def standardize_author_name(self, author_name):
-        """
-        Standardize author names to handle variations like "T C Moore", "Timothy C Moore", and "Timothy C. Moore".
-        :param author_name: The name to standardize
-        :return: Standardized author name in the format "Timothy C. Moore"
-        """
+        """Standardize the author's name to ensure consistency."""
         name_parts = author_name.split()
 
         # Capitalize each part of the name
@@ -33,13 +29,13 @@ class Springer(Base):
 
         # If the author has a middle initial, ensure it is followed by a dot
         if len(name_parts) == 3 and len(name_parts[1]) == 1:
-            # Make sure the middle initial is followed by a dot
-            middle_name = name_parts[1] + "."
+            middle_name = name_parts[1]
+            if not middle_name.endswith("."):
+                middle_name += "."
             return f"{name_parts[0]} {middle_name} {name_parts[2]}"
-        elif len(name_parts) == 2:  # No middle name, just first and last name
+        elif len(name_parts) == 2:
             return f"{name_parts[0]} {name_parts[1]}"
         else:
-            # Handle other cases (like middle name fully spelled out)
             return " ".join(name_parts)
 
     def get_publications_by_author(self, author_name, rows=10):
@@ -49,37 +45,25 @@ class Springer(Base):
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
-        if author_name.strip() == "":
-            logging.warning(
-                "Received empty string for author name in search query, returning None"
-            )
+        if not author_name.strip():
+            logging.warning("Received empty string for author name in search query, returning None")
             return None
 
-        # Normalize the author name before querying
+        # Standardize the author name for query
         normalized_name = self.standardize_author_name(author_name)
-
-        # Prepare the query parameters
         params = {
-            "q": normalized_name,  # Author query (normalized format)
-            "p": rows,  # Limit number of results
+            "q": normalized_name,  
+            "p": rows, 
             "api_key": self.api_key,
         }
 
-        # Error handling when interacting with Springer APIs.
+        # Error handling when interacting with Springer APIs, Raises HTTP Error for bad responses
         try:
-            response = requests.get(self.base_url, params=params, timeout=10)  # Send the request to the Springer API
-            response.raise_for_status()  # Raises HTTP Error for bad responses
+            response = requests.get(self.base_url, params=params, timeout=10) 
+            response.raise_for_status() 
         except requests.exceptions.RequestException as e:
             logging.error(f"Springer API Request error: {e}")
-        # Send the request to the Springer API
-        response = requests.get(self.base_url, params=params)
-
-        if response.status_code != 200:
-            logging.error(
-                f"Error fetching data from Springer API: {response.status_code}"
-            )
-            return None
-
+            return []
 
         # Parse the JSON response
         data = response.json()
@@ -113,9 +97,6 @@ class Springer(Base):
 def search_multiple_authors(api_key, authors, limit=10):
     """
     Search for publications by multiple authors.
-    :param api_key: Springer API key
-    :param authors: List of author names to search for (supports full names, initials, etc.)
-    :param limit: The number of results to limit for each author (default is 10)
     :return: Dictionary with results for each author
     """
     springer_api = Springer(api_key)
@@ -123,24 +104,22 @@ def search_multiple_authors(api_key, authors, limit=10):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
-        if author == "":
+        if not author.strip(): 
             logging.warning("Received empty string for author name, continuing...")
             continue
         try:
             # Get publications for each author, passing the limit (rows) to get_publications_by_author
             publications = springer_api.get_publications_by_author(author, rows=limit)
-            all_results[author] = publications
+            all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")
+            all_results[author] = []
 
     return all_results
 
 
 # Example usage:
 if __name__ == "__main__":
-    # Get API key
-    api_key = ""
-
     # Input: list of author names (comma-separated input)
     author_names = input("Enter author names (comma-separated): ").split(",")
 
@@ -148,7 +127,7 @@ if __name__ == "__main__":
     author_names = [name.strip() for name in author_names]
 
     # Get results for all authors
-    results = search_multiple_authors(api_key, author_names)
+    results = search_multiple_authors(author_names)
 
     # Output the results in JSON format
     print(json.dumps(results, indent=4))

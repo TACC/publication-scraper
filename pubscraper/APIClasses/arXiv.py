@@ -29,22 +29,19 @@ class ArxivAPI(Base):
 
         # If the author has a middle initial, ensure it is followed by a dot
         if len(name_parts) == 3 and len(name_parts[1]) == 1:
-            # Initial + last name (e.g., Timothy C Moore -> Timothy C. Moore)
-            middle_name = name_parts[1] + "."
+            middle_name = name_parts[1]
+            if not middle_name.endswith("."):
+                middle_name += "."
             return f"{name_parts[0]} {middle_name} {name_parts[2]}"
         elif len(name_parts) == 2:
-            # First name + Last name (e.g., Timothy Moore -> Timothy Moore)
             return f"{name_parts[0]} {name_parts[1]}"
         else:
-            # Handle other formats (e.g., just first name, last name, etc.)
             return " ".join(name_parts)
 
     def get_publications_by_author(self, author_name, start=0, max_results=10):
         """Fetch publications from arXiv for a standardized author name."""
-        if author_name.strip() == "":
-            logging.warning(
-                "Received empty string for author name in search query, returning None"
-            )
+        if not author_name.strip():
+            logging.warning("Received empty string for author name in search query, returning None")
             return None
 
         # Standardize the author name for query
@@ -55,6 +52,7 @@ class ArxivAPI(Base):
             "max_results": max_results,
         }
 
+        # Error handling when interacting with arXiv APIs, Raises HTTP Error for bad responses
         try:
             response = requests.get(self.base_url, params=params, timeout=10)
             response.raise_for_status()
@@ -110,14 +108,13 @@ def search_multiple_authors(authors, max_results=10):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
-        if not author.strip():  # Skip empty author names
+        if not author.strip(): 
+            logging.warning("Received empty string for author name, continuing...")
             continue
         try:
-            # Get publications for each author
-            publications = arxiv_api.get_publications_by_author(
-                author, max_results=max_results
-            )
-            all_results[author] = publications
+            # Get publications for each author, passing the limit (rows) to get_publications_by_author
+            publications = arxiv_api.get_publications_by_author(author, max_results=max_results)
+            all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")
             all_results[author] = []
@@ -128,8 +125,6 @@ def search_multiple_authors(authors, max_results=10):
 if __name__ == "__main__":
     # Input: list of author names (comma-separated input)
     author_names = input("Enter author names (comma-separated): ").split(",")
-
-    # Strip any leading/trailing whitespace
     author_names = [name.strip() for name in author_names]
 
     # Get results for all authors

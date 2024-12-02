@@ -2,12 +2,18 @@ import requests
 import json
 import logging
 
+from pubscraper.APIClasses.Base import Base
+import config
+
 format_str = "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
 logging.basicConfig(level=logging.DEBUG, format=format_str)
 
-class PLOS:
+class PLOS(Base):
     def __init__(self):
-        self.base_url = "https://api.plos.org/search"
+        """
+        Initialize the arXiv API client.
+        """
+        self.base_url = config.PLOS_URL
 
     def get_publications_by_author(self, author_name, rows=10):
         """"
@@ -17,7 +23,7 @@ class PLOS:
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
-        if author_name.strip() == "":
+        if not author_name.strip():
             logging.warning("Received empty string for author name in search query, returning None")
             return None
     
@@ -28,12 +34,12 @@ class PLOS:
             'wt': 'json'
         }
 
-        # Error handling when interacting with PLOS APIs.
+        # Error handling when interacting with PLOS APIs, Raises HTTP Error for bad responses.
         try:
-            response = requests.get(self.base_url, params=params, timeout=10)  # Send the request to the PLOS API
-            response.raise_for_status()  # Raises HTTP Error for bad responses
+            response = requests.get(self.base_url, params=params, timeout=10)  
+            response.raise_for_status() 
         except requests.exceptions.RequestException as e:
-            logging.error(f"Elsevier API Request error: {e}")
+            logging.error(f"PLOS API Request error: {e}")
             return None
         
     
@@ -43,7 +49,7 @@ class PLOS:
         # Extract publication records
         publications = []
         for doc in data['response']['docs']:
-            id = doc.get('id', 'No ID available')
+            doi = doc.get('id', 'No ID available')
             journal = doc.get('journal', 'No journal available')
             article_type = doc.get('article_type', 'No article type available')
             publication_date = doc.get('publication_date', 'No date available')
@@ -53,7 +59,7 @@ class PLOS:
             # Create a dictionary with the relevant information
             if all([title, authors, publication_date, journal]):
                 publication = {
-                    'id': id,
+                    'doi': doi,
                     'journal': journal,
                     'article_type': article_type,
                     'publication_date': publication_date,
@@ -71,15 +77,17 @@ def search_multiple_authors(authors):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
-        if author == "":
+        if not author.strip(): 
             logging.warning("Received empty string for author name, continuing...")
             continue
         try:
             # Get publications for each author
             publications = plos_api.get_publications_by_author(author)
-            all_results[author] = publications
+            all_results[author] = publications if publications else []
         except Exception as e:
-            print(f"Error fetching data for {author}: {e}")
+            logging.error(f"Error fetching data for {author}: {e}")
+            all_results[author] = []
+
     
     return all_results
 
@@ -87,8 +95,6 @@ def search_multiple_authors(authors):
 if __name__ == "__main__":
     # Input: list of author names (comma-separated input)
     author_names = input("Enter author names (comma-separated): ").split(',')
-
-    # Strip any leading/trailing whitespace
     author_names = [name.strip() for name in author_names]
 
     # Get results for all authors
