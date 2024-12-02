@@ -100,7 +100,7 @@ def main(log_level, log_file, input_file, number, output_file, apis):
                 author_names.append(row[0])
     except FileNotFoundError:
         logger.error(f"Couldn't read input file {input_file}, exiting")
-        return 1
+        exit(1)
 
     logger.debug(f"Querying the following APIs: {apis}")
     logger.debug(f"Requesting {number} publications for each author")
