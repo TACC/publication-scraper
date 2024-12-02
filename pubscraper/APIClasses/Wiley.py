@@ -7,18 +7,16 @@ import json
 from pubscraper.APIClasses.Base import Base
 import config
 
-# Set up basic logging
-format_str = (
-    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
 
 class Wiley(Base):
     def __init__(self):
         """
-        Initialize the Elsevier API client.
+        Initialize the Wiley Online Library API client.
         """
+        with open("secrets.json") as f:
+            secrets = json.load(f)
+            api_key = secrets["Wiley"]
+
         self.base_url = config.WILEY_URL
 
     def standardize_author_name(self, author_name):
@@ -70,6 +68,7 @@ class Wiley(Base):
         # Parse the response
         return self._parse_response(response.text)
 
+      
     def _parse_response(self, xml_data):
         """
         Parse the XML response to extract publication details.

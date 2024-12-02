@@ -7,13 +7,7 @@ from pubscraper.APIClasses.Base import Base
 import config
 
 
-format_str = (
-    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
-
-class ArxivAPI(Base):
+class ArXiv(Base):
     def __init__(self):
         """
         Initialize the arXiv API client.
@@ -103,8 +97,14 @@ class ArxivAPI(Base):
 
 
 def search_multiple_authors(authors, max_results=10):
-    arxiv_api = ArxivAPI()
-    all_results = {}
+    """
+    Search for publications by multiple authors.
+    :param authors: List of author names to search for
+    :return: Dictionary with results for each author
+    """
+    arxiv_api = ArXiv()
+    all_results = {}  # Dictionary to hold results for all authors
+
 
     for author in authors:
         print(f"Searching for publications by {author}...")

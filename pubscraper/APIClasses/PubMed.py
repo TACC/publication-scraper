@@ -6,11 +6,6 @@ import logging
 from pubscraper.APIClasses.Base import Base
 import config
 
-format_str = (
-    "[%(asctime)s ] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
 
 class PubMed(Base):
     def __init__(self):
@@ -44,7 +39,6 @@ class PubMed(Base):
             for name in split_name[:-1]:
                 entrez_author_name += "{initial}".format(initial=name[0])
             entrez_author_name += "[Author Name]"
-        logging.info(f"searching for publications by {entrez_author_name}")
 
         params = {
             "db": "pmc",
@@ -152,7 +146,7 @@ def search_multiple_authors(authors, rows=10):
     all_results = {}
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
+        logging.info(f"Searching for publications by {author}...")
 
         if author == "":
             logging.warning("received empty string for author name, continuing...")

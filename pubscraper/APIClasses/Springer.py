@@ -5,18 +5,16 @@ import json
 from pubscraper.APIClasses.Base import Base
 import config
 
-format_str = (
-    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
 
 class Springer(Base):
-    def __init__(self, api_key):
+    def __init__(self):
         """
         Initialize the Springer (springernature) API client.
-        :param api_key: Your Springer API key
         """
+        with open("secrets.json") as f:
+            secrets = json.load(f)
+            api_key = secrets["Springer"]
+
         self.base_url = config.SPRINGER_URL
         self.api_key = api_key
 
@@ -94,12 +92,12 @@ class Springer(Base):
         return publications
 
 
-def search_multiple_authors(api_key, authors, limit=10):
+def search_multiple_authors(authors, limit=10):
     """
     Search for publications by multiple authors.
     :return: Dictionary with results for each author
     """
-    springer_api = Springer(api_key)
+    springer_api = Springer()
     all_results = {}
 
     for author in authors:

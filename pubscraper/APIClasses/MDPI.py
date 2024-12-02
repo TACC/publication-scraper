@@ -5,11 +5,6 @@ import json
 from pubscraper.APIClasses.Base import Base
 import config
 
-format_str = (
-    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
-
 
 class MDPI(Base):
     def __init__(self, api_key=None):
