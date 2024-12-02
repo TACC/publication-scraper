@@ -1,4 +1,7 @@
 import pytest
+import responses
+from responses import _recorder
+
 from pubscraper.APIClasses import PubMed
 
 
@@ -12,6 +15,7 @@ def test_no_input():
     assert results == {}
 
 
+@responses.activate
 def test_partial_empty_input():
     results = PubMed.search_multiple_authors(["albert", ""])
     assert len(results) == 1
