@@ -17,6 +17,20 @@ def test_no_input():
 
 @responses.activate
 def test_partial_empty_input():
+    response_1 = responses.Response(
+        method="GET",
+        url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+        status=200,
+        json={"esearchresult": {"idlist": ["12345678"]}}
+    )
+    responses.add(response_1)
+    response_2 = responses.Response(
+        method="GET",
+        url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
+        status=200,
+        json={"result": {"uids": ["12345678"], "12345678": {"authors": [{"name": "albert"}], "title": "some title", "fulljournalname": "some journal", "sortdate": "2000/09/06"}}}
+    )
+    responses.add(response_2)
     results = PubMed.search_multiple_authors(["albert", ""])
     assert len(results) == 1
 
