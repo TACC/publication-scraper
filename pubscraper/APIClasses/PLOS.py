@@ -71,7 +71,13 @@ class PLOS(Base):
         return publications
 
 # Function to search for multiple authors
-def search_multiple_authors(authors):
+def search_multiple_authors(authors, rows=10):
+    """
+    Search for publications by multiple authors.
+    :param authors: The name of the author to search for
+    :param rows: The number of results to return (default is 10)
+    :return: Dictionary with results for each author
+    """
     plos_api = PLOS()
     all_results = {} # Dictionary to hold results for all authors
 
@@ -82,12 +88,11 @@ def search_multiple_authors(authors):
             continue
         try:
             # Get publications for each author
-            publications = plos_api.get_publications_by_author(author)
+            publications = plos_api.get_publications_by_author(author, rows=rows)
             all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")
             all_results[author] = []
-
     
     return all_results
 
