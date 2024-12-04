@@ -83,11 +83,18 @@ def set_log_file(ctx, param, value):
     default=["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef"],
     show_default=True,
 )
+@click.option("--list", "list_apis", is_flag=True, default=False)
 # TODO: batch author names to circumvent rate limits?
-def main(log_level, log_file, input_file, number, output_file, apis):
+def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
+
+    if list_apis:
+        click.echo(
+            "Available endpoints:\n  Pubmed\n  ArXiv\n  MDPI\n  Elsevier\n  Springer\n  Wiley\n  CrossRef"
+        )
+        return 0
 
     author_names = []
     try:
