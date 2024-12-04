@@ -71,7 +71,7 @@ class CrossRef(Base):
                 return False
         return True
 
-    def get_publications_by_author(self, author_name, rows=10, offset=0):
+    def _aggregate_publications(self, author_name, rows=10, offset=0):
         """
         Given the name of an author, search CrossRef for works written by
         that author name
@@ -89,7 +89,7 @@ class CrossRef(Base):
 
         if author_name == "":
             logging.warning("received empty string for author name, returning None")
-            return None
+            return 0, None
 
         params = {
             "query.author": author_name.replace(" ", "+"),
@@ -103,7 +103,7 @@ class CrossRef(Base):
 
         if response.status_code != 200:
             logging.error(f"Error fetching data from PubMed: {response.status_code}")
-            return None
+            return 0, None
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
@@ -137,7 +137,15 @@ class CrossRef(Base):
 
         return total_results, publications
 
-    def _aggregate_publications(self, author: str, rows: int):
+    def get_publications_by_author(self, author: str, rows: int = 10):
+        if rows < 0:
+            logging.error(f"Rows must be a positive number (received {rows})")
+            raise ValueError("Rows must be a positive number")
+
+        if author == "":
+            logging.warning("received empty string for author name, returning None")
+            return None
+
         publications = []
         desired_rows = rows
         offset = len(publications)
@@ -145,7 +153,11 @@ class CrossRef(Base):
             f"Initial request: requesting {rows} publications from {author} (offset = {offset})"
         )
         while len(publications) < desired_rows:
-            total_results, pubs = self.get_publications_by_author(author, rows, offset)
+            total_results, pubs = self._aggregate_publications(author, rows, offset)
+            if not pubs:
+                # an error occured in _aggregate_publications, return None
+                return None
+
             logging.debug(f"Received {len(pubs)} valid publications for {author}")
             publications += pubs
 
@@ -176,9 +188,10 @@ def search_multiple_authors(authors: list[str], rows: int = 10):
 
         if author == "":
             logging.warning("Received empty string for author name, continuing...")
+            continue
 
         try:
-            publications = crossref._aggregate_publications(author, rows)
+            _, publications = crossref._aggregate_publications(author, rows)
             all_results[author] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}, {e}")

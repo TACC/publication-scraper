@@ -28,7 +28,7 @@ def test_search_all_names():
 
 def test_no_results():
     results = CrossRef.search_multiple_authors(["gibberish noneresults"])
-    assert results == {"gibberish noneresults": None}
+    assert results == {"gibberish noneresults": []}
 
 
 def test_limit_results():
