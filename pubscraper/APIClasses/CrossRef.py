@@ -120,6 +120,7 @@ class CrossRef(Base):
             doi = publication_item["DOI"]
 
             pub = {
+                "from": "CrossRef",
                 "journal": journal,
                 "publication_date": publication_date,
                 "title": title,
