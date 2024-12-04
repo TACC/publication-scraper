@@ -77,7 +77,7 @@ class CrossRef(Base):
         that author name
         :params author_name: name of author to search
         :params rows: maximum number of publications to return (default is 10)
-        :return: a list of publication objects/dics holding UID, journal name,
+        :return: a list of publication objects/dicts holding UID, journal name,
         publication date, title, and list of authors for each publication
         """
 

@@ -139,7 +139,6 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
         authors_pubs = []
         for api_name in apis:
             api = available_apis[api_name]
-            # api = class_name()
             pubs_found = api.get_publications_by_author(author, number)
             if pubs_found is not None:
                 authors_pubs += pubs_found
