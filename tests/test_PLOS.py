@@ -23,7 +23,6 @@ def mock_PLOS_response(entries):
 def test_skip_empty_name(mock_api):
     """Test skipping empty author names."""
     results = PLOS.search_multiple_authors([""])
-
     assert results == {}
     assert len(mock_api.calls) == 0  # No requests should have been made
 
