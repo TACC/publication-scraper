@@ -1,0 +1,313 @@
+responses:
+- response:
+    auto_calculate_content_length: false
+    body: ''
+    content_type: text/plain
+    headers:
+      cache-control: no-cache
+      connection: close
+      content-length: '0'
+      location: https://api.crossref.org/works?query.author=Horace%2BJ.%2BMaxile&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+    method: GET
+    status: 302
+    url: http://api.crossref.org/works?query.author=Horace%2BJ.%2BMaxile&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":10777,"items":[{"author":[{"sequence":"additional","affiliation":[]},{"given":"Horace","family":"Maxile","sequence":"first","affiliation":[{"name":"Louisiana
+      State University and Agricultural & Mechanical College"}]}],"title":["Say What?
+      Topics, Signs, and Signification in African-American Music."]},{"author":[{"suffix":"JR.","given":"HORACE
+      J.","family":"MAXILE","sequence":"first","affiliation":[]}],"title":["Implication,
+      Quotation, and Coltrane in Selected Works By David N. Baker"],"container-title":["Journal
+      of the Society for American Music"],"published-print":{"date-parts":[[2013,5]]}},{"author":[{"given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[]}],"title":["National
+      Convention of Gospel Choirs and Choruses"],"container-title":["Oxford Music
+      Online"],"published-print":{"date-parts":[[2014,9,3]]}},{"author":[{"given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[]}],"title":["Florence
+      B. Price, Piano Sonata in E minor (1932)"],"container-title":["Analytical Essays
+      on Music by Women Composers: Concert Music, 1900\u20131960"],"published-print":{"date-parts":[[2022,8,11]]}},{"author":[{"given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[]}],"title":["Olly Wilson
+      (1937\u20132018)"],"container-title":["Interviews with American Composers"],"published-print":{"date-parts":[[2022,1,1]]}},{"author":[{"given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[]}],"title":["Mary Mary"],"container-title":["Oxford
+      Music Online"],"published-print":{"date-parts":[[2014,7,1]]}},{"author":[{"suffix":"Jr","given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[{"name":"Columbia College
+      Chicago, IL, USA,"}]}],"title":["Extensions on a Black Musical Tropology: From
+      Trains to the Mothership (and Beyond)"],"container-title":["Journal of Black
+      Studies"],"published-print":{"date-parts":[[2011,5]]}},{"author":[{"given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[]}],"title":["McClurkin,
+      Donnie"],"container-title":["Oxford Music Online"]},{"author":[{"suffix":"Jr.","given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[]}],"title":["<i>Ulysses
+      Kay: Works for Chamber Orchestra<\/i>. Metropolitan Philharmonic Orchestra,
+      Kevin Scott, conductor. Albany Records, TROY 961, 2007."],"container-title":["Journal
+      of the Society for American Music"],"published-print":{"date-parts":[[2009,8]]}},{"author":[{"suffix":"Jr.","given":"Horace
+      J.","family":"Maxile","sequence":"first","affiliation":[]}],"title":["Healing
+      for the Soul: Richard Smallwood, the Vamp, and the Gospel Imagination"],"container-title":["Yale
+      Journal of Music &amp; Religion"]}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+    content_type: text/plain
+    headers:
+      access-control-allow-headers: X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+        Accept-Language, Accept-Ranges, Cache-Control
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Link
+      connection: close
+      content-encoding: gzip
+      content-length: '1003'
+      content-type: application/json
+      date: Mon, 02 Dec 2024 22:27:03 GMT
+      permissions-policy: interest-cohort=()
+      server: Jetty(9.4.40.v20210413)
+      set-cookie: AWSALB=kX+8C7IGOhrX7biaJkhvLkRuW/XEcREp1/h+Q53aW/o/hZrvo8PskHxif+Jni+k0dygtFCyoYYD0EMs0RN+YIOw2d/DWYD3Xm2JOIiQia5hC71XqOrbEeVAh7sYS;
+        Expires=Mon, 09 Dec 2024 22:27:00 GMT; Path=/, AWSALBCORS=kX+8C7IGOhrX7biaJkhvLkRuW/XEcREp1/h+Q53aW/o/hZrvo8PskHxif+Jni+k0dygtFCyoYYD0EMs0RN+YIOw2d/DWYD3Xm2JOIiQia5hC71XqOrbEeVAh7sYS;
+        Expires=Mon, 09 Dec 2024 22:27:00 GMT; Path=/; SameSite=None
+      vary: Accept-Encoding
+      x-api-pool: polite
+      x-rate-limit-interval: 1s
+      x-rate-limit-limit: '50'
+      x-ratelimit-interval: 1s
+      x-ratelimit-limit: '50'
+    method: GET
+    status: 200
+    url: https://api.crossref.org/works?query.author=Horace%2BJ.%2BMaxile&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: ''
+    content_type: text/plain
+    headers:
+      cache-control: no-cache
+      connection: close
+      content-length: '0'
+      location: https://api.crossref.org/works?query.author=Emmett%2BPrice&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+    method: GET
+    status: 302
+    url: http://api.crossref.org/works?query.author=Emmett%2BPrice&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":108518,"items":[{"author":[{"given":"Emmett","family":"Price","sequence":"first","affiliation":[]}],"title":["<i>The
+      Birth of Bebop: A Social and Musical History<\/i> by Scott DeVeaux"],"container-title":["Jazz
+      and Culture"],"published-print":{"date-parts":[[1998,10,1]]}},{"author":[{"given":"Emmett
+      W.","family":"Price","sequence":"first","affiliation":[]}],"title":["The Fluke
+      Situation in American Ruminants"],"container-title":["The Journal of Parasitology"],"published-print":{"date-parts":[[1953,4]]}},{"author":[{"suffix":"III","given":"Emmett
+      G.","family":"Price","sequence":"first","affiliation":[]}],"title":["Singing
+      the Sermon: Where Musicology Meets Homiletics"],"container-title":["Yale Journal
+      of Music &amp; Religion"]},{"author":[{"given":"Emmett W.","family":"Price","sequence":"first","affiliation":[]}],"title":["A
+      new nematode, Nematodirus antilocaprae, from the prong-horn antelope, with a
+      key to the species of Nematodirus"],"container-title":["Proceedings of the United
+      States National Museum"],"published-print":{"date-parts":[[1927]]}},{"author":[{"suffix":"III","given":"Emmett
+      G.","family":"Price","sequence":"first","affiliation":[]}],"title":["Aria by
+      Grover Washington, Jr."],"container-title":["Jazz and Culture"],"published-print":{"date-parts":[[2001,10,1]]}},{"author":[{"given":"Emmett
+      G.","family":"Price","sequence":"first","affiliation":[]}],"title":["Jazz"],"container-title":["Jazz
+      and Culture"],"published-print":{"date-parts":[[2007,10,1]]}},{"author":[{"given":"Emmett
+      W.","family":"Price","sequence":"first","affiliation":[]}],"title":["A new species
+      of trematode of the family Heterophyidae, with a note on the genus Apophallus
+      and related genera"],"container-title":["Proceedings of the United States National
+      Museum"],"published-print":{"date-parts":[[1931]]}},{"author":[{"given":"Emmett
+      G.","family":"Price","sequence":"first","affiliation":[]}],"title":["Allan Moore,
+      editor. The Cambridge Companion to Blues and Gospel Music. Cambridge: Cambridge
+      University Press, 2002. Russ Cheatham. Bad Boy of Gospel Music: The Calvin Newton
+      Story. Jackson: University Press of Mississippi, 2003."],"container-title":["Journal
+      of Popular Music Studies"],"published-print":{"date-parts":[[2005,8]]}},{"author":[{"given":"Emmett
+      W.","family":"Price","sequence":"first","affiliation":[]}],"title":["Two new
+      species of trematode worms of the genus Eucotyle from North American birds"],"container-title":["Proceedings
+      of the United States National Museum"],"published-print":{"date-parts":[[1930]]}},{"author":[{"given":"Emmett
+      W.","family":"Price","sequence":"first","affiliation":[]}],"title":["New helminth
+      parasites from Central American mammals"],"container-title":["Proceedings of
+      the United States National Museum"],"published-print":{"date-parts":[[1928]]}}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+    content_type: text/plain
+    headers:
+      access-control-allow-headers: X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+        Accept-Language, Accept-Ranges, Cache-Control
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Link
+      connection: close
+      content-encoding: gzip
+      content-length: '896'
+      content-type: application/json
+      date: Mon, 02 Dec 2024 22:27:04 GMT
+      permissions-policy: interest-cohort=()
+      server: Jetty(9.4.40.v20210413)
+      set-cookie: AWSALB=dXsDFJMQ0p3RWBtlZ86c7x3SwDZjqheF64PFUdrxvJOA1IfhrKSjd6vgH7uZt2x0QrZjfW3mr+98Bl5X9YtEZ3gDf7gfsLIDYltRshTSqTybzgpD5XE6G3Wfv8QV;
+        Expires=Mon, 09 Dec 2024 22:27:03 GMT; Path=/, AWSALBCORS=dXsDFJMQ0p3RWBtlZ86c7x3SwDZjqheF64PFUdrxvJOA1IfhrKSjd6vgH7uZt2x0QrZjfW3mr+98Bl5X9YtEZ3gDf7gfsLIDYltRshTSqTybzgpD5XE6G3Wfv8QV;
+        Expires=Mon, 09 Dec 2024 22:27:03 GMT; Path=/; SameSite=None
+      vary: Accept-Encoding
+      x-api-pool: polite
+      x-rate-limit-interval: 1s
+      x-rate-limit-limit: '50'
+      x-ratelimit-interval: 1s
+      x-ratelimit-limit: '50'
+    method: GET
+    status: 200
+    url: https://api.crossref.org/works?query.author=Emmett%2BPrice&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: ''
+    content_type: text/plain
+    headers:
+      cache-control: no-cache
+      connection: close
+      content-length: '0'
+      location: https://api.crossref.org/works?query.author=Jane%2BEyre&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+    method: GET
+    status: 302
+    url: http://api.crossref.org/works?query.author=Jane%2BEyre&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":254145,"items":[{"author":[{"given":"Jane
+      Eyre","family":"Gabriel","sequence":"first","affiliation":[]}],"title":["As
+      prote\u00ednas de choque t\u00e9rmico e suas implica\u00e7\u00f5es como biomarcadores
+      no diagn\u00f3stico de dist\u00farbios fisiopatol\u00f3gicos: uma revis\u00e3o"],"container-title":["Revista
+      de Ci\u00eancias M\u00e9dicas e Biol\u00f3gicas"]},{"author":[{"given":"Jane
+      Eyre","family":"Gabriel","sequence":"first","affiliation":[{"name":"Universidade
+      Federal do Vale do S\u00e3o Francisco"}]}],"title":["THE POLYMORPHISM R441Q
+      OF THE CHICKEN WWP1 UBIQUITIN PROTEIN LIGASE AFFECTS ITS FUNCTIONAL AND STRUCTURAL
+      PROPRIETIES: POSSIBLE IMPLICATIONS TO GENETIC MUSCULAR DYSTROPHY \/ O POLIMORFISMO
+      R441Q DA ENZIMA LIGASE WWP1 DA PROTE\u00cdNA UBIQUITINA DE GALINHA AFETA SUAS
+      PROPRIEDADES FUNCIONAIS E ESTRUTURAIS: POSS\u00cdVEIS IMPLICA\u00c7\u00d5ES
+      \u00c0 DISTROFIA MUSCULAR GEN\u00c9TICA"],"container-title":["Brazilian Journal
+      of Development"],"published-print":{"date-parts":[[2021]]}},{"author":[{"given":"Jane
+      Eyre","family":"Gabriel","sequence":"first","affiliation":[]}],"title":["Evaluating
+      the specificity of primers employed for PCR-based diagnostics of Leishmaniases
+      using multiple alignment analysis"],"container-title":["Estudos de Biologia"]},{"author":[{"given":"Jane
+      Eyre","family":"Gabriel","sequence":"first","affiliation":[]}],"title":["THE
+      POLYMORPHISM R441Q OF THE CHICKEN WWP1 UBIQUITIN PROTEIN LIGASE AFFECTS ITS
+      FUNCTIONAL AND STRUCTURAL PROPRIETIES: POSSIBLE IMPLICATIONS TO GENETIC MUSCULAR
+      DYSTROPHY"],"container-title":["Abordagens ligadas \u00e0s ci\u00eancias exatas"]},{"author":[{"given":"Stephen","family":"Eyre","sequence":"first","affiliation":[]},{"given":"Jane","family":"Worthington","sequence":"additional","affiliation":[]}],"title":["Take
+      Your PICS: Moving from GWAS to Immune Function"],"container-title":["Immunity"],"published-print":{"date-parts":[[2014,12]]}},{"author":[{"ORCID":"http:\/\/orcid.org\/0000-0003-0894-480X","authenticated-orcid":false,"given":"Dominic","family":"Eyre","sequence":"first","affiliation":[]},{"given":"Jane","family":"Barbrook","sequence":"additional","affiliation":[]}],"title":["The
+      eradication of Asian longhorned beetle at Paddock Wood, UK"],"container-title":["CABI
+      Agriculture and Bioscience"],"published-print":{"date-parts":[[2021,12]]}},{"author":[{"given":"Steve","family":"Eyre","sequence":"first","affiliation":[]},{"given":"Jane","family":"Worthington","sequence":"additional","affiliation":[]}],"title":["Genetics
+      of rheumatoid arthritis"],"container-title":["Oxford Medicine Online"],"published-print":{"date-parts":[[2013,10]]}},{"author":[{"given":"Jane","family":"Worthington","sequence":"first","affiliation":[]},{"given":"Steve","family":"Eyre","sequence":"additional","affiliation":[]}],"title":["Principles
+      of genetic epidemiology"],"container-title":["Rheumatology"],"published-print":{"date-parts":[[2015]]}},{"author":[{"given":"Jane","family":"Charlesworth","sequence":"first","affiliation":[{"name":"Centre
+      for the Study of Evolution, School of Life Sciences, University of Sussex, Brighton
+      BN1 9QG, United Kingdom"}]},{"given":"Adam","family":"Eyre-Walker","sequence":"additional","affiliation":[{"name":"Centre
+      for the Study of Evolution, School of Life Sciences, University of Sussex, Brighton
+      BN1 9QG, United Kingdom"}]}],"title":["The other side of the nearly neutral
+      theory, evidence of slightly advantageous back-mutations"],"container-title":["Proceedings
+      of the National Academy of Sciences"],"published-print":{"date-parts":[[2007,10,23]]}},{"author":[{"given":"Jane
+      Eyre Gomes de","family":"Castro","sequence":"first","affiliation":[]}],"title":["O
+      USO DO SOFTWARE \u201cLUZ DO SABER\u201d NA SALA DE RECURSO MULTIFUNCIONAL:
+      UMA AN\u00c1LISE SOBRE A MEDIA\u00c7\u00c3O DO PROFESSOR DO AEE NO ATENDIMENTO
+      DE UMA CRIAN\u00c7A COM DEFICI\u00caNCIA INTELECTUAL"],"container-title":["Anais
+      do(a) Anais IV CINTEDI"]}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+    content_type: text/plain
+    headers:
+      access-control-allow-headers: X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+        Accept-Language, Accept-Ranges, Cache-Control
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Link
+      connection: close
+      content-encoding: gzip
+      content-length: '1539'
+      content-type: application/json
+      date: Mon, 02 Dec 2024 22:27:07 GMT
+      permissions-policy: interest-cohort=()
+      server: Jetty(9.4.40.v20210413)
+      set-cookie: AWSALB=hJ8O8g1dgV4e0Q9UpzH3+GPG0u7ZLkL3CbiUA1Ml/3r+2ILfCPE8xB568lRana3cqaDBwgKJbU7isZ090vxTu6n0AhstDXzfv2dbwrJuzarCppDH88oFID/KWeIR;
+        Expires=Mon, 09 Dec 2024 22:27:05 GMT; Path=/, AWSALBCORS=hJ8O8g1dgV4e0Q9UpzH3+GPG0u7ZLkL3CbiUA1Ml/3r+2ILfCPE8xB568lRana3cqaDBwgKJbU7isZ090vxTu6n0AhstDXzfv2dbwrJuzarCppDH88oFID/KWeIR;
+        Expires=Mon, 09 Dec 2024 22:27:05 GMT; Path=/; SameSite=None
+      vary: Accept-Encoding
+      x-api-pool: polite
+      x-rate-limit-interval: 1s
+      x-rate-limit-limit: '50'
+      x-ratelimit-interval: 1s
+      x-ratelimit-limit: '50'
+    method: GET
+    status: 200
+    url: https://api.crossref.org/works?query.author=Jane%2BEyre&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: ''
+    content_type: text/plain
+    headers:
+      cache-control: no-cache
+      connection: close
+      content-length: '0'
+      location: https://api.crossref.org/works?query.author=Ariella%2BSerman&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+    method: GET
+    status: 302
+    url: http://api.crossref.org/works?query.author=Ariella%2BSerman&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":2880,"items":[{"author":[{"given":"Ariella","family":"Serman","sequence":"first","affiliation":[]}],"title":["Alexa
+      \u2013 What\u2019s Your Personality? The Personification Of Amazon\u2019s Alexa
+      Through Television Advertisements"]},{"author":[{"given":"Ariella","family":"Serman","sequence":"first","affiliation":[]}],"title":["Alexa
+      \u2013 What\u2019s Your Personality? The Personification Of Amazon\u2019s Alexa
+      Through Television Advertisements"]},{"author":[{"given":"L.","family":"Serman","sequence":"first","affiliation":[]},{"given":"A.","family":"Serman","sequence":"additional","affiliation":[]},{"given":"D.","family":"Fabijanovic","sequence":"additional","affiliation":[]}],"title":["An
+      in vivo rat model to study epigenetic control of cell invasion"],"container-title":["Medical
+      Hypotheses"],"published-print":{"date-parts":[[2011,3]]}},{"author":[{"given":"Ilya","family":"Serman","sequence":"first","affiliation":[]}],"title":["The
+      eighteenth century: neoclassicism and the Enlightenment, 1730\u201390"],"container-title":["The
+      Cambridge History of Russian Literature"],"published-print":{"date-parts":[[1992,4,30]]}},{"author":[{"given":"Lesia","family":"Serman","sequence":"first","affiliation":[]}],"title":["The
+      problem of self-presentation of a foreign language teacher in the system of
+      distance education"],"container-title":["Human Studies. Series of Pedagogy"],"published-print":{"date-parts":[[2021]]}},{"author":[{"ORCID":"http:\/\/orcid.org\/0000-0002-7836-3085","authenticated-orcid":false,"given":"Taras","family":"SERMAN","sequence":"first","affiliation":[]}],"title":["ADAPTIVE
+      PHYSICAL CULTURE FOR PEOPLE, WHO EXPERIENCED WAR TRAUMAS"],"container-title":["Humanities
+      science current issues"],"published-print":{"date-parts":[[2022]]}},{"author":[{"given":"N.J.","family":"Serman","sequence":"first","affiliation":[]}],"title":["Atlas
+      of oral diagnostic imaging"],"container-title":["Journal of Dentistry"],"published-print":{"date-parts":[[1992,6]]}},{"author":[{"given":"Il''ja","family":"Serman","sequence":"first","affiliation":[]}],"title":["\u041b\u043e\u043c\u043e\u043d\u043e\u0441\u043e\u0432
+      \u0438 \u0411\u0443\u0430\u043b\u043e (\u041f\u0440\u043e\u0431\u043b\u0435\u043c\u0430
+      \u043b\u0438\u0442\u0435\u0440\u0430\u0442\u0443\u0440\u043d\u043e\u0439 \u043e\u0440\u0438\u0435\u043d\u0442\u0430\u0446\u0438\u0438)"],"container-title":["Cahiers
+      du monde russe et sovi\u00e9tique"],"published-print":{"date-parts":[[1983]]}},{"author":[{"given":"N","family":"Serman","sequence":"first","affiliation":[]}],"title":["A
+      false presence of bifid mandibular canals in panoramic radiographs"],"container-title":["Dentomaxillofacial
+      Radiology"],"published-print":{"date-parts":[[2012,10]]}},{"author":[{"given":"Il''ia","family":"Serman","sequence":"first","affiliation":[]}],"title":["The
+      Paradise Myth in Eighteenth-Century Russia: Utopian Patterns in Early Secular
+      Literature and Culture. By Stephen Lessing Baehr. Stanford: Stanford University
+      Press, 1991. 308 pp. Bibliography. Index. $37.50."],"container-title":["Slavic
+      Review"],"published-print":{"date-parts":[[1992]]}}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+    content_type: text/plain
+    headers:
+      access-control-allow-headers: X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+        Accept-Language, Accept-Ranges, Cache-Control
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Link
+      connection: close
+      content-encoding: gzip
+      content-length: '1188'
+      content-type: application/json
+      date: Mon, 02 Dec 2024 22:27:07 GMT
+      permissions-policy: interest-cohort=()
+      server: Jetty(9.4.40.v20210413)
+      set-cookie: AWSALB=tfF+cnokW4bOIRkk0N+HLCmvdt2QycEKlgos/kWM8Jp51jAPRJfRNjniQMYMDSkzHh1tdp41552u3tXthJpbQbrHdCD/srPxQqzmLdtH+W+YbliKfMw2REFY3vg/;
+        Expires=Mon, 09 Dec 2024 22:27:07 GMT; Path=/, AWSALBCORS=tfF+cnokW4bOIRkk0N+HLCmvdt2QycEKlgos/kWM8Jp51jAPRJfRNjniQMYMDSkzHh1tdp41552u3tXthJpbQbrHdCD/srPxQqzmLdtH+W+YbliKfMw2REFY3vg/;
+        Expires=Mon, 09 Dec 2024 22:27:07 GMT; Path=/; SameSite=None
+      vary: Accept-Encoding
+      x-api-pool: polite
+      x-rate-limit-interval: 1s
+      x-rate-limit-limit: '50'
+      x-ratelimit-interval: 1s
+      x-ratelimit-limit: '50'
+    method: GET
+    status: 200
+    url: https://api.crossref.org/works?query.author=Ariella%2BSerman&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: ''
+    content_type: text/plain
+    headers:
+      cache-control: no-cache
+      connection: close
+      content-length: '0'
+      location: https://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+    method: GET
+    status: 302
+    url: http://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+- response:
+    auto_calculate_content_length: false
+    body: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":0,"items":[],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+    content_type: text/plain
+    headers:
+      access-control-allow-headers: X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+        Accept-Language, Accept-Ranges, Cache-Control
+      access-control-allow-origin: '*'
+      access-control-expose-headers: Link
+      connection: close
+      content-type: application/json
+      date: Mon, 02 Dec 2024 22:27:09 GMT
+      permissions-policy: interest-cohort=()
+      server: Jetty(9.4.40.v20210413)
+      set-cookie: AWSALB=WOukMQNP9PlAQH625vWI1Wvdk2etLNuiYS7LqDDYSBjziPQ55IXmL3zzXVQo4JHTMgzFKZCSPDp5sTBYYkaQGmfibPly8fTJrthlMPWpsDhgVilPkahYmpS5izxX;
+        Expires=Mon, 09 Dec 2024 22:27:07 GMT; Path=/, AWSALBCORS=WOukMQNP9PlAQH625vWI1Wvdk2etLNuiYS7LqDDYSBjziPQ55IXmL3zzXVQo4JHTMgzFKZCSPDp5sTBYYkaQGmfibPly8fTJrthlMPWpsDhgVilPkahYmpS5izxX;
+        Expires=Mon, 09 Dec 2024 22:27:07 GMT; Path=/; SameSite=None
+      transfer-encoding: chunked
+      x-api-pool: polite
+      x-rate-limit-interval: 1s
+      x-rate-limit-limit: '50'
+      x-ratelimit-interval: 1s
+      x-ratelimit-limit: '50'
+    method: GET
+    status: 200
+    url: https://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
