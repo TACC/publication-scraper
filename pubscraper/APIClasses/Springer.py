@@ -18,7 +18,7 @@ class Springer(Base):
         self.base_url = config.SPRINGER_URL
         self.api_key = api_key
 
-    def standardize_author_name(self, author_name):
+    def _standardize_author_name(self, author_name):
         """Standardize the author's name to ensure consistency."""
         name_parts = author_name.split()
 
@@ -44,21 +44,23 @@ class Springer(Base):
         :return: A list of dictionaries containing publication details
         """
         if not author_name.strip():
-            logging.warning("Received empty string for author name in search query, returning None")
+            logging.warning(
+                "Received empty string for author name in search query, returning None"
+            )
             return None
 
         # Standardize the author name for query
-        normalized_name = self.standardize_author_name(author_name)
+        normalized_name = self._standardize_author_name(author_name)
         params = {
-            "q": normalized_name,  
-            "p": rows, 
+            "q": normalized_name,
+            "p": rows,
             "api_key": self.api_key,
         }
 
         # Error handling when interacting with Springer APIs, Raises HTTP Error for bad responses
         try:
-            response = requests.get(self.base_url, params=params, timeout=10) 
-            response.raise_for_status() 
+            response = requests.get(self.base_url, params=params, timeout=10)
+            response.raise_for_status()
         except requests.exceptions.RequestException as e:
             logging.error(f"Springer API Request error: {e}")
             return []
@@ -80,12 +82,13 @@ class Springer(Base):
 
             if all([title, authors, publication_date, publication_name]):
                 publication = {
-                    "doi": doi,
+                    "from": "Springer",
                     "journal": publication_name,
                     "content_type": content_type,
                     "publication_date": publication_date,
                     "title": title,
                     "authors": ", ".join(authors),
+                    "doi": doi,
                 }
                 publications.append(publication)
 
@@ -102,7 +105,7 @@ def search_multiple_authors(authors, limit=10):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
-        if not author.strip(): 
+        if not author.strip():
             logging.warning("Received empty string for author name, continuing...")
             continue
         try:
