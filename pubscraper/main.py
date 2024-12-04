@@ -82,12 +82,32 @@ def set_log_file(ctx, param, value):
     multiple=True,
     default=["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef"],
     show_default=True,
+    help="Specify APIs to query",
+)
+# TODO: I don't like the help message saying 'available' for querying, rephrase for clarity
+@click.option(
+    "--list",
+    "list_apis",
+    is_flag=True,
+    default=False,
+    help="List APIs available for querying",
 )
 # TODO: batch author names to circumvent rate limits?
-def main(log_level, log_file, input_file, number, output_file, apis):
+def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
+
+    if list_apis:
+        click.secho("Available endpoints:", underline=True)
+        click.secho("  Pubmed", fg="blue")
+        click.secho("  ArXiv", fg="blue")
+        click.secho("  MDPI", fg="blue")
+        click.secho("  Elsevier", fg="blue")
+        click.secho("  Springer", fg="blue")
+        click.secho("  Wiley", fg="blue")
+        click.secho("  CrossRef", fg="blue")
+        return 0
 
     author_names = []
     try:
