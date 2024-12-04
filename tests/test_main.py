@@ -49,3 +49,10 @@ def test_bad_api_selection(runner):
 def test_log_level(runner):
     result = runner.invoke(main.main, ["--log-level DEBUG"])
     assert "DEBUG" in result.output
+
+
+def test_print_list_succeeds(runner):
+    response_text = get_response_text(os.path.join(RESPONSE_DIR, "list.txt"))
+    result = runner.invoke(main.main, ["--list"])
+    assert result.exit_code == 0
+    assert result.output == response_text
