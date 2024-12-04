@@ -12,7 +12,7 @@ class PubMed(Base):
         self.search_url = config.PUBMED_SEARCH_URL
         self.summary_url = config.PUBMED_SUMMARY_URL
 
-    def get_UIDs_by_author(self, author_name, rows=10):
+    def _get_UIDs_by_author(self, author_name, rows=10):
         """
         Retrieve a given author's UID publications
         :param author_name: name of author {firstName} {lastName}
@@ -47,15 +47,15 @@ class PubMed(Base):
             "retmode": "JSON",
         }
 
-        
         # Error handling when interacting with PubMed APIs.
         try:
-            response = requests.get(self.search_url, params=params, timeout=10)  # Send the request to the PubMed API
+            response = requests.get(
+                self.search_url, params=params, timeout=10
+            )  # Send the request to the PubMed API
             response.raise_for_status()  # Raises HTTP Error for bad responses
         except requests.exceptions.RequestException as e:
             logging.error(f"PubMed API Request error: {e}")
             return None
-
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
@@ -71,7 +71,20 @@ class PubMed(Base):
         logging.debug(f"received the following UIDs: {id_list}")
         return id_list
 
-    def get_summary_by_UIDs(self, UIDs):
+    def _extract_DOI(self, summary_object) -> str:
+        """
+        Given a JSON object of a publication, extract and return the DOI
+        :params summary_object: JSON result from PubMed eSummary
+        :return: DOI of the article as a string
+        """
+        articleids = summary_object.get("articleids", [])
+        for id in articleids:
+            if id["idtype"] == "doi":
+                return id["value"]
+
+        return ""
+
+    def _get_summary_by_UIDs(self, UIDs):
         """
         Given a list of UIDs, retrieve summary information for each UID
         :params UIDs: a list of UIDs
@@ -89,17 +102,17 @@ class PubMed(Base):
             "id": stringified_UIDs,
             "retmode": "JSON",
         }
-        
 
         # Error handling when interacting with PubMed APIs.
         try:
-            response = requests.get(self.search_url, params=params, timeout=10)  # Send the request to the PubMed API
+            response = requests.get(
+                self.search_url, params=params, timeout=10
+            )  # Send the request to the PubMed API
             response.raise_for_status()  # Raises HTTP Error for bad responses
         except requests.exceptions.RequestException as e:
             logging.error(f"Error fetching summaries from PubMed: {e}")
             return None
         response = requests.get(self.summary_url, params=params)
-        
 
         data = response.json()
 
@@ -111,11 +124,12 @@ class PubMed(Base):
                 author_list.append(author_object["name"])
 
             pub = {
-                "doi": uid,
+                "from": "PubMed",
                 "journal": summary_object["fulljournalname"],
                 "publication_date": summary_object["sortdate"],
                 "title": summary_object["title"],
                 "authors": ",".join(author_list),
+                "doi": self._extract_DOI(summary_object),
             }
             publications.append(pub)
 
@@ -129,8 +143,8 @@ class PubMed(Base):
         :params rows: maximum number of publications to return (default is 10)
         :return: a list of publication objects/dicts holding summary data for each publication
         """
-        UIDs = self.get_UIDs_by_author(author_name, rows)
-        summary_info = self.get_summary_by_UIDs(UIDs)
+        UIDs = self._get_UIDs_by_author(author_name, rows)
+        summary_info = self._get_summary_by_UIDs(UIDs)
 
         return summary_info
 
