@@ -1,0 +1,15 @@
+Usage: main [OPTIONS]
+
+Options:
+  --version                       Show the version and exit.
+  --log-level [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
+                                  Set the log level  [default: 20]
+  --log-file PATH                 Set the log file
+  -i, --input_file TEXT           Specify input file
+  -o, --output_file TEXT          Specify output file
+  -n, --number INTEGER            Specify max number of publications to receive
+                                  for each author
+  -a, --apis [PubMed|ArXiv|MDPI|Elsevier|Springer|Wiley|CrossRef]
+                                  [default: PubMed, ArXiv, MDPI, Elsevier,
+                                  Springer, Wiley, CrossRef]
+  --help                          Show this message and exit.

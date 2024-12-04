@@ -1,0 +1,259 @@
+responses:
+- response:
+    auto_calculate_content_length: false
+    body: '{"header":{"type":"esearch","version":"0.3"},"esearchresult":{"count":"5095","retmax":"10","retstart":"0","idlist":["11603028","11602576","11596556","11587556","11583953","11578102","11574494","11571497","11564627","11560274"],"translationset":[],"translationstack":[{"term":"albert[author]","field":"author","count":"5144","explode":"N"},"GROUP"],"querytranslation":"albert[author]"}}
+
+      '
+    content_type: text/plain
+    headers:
+      Access-Control-Allow-Origin: '*'
+      Access-Control-Expose-Headers: X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control: private
+      Content-Security-Policy: upgrade-insecure-requests
+      Keep-Alive: timeout=4, max=40
+      NCBI-PHID: 322C0194B8BE824500002F92D0C9FB7A.1.1.m_1
+      NCBI-SID: F138BF4B576CBECA_89BFSID
+      Referrer-Policy: origin-when-cross-origin
+      Set-Cookie: ncbi_sid=F138BF4B576CBECA_89BFSID; domain=.nih.gov; path=/; expires=Tue,
+        02 Dec 2025 22:24:39 GMT
+      Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding: chunked
+      X-RateLimit-Limit: '3'
+      X-RateLimit-Remaining: '2'
+      X-UA-Compatible: IE=Edge
+      X-XSS-Protection: 1; mode=block
+      content-encoding: gzip
+    method: GET
+    status: 200
+    url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&term=albert%5Bauthor%5D&retmax=10&retmode=JSON
+- response:
+    auto_calculate_content_length: false
+    body: '{"header":{"type":"esearch","version":"0.3"},"esearchresult":{"ERROR":"Empty
+      term and query_key - nothing todo"}}
+
+      '
+    content_type: text/plain
+    headers:
+      Access-Control-Allow-Origin: '*'
+      Access-Control-Expose-Headers: X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control: private
+      Content-Security-Policy: upgrade-insecure-requests
+      Keep-Alive: timeout=4, max=40
+      NCBI-PHID: D0BD1C06313643550000548B8CF52589.1.1.m_1
+      NCBI-SID: 8B4857BB843606A6_5AF9SID
+      Referrer-Policy: origin-when-cross-origin
+      Set-Cookie: ncbi_sid=8B4857BB843606A6_5AF9SID; domain=.nih.gov; path=/; expires=Tue,
+        02 Dec 2025 22:24:39 GMT
+      Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding: chunked
+      X-RateLimit-Limit: '3'
+      X-RateLimit-Remaining: '1'
+      X-UA-Compatible: IE=Edge
+      X-XSS-Protection: 1; mode=block
+      content-encoding: gzip
+    method: GET
+    status: 200
+    url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pmc&id=11603028%2C11602576%2C11596556%2C11587556%2C11583953%2C11578102%2C11574494%2C11571497%2C11564627%2C11560274&retmode=JSON
+- response:
+    auto_calculate_content_length: false
+    body: "{\"header\":{\"type\":\"esummary\",\"version\":\"0.3\"},\"result\":{\"\
+      uids\":[\"11603028\",\"11602576\",\"11596556\",\"11587556\",\"11583953\",\"\
+      11578102\",\"11574494\",\"11571497\",\"11564627\",\"11560274\"],\"11603028\"\
+      :{\"uid\":\"11603028\",\"pubdate\":\"2024 Nov 27\",\"epubdate\":\"2024 Nov 27\"\
+      ,\"printpubdate\":\"\",\"source\":\"Nat Commun\",\"authors\":[{\"name\":\"Busselez\
+      \ J\",\"authtype\":\"Author\"},{\"name\":\"Koenig G\",\"authtype\":\"Author\"\
+      },{\"name\":\"Dominique C\",\"authtype\":\"Author\"},{\"name\":\"Klos T\",\"\
+      authtype\":\"Author\"},{\"name\":\"Velayudhan D\",\"authtype\":\"Author\"},{\"\
+      name\":\"Sosnowski P\",\"authtype\":\"Author\"},{\"name\":\"Marechal N\",\"\
+      authtype\":\"Author\"},{\"name\":\"Crucifix C\",\"authtype\":\"Author\"},{\"\
+      name\":\"Gizardin-Fredon H\",\"authtype\":\"Author\"},{\"name\":\"Cianferani\
+      \ S\",\"authtype\":\"Author\"},{\"name\":\"Albert B\",\"authtype\":\"Author\"\
+      },{\"name\":\"Henry Y\",\"authtype\":\"Author\"},{\"name\":\"Henras AK\",\"\
+      authtype\":\"Author\"},{\"name\":\"Schmidt H\",\"authtype\":\"Author\"}],\"\
+      title\":\"Remodelling of Rea1 linker domain drives the removal of assembly factors\
+      \ from pre-ribosomal particles\",\"volume\":\"15\",\"issue\":\"\",\"pages\"\
+      :\"10309\",\"articleids\":[{\"idtype\":\"pmid\",\"value\":\"39604383\"},{\"\
+      idtype\":\"doi\",\"value\":\"10.1038/s41467-024-54698-w\"},{\"idtype\":\"pmcid\"\
+      ,\"value\":\"PMC11603028\"}],\"fulljournalname\":\"Nature Communications\",\"\
+      sortdate\":\"2024/11/27 00:00\",\"pmclivedate\":\"2024/11/28\"},\"11602576\"\
+      :{\"uid\":\"11602576\",\"pubdate\":\"2024 Sep 11\",\"epubdate\":\"2024 Sep 11\"\
+      ,\"printpubdate\":\"\",\"source\":\"Cell Genom\",\"authors\":[{\"name\":\"Johnson\
+      \ KE\",\"authtype\":\"Author\"},{\"name\":\"Heisel T\",\"authtype\":\"Author\"\
+      },{\"name\":\"Allert M\",\"authtype\":\"Author\"},{\"name\":\"F\xFCrst A\",\"\
+      authtype\":\"Author\"},{\"name\":\"Yerabandi N\",\"authtype\":\"Author\"},{\"\
+      name\":\"Knights D\",\"authtype\":\"Author\"},{\"name\":\"Jacobs KM\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Lock EF\",\"authtype\":\"Author\"},{\"name\":\"Bode\
+      \ L\",\"authtype\":\"Author\"},{\"name\":\"Fields DA\",\"authtype\":\"Author\"\
+      },{\"name\":\"Rudolph MC\",\"authtype\":\"Author\"},{\"name\":\"Gale CA\",\"\
+      authtype\":\"Author\"},{\"name\":\"Albert FW\",\"authtype\":\"Author\"},{\"\
+      name\":\"Demerath EW\",\"authtype\":\"Author\"},{\"name\":\"Blekhman R\",\"\
+      authtype\":\"Author\"}],\"title\":\"Human milk variation is shaped by maternal\
+      \ genetics and impacts the infant gut microbiome\",\"volume\":\"4\",\"issue\"\
+      :\"10\",\"pages\":\"100638\",\"articleids\":[{\"idtype\":\"pmid\",\"value\"\
+      :\"39265573\"},{\"idtype\":\"doi\",\"value\":\"10.1016/j.xgen.2024.100638\"\
+      },{\"idtype\":\"pmcid\",\"value\":\"PMC11602576\"}],\"fulljournalname\":\"Cell\
+      \ Genomics\",\"sortdate\":\"2024/09/11 00:00\",\"pmclivedate\":\"2024/11/29\"\
+      },\"11596556\":{\"uid\":\"11596556\",\"pubdate\":\"2024 Oct 22\",\"epubdate\"\
+      :\"2024 Oct 22\",\"printpubdate\":\"\",\"source\":\"Medicina (Kaunas)\",\"authors\"\
+      :[{\"name\":\"Reiss AB\",\"authtype\":\"Author\"},{\"name\":\"Vasalani S\",\"\
+      authtype\":\"Author\"},{\"name\":\"Albert J\",\"authtype\":\"Author\"},{\"name\"\
+      :\"Drewes W\",\"authtype\":\"Author\"},{\"name\":\"Li K\",\"authtype\":\"Author\"\
+      },{\"name\":\"Srivastava A\",\"authtype\":\"Author\"},{\"name\":\"De Leon J\"\
+      ,\"authtype\":\"Author\"},{\"name\":\"Katz AE\",\"authtype\":\"Author\"}],\"\
+      title\":\"The Effect of Androgen Deprivation Therapy on the Cardiovascular System\
+      \ in Advanced Prostate Cancer\",\"volume\":\"60\",\"issue\":\"11\",\"pages\"\
+      :\"1727\",\"articleids\":[{\"idtype\":\"pmid\",\"value\":\"39596912\"},{\"idtype\"\
+      :\"doi\",\"value\":\"10.3390/medicina60111727\"},{\"idtype\":\"pmcid\",\"value\"\
+      :\"PMC11596556\"}],\"fulljournalname\":\"Medicina\",\"sortdate\":\"2024/10/22\
+      \ 00:00\",\"pmclivedate\":\"2024/11/27\"},\"11587556\":{\"uid\":\"11587556\"\
+      ,\"pubdate\":\"2024 Jul 26\",\"epubdate\":\"2024 Jul 26\",\"printpubdate\":\"\
+      \",\"source\":\"Cardiovasc Res\",\"authors\":[{\"name\":\"Forrester EA\",\"\
+      authtype\":\"Author\"},{\"name\":\"Ben\xEDtez-Angeles M\",\"authtype\":\"Author\"\
+      },{\"name\":\"Redford KE\",\"authtype\":\"Author\"},{\"name\":\"Rosenbaum T\"\
+      ,\"authtype\":\"Author\"},{\"name\":\"Abbott GW\",\"authtype\":\"Author\"},{\"\
+      name\":\"Barrese V\",\"authtype\":\"Author\"},{\"name\":\"Dora K\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Albert AP\",\"authtype\":\"Author\"},{\"name\":\"Dannesboe\
+      \ J\",\"authtype\":\"Author\"},{\"name\":\"Salles-Crawley I\",\"authtype\":\"\
+      Author\"},{\"name\":\"Jepps TA\",\"authtype\":\"Author\"},{\"name\":\"Greenwood\
+      \ IA\",\"authtype\":\"Author\"}],\"title\":\"Crucial role for sensory nerves\
+      \ and Na/H exchanger inhibition in dapagliflozin- and empagliflozin-induced\
+      \ arterial relaxation\",\"volume\":\"120\",\"issue\":\"14\",\"pages\":\"1811-1824\"\
+      ,\"articleids\":[{\"idtype\":\"pmid\",\"value\":\"39056245\"},{\"idtype\":\"\
+      doi\",\"value\":\"10.1093/cvr/cvae156\"},{\"idtype\":\"pmcid\",\"value\":\"\
+      PMC11587556\"}],\"fulljournalname\":\"Cardiovascular Research\",\"sortdate\"\
+      :\"2024/07/26 00:00\",\"pmclivedate\":\"2024/11/26\"},\"11583953\":{\"uid\"\
+      :\"11583953\",\"pubdate\":\"2024 Oct 7\",\"epubdate\":\"2024 Oct 7\",\"printpubdate\"\
+      :\"2024 Nov 30\",\"source\":\"Stat Med\",\"authors\":[{\"name\":\"Yang J\",\"\
+      authtype\":\"Author\"},{\"name\":\"Zhang W\",\"authtype\":\"Author\"},{\"name\"\
+      :\"Albert PS\",\"authtype\":\"Author\"},{\"name\":\"Liu A\",\"authtype\":\"\
+      Author\"},{\"name\":\"Chen Z\",\"authtype\":\"Author\"}],\"title\":\"Combining\
+      \ Biomarkers to Improve Diagnostic Accuracy in Detecting Diseases With Group\u2010\
+      Tested Data\",\"volume\":\"43\",\"issue\":\"27\",\"pages\":\"5182-5192\",\"\
+      articleids\":[{\"idtype\":\"pmid\",\"value\":\"39375883\"},{\"idtype\":\"doi\"\
+      ,\"value\":\"10.1002/sim.10230\"},{\"idtype\":\"pmcid\",\"value\":\"PMC11583953\"\
+      }],\"fulljournalname\":\"Statistics in Medicine\",\"sortdate\":\"2024/10/07\
+      \ 00:00\",\"pmclivedate\":\"2024/11/23\"},\"11578102\":{\"uid\":\"11578102\"\
+      ,\"pubdate\":\"2022 Apr 8\",\"epubdate\":\"2022 Apr 8\",\"printpubdate\":\"\
+      2022 Sep\",\"source\":\"Spine J\",\"authors\":[{\"name\":\"Shahi P\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Vaishnav AS\",\"authtype\":\"Author\"},{\"name\":\"\
+      Lee R\",\"authtype\":\"Author\"},{\"name\":\"Mai E\",\"authtype\":\"Author\"\
+      },{\"name\":\"Steinhaus ME\",\"authtype\":\"Author\"},{\"name\":\"Huang R\"\
+      ,\"authtype\":\"Author\"},{\"name\":\"Albert T\",\"authtype\":\"Author\"},{\"\
+      name\":\"Iyer S\",\"authtype\":\"Author\"},{\"name\":\"Sheha ED\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Dowdell JE\",\"authtype\":\"Author\"},{\"name\":\"\
+      Qureshi SA\",\"authtype\":\"Author\"}],\"title\":\"Outcomes of cervical disc\
+      \ replacement in patients with neck pain greater than arm pain\",\"volume\"\
+      :\"22\",\"issue\":\"9\",\"pages\":\"1481-1489\",\"articleids\":[{\"idtype\"\
+      :\"pmid\",\"value\":\"35405338\"},{\"idtype\":\"doi\",\"value\":\"10.1016/j.spinee.2022.04.001\"\
+      },{\"idtype\":\"pmcid\",\"value\":\"PMC11578102\"},{\"idtype\":\"MID\",\"value\"\
+      :\"NIHMS2035906\"}],\"fulljournalname\":\"The spine journal : official journal\
+      \ of the North American Spine Society\",\"sortdate\":\"2022/04/08 00:00\",\"\
+      pmclivedate\":\"2024/11/20\"},\"11574494\":{\"uid\":\"11574494\",\"pubdate\"\
+      :\"2024 Nov 4\",\"epubdate\":\"2024 Nov 4\",\"printpubdate\":\"\",\"source\"\
+      :\"JMIR Form Res\",\"authors\":[{\"name\":\"Albert SL\",\"authtype\":\"Author\"\
+      },{\"name\":\"Massar RE\",\"authtype\":\"Author\"},{\"name\":\"Cassidy O\",\"\
+      authtype\":\"Author\"},{\"name\":\"Fennelly K\",\"authtype\":\"Author\"},{\"\
+      name\":\"Jay M\",\"authtype\":\"Author\"},{\"name\":\"Massey PM\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Bragg MA\",\"authtype\":\"Author\"}],\"title\":\"Body\
+      \ Positivity, Physical Health, and Emotional Well-Being Discourse on Social\
+      \ Media: Content Analysis of Lizzo\u2019s Instagram\",\"volume\":\"8\",\"issue\"\
+      :\"\",\"pages\":\"e60541\",\"articleids\":[{\"idtype\":\"pmid\",\"value\":\"\
+      39496156\"},{\"idtype\":\"doi\",\"value\":\"10.2196/60541\"},{\"idtype\":\"\
+      pmcid\",\"value\":\"PMC11574494\"}],\"fulljournalname\":\"JMIR Formative Research\"\
+      ,\"sortdate\":\"2024/11/04 00:00\",\"pmclivedate\":\"2024/11/19\"},\"11571497\"\
+      :{\"uid\":\"11571497\",\"pubdate\":\"2024 Mar 19\",\"epubdate\":\"2024 Mar 19\"\
+      ,\"printpubdate\":\"\",\"source\":\"J Diabetes Sci Technol\",\"authors\":[{\"\
+      name\":\"Maia A\",\"authtype\":\"Author\"},{\"name\":\"Subias Andujar D\",\"\
+      authtype\":\"Author\"},{\"name\":\"Yuste C\",\"authtype\":\"Author\"},{\"name\"\
+      :\"Albert L\",\"authtype\":\"Author\"},{\"name\":\"Vilaverde J\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Cardoso MH\",\"authtype\":\"Author\"},{\"name\":\"\
+      Rigla M\",\"authtype\":\"Author\"}],\"title\":\"Time in Range Analysis in Automated\
+      \ Insulin Delivery Era: Should Day and Nighttime Targets be the Same?\",\"volume\"\
+      :\"\",\"issue\":\"\",\"pages\":\"19322968241236456\",\"articleids\":[{\"idtype\"\
+      :\"pmid\",\"value\":\"38501504\"},{\"idtype\":\"doi\",\"value\":\"10.1177/19322968241236456\"\
+      },{\"idtype\":\"pmcid\",\"value\":\"PMC11571497\"}],\"fulljournalname\":\"Journal\
+      \ of Diabetes Science and Technology\",\"sortdate\":\"2024/03/19 00:00\",\"\
+      pmclivedate\":\"2024/11/18\"},\"11564627\":{\"uid\":\"11564627\",\"pubdate\"\
+      :\"2024 Oct 25\",\"epubdate\":\"2024 Oct 25\",\"printpubdate\":\"2024 Dec\"\
+      ,\"source\":\"Ophthalmol Ther\",\"authors\":[{\"name\":\"Chang DH\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Kao AA\",\"authtype\":\"Author\"},{\"name\":\"Huggins\
+      \ LK\",\"authtype\":\"Author\"},{\"name\":\"Albert JN\",\"authtype\":\"Author\"\
+      },{\"name\":\"Whinery JN\",\"authtype\":\"Author\"},{\"name\":\"Camirand BM\"\
+      ,\"authtype\":\"Author\"}],\"title\":\"Clinical Evaluation of Violet Light Filtration\
+      \ and High-Resolution Lathing on a Diffractive Extended Depth of Focus IOL\"\
+      ,\"volume\":\"13\",\"issue\":\"12\",\"pages\":\"3135-3147\",\"articleids\":[{\"\
+      idtype\":\"pmid\",\"value\":\"39455493\"},{\"idtype\":\"doi\",\"value\":\"10.1007/s40123-024-01056-0\"\
+      },{\"idtype\":\"pmcid\",\"value\":\"PMC11564627\"}],\"fulljournalname\":\"Ophthalmology\
+      \ and Therapy\",\"sortdate\":\"2024/10/25 00:00\",\"pmclivedate\":\"2024/11/16\"\
+      },\"11560274\":{\"uid\":\"11560274\",\"pubdate\":\"2024 Oct 8\",\"epubdate\"\
+      :\"2024 Oct 8\",\"printpubdate\":\"\",\"source\":\"Eur Heart J\",\"authors\"\
+      :[{\"name\":\"Peek N\",\"authtype\":\"Author\"},{\"name\":\"Hindricks G\",\"\
+      authtype\":\"Author\"},{\"name\":\"Akbarov A\",\"authtype\":\"Author\"},{\"\
+      name\":\"Tijssen JG\",\"authtype\":\"Author\"},{\"name\":\"Jenkins DA\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Kapacee Z\",\"authtype\":\"Author\"},{\"name\":\"Parkes\
+      \ LM\",\"authtype\":\"Author\"},{\"name\":\"van der Geest RJ\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Longato E\",\"authtype\":\"Author\"},{\"name\":\"Sprague\
+      \ D\",\"authtype\":\"Author\"},{\"name\":\"Taleb Y\",\"authtype\":\"Author\"\
+      },{\"name\":\"Ong M\",\"authtype\":\"Author\"},{\"name\":\"Miller CA\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Shamloo AS\",\"authtype\":\"Author\"},{\"name\":\"\
+      Albert C\",\"authtype\":\"Author\"},{\"name\":\"Barthel P\",\"authtype\":\"\
+      Author\"},{\"name\":\"Boveda S\",\"authtype\":\"Author\"},{\"name\":\"Braunschweig\
+      \ F\",\"authtype\":\"Author\"},{\"name\":\"Johansen JB\",\"authtype\":\"Author\"\
+      },{\"name\":\"Cook N\",\"authtype\":\"Author\"},{\"name\":\"de Chillou C\",\"\
+      authtype\":\"Author\"},{\"name\":\"Elders P\",\"authtype\":\"Author\"},{\"name\"\
+      :\"Fax\xE9n J\",\"authtype\":\"Author\"},{\"name\":\"Friede T\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Fusini L\",\"authtype\":\"Author\"},{\"name\":\"Gale\
+      \ CP\",\"authtype\":\"Author\"},{\"name\":\"Jarkovsky J\",\"authtype\":\"Author\"\
+      },{\"name\":\"Jouven X\",\"authtype\":\"Author\"},{\"name\":\"Junttila J\",\"\
+      authtype\":\"Author\"},{\"name\":\"Kautzner J\",\"authtype\":\"Author\"},{\"\
+      name\":\"Kiviniemi A\",\"authtype\":\"Author\"},{\"name\":\"Kutyifa V\",\"authtype\"\
+      :\"Author\"},{\"name\":\"Leclercq C\",\"authtype\":\"Author\"},{\"name\":\"\
+      Lee DC\",\"authtype\":\"Author\"},{\"name\":\"Leigh J\",\"authtype\":\"Author\"\
+      },{\"name\":\"Lenarczyk R\",\"authtype\":\"Author\"},{\"name\":\"Leyva F\",\"\
+      authtype\":\"Author\"},{\"name\":\"Maeng M\",\"authtype\":\"Author\"},{\"name\"\
+      :\"Manca A\",\"authtype\":\"Author\"},{\"name\":\"Marijon E\",\"authtype\":\"\
+      Author\"},{\"name\":\"Marschall U\",\"authtype\":\"Author\"},{\"name\":\"Merino\
+      \ JL\",\"authtype\":\"Author\"},{\"name\":\"Mont L\",\"authtype\":\"Author\"\
+      },{\"name\":\"Nielsen JC\",\"authtype\":\"Author\"},{\"name\":\"Olsen T\",\"\
+      authtype\":\"Author\"},{\"name\":\"Pester J\",\"authtype\":\"Author\"},{\"name\"\
+      :\"Pontone G\",\"authtype\":\"Author\"},{\"name\":\"Roca I\",\"authtype\":\"\
+      Author\"},{\"name\":\"Schmidt G\",\"authtype\":\"Author\"},{\"name\":\"Schwartz\
+      \ PJ\",\"authtype\":\"Author\"},{\"name\":\"Sticherling C\",\"authtype\":\"\
+      Author\"},{\"name\":\"Suleiman M\",\"authtype\":\"Author\"},{\"name\":\"Taborsky\
+      \ M\",\"authtype\":\"Author\"},{\"name\":\"Tan HL\",\"authtype\":\"Author\"\
+      },{\"name\":\"Tfelt-Hansen J\",\"authtype\":\"Author\"},{\"name\":\"Thiele H\"\
+      ,\"authtype\":\"Author\"},{\"name\":\"Tomaselli GF\",\"authtype\":\"Author\"\
+      },{\"name\":\"Verstraelen T\",\"authtype\":\"Author\"},{\"name\":\"Vinayagamoorthy\
+      \ M\",\"authtype\":\"Author\"},{\"name\":\"Olesen KK\",\"authtype\":\"Author\"\
+      },{\"name\":\"Wilde A\",\"authtype\":\"Author\"},{\"name\":\"Willems R\",\"\
+      authtype\":\"Author\"},{\"name\":\"Wu KC\",\"authtype\":\"Author\"},{\"name\"\
+      :\"Zabel M\",\"authtype\":\"Author\"},{\"name\":\"Martin GP\",\"authtype\":\"\
+      Author\"},{\"name\":\"Dagres N\",\"authtype\":\"Author\"}],\"title\":\"Sudden\
+      \ cardiac death after myocardial infarction: individual participant data from\
+      \ pooled cohorts\",\"volume\":\"45\",\"issue\":\"43\",\"pages\":\"4616-4626\"\
+      ,\"articleids\":[{\"idtype\":\"pmid\",\"value\":\"39378245\"},{\"idtype\":\"\
+      doi\",\"value\":\"10.1093/eurheartj/ehae326\"},{\"idtype\":\"pmcid\",\"value\"\
+      :\"PMC11560274\"}],\"fulljournalname\":\"European Heart Journal\",\"sortdate\"\
+      :\"2024/10/08 00:00\",\"pmclivedate\":\"2024/11/14\"}}}\n"
+    content_type: text/plain; charset=utf-8
+    headers:
+      Access-Control-Allow-Origin: '*'
+      Access-Control-Expose-Headers: X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control: private
+      Content-Security-Policy: upgrade-insecure-requests
+      Keep-Alive: timeout=4, max=40
+      NCBI-PHID: D0BD1C06313643550000408B8D3E4070.1.1.m_1
+      NCBI-SID: 34F0E18FCC9DC3F7_9907SID
+      Referrer-Policy: origin-when-cross-origin
+      Set-Cookie: ncbi_sid=34F0E18FCC9DC3F7_9907SID; domain=.nih.gov; path=/; expires=Tue,
+        02 Dec 2025 22:24:39 GMT
+      Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding: chunked
+      X-RateLimit-Limit: '3'
+      X-RateLimit-Remaining: '0'
+      X-UA-Compatible: IE=Edge
+      X-XSS-Protection: 1; mode=block
+      content-encoding: gzip
+    method: GET
+    status: 200
+    url: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pmc&id=11603028%2C11602576%2C11596556%2C11587556%2C11583953%2C11578102%2C11574494%2C11571497%2C11564627%2C11560274&retmode=JSON

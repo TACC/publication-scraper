@@ -1,6 +1,8 @@
-import pytest
 import json
-import os
+
+import pytest
+import responses
+
 from pubscraper.APIClasses import CrossRef
 
 
@@ -39,3 +41,16 @@ def test_author_retry():
     # requesting 10 valid results for "j l hendrix" will provoke a KeyError
     # when searching for author["family"]
     assert len(results["j l hendrix"]) == 10
+
+
+def test_should_fail():
+    cr = CrossRef.CrossRef()
+    with pytest.raises(Exception):
+        cr.get_publications_by_author("j l hendrix", -1)
+
+
+def test_HTTP_failure():
+    cr = CrossRef.CrossRef()
+    cr.base_url = "https://httpstat.us/500"
+    result = cr.get_publications_by_author("j l hendrix")
+    assert result is None
