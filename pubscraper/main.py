@@ -84,9 +84,6 @@ def set_log_file(ctx, param, value):
     show_default=True,
 )
 # TODO: batch author names to circumvent rate limits?
-# TODO:
-# - write tests (figure out how to write tests for a CLtool)
-# - trycatch our HTTP requests
 def main(log_level, log_file, input_file, number, output_file, apis):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
@@ -100,7 +97,7 @@ def main(log_level, log_file, input_file, number, output_file, apis):
                 author_names.append(row[0])
     except FileNotFoundError:
         logger.error(f"Couldn't read input file {input_file}, exiting")
-        return 1
+        exit(1)
 
     logger.debug(f"Querying the following APIs: {apis}")
     logger.debug(f"Requesting {number} publications for each author")
@@ -133,7 +130,7 @@ def main(log_level, log_file, input_file, number, output_file, apis):
 
     logger.info(f"Found publications for {len(authors_and_pubs)} authors")
 
-    # NOTE: main,py currently writes output to a JSON file. it will eventually return a TabLib
+    # NOTE: main.py currently writes output to a JSON file. it will eventually return a TabLib
     # object and the final output will be user-configurable through the command line
     logger.debug(f"Results: {(json.dumps(authors_and_pubs, indent=2))}")
 

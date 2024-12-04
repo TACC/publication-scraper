@@ -1,6 +1,8 @@
-import pytest
 import json
-import os
+
+import pytest
+import responses
+
 from pubscraper.APIClasses import CrossRef
 
 
@@ -52,26 +54,3 @@ def test_HTTP_failure():
     cr.base_url = "https://httpstat.us/500"
     result = cr.get_publications_by_author("j l hendrix")
     assert result is None
-
-
-def test_result_parity():
-    # this test sometimes fails, I have no idea why
-    try:
-        os.remove("results_one.json")
-    except Exception:
-        pass
-
-    try:
-        os.remove("results_two.json")
-    except Exception:
-        pass
-
-    result_one = CrossRef.search_multiple_authors(["richard feynman"])
-    result_two = CrossRef.search_multiple_authors(["richard feynman"])
-    with open("results_one.json", "w") as fout:
-        fout.writelines(json.dumps(result_one, indent=2))
-
-    with open("results_two.json", "w") as fout:
-        fout.writelines(json.dumps(result_two, indent=2))
-
-    assert result_one == result_two

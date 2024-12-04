@@ -1,21 +1,24 @@
 [tool.poetry]
 name = "pubscraper"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "A tool designed to pull publication information from various publishers associated with a given author name"
+authors = ["Magret Adekunle <ma57489@my.utexas.edu>", "Joseph Hendrix <jlh7459@my.utexas.edu"]
 readme = "README.md"
 packages = [{include = "APIClasses", from = "pubscraper"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 requests = "^2.32.3"
-pytest = "^8.3.3"
 click = "^8.1.7"
 click-loglevel = "^0.5.0"
-responses = "^0.25.3"
 
 [tool.poetry.scripts]
 pubscraper = "pubscraper.main:main"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+responses = "^0.25.3"
+pytest-cov = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core"]
