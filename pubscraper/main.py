@@ -82,8 +82,16 @@ def set_log_file(ctx, param, value):
     multiple=True,
     default=["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef"],
     show_default=True,
+    help="Specify APIs to query",
 )
-@click.option("--list", "list_apis", is_flag=True, default=False)
+# TODO: I don't like the help message saying 'available' for querying, rephrase for clarity
+@click.option(
+    "--list",
+    "list_apis",
+    is_flag=True,
+    default=False,
+    help="List APIs available for querying",
+)
 # TODO: batch author names to circumvent rate limits?
 def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
