@@ -99,9 +99,14 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
         logger.debug(f"Writing logs to {log_file}")
 
     if list_apis:
-        click.echo(
-            "Available endpoints:\n  Pubmed\n  ArXiv\n  MDPI\n  Elsevier\n  Springer\n  Wiley\n  CrossRef"
-        )
+        click.secho("Available endpoints:", underline=True)
+        click.secho("  Pubmed", fg="blue")
+        click.secho("  ArXiv", fg="blue")
+        click.secho("  MDPI", fg="blue")
+        click.secho("  Elsevier", fg="blue")
+        click.secho("  Springer", fg="blue")
+        click.secho("  Wiley", fg="blue")
+        click.secho("  CrossRef", fg="blue")
         return 0
 
     author_names = []
