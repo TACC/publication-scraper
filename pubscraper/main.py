@@ -16,6 +16,8 @@ from APIClasses.Elsevier import Elsevier
 from APIClasses.Springer import Springer
 from APIClasses.Wiley import Wiley
 from APIClasses.CrossRef import CrossRef
+from APIClasses.PLOS import PLOS
+
 
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
 LOG_LEVEL = config.LOGGER_LEVEL
@@ -76,11 +78,11 @@ def set_log_file(ctx, param, value):
     "--apis",
     "-a",
     type=click.Choice(
-        ["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef"],
+        ["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef", "PLOS"],
         case_sensitive=False,
     ),
     multiple=True,
-    default=["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef"],
+    default=["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef", "PLOS"],
     show_default=True,
     help="Specify APIs to query",
 )
@@ -131,6 +133,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
         "Springer": Springer(),
         "Wiley": Wiley(),
         "CrossRef": CrossRef(),
+        "PLOS": PLOS()
     }
     authors_and_pubs = []
 

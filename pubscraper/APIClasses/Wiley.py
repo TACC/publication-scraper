@@ -13,10 +13,6 @@ class Wiley(Base):
         """
         Initialize the Wiley Online Library API client.
         """
-        with open("secrets.json") as f:
-            secrets = json.load(f)
-            api_key = secrets["Wiley"]
-
         self.base_url = config.WILEY_URL
 
     def _standardize_author_name(self, author_name):

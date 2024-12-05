@@ -1,0 +1,397 @@
+responses:
+  - response:
+      auto_calculate_content_length: false
+      body: ""
+      content_type: text/plain
+      headers:
+        cache-control: no-cache
+        connection: close
+        content-length: "0"
+        location: https://api.crossref.org/works?query.author=Kumar%2BSaurabh&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+      method: GET
+      status: 302
+      url: http://api.crossref.org/works?query.author=Kumar%2BSaurabh&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body:
+        '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":1122348,"items":[{"author":[{"ORCID":"http:\/\/orcid.org\/0000-0002-5777-3245","authenticated-orcid":false,"given":"Saurabh","family":"Chanana","sequence":"first","affiliation":[]},{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Load
+        Frequency Control of HVDC Link Interconnected Power System Using Genetic Algorithm"],"container-title":["MENDEL"]},{"author":[{"sequence":"additional","affiliation":[]},{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Being
+        sustainable while being fashionable in clothing industry: Exploring the potential
+        integration of Sustainable Fashion Products and Collaborative Fashion Consumption
+        Services"]},{"author":[{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Mounier-Kuhn
+        syndrome (MKS) - Pathognomonic Findings"],"container-title":["JOURNAL OF CLINICAL
+        AND DIAGNOSTIC RESEARCH"]},{"author":[{"given":"Kumar","family":"Saurabh","sequence":"first","affiliation":[]}],"title":["Spectrum
+        of Parasitic Infections in Patients with Diarrhea Attending a Tertiary Care
+        Hospital in Western Rajasthan, India"],"container-title":["JOURNAL OF CLINICAL
+        AND DIAGNOSTIC RESEARCH"]},{"author":[{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Difference-in-Differences
+        in Action: Measuring Brand Marketing Campaign Impact Through Survey Responses"],"container-title":["International
+        Journal of Science and Research (IJSR)"],"published-print":{"date-parts":[[2018,9,5]]}},{"author":[{"ORCID":"http:\/\/orcid.org\/0000-0002-2116-4632","authenticated-orcid":true,"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Review
+        of: \"Glycemic Control and Its Determinants Among Type 2 Diabetes Mellitus Patients
+        at the Limbe Regional Hospital, Limbe, Southwestern Cameroon\""],"published-print":{"date-parts":[[2023,10,23]]}},{"author":[{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Review
+        of: \"Peatmass Change and Water Level Influencing Regenerated Melaleuca Forest
+        After a Fire in U Minh Thuong National Park, Vietnam\""],"published-print":{"date-parts":[[2023,9,3]]}},{"author":[{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Review
+        of: \"Stakeholders'' Perception of Socioecological Factors Influencing Forest
+        Elephant Crop Depredation in Gabon, Central Africa\""],"published-print":{"date-parts":[[2024,1,13]]}},{"author":[{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[]}],"title":["Leveraging
+        AI for Advanced Marketing Mix Modeling: A Data-Driven Approach"],"container-title":["Journal
+        of Artificial Intelligence, Machine Learning and Data Science"]},{"author":[{"given":"Saurabh","family":"Kumar","sequence":"first","affiliation":[{"name":"Department
+        of Mechanical Engineering, School of Engineering, University of Petroleum andEnergy
+        Studies (UPES), Dehradun, 248007, India."}]}],"title":["Dynamic behaviour of
+        axially functionally graded beam resting on variable elastic foundation"],"container-title":["Archive
+        of Mechanical Engineering"]}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+      content_type: text/plain
+      headers:
+        access-control-allow-headers:
+          X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+          Accept-Language, Accept-Ranges, Cache-Control
+        access-control-allow-origin: "*"
+        access-control-expose-headers: Link
+        connection: close
+        content-encoding: gzip
+        content-length: "1317"
+        content-type: application/json
+        date: Mon, 02 Dec 2024 22:02:27 GMT
+        permissions-policy: interest-cohort=()
+        server: Jetty(9.4.40.v20210413)
+        set-cookie:
+          AWSALB=6s8r6hfh+NvWFCHSDnXJd2yRSpdB4jNX9F2Pd8NA69tuunuSUvEJQu8Hz9bkdpHGyzD4UfkUSlcZPYwgQTHeaxe0RUY/jN6Fi7DuICCmaXsWgPMIbzncdsK8eBqN;
+          Expires=Mon, 09 Dec 2024 22:02:26 GMT; Path=/, AWSALBCORS=6s8r6hfh+NvWFCHSDnXJd2yRSpdB4jNX9F2Pd8NA69tuunuSUvEJQu8Hz9bkdpHGyzD4UfkUSlcZPYwgQTHeaxe0RUY/jN6Fi7DuICCmaXsWgPMIbzncdsK8eBqN;
+          Expires=Mon, 09 Dec 2024 22:02:26 GMT; Path=/; SameSite=None
+        vary: Accept-Encoding
+        x-api-pool: polite
+        x-rate-limit-interval: 1s
+        x-rate-limit-limit: "50"
+        x-ratelimit-interval: 1s
+        x-ratelimit-limit: "50"
+      method: GET
+      status: 200
+      url: https://api.crossref.org/works?query.author=Kumar%2BSaurabh&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body: ""
+      content_type: text/plain
+      headers:
+        cache-control: no-cache
+        connection: close
+        content-length: "0"
+        location: https://api.crossref.org/works?query.author=Zhengda%2BBian&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+      method: GET
+      status: 302
+      url: http://api.crossref.org/works?query.author=Zhengda%2BBian&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body:
+        '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":50531,"items":[{"author":[{"given":"Zhengda","family":"Bian","sequence":"first","affiliation":[{"name":"National
+        University of Singapore, Singapore"}]},{"given":"Shenggui","family":"Li","sequence":"additional","affiliation":[{"name":"National
+        University of Singapore, Singapore"}]},{"given":"Wei","family":"Wang","sequence":"additional","affiliation":[{"name":"ByteDance,
+        Singapore"}]},{"given":"Yang","family":"You","sequence":"additional","affiliation":[{"name":"National
+        University of Singapore, Singapore"}]}],"title":["Online evolutionary batch
+        size orchestration for scheduling deep learning workloads in GPU clusters"],"container-title":["Proceedings
+        of the International Conference for High Performance Computing, Networking,
+        Storage and Analysis"],"published-print":{"date-parts":[[2021,11,14]]}},{"author":[{"given":"Boxiang","family":"Wang","sequence":"first","affiliation":[{"name":"HPC-AI
+        Technology Inc., Singapore"}]},{"given":"Qifan","family":"Xu","sequence":"additional","affiliation":[{"name":"University
+        of California, Los Angeles, United States of America"}]},{"given":"Zhengda","family":"Bian","sequence":"additional","affiliation":[{"name":"HPC-AI
+        Technology Inc., China"}]},{"given":"Yang","family":"You","sequence":"additional","affiliation":[{"name":"School
+        of Computing, National University of Singapore, Singapore"}]}],"title":["Tesseract:
+        Parallelize the Tensor Parallelism Efficiently"],"container-title":["Proceedings
+        of the 51st International Conference on Parallel Processing"],"published-print":{"date-parts":[[2022,8,29]]}},{"author":[{"given":"Zhengda
+        Huang","family":"Zhengda Huang","sequence":"first","affiliation":[]}],"title":["On
+        the Behavior of the Four Order Iteration in Euler''s Family Near a Zero"],"container-title":["Journal
+        of Mathematical Study"]},{"author":[{"given":"Zhengda","family":"Huang","sequence":"first","affiliation":[]}],"title":["The
+        convergence ball of Newton''s method and the uniqueness ball of equations under
+        H\u00f6lder-type continuous derivatives"],"container-title":["Computers &amp;
+        Mathematics with Applications"],"published-print":{"date-parts":[[2004,1]]}},{"author":[{"given":"Zhengda","family":"Pan","sequence":"first","affiliation":[]}],"title":["Photoluminescence
+        of Er-doped ZnO nanoparticle films via direct and indirect excitation"],"container-title":["Journal
+        of Nanophotonics"],"published-print":{"date-parts":[[2012,5,21]]}},{"author":[{"given":"Zhengda","family":"Jiang","sequence":"first","affiliation":[]}],"title":["The
+        consensus of physical therapeutic treatment on cancer patients"],"container-title":["AIP
+        Conference Proceedings","2ND INTERNATIONAL CONFERENCE ON FRONTIERS OF BIOLOGICAL
+        SCIENCES AND ENGINEERING (FSBE 2019)"],"published-print":{"date-parts":[[2020]]}},{"author":[{"given":"Zhengda","family":"Gong","sequence":"first","affiliation":[]}],"title":["Species
+        richness and vertical distribution pattern of flea fauna in Heng-duan Mountains
+        of western Yunnan, China"],"container-title":["Biodiversity Science"],"published-print":{"date-parts":[[2005]]}},{"author":[{"given":"Huang","family":"Zhengda","sequence":"first","affiliation":[]}],"title":["On
+        Newton''s method under H\u00f6lder continuous derivative"],"container-title":["Journal
+        of Mathematical Analysis and Applications"],"published-print":{"date-parts":[[2002,6]]}},{"author":[{"given":"Zhengda","family":"Yang","sequence":"first","affiliation":[{"name":"North
+        China University of Technology,Beijing,China"}]}],"title":["Multi-Attention
+        Based Sleep Staging Method for Single-Channel EEG Signals"],"container-title":["2024
+        6th International Conference on Communications, Information System and Computer
+        Engineering (CISCE)"],"published-print":{"date-parts":[[2024,5,10]]}},{"author":[{"given":"Zhengda","family":"Li","sequence":"first","affiliation":[]}],"title":["Optical
+        design and optimization of a miniature projector with liquid lenses via modified
+        ant colony algorithm"],"container-title":["Optical Engineering"],"published-print":{"date-parts":[[2012,7,5]]}}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+      content_type: text/plain
+      headers:
+        access-control-allow-headers:
+          X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+          Accept-Language, Accept-Ranges, Cache-Control
+        access-control-allow-origin: "*"
+        access-control-expose-headers: Link
+        connection: close
+        content-encoding: gzip
+        content-length: "1391"
+        content-type: application/json
+        date: Mon, 02 Dec 2024 22:02:29 GMT
+        permissions-policy: interest-cohort=()
+        server: Jetty(9.4.40.v20210413)
+        set-cookie:
+          AWSALB=2fTCV+FIz1OMZ/RaZ6hxFyG6BBOp11vlQ8y+CYotVntL3EzwYX0VauWFB/GKIkKzCtsHFE9oWl7auEBdYMzoaVuTpBjJh3+x96uiYcpg+twbmGuSitV5F5ns+/zH;
+          Expires=Mon, 09 Dec 2024 22:02:27 GMT; Path=/, AWSALBCORS=2fTCV+FIz1OMZ/RaZ6hxFyG6BBOp11vlQ8y+CYotVntL3EzwYX0VauWFB/GKIkKzCtsHFE9oWl7auEBdYMzoaVuTpBjJh3+x96uiYcpg+twbmGuSitV5F5ns+/zH;
+          Expires=Mon, 09 Dec 2024 22:02:27 GMT; Path=/; SameSite=None
+        vary: Accept-Encoding
+        x-api-pool: polite
+        x-rate-limit-interval: 1s
+        x-rate-limit-limit: "50"
+        x-ratelimit-interval: 1s
+        x-ratelimit-limit: "50"
+      method: GET
+      status: 200
+      url: https://api.crossref.org/works?query.author=Zhengda%2BBian&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body: ""
+      content_type: text/plain
+      headers:
+        cache-control: no-cache
+        connection: close
+        content-length: "0"
+        location: https://api.crossref.org/works?query.author=Zachariah%2BB.%2BEtienne&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+      method: GET
+      status: 302
+      url: http://api.crossref.org/works?query.author=Zachariah%2BB.%2BEtienne&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body:
+        '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":55696,"items":[{"author":[{"ORCID":"http:\/\/orcid.org\/0000-0002-6838-9185","authenticated-orcid":true,"given":"Zachariah
+        B.","family":"Etienne","sequence":"first","affiliation":[{"id":[{"id":"https:\/\/ror.org\/03hbp5t65","id-type":"ROR","asserted-by":"publisher"}],"name":"University
+        of Idaho"},{"id":[{"id":"https:\/\/ror.org\/011vxgd24","id-type":"ROR","asserted-by":"publisher"}],"name":"West
+        Virginia University"},{"id":[{"id":"https:\/\/ror.org\/011vxgd24","id-type":"ROR","asserted-by":"publisher"}],"name":"West
+        Virginia University"}]}],"title":["Improved moving-puncture techniques for compact
+        binary simulations"],"container-title":["Physical Review D"]},{"author":[{"given":"Philip","family":"Chang","sequence":"first","affiliation":[{"name":"Department
+        of Physics, University of Wisconsin-Milwaukee, 3135 North Maryland Avenue, Milwaukee,
+        WI 53211, USA"}]},{"given":"Zachariah B","family":"Etienne","sequence":"additional","affiliation":[{"name":"Department
+        of Physics and Astronomy, West Virginia University, Morgantown, WV 26506, USA"},{"name":"Center
+        for Gravitational Waves and Cosmology, West Virginia University, Chestnut Ridge
+        Research Building, Morgantown, WV 26505, USA"}]}],"title":["General relativistic
+        hydrodynamics on a moving-mesh I: static space\u2013times"],"container-title":["Monthly
+        Notices of the Royal Astronomical Society"],"published-print":{"date-parts":[[2020,7,21]]}},{"author":[{"given":"Caleb","family":"Devine","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Sean
+        T","family":"McWilliams","sequence":"additional","affiliation":[]}],"title":["Optimizing
+        spinning time-domain gravitational waveforms for advanced LIGO data analysis"],"container-title":["Classical
+        and Quantum Gravity"],"published-print":{"date-parts":[[2016,6,23]]}},{"author":[{"given":"Ian","family":"Ruchlin","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Thomas
+        W.","family":"Baumgarte","sequence":"additional","affiliation":[]}],"title":["<mml:math
+        xmlns:mml=\"http:\/\/www.w3.org\/1998\/Math\/MathML\" display=\"inline\"><mml:mrow><mml:mi>SENR<\/mml:mi><mml:mo>\/<\/mml:mo><mml:mi>NRPy<\/mml:mi><mml:mo>+<\/mml:mo><\/mml:mrow><\/mml:math>\n:
+        Numerical relativity in singular curvilinear coordinate systems"],"container-title":["Physical
+        Review D"]},{"author":[{"given":"Vasileios","family":"Paschalidis","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["Importance
+        of cooling in triggering the collapse of hypermassive neutron stars"],"container-title":["Physical
+        Review D"]},{"author":[{"given":"Zachariah B.","family":"Etienne","sequence":"first","affiliation":[]},{"given":"Vasileios","family":"Paschalidis","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["General-relativistic
+        simulations of black-hole\u2013neutron-star mergers: Effects of tilted magnetic
+        fields"],"container-title":["Physical Review D"]},{"author":[{"given":"Vasileios","family":"Paschalidis","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["General-relativistic
+        simulations of binary black hole-neutron stars: Precursor electromagnetic signals"],"container-title":["Physical
+        Review D"]},{"author":[{"given":"Zachariah B.","family":"Etienne","sequence":"first","affiliation":[]},{"given":"Vasileios","family":"Paschalidis","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["Advanced
+        Models of Black Hole\u2013Neutron Star Binaries and Their Astrophysical Impact"],"container-title":["Astrophysics
+        and Space Science Proceedings","Gravitational Wave Astrophysics"],"published-print":{"date-parts":[[2015]]}},{"author":[{"given":"Zachariah
+        B.","family":"Etienne","sequence":"first","affiliation":[]},{"given":"Yuk Tung","family":"Liu","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["General
+        relativistic simulations of slowly and differentially rotating magnetized neutron
+        stars"],"container-title":["Physical Review D"]},{"author":[{"given":"Yuk Tung","family":"Liu","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["Evolution
+        of near-extremal-spin black holes using the moving puncture technique"],"container-title":["Physical
+        Review D"]}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+      content_type: text/plain
+      headers:
+        access-control-allow-headers:
+          X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+          Accept-Language, Accept-Ranges, Cache-Control
+        access-control-allow-origin: "*"
+        access-control-expose-headers: Link
+        connection: close
+        content-encoding: gzip
+        content-length: "1417"
+        content-type: application/json
+        date: Mon, 02 Dec 2024 22:02:31 GMT
+        permissions-policy: interest-cohort=()
+        server: Jetty(9.4.40.v20210413)
+        set-cookie:
+          AWSALB=HAEGA6aSfbvtYiIOXIul3jVAWOAfWTQ1fL+2FN+NBvZP/H7EK1s60T58MdqVtly62LhOC+ZnL8IZAn4MV4N1WwiiGZw7XgmBitbCIDIeYr1RjIqBr0FEbIeAYK4u;
+          Expires=Mon, 09 Dec 2024 22:02:29 GMT; Path=/, AWSALBCORS=HAEGA6aSfbvtYiIOXIul3jVAWOAfWTQ1fL+2FN+NBvZP/H7EK1s60T58MdqVtly62LhOC+ZnL8IZAn4MV4N1WwiiGZw7XgmBitbCIDIeYr1RjIqBr0FEbIeAYK4u;
+          Expires=Mon, 09 Dec 2024 22:02:29 GMT; Path=/; SameSite=None
+        vary: Accept-Encoding
+        x-api-pool: polite
+        x-rate-limit-interval: 1s
+        x-rate-limit-limit: "50"
+        x-ratelimit-interval: 1s
+        x-ratelimit-limit: "50"
+      method: GET
+      status: 200
+      url: https://api.crossref.org/works?query.author=Zachariah%2BB.%2BEtienne&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body: ""
+      content_type: text/plain
+      headers:
+        cache-control: no-cache
+        connection: close
+        content-length: "0"
+        location: https://api.crossref.org/works?query.author=Zachariah%2BBurke%2BEtienne&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+      method: GET
+      status: 302
+      url: http://api.crossref.org/works?query.author=Zachariah%2BBurke%2BEtienne&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body:
+        '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":120578,"items":[{"author":[{"ORCID":"http:\/\/orcid.org\/0000-0002-6838-9185","authenticated-orcid":true,"given":"Zachariah
+        B.","family":"Etienne","sequence":"first","affiliation":[{"id":[{"id":"https:\/\/ror.org\/03hbp5t65","id-type":"ROR","asserted-by":"publisher"}],"name":"University
+        of Idaho"},{"id":[{"id":"https:\/\/ror.org\/011vxgd24","id-type":"ROR","asserted-by":"publisher"}],"name":"West
+        Virginia University"},{"id":[{"id":"https:\/\/ror.org\/011vxgd24","id-type":"ROR","asserted-by":"publisher"}],"name":"West
+        Virginia University"}]}],"title":["Improved moving-puncture techniques for compact
+        binary simulations"],"container-title":["Physical Review D"]},{"author":[{"given":"Philip","family":"Chang","sequence":"first","affiliation":[{"name":"Department
+        of Physics, University of Wisconsin-Milwaukee, 3135 North Maryland Avenue, Milwaukee,
+        WI 53211, USA"}]},{"given":"Zachariah B","family":"Etienne","sequence":"additional","affiliation":[{"name":"Department
+        of Physics and Astronomy, West Virginia University, Morgantown, WV 26506, USA"},{"name":"Center
+        for Gravitational Waves and Cosmology, West Virginia University, Chestnut Ridge
+        Research Building, Morgantown, WV 26505, USA"}]}],"title":["General relativistic
+        hydrodynamics on a moving-mesh I: static space\u2013times"],"container-title":["Monthly
+        Notices of the Royal Astronomical Society"],"published-print":{"date-parts":[[2020,7,21]]}},{"author":[{"given":"Caleb","family":"Devine","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Sean
+        T","family":"McWilliams","sequence":"additional","affiliation":[]}],"title":["Optimizing
+        spinning time-domain gravitational waveforms for advanced LIGO data analysis"],"container-title":["Classical
+        and Quantum Gravity"],"published-print":{"date-parts":[[2016,6,23]]}},{"author":[{"given":"Ian","family":"Ruchlin","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Thomas
+        W.","family":"Baumgarte","sequence":"additional","affiliation":[]}],"title":["<mml:math
+        xmlns:mml=\"http:\/\/www.w3.org\/1998\/Math\/MathML\" display=\"inline\"><mml:mrow><mml:mi>SENR<\/mml:mi><mml:mo>\/<\/mml:mo><mml:mi>NRPy<\/mml:mi><mml:mo>+<\/mml:mo><\/mml:mrow><\/mml:math>\n:
+        Numerical relativity in singular curvilinear coordinate systems"],"container-title":["Physical
+        Review D"]},{"author":[{"given":"Vasileios","family":"Paschalidis","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["Importance
+        of cooling in triggering the collapse of hypermassive neutron stars"],"container-title":["Physical
+        Review D"]},{"author":[{"given":"Zachariah B.","family":"Etienne","sequence":"first","affiliation":[]},{"given":"Vasileios","family":"Paschalidis","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["General-relativistic
+        simulations of black-hole\u2013neutron-star mergers: Effects of tilted magnetic
+        fields"],"container-title":["Physical Review D"]},{"author":[{"given":"Zachariah
+        B.","family":"Etienne","sequence":"first","affiliation":[]},{"given":"Vasileios","family":"Paschalidis","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["Advanced
+        Models of Black Hole\u2013Neutron Star Binaries and Their Astrophysical Impact"],"container-title":["Astrophysics
+        and Space Science Proceedings","Gravitational Wave Astrophysics"],"published-print":{"date-parts":[[2015]]}},{"author":[{"given":"Vasileios","family":"Paschalidis","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["General-relativistic
+        simulations of binary black hole-neutron stars: Precursor electromagnetic signals"],"container-title":["Physical
+        Review D"]},{"author":[{"given":"Zachariah B.","family":"Etienne","sequence":"first","affiliation":[]},{"given":"Yuk
+        Tung","family":"Liu","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["General
+        relativistic simulations of slowly and differentially rotating magnetized neutron
+        stars"],"container-title":["Physical Review D"]},{"author":[{"given":"Yuk Tung","family":"Liu","sequence":"first","affiliation":[]},{"given":"Zachariah
+        B.","family":"Etienne","sequence":"additional","affiliation":[]},{"given":"Stuart
+        L.","family":"Shapiro","sequence":"additional","affiliation":[]}],"title":["Evolution
+        of near-extremal-spin black holes using the moving puncture technique"],"container-title":["Physical
+        Review D"]}],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+      content_type: text/plain
+      headers:
+        access-control-allow-headers:
+          X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+          Accept-Language, Accept-Ranges, Cache-Control
+        access-control-allow-origin: "*"
+        access-control-expose-headers: Link
+        connection: close
+        content-encoding: gzip
+        content-length: "1417"
+        content-type: application/json
+        date: Mon, 02 Dec 2024 22:02:32 GMT
+        permissions-policy: interest-cohort=()
+        server: Jetty(9.4.40.v20210413)
+        set-cookie:
+          AWSALB=fYXN5WNgbLhT8xmUoaqXnqWBu15TizmwWoTbZ3npQL1ExBtRZo/Nn1kyg9MA+xHI8rXASAWNUNIEfcN+c5LcrsnO996pl5dePRZSj8hQmpUD7gilR1211X52yYLy;
+          Expires=Mon, 09 Dec 2024 22:02:31 GMT; Path=/, AWSALBCORS=fYXN5WNgbLhT8xmUoaqXnqWBu15TizmwWoTbZ3npQL1ExBtRZo/Nn1kyg9MA+xHI8rXASAWNUNIEfcN+c5LcrsnO996pl5dePRZSj8hQmpUD7gilR1211X52yYLy;
+          Expires=Mon, 09 Dec 2024 22:02:31 GMT; Path=/; SameSite=None
+        vary: Accept-Encoding
+        x-api-pool: polite
+        x-rate-limit-interval: 1s
+        x-rate-limit-limit: "50"
+        x-ratelimit-interval: 1s
+        x-ratelimit-limit: "50"
+      method: GET
+      status: 200
+      url: https://api.crossref.org/works?query.author=Zachariah%2BBurke%2BEtienne&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body: ""
+      content_type: text/plain
+      headers:
+        cache-control: no-cache
+        connection: close
+        content-length: "0"
+        location: https://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+      method: GET
+      status: 302
+      url: http://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":0,"items":[],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+      content_type: text/plain
+      headers:
+        access-control-allow-headers:
+          X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+          Accept-Language, Accept-Ranges, Cache-Control
+        access-control-allow-origin: "*"
+        access-control-expose-headers: Link
+        connection: close
+        content-type: application/json
+        date: Mon, 02 Dec 2024 22:02:33 GMT
+        permissions-policy: interest-cohort=()
+        server: Jetty(9.4.40.v20210413)
+        set-cookie:
+          AWSALB=+r2FSQmIV6SfnQ1JrGIm8cq+ySJPmPzKe3Pcvgq1ru4eF+t7TQTnINkk7em+v8OQ+/Bb2eCqDDufWkkmSybN4nCrkSjWmXzRMN08Qjch5XH31R2VG9KJe75AWr2W;
+          Expires=Mon, 09 Dec 2024 22:02:33 GMT; Path=/, AWSALBCORS=+r2FSQmIV6SfnQ1JrGIm8cq+ySJPmPzKe3Pcvgq1ru4eF+t7TQTnINkk7em+v8OQ+/Bb2eCqDDufWkkmSybN4nCrkSjWmXzRMN08Qjch5XH31R2VG9KJe75AWr2W;
+          Expires=Mon, 09 Dec 2024 22:02:33 GMT; Path=/; SameSite=None
+        transfer-encoding: chunked
+        x-api-pool: polite
+        x-rate-limit-interval: 1s
+        x-rate-limit-limit: "50"
+        x-ratelimit-interval: 1s
+        x-ratelimit-limit: "50"
+      method: GET
+      status: 200
+      url: https://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body: ""
+      content_type: text/plain
+      headers:
+        cache-control: no-cache
+        connection: close
+        content-length: "0"
+        location: https://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+      method: GET
+      status: 302
+      url: http://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu
+  - response:
+      auto_calculate_content_length: false
+      body: '{"status":"ok","message-type":"work-list","message-version":"1.0.0","message":{"facets":{},"total-results":0,"items":[],"items-per-page":10,"query":{"start-index":0,"search-terms":null}}}'
+      content_type: text/plain
+      headers:
+        access-control-allow-headers:
+          X-Requested-With, Accept, Accept-Encoding, Accept-Charset,
+          Accept-Language, Accept-Ranges, Cache-Control
+        access-control-allow-origin: "*"
+        access-control-expose-headers: Link
+        connection: close
+        content-type: application/json
+        date: Mon, 02 Dec 2024 22:02:34 GMT
+        permissions-policy: interest-cohort=()
+        server: Jetty(9.4.40.v20210413)
+        set-cookie:
+          AWSALB=7IQdWAwj9S+lcvyypLPla6yuqXtIe0Ha20Mtwb13fzzRBC9Rhek8d99iUMkyIZ99tdmHWPcEjuvWk0VIy+z6yN0cNdVpAQmaMBAPm0dCNhXRe5Xh6wJsF6hD/FN4;
+          Expires=Mon, 09 Dec 2024 22:02:34 GMT; Path=/, AWSALBCORS=7IQdWAwj9S+lcvyypLPla6yuqXtIe0Ha20Mtwb13fzzRBC9Rhek8d99iUMkyIZ99tdmHWPcEjuvWk0VIy+z6yN0cNdVpAQmaMBAPm0dCNhXRe5Xh6wJsF6hD/FN4;
+          Expires=Mon, 09 Dec 2024 22:02:34 GMT; Path=/; SameSite=None
+        transfer-encoding: chunked
+        x-api-pool: polite
+        x-rate-limit-interval: 1s
+        x-rate-limit-limit: "50"
+        x-ratelimit-interval: 1s
+        x-ratelimit-limit: "50"
+      method: GET
+      status: 200
+      url: https://api.crossref.org/works?query.author=%2B&rows=10&select=author%2Ctitle%2Ccontainer-title%2Cpublished-print&offset=0&mailto=jlh7459%40my.utexas.edu

@@ -117,8 +117,8 @@ class Elsevier(Base):
 def search_multiple_authors(authors, limit=10):
     """
     Search for publications by multiple authors.
-    :param api_key: Elsevier API key
     :param authors: List of author names to search for
+    :param limit: The number of results to return (default is 10)
     :return: Dictionary with results for each author
     """
     elsevier_api = Elsevier()
