@@ -110,6 +110,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
         return 0
 
     author_names = []
+    logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
     try:
         with open(input_file, newline="") as csvfile:
             name_reader = csv.reader(csvfile)
