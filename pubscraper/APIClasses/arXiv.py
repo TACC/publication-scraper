@@ -4,7 +4,7 @@ import logging
 import requests
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 
 class ArXiv(Base):
@@ -33,7 +33,7 @@ class ArXiv(Base):
             return " ".join(name_parts)
 
     def get_publications_by_author(self, author_name, start=0, max_results=10):
-        """"
+        """ "
         Retrieve publications from PLOS by author name.
         :param author_name: The name of the author to search for
         :param rows: The number of results to return (default is 10)
@@ -62,7 +62,7 @@ class ArXiv(Base):
             return []
 
         root = ET.fromstring(response.text)
-        
+
         publications = []
 
         for entry in root.findall("{http://www.w3.org/2005/Atom}entry"):

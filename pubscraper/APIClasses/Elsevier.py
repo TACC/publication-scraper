@@ -3,7 +3,7 @@ import json
 import logging
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 
 class Elsevier(Base):

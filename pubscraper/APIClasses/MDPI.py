@@ -3,7 +3,7 @@ import logging
 import json
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 
 class MDPI(Base):
@@ -135,4 +135,3 @@ if __name__ == "__main__":
 
     # Output the results in JSON format
     print(json.dumps(results, indent=4))
-

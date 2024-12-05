@@ -3,7 +3,7 @@ import json
 import logging
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 format_str = (
     "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
@@ -110,4 +110,3 @@ if __name__ == "__main__":
 
     # Output the results in JSON format
     print(json.dumps(results, indent=4))
-
