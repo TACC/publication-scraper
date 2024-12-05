@@ -15,7 +15,7 @@ class Wiley(Base):
         """
         self.base_url = config.WILEY_URL
 
-    def standardize_author_name(self, author_name):
+    def _standardize_author_name(self, author_name):
         """
         Standardize author names to handle variations.
         """
@@ -38,11 +38,13 @@ class Wiley(Base):
 
     def get_publications_by_author(self, author_name, rows=10):
         if not author_name.strip():
-            logging.warning("Received empty string for author name in search query, returning None")
+            logging.warning(
+                "Received empty string for author name in search query, returning None"
+            )
             return None
 
         # Standardize the author name for query
-        author_name_standardized = self.standardize_author_name(author_name)
+        author_name_standardized = self._standardize_author_name(author_name)
         encoded_author = urllib.parse.quote(author_name_standardized)
 
         # Construct the full URL
@@ -64,7 +66,6 @@ class Wiley(Base):
         # Parse the response
         return self._parse_response(response.text)
 
-      
     def _parse_response(self, xml_data):
         """
         Parse the XML response to extract publication details.
@@ -73,7 +74,7 @@ class Wiley(Base):
         namespaces = {
             "zs": "http://docs.oasis-open.org/ns/search-ws/sruResponse",
             "dc": "http://purl.org/dc/elements/1.1/",
-            "dcterms": "http://purl.org/dc/terms/"
+            "dcterms": "http://purl.org/dc/terms/",
         }
 
         # Extract publication records
@@ -83,24 +84,47 @@ class Wiley(Base):
             contributors = record.findall(".//dc:contributor", namespaces=namespaces)
             doi_elememnt = record.find(".//dc:identifier", namespaces=namespaces)
             pub_date_elem = record.find(".//dc:date", namespaces=namespaces)
-            part_of_elem = record.find(".//dcterms:isPartOf", namespaces=namespaces) 
+            part_of_elem = record.find(".//dcterms:isPartOf", namespaces=namespaces)
 
-            title = title_elem.text.strip() if title_elem is not None and title_elem.text else "No title available"
-            authors = [contributor.text.strip() for contributor in contributors if contributor is not None and contributor.text]
-            doi = doi_elememnt.text.strip() if doi_elememnt is not None and doi_elememnt.text else "No DOI available"
-            publication_date = pub_date_elem.text.strip() if pub_date_elem is not None and pub_date_elem.text else "No date available"
-            part_of = part_of_elem.text.strip() if part_of_elem is not None and part_of_elem.text else "No collection available"
+            title = (
+                title_elem.text.strip()
+                if title_elem is not None and title_elem.text
+                else "No title available"
+            )
+            authors = [
+                contributor.text.strip()
+                for contributor in contributors
+                if contributor is not None and contributor.text
+            ]
+            doi = (
+                doi_elememnt.text.strip()
+                if doi_elememnt is not None and doi_elememnt.text
+                else "No DOI available"
+            )
+            publication_date = (
+                pub_date_elem.text.strip()
+                if pub_date_elem is not None and pub_date_elem.text
+                else "No date available"
+            )
+            part_of = (
+                part_of_elem.text.strip()
+                if part_of_elem is not None and part_of_elem.text
+                else "No collection available"
+            )
 
-            publications.append({
-                "doi": doi,
-                "is_part_of": part_of, 
-                "publication_date": publication_date,
-                "title": title,
-                "authors": ", ".join(authors),
-            })
-        
+            publications.append(
+                {
+                    "from": "Wiley",
+                    "is_part_of": part_of,
+                    "publication_date": publication_date,
+                    "title": title,
+                    "authors": ", ".join(authors),
+                    "doi": doi,
+                }
+            )
+
         return publications
-  
+
 
 def search_multiple_authors(authors, limit=10):
     wiley_api = Wiley()

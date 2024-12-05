@@ -21,14 +21,24 @@ def test_partial_empty_input():
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678"]}},
     )
     responses.add(response_1)
     response_2 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
         status=200,
-        json={"result": {"uids": ["12345678"], "12345678": {"authors": [{"name": "albert"}], "title": "some title", "fulljournalname": "some journal", "sortdate": "2000/09/06"}}}
+        json={
+            "result": {
+                "uids": ["12345678"],
+                "12345678": {
+                    "authors": [{"name": "albert"}],
+                    "title": "some title",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+            }
+        },
     )
     responses.add(response_2)
     results = PubMed.search_multiple_authors(["albert", ""])
@@ -41,42 +51,72 @@ def test_search_all_names():
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678"]}},
     )
     responses.add(response_1)
     response_2 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
         status=200,
-        json={"result": {"uids": ["12345678"], "12345678": {"authors": [{"name": "albert"}], "title": "some title", "fulljournalname": "some journal", "sortdate": "2000/09/06"}}}
+        json={
+            "result": {
+                "uids": ["12345678"],
+                "12345678": {
+                    "authors": [{"name": "albert"}],
+                    "title": "some title",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+            }
+        },
     )
     responses.add(response_2)
     response_3 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678"]}},
     )
     responses.add(response_3)
     response_4 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
         status=200,
-        json={"result": {"uids": ["12345678"], "12345678": {"authors": [{"name": "joe"}], "title": "some title", "fulljournalname": "some journal", "sortdate": "2000/09/06"}}}
+        json={
+            "result": {
+                "uids": ["12345678"],
+                "12345678": {
+                    "authors": [{"name": "joe"}],
+                    "title": "some title",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+            }
+        },
     )
     responses.add(response_4)
     response_5 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678"]}},
     )
     responses.add(response_5)
     response_6 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
         status=200,
-        json={"result": {"uids": ["12345678"], "12345678": {"authors": [{"name": "allen"}], "title": "some title", "fulljournalname": "some journal", "sortdate": "2000/09/06"}}}
+        json={
+            "result": {
+                "uids": ["12345678"],
+                "12345678": {
+                    "authors": [{"name": "allen"}],
+                    "title": "some title",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+            }
+        },
     )
     responses.add(response_6)
 
@@ -90,7 +130,7 @@ def test_no_results():
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": []}}
+        json={"esearchresult": {"idlist": []}},
     )
     responses.add(response_1)
     results = PubMed.search_multiple_authors(["joseph l hendrix"])
@@ -103,14 +143,24 @@ def test_initials_lastname():
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678"]}},
     )
     responses.add(response_1)
     response_2 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
         status=200,
-        json={"result": {"uids": ["12345678"], "12345678": {"authors": [{"name": "w j allen"}], "title": "BiasNet", "fulljournalname": "some journal", "sortdate": "2000/09/06"}}}
+        json={
+            "result": {
+                "uids": ["12345678"],
+                "12345678": {
+                    "authors": [{"name": "w j allen"}],
+                    "title": "BiasNet",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+            }
+        },
     )
     responses.add(response_2)
 
@@ -123,23 +173,37 @@ def test_initials_lastname():
             biasnet_found = True
     assert biasnet_found
 
+
 @responses.activate
 def test_fullname():
     response_1 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678"]}},
     )
     responses.add(response_1)
     response_2 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
         status=200,
-        json={"result": {"uids": ["12345678", "23456789"], 
-                         "12345678": {"authors": [{"name": "william joseph allen"}], "title": "BiasNet", "fulljournalname": "some journal", "sortdate": "2000/09/06"},
-                         "23456789": {"authors": [{"name": "william joseph allen"}], "title": "BiasNet", "fulljournalname": "some journal", "sortdate": "2000/09/06"}
-                         }}
+        json={
+            "result": {
+                "uids": ["12345678", "23456789"],
+                "12345678": {
+                    "authors": [{"name": "william joseph allen"}],
+                    "title": "BiasNet",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+                "23456789": {
+                    "authors": [{"name": "william joseph allen"}],
+                    "title": "BiasNet",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+            }
+        },
     )
     responses.add(response_2)
 
@@ -159,17 +223,30 @@ def test_limit_number_of_results():
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678", "12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678", "12345678"]}},
     )
     responses.add(response_1)
     response_2 = responses.Response(
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
         status=200,
-        json={"result": {"uids": ["12345678", "23456789"], 
-                         "12345678": {"authors": [{"name": "w j allen"}], "title": "BiasNet", "fulljournalname": "some journal", "sortdate": "2000/09/06"},
-                         "23456789": {"authors": [{"name": "w j allen"}], "title": "BiasNet", "fulljournalname": "some journal", "sortdate": "2000/09/06"}
-                         }}
+        json={
+            "result": {
+                "uids": ["12345678", "23456789"],
+                "12345678": {
+                    "authors": [{"name": "w j allen"}],
+                    "title": "BiasNet",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+                "23456789": {
+                    "authors": [{"name": "w j allen"}],
+                    "title": "BiasNet",
+                    "fulljournalname": "some journal",
+                    "sortdate": "2000/09/06",
+                },
+            }
+        },
     )
     responses.add(response_2)
 
@@ -180,25 +257,26 @@ def test_limit_number_of_results():
 def test_should_fail():
     pb = PubMed.PubMed()
     with pytest.raises(Exception):
-        pb.get_UIDs_by_author("w j allen", -1)
+        pb._get_UIDs_by_author("w j allen", -1)
 
 
 def test_bad_author_name():
     pb = PubMed.PubMed()
-    result = pb.get_UIDs_by_author("")
+    result = pb._get_UIDs_by_author("")
     assert result is None
+
 
 @responses.activate
 def test_HTTP_failure_UIDs():
     response_1 = responses.Response(
-        method="GET",
-        url="https://httpstat.us/500",
-        status=500
+        method="GET", url="https://httpstat.us/500", status=500
     )
+    responses.add(response_1)
     pb = PubMed.PubMed()
     pb.search_url = "https://httpstat.us/500"
-    result = pb.get_UIDs_by_author("joe hendrix", 1)
+    result = pb._get_UIDs_by_author("joe hendrix", 1)
     assert result is None
+
 
 @responses.activate
 def test_HTTP_failure_summaries():
@@ -206,7 +284,7 @@ def test_HTTP_failure_summaries():
         method="GET",
         url="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
         status=200,
-        json={"esearchresult": {"idlist": ["12345678", "12345678"]}}
+        json={"esearchresult": {"idlist": ["12345678", "12345678"]}},
     )
     responses.add(response_1)
     response_2 = responses.Response(
@@ -223,4 +301,3 @@ def test_HTTP_failure_summaries():
 def test_failure_multiple_authors():
     empty_results = PubMed.search_multiple_authors(["kelsey", "erik"], -1)
     assert empty_results == {}
-

@@ -15,7 +15,7 @@ class MDPI(Base):
         self.base_url = config.MDPI_URL
         self.api_key = api_key
 
-    def standardize_author_name(self, author_name):
+    def _standardize_author_name(self, author_name):
         """
         Standardize author names to handle variations like "T C Moore", "Timothy C Moore", and "Timothy C. Moore".
         :param author_name: The name to standardize
@@ -51,7 +51,7 @@ class MDPI(Base):
             return None
 
         # Normalize the author name before querying
-        normalized_name = self.standardize_author_name(author_name)
+        normalized_name = self._standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {
@@ -82,11 +82,12 @@ class MDPI(Base):
             authors = [author.get("name", "") for author in article.get("authors", [])]
 
             publication = {
-                "doi": doi,
+                "from": "MDPI",
                 "journal": journal,
                 "publication_date": publication_date,
                 "title": title,
                 "authors": ", ".join(authors),
+                "doi": doi,
             }
             publications.append(publication)
 
@@ -134,3 +135,4 @@ if __name__ == "__main__":
 
     # Output the results in JSON format
     print(json.dumps(results, indent=4))
+

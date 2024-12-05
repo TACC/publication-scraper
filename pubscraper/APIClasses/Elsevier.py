@@ -18,7 +18,7 @@ class Elsevier(Base):
         self.base_url = config.ELSEVIER_URL
         self.api_key = api_key
 
-    def standardize_author_name(self, author_name):
+    def _standardize_author_name(self, author_name):
         """
         Standardize author names to handle variations like "T C Moore", "Timothy C Moore", and "Timothy C. Moore".
         :param author_name: The name to standardize
@@ -52,7 +52,7 @@ class Elsevier(Base):
             return None
 
         # Normalize the author name
-        normalized_name = self.standardize_author_name(author_name)
+        normalized_name = self._standardize_author_name(author_name)
 
         # Prepare the query parameters
         params = {
@@ -63,15 +63,16 @@ class Elsevier(Base):
 
         # Send the request to the Elsevier API
         headers = {"Accept": "application/json"}
-        
+
         # Error handling when interacting with Elsevier APIs, Raises HTTP Error for bad responses
         try:
-            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)  
-            response.raise_for_status()  
+            response = requests.get(
+                self.base_url, headers=headers, params=params, timeout=10
+            )
+            response.raise_for_status()
         except requests.exceptions.RequestException as e:
             logging.error(f"Elsevier API Request error: {e}")
             return None
-        
 
         # Log the raw response for debugging
         data = response.json()
@@ -100,12 +101,13 @@ class Elsevier(Base):
 
             # Create a dictionary with the relevant information
             publication = {
-                "doi": doi,
+                "from": "Elsevier",
                 "journal": publication_name,
                 "content_type": content_type,
                 "publication_date": publication_date,
                 "title": title,
                 "authors": ", ".join(authors),
+                "doi": doi,
             }
             publications.append(publication)
 
