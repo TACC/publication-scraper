@@ -2,7 +2,7 @@ import requests
 import json
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config
 
 
 class IEEEXplore(Base):

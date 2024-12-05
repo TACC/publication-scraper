@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 import json
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 
 class Wiley(Base):

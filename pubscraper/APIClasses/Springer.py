@@ -3,7 +3,7 @@ import logging
 import json
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 
 class Springer(Base):
