@@ -2,6 +2,7 @@ import json
 import logging
 import csv
 import os
+import tablib
 
 import click
 from click_loglevel import LogLevel
@@ -94,8 +95,22 @@ def set_log_file(ctx, param, value):
     default=False,
     help="List APIs available for querying",
 )
+@click.option(
+    "--format",
+    "-f",
+    type=click.Choice(
+        ['json', 'csv', 'xls', 'xlsx'],
+        case_sensitive=False,
+    ),
+    # multiple=True,
+    default=['json'],
+    show_default=True,
+    help="Select the output format: tsv, csv, or json."
+)
+
+
 # TODO: batch author names to circumvent rate limits?
-def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
+def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format ):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
@@ -134,6 +149,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
         "CrossRef": CrossRef(),
         "PLOS": PLOS()
     }
+
     authors_and_pubs = []
 
     for author in author_names:
@@ -151,24 +167,56 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis):
 
         authors_and_pubs.append(results)
 
-    logger.info(f"Found publications for {len(authors_and_pubs)} authors")
 
-    # NOTE: main.py currently writes output to a JSON file. it will eventually return a TabLib
-    # object and the final output will be user-configurable through the command line
+    """
+    Using TabLib to format data in specified format
+    """
     logger.debug(f"Results: {(json.dumps(authors_and_pubs, indent=2))}")
+    logger.debug(f"Exporting the dataset in the {format} specified format to {output_file}")
 
-    logger.debug(f"Writing results to {output_file}")
     try:
         os.remove(output_file)
         logger.debug(f"successfully removed {output_file}")
     except Exception:
         logger.warning(f"could not remove {output_file}")
 
-    fout = open(output_file, "w")
-    fout.write(json.dumps(authors_and_pubs, indent=2))
-    logger.info(f"wrote results to {output_file}")
-    return 0
 
+    dataset = tablib.Dataset()
+    dataset.headers = ['Author', 'DOI', 'Journal', 'Publication Date', 'Title', 'Authors']
+
+    # Loop through each author and their publications in authors_and_pubs
+    for author_result in authors_and_pubs:
+        for author, publications in author_result.items():  # Use .items() to unpack dictionary
+            for pub in publications:
+                if isinstance(pub, dict):  # Only process dictionary entries
+                    # Safely fetch values using .get to avoid KeyError, defaulting to 'N/A' if the key is missing
+                    dataset.append([
+                        author,
+                        pub.get('doi', 'N/A'),
+                        pub.get('journal', 'N/A'),
+                        pub.get('publication_date', 'N/A'),
+                        pub.get('title', 'N/A'),
+                        pub.get('authors', 'N/A')
+                    ])
+
+
+    # # Export to specified format
+    # with open(f'output.{format}', 'w') as f:
+    #         f.write(dataset.export(format)) 
+
+    with open(f'output.{format}', 'w') as f:
+        if format == 'csv':
+            f.write(dataset.export('csv'))  # Export to CSV
+        elif format == 'json':
+            json_data = authors_and_pubs
+            json.dump(json_data, f, indent=4)
+
+    # fout = open(output_file, "w")
+    # fout.write(json.dumps(authors_and_pubs, indent=2))
+    # logger.info(f"wrote results to {output_file}")
+    
+    logger.info(f"Data successfully exported to output.{format}")
+    return 0
 
 if __name__ == "__main__":
     main()

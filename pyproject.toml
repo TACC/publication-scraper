@@ -11,6 +11,7 @@ python = "^3.12"
 requests = "^2.32.3"
 click = "^8.1.7"
 click-loglevel = "^0.5.0"
+tablib = "^3.7.0"
 
 [tool.poetry.scripts]
 pubscraper = "pubscraper.main:main"
