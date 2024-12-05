@@ -1,0 +1,85 @@
+responses:
+- response:
+    auto_calculate_content_length: false
+    body: '{"search-results":{"opensearch:totalResults":"0","opensearch:startIndex":"0","opensearch:itemsPerPage":"0","opensearch:Query":{"@role":
+      "request", "@searchTerms": "AUTHOR-NAME(Nada S. Hussein)", "@startPage": "0"},"link":
+      [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/search/scopus?start=0&count=10&query=AUTHOR-NAME%28Nada+S.+Hussein%29&apiKey=55173f3f651a1757034a3756070c8399",
+      "@type": "application/json"}],"entry": [{"@_fa": "true", "error":"Result set
+      was empty"}]}}'
+    content_type: text/plain
+    headers:
+      CF-Cache-Status: DYNAMIC
+      CF-RAY: 8ebece819e906c81-DFW
+      Set-Cookie: __cf_bm=oSbgNWAZLm0ATnuLAQpjNdSq09t3Z3wWXH7QMUH3Sgw-1733179100-1.0.1.1-NA1.lOo8NTmIV5boidxl00_p9SB4oLNVimd3eYYpgLU1YfFebTRz5TwbtVYbtDNZixZDniVHFe_yWJxJKSsAoA;
+        path=/; expires=Mon, 02-Dec-24 23:08:20 GMT; domain=.elsevier.com; HttpOnly;
+        Secure; SameSite=None
+      Transfer-Encoding: chunked
+      Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+      X-ELS-APIKey: 55173f3f651a1757034a3756070c8399
+      X-ELS-ReqId: d74216a4efe485ab
+      X-ELS-ResourceVersion: default
+      X-ELS-Status: NO_SEARCH_RESULTS(Result set was empty)
+      X-ELS-TransId: 25073a86df06f0e4
+      X-RateLimit-Limit: '20000'
+      X-RateLimit-Remaining: '19992'
+      X-RateLimit-Reset: '1733738045'
+      allow: GET
+    method: GET
+    status: 200
+    url: https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME%28Nada+S.+Hussein%29&count=10&apiKey=55173f3f651a1757034a3756070c8399
+- response:
+    auto_calculate_content_length: false
+    body: '{"search-results":{"opensearch:totalResults":"0","opensearch:startIndex":"0","opensearch:itemsPerPage":"0","opensearch:Query":{"@role":
+      "request", "@searchTerms": "AUTHOR-NAME(Emmett Price)", "@startPage": "0"},"link":
+      [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/search/scopus?start=0&count=10&query=AUTHOR-NAME%28Emmett+Price%29&apiKey=55173f3f651a1757034a3756070c8399",
+      "@type": "application/json"}],"entry": [{"@_fa": "true", "error":"Result set
+      was empty"}]}}'
+    content_type: text/plain
+    headers:
+      CF-Cache-Status: DYNAMIC
+      CF-RAY: 8ebece840e30ddb3-DFW
+      Set-Cookie: __cf_bm=S8JakttjIZZ5V3x.Hj9Ztbi_PgxFbqF75eyrAslYnGA-1733179101-1.0.1.1-8i1VgBs98h3XVecy._Hhphf3EPdCuhEnThtkhzQEpnWUK7HToKzNo2SYpDXfZmH3gBV3NTOFyiytefWmsIk1Mw;
+        path=/; expires=Mon, 02-Dec-24 23:08:21 GMT; domain=.elsevier.com; HttpOnly;
+        Secure; SameSite=None
+      Transfer-Encoding: chunked
+      Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+      X-ELS-APIKey: 55173f3f651a1757034a3756070c8399
+      X-ELS-ReqId: dc1bf85e07c1f3e7
+      X-ELS-ResourceVersion: default
+      X-ELS-Status: NO_SEARCH_RESULTS(Result set was empty)
+      X-ELS-TransId: afaca18207387420
+      X-RateLimit-Limit: '20000'
+      X-RateLimit-Remaining: '19991'
+      X-RateLimit-Reset: '1733738045'
+      allow: GET
+    method: GET
+    status: 200
+    url: https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME%28Emmett+Price%29&count=10&apiKey=55173f3f651a1757034a3756070c8399
+- response:
+    auto_calculate_content_length: false
+    body: '{"search-results":{"opensearch:totalResults":"0","opensearch:startIndex":"0","opensearch:itemsPerPage":"0","opensearch:Query":{"@role":
+      "request", "@searchTerms": "AUTHOR-NAME(Omoye Mary Akhagba)", "@startPage":
+      "0"},"link": [{"@_fa": "true", "@ref": "self", "@href": "https://api.elsevier.com/content/search/scopus?start=0&count=10&query=AUTHOR-NAME%28Omoye+Mary+Akhagba%29&apiKey=55173f3f651a1757034a3756070c8399",
+      "@type": "application/json"}],"entry": [{"@_fa": "true", "error":"Result set
+      was empty"}]}}'
+    content_type: text/plain
+    headers:
+      CF-Cache-Status: DYNAMIC
+      CF-RAY: 8ebece86bbc47d5a-DFW
+      Set-Cookie: __cf_bm=v7ElApW2SMMxwO.jZfFs4tAReE39Y8Y5Ua9JvrrB3UY-1733179101-1.0.1.1-8fT9Z8P1tBPYvz4MZIR1vADKNK1zB82iEV88SAQucJ3kYV7MAwe8moj591riztoF6.fVomwF2AGHZ_rGtwem6w;
+        path=/; expires=Mon, 02-Dec-24 23:08:21 GMT; domain=.elsevier.com; HttpOnly;
+        Secure; SameSite=None
+      Transfer-Encoding: chunked
+      Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+      X-ELS-APIKey: 55173f3f651a1757034a3756070c8399
+      X-ELS-ReqId: 39731ed109dc2c47
+      X-ELS-ResourceVersion: default
+      X-ELS-Status: NO_SEARCH_RESULTS(Result set was empty)
+      X-ELS-TransId: 1db1fc9b6e860a57
+      X-RateLimit-Limit: '20000'
+      X-RateLimit-Remaining: '19990'
+      X-RateLimit-Reset: '1733738045'
+      allow: GET
+    method: GET
+    status: 200
+    url: https://api.elsevier.com/content/search/scopus?query=AUTHOR-NAME%28Omoye+Mary+Akhagba%29&count=10&apiKey=55173f3f651a1757034a3756070c8399

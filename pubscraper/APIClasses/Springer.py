@@ -3,7 +3,7 @@ import logging
 import json
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 
 class Springer(Base):
@@ -98,6 +98,8 @@ class Springer(Base):
 def search_multiple_authors(authors, limit=10):
     """
     Search for publications by multiple authors.
+    :param authors: The name of the author to search for
+    :param rows: The number of results to return (default is 10).
     :return: Dictionary with results for each author
     """
     springer_api = Springer()

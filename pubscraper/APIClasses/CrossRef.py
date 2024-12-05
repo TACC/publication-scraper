@@ -192,6 +192,7 @@ def search_multiple_authors(authors: list[str], rows: int = 10):
 
         try:
             publications = crossref.get_publications_by_author(author, rows)
+
             all_results[author] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}, {e}")
