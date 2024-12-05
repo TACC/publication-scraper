@@ -154,7 +154,7 @@ class CrossRef(Base):
         )
         while len(publications) < desired_rows:
             total_results, pubs = self._aggregate_publications(author, rows, offset)
-            if not pubs:
+            if pubs is None:
                 # an error occured in _aggregate_publications, return None
                 return None
 
@@ -165,7 +165,7 @@ class CrossRef(Base):
                 logging.warning(
                     f"Requested {rows} publications from {author}, found {total_results}"
                 )
-                return publications or None
+                return publications
 
             offset += rows
             rows -= len(pubs)
@@ -173,7 +173,7 @@ class CrossRef(Base):
                 f"Requesting {rows} more publications by {author} (offset = {offset})"
             )
 
-        logging.info(
+        logging.debug(
             f"Retrieved {len(publications)} publications by {author} from CrossRef"
         )
         return publications or None
@@ -191,7 +191,7 @@ def search_multiple_authors(authors: list[str], rows: int = 10):
             continue
 
         try:
-            _, publications = crossref._aggregate_publications(author, rows)
+            publications = crossref.get_publications_by_author(author, rows)
             all_results[author] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}, {e}")
