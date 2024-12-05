@@ -4,7 +4,7 @@ import logging
 import requests
 
 from pubscraper.APIClasses.Base import Base
-import config
+import pubscraper.config as config
 
 
 class ArXiv(Base):
@@ -14,7 +14,7 @@ class ArXiv(Base):
         """
         self.base_url = config.ARXIV_URL
 
-    def standardize_author_name(self, author_name):
+    def _standardize_author_name(self, author_name):
         """Standardize the author's name to ensure consistency."""
         name_parts = author_name.split()
 
@@ -33,18 +33,20 @@ class ArXiv(Base):
             return " ".join(name_parts)
 
     def get_publications_by_author(self, author_name, start=0, max_results=10):
-        """"
+        """ "
         Retrieve publications from PLOS by author name.
         :param author_name: The name of the author to search for
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
         if not author_name.strip():
-            logging.warning("Received empty string for author name in search query, returning None")
+            logging.warning(
+                "Received empty string for author name in search query, returning None"
+            )
             return None
 
         # Standardize the author name for query
-        author_name_standardized = self.standardize_author_name(author_name)
+        author_name_standardized = self._standardize_author_name(author_name)
         params = {
             "search_query": f'au:"{author_name_standardized}"',
             "start": start,
@@ -60,40 +62,43 @@ class ArXiv(Base):
             return []
 
         root = ET.fromstring(response.text)
-        
+
         publications = []
 
         for entry in root.findall("{http://www.w3.org/2005/Atom}entry"):
             authors = [
-                self.get_text(author, "{http://www.w3.org/2005/Atom}name")
+                self._get_text(author, "{http://www.w3.org/2005/Atom}name")
                 for author in entry.findall("{http://www.w3.org/2005/Atom}author")
             ]
 
             # Check if the exact author name is in the authors list
             if author_name_standardized in authors:
                 paper = {
-                    "title": self.get_text(entry, "{http://www.w3.org/2005/Atom}title"),
-                    "publication_name": self.get_text(
+                    "from": "ArXiv",
+                    "title": self._get_text(
+                        entry, "{http://www.w3.org/2005/Atom}title"
+                    ),
+                    "publication_name": self._get_text(
                         entry.find("{http://www.w3.org/2005/Atom}source"),
                         "{http://www.w3.org/2005/Atom}title",
                         "arXiv",
                     ),
-                    "publication_date": self.get_text(
+                    "publication_date": self._get_text(
                         entry, "{http://www.w3.org/2005/Atom}published"
                     ),
-                    "content_type": self.get_text(
+                    "content_type": self._get_text(
                         entry, "{http://www.w3.org/2005/Atom}category", "preprint"
                     ),
-                    "doi": self.get_text(
+                    "authors": authors,
+                    "doi": self._get_text(
                         entry, "{http://arxiv.org/schemas/atom}doi", ""
                     ),
-                    "authors": authors,
                 }
                 publications.append(paper)
 
         return publications
 
-    def get_text(self, element, tag, default=""):
+    def _get_text(self, element, tag, default=""):
         """Helper method to safely get text from XML elements."""
         if element is not None:
             found_element = element.find(tag)
@@ -113,12 +118,14 @@ def search_multiple_authors(authors, max_results=10):
 
     for author in authors:
         print(f"Searching for publications by {author}...")
-        if not author.strip(): 
+        if not author.strip():
             logging.warning("Received empty string for author name, continuing...")
             continue
         try:
             # Get publications for each author, passing the limit (rows) to get_publications_by_author
-            publications = arxiv_api.get_publications_by_author(author, max_results=max_results)
+            publications = arxiv_api.get_publications_by_author(
+                author, max_results=max_results
+            )
             all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")

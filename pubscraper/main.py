@@ -7,17 +7,17 @@ import tablib
 import click
 from click_loglevel import LogLevel
 
-from version import __version__
-import config
+from pubscraper.version import __version__
+import pubscraper.config as config
 
-from APIClasses.PubMed import PubMed
-from APIClasses.arXiv import ArXiv
-from APIClasses.MDPI import MDPI
-from APIClasses.Elsevier import Elsevier
-from APIClasses.Springer import Springer
-from APIClasses.Wiley import Wiley
-from APIClasses.CrossRef import CrossRef
-from APIClasses.PLOS import PLOS
+from pubscraper.APIClasses.PubMed import PubMed
+from pubscraper.APIClasses.arXiv import ArXiv
+from pubscraper.APIClasses.MDPI import MDPI
+from pubscraper.APIClasses.Elsevier import Elsevier
+from pubscraper.APIClasses.Springer import Springer
+from pubscraper.APIClasses.Wiley import Wiley
+from pubscraper.APIClasses.CrossRef import CrossRef
+from pubscraper.APIClasses.PLOS import PLOS
 
 
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
@@ -79,11 +79,29 @@ def set_log_file(ctx, param, value):
     "--apis",
     "-a",
     type=click.Choice(
-        ["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef", "PLOS"],
+        [
+            "PubMed",
+            "ArXiv",
+            "MDPI",
+            "Elsevier",
+            "Springer",
+            "Wiley",
+            "CrossRef",
+            "PLOS",
+        ],
         case_sensitive=False,
     ),
     multiple=True,
-    default=["PubMed", "ArXiv", "MDPI", "Elsevier", "Springer", "Wiley", "CrossRef", "PLOS"],
+    default=[
+        "PubMed",
+        "ArXiv",
+        "MDPI",
+        "Elsevier",
+        "Springer",
+        "Wiley",
+        "CrossRef",
+        "PLOS",
+    ],
     show_default=True,
     help="Specify APIs to query",
 )
@@ -127,6 +145,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
         return 0
 
     author_names = []
+    logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
     try:
         with open(input_file, newline="") as csvfile:
             name_reader = csv.reader(csvfile)
@@ -147,7 +166,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
         "Springer": Springer(),
         "Wiley": Wiley(),
         "CrossRef": CrossRef(),
-        "PLOS": PLOS()
+        "PLOS": PLOS(),
     }
 
     authors_and_pubs = []
@@ -158,7 +177,6 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
         authors_pubs = []
         for api_name in apis:
             api = available_apis[api_name]
-            # api = class_name()
             pubs_found = api.get_publications_by_author(author, number)
             if pubs_found is not None:
                 authors_pubs += pubs_found

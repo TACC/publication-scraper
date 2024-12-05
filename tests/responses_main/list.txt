@@ -1,0 +1,8 @@
+Available endpoints:
+  Pubmed
+  ArXiv
+  MDPI
+  Elsevier
+  Springer
+  Wiley
+  CrossRef

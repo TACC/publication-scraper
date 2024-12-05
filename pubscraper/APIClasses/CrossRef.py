@@ -7,7 +7,7 @@ from pubscraper.APIClasses.Base import Base
 # NOTE: we might want to limit results to works published after TACC was founded
 
 """
-Many results from CrossRef are are missing dadta we're interested in. Currently,
+Many results from CrossRef are are missing data we're interested in. Currently,
 we skip over results with missing data and make another request. If we requested
 10 rows, we repeat this process until we have 10 valid publications for each author.
 This is a slow process, and we should think about better solutions
@@ -19,7 +19,7 @@ class CrossRef(Base):
         self.base_url = "http://api.crossref.org/works"
 
     # TODO: should these extract methods be squished to one method w a switch? ask erik
-    def extract_journal(self, publication_item):
+    def _extract_journal(self, publication_item):
         try:
             journal = publication_item["container-title"][0]
             logging.debug(f"Successfully extracted journal: {journal}")
@@ -28,7 +28,7 @@ class CrossRef(Base):
             logging.debug(f"Error fetching container-title from {publication_item} \n")
             return None
 
-    def extract_authors(self, publication_item):
+    def _extract_authors(self, publication_item):
         authors = []
         for author in publication_item["author"]:
             try:
@@ -44,7 +44,7 @@ class CrossRef(Base):
             logging.debug(f"added {name} to author list")
         return (",").join(authors)
 
-    def extract_publication_date(self, publication_item):
+    def _extract_publication_date(self, publication_item):
         logging.debug(json.dumps(publication_item, indent=2))
         try:
             date_list = publication_item["published-print"]["date-parts"][0]
@@ -56,7 +56,7 @@ class CrossRef(Base):
             logging.debug(f"Error fetching published-print from {publication_item} \n")
             return None
 
-    def extract_title(self, publication_item):
+    def _extract_title(self, publication_item):
         try:
             title = publication_item["title"][0]
             logging.debug(f"Successfuly extracted title: {title}")
@@ -65,7 +65,7 @@ class CrossRef(Base):
             logging.debug(f"Error fetching title from {publication_item} \n")
             return None
 
-    def is_valid_pub(self, pub: dict[str, str]) -> bool:
+    def _is_valid_pub(self, pub: dict[str, str]) -> bool:
         for item in pub:
             if pub[item] is None:
                 return False
@@ -77,7 +77,7 @@ class CrossRef(Base):
         that author name
         :params author_name: name of author to search
         :params rows: maximum number of publications to return (default is 10)
-        :return: a list of publication objects/dics holding UID, journal name,
+        :return: a list of publication objects/dicts holding UID, journal name,
         publication date, title, and list of authors for each publication
         """
 
@@ -94,7 +94,7 @@ class CrossRef(Base):
         params = {
             "query.author": author_name.replace(" ", "+"),
             "rows": rows,
-            "select": "author,title,container-title,published-print",
+            "select": "author,title,container-title,published-print,DOI",
             "offset": offset,
             "mailto": "jlh7459@my.utexas.edu",
         }
@@ -113,19 +113,22 @@ class CrossRef(Base):
         publications = []
 
         for publication_item in data["message"]["items"]:
-            journal = self.extract_journal(publication_item)
-            publication_date = self.extract_publication_date(publication_item)
-            title = self.extract_title(publication_item)
-            authors = self.extract_authors(publication_item)
+            journal = self._extract_journal(publication_item)
+            publication_date = self._extract_publication_date(publication_item)
+            title = self._extract_title(publication_item)
+            authors = self._extract_authors(publication_item)
+            doi = publication_item["DOI"]
 
             pub = {
+                "from": "CrossRef",
                 "journal": journal,
                 "publication_date": publication_date,
                 "title": title,
                 "authors": authors,
+                "doi": doi,
             }
 
-            if self.is_valid_pub(pub):
+            if self._is_valid_pub(pub):
                 publications.append(pub)
 
         logging.debug(
@@ -134,7 +137,7 @@ class CrossRef(Base):
 
         return total_results, publications
 
-    def aggregate_publications(self, author: str, rows: int):
+    def _aggregate_publications(self, author: str, rows: int):
         publications = []
         desired_rows = rows
         offset = len(publications)
@@ -175,7 +178,7 @@ def search_multiple_authors(authors: list[str], rows: int = 10):
             logging.warning("Received empty string for author name, continuing...")
 
         try:
-            publications = crossref.aggregate_publications(author, rows)
+            publications = crossref._aggregate_publications(author, rows)
             all_results[author] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}, {e}")
