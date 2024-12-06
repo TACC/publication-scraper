@@ -67,7 +67,7 @@ def set_log_file(ctx, param, value):
 @click.option(
     "-i", "--input_file", type=str, default="input.csv", help="Specify input file"
 )
-@click.option("-o", "--output_file", default="output.json", help="Specify output file")
+@click.option("-o", "--output_file", default="output", help="Specify output file")
 @click.option(
     "-n",
     "--number",
@@ -185,8 +185,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
     """
     Using TabLib to format data in specified format
     """
-    logger.debug(f"Results: {(json.dumps(authors_and_pubs, indent=2))}")
-    logger.debug(f"Exporting the dataset in the {format} specified format to {output_file}")
+    logger.info(f"Exporting the dataset in the specified format: {format} ")
 
     try:
         os.remove(output_file)
@@ -196,7 +195,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
 
     dataset = tablib.Dataset()
-    dataset.headers = ['Author', 'DOI', 'Journal', 'Publication Date', 'Title', 'Authors']
+    dataset.headers = ['From', 'Author', 'DOI', 'Journal', 'Content Type', 'Publication Date', 'Title', 'Authors']
 
     # Loop through each author and their publications in authors_and_pubs
     for author_result in authors_and_pubs:
@@ -205,30 +204,23 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
                 if isinstance(pub, dict):  # Only process dictionary entries
                     # Safely fetch values using .get to avoid KeyError, defaulting to 'N/A' if the key is missing
                     dataset.append([
+                        pub.get('from', 'N/A'),
                         author,
                         pub.get('doi', 'N/A'),
                         pub.get('journal', 'N/A'),
+                        pub.get('content_type', 'N/A'),
                         pub.get('publication_date', 'N/A'),
                         pub.get('title', 'N/A'),
                         pub.get('authors', 'N/A')
                     ])
 
-
-    # # Export to specified format
-    # with open(f'output.{format}', 'w') as f:
-    #         f.write(dataset.export(format)) 
-
-    with open(f'output.{format}', 'w') as f:
+    with open(f'{output_file}.{format}', 'w') as f:
         if format == 'csv':
             f.write(dataset.export(format)) 
         elif format == 'json':
             json.dump(authors_and_pubs, f, indent=4)
-
-    # fout = open(output_file, "w")
-    # fout.write(json.dumps(authors_and_pubs, indent=2))
-    # logger.info(f"wrote results to {output_file}")
     
-    logger.info(f"Data successfully exported to output.{format}")
+    logger.info(f"Data successfully exported to {output_file}.{format}")
     return 0
 
 if __name__ == "__main__":

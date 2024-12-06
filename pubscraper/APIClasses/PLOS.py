@@ -21,7 +21,6 @@ class PLOS(Base):
     def get_publications_by_author(self, author_name, rows=10):
         """ "
         Retrieve publications from PLOS by author name.
-
         :param author_name: The name of the author to search for
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
