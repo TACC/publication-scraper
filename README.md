@@ -24,12 +24,18 @@ author, institution, and date range.
 
 By default, author names are read in from `input.csv` and API results are written to `output.json`.
 
-The the minimum command options required to run the program is shown below.
+The minimum command options required to run the program is shown below.
 ```console
 > poetry run pubscraper -i input.csv
 ```
 
-
+The tool expects `input.csv` to appear as follows:
+```csv
+first,last,institution,etc
+Dan,Stanzione,TACC,etc
+James,Carson,TACC,etc
+```
+Use the  `--help` flag for an overview of available option flags:
 ```console
 > poetry run pubscraper --help
 Usage: pubscraper [OPTIONS]
@@ -51,7 +57,7 @@ Options:
   --help                          Show this message and exit.
 ```
 
-#### Examples of output files varied by specfied format (-f or --format)
+#### Output format can be specified with the `--format` flag
 
 Json output file (default format is json)
 ```console

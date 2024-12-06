@@ -116,15 +116,17 @@ def set_log_file(ctx, param, value):
 @click.option(
     "--format",
     "-f",
-    type=click.Choice(['json', 'csv'],case_sensitive=False,),
+    type=click.Choice(
+        ["json", "csv"],
+        case_sensitive=False,
+    ),
     default="json",
     show_default=True,
-    help="Select the output format: csv or json."
+    help="Select the output format: csv or json.",
 )
 
-
 # TODO: batch author names to circumvent rate limits?
-def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format ):
+def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
@@ -138,6 +140,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
         click.secho("  Springer", fg="blue")
         click.secho("  Wiley", fg="blue")
         click.secho("  CrossRef", fg="blue")
+        click.secho("  PLOS", fg="blue")
         return 0
 
     author_names = []
@@ -145,8 +148,10 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
     try:
         with open(input_file, newline="") as csvfile:
             name_reader = csv.reader(csvfile)
+            next(name_reader)  # skip header row
             for row in name_reader:
-                author_names.append(row[0])
+                name = f"{row[0]} {row[1]}"
+                author_names.append(name)
     except FileNotFoundError:
         logger.error(f"Couldn't read input file {input_file}, exiting")
         exit(1)
@@ -181,10 +186,10 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
         authors_and_pubs.append(results)
 
-
     """
     Using TabLib to format data in specified format
     """
+    logger.debug(f"Results: {(json.dumps(authors_and_pubs, indent=2))}")
     logger.info(f"Exporting the dataset in the specified format: {format} ")
 
     try:
@@ -193,13 +198,16 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
     except Exception:
         logger.warning(f"could not remove {output_file}")
 
-
     dataset = tablib.Dataset()
+
     dataset.headers = ['From', 'Author', 'DOI', 'Journal', 'Content Type', 'Publication Date', 'Title', 'Authors']
 
     # Loop through each author and their publications in authors_and_pubs
     for author_result in authors_and_pubs:
-        for author, publications in author_result.items():  # Use .items() to unpack dictionary
+        for (
+            author,
+            publications,
+        ) in author_result.items():  # Use .items() to unpack dictionary
             for pub in publications:
                 if isinstance(pub, dict):  # Only process dictionary entries
                     # Safely fetch values using .get to avoid KeyError, defaulting to 'N/A' if the key is missing
@@ -221,7 +229,9 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             json.dump(authors_and_pubs, f, indent=4)
     
     logger.info(f"Data successfully exported to {output_file}.{format}")
+
     return 0
+
 
 if __name__ == "__main__":
     main()
