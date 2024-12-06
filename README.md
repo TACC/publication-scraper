@@ -109,11 +109,11 @@ CSV output file
 ```console
 output.cvs
 
-Author,DOI,Journal,Publication Date,Title,Authors
-James Carson,11515779,BMC Public Health,2024/10/22 00:00,Social inequalities in child mental health trajectories: a longitudinal study using birth cohort data 12 countries,"Cadman T,Avraam D,Carson J,Elhakeem A,Grote V,Guerlich K,Guxens M,Howe LD,Huang RC,Harris JR,Houweling TA,Hyde E,Jaddoe V,Jansen PW,Julvez J,Koletzko B,Lin A,Margetaki K,Melchior M,Nader JT,Pedersen M,Pizzi C,Roumeliotaki T,Swertz M,Tafflet M,Taylor-Robinson D,Wootton RE,Strandberg-Larsen K"
-James Carson,11475381,International Journal for Numerical Methods in Biomedical Engineering,2021/12/27 00:00,Automating fractional flow reserve (FFR) calculation from CT scans: A rapid workflow using unsupervised learning and computational fluid dynamics,"Chakshu NK,Carson JM,Sazonov I,Nithiarasu P"
-Kelsey Beavers,11444771,Proceedings of the Royal Society B: Biological Sciences,2024/10/02 00:00,Trade-off between photosymbiosis and innate immunity influences cnidarian’s response to pathogenic bacteria,"Emery MA,Beavers KM,Van Buren EW,Batiste R,Dimos B,Pellegrino MW,Mydlarz LD"
-Kelsey Beavers,11579526,Integrative and Comparative Biology,2024/07/18 00:00,Structural and Evolutionary Relationships of Melanin Cascade Proteins in Cnidarian Innate Immunity,"Van Buren EW,Ponce IE,Beavers KM,Stokes A,Cornelio MN,Emery M,Mydlarz LD"
+From,Author,DOI,Journal,Content Type,Publication Date,Title,Authors
+PubMed,James Carson,10.1186/s12889-024-20291-5,BMC Public Health,N/A,2024/10/22 00:00,Social inequalities in child mental health trajectories: a longitudinal study using birth cohort data 12 countries,"Cadman T,Avraam D,Carson J,Elhakeem A,Grote V,Guerlich K,Guxens M,Howe LD,Huang RC,Harris JR,Houweling TA,Hyde E,Jaddoe V,Jansen PW,Julvez J,Koletzko B,Lin A,Margetaki K,Melchior M,Nader JT,Pedersen M,Pizzi C,Roumeliotaki T,Swertz M,Tafflet M,Taylor-Robinson D,Wootton RE,Strandberg-Larsen K"
+PubMed,James Carson,10.1002/cnm.3559,International Journal for Numerical Methods in Biomedical Engineering,N/A,2021/12/27 00:00,Automating fractional flow reserve (FFR) calculation from CT scans: A rapid workflow using unsupervised learning and computational fluid dynamics,"Chakshu NK,Carson JM,Sazonov I,Nithiarasu P"
+Elsevier,Kelsey Beavers,10.1016/j.jcis.2015.10.053,Journal of Colloid and Interface Science,Article,2016-02-01,High conversion of HAuCl<inf>4</inf> into gold nanorods: A re-seeding approach,Canonico-May S.A.
+Springer,Kelsey Beavers,10.1186/s12874-024-02252-z,BMC Medical Research Methodology,Article,2024-06-03,Use of systems thinking and adapted group model building methods to understand patterns of technology use among older adults with type 1 diabetes: a preliminary process evaluation,"Kahkoska, Anna R., Smith, Cambray, Young, Laura A., Hassmiller Lich, Kristen"
 ...
 ```
 
