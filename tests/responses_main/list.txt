@@ -6,3 +6,4 @@ Available endpoints:
   Springer
   Wiley
   CrossRef
+  PLOS

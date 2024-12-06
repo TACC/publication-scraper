@@ -9,9 +9,11 @@ Options:
   -o, --output_file TEXT          Specify output file
   -n, --number INTEGER            Specify max number of publications to receive
                                   for each author
-  -a, --apis [PubMed|ArXiv|MDPI|Elsevier|Springer|Wiley|CrossRef]
+  -a, --apis [PubMed|ArXiv|MDPI|Elsevier|Springer|Wiley|CrossRef|PLOS]
                                   Specify APIs to query  [default: PubMed,
                                   ArXiv, MDPI, Elsevier, Springer, Wiley,
-                                  CrossRef]
+                                  CrossRef, PLOS]
   --list                          List APIs available for querying
+  -f, --format [json|csv]         Select the output format: csv or json.
+                                  [default: json]
   --help                          Show this message and exit.
