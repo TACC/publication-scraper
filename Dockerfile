@@ -9,8 +9,8 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-COPY README.md LICENSE /publication-scraper
-COPY pubscraper /publication-scraper/pubscraper
+COPY README.md LICENSE /publication-scraper/
+COPY pubscraper /publication-scraper/pubscraper/
 
 RUN ls
 RUN poetry build
@@ -34,7 +34,7 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /publication-scraper
 
-COPY --from=poetry /publication-scraper /publication-scraper/requirements.txt .
+COPY --from=poetry /publication-scraper /publication-scraper/requirements.txt ./
 
 RUN pip install -r requirements.txt
 
