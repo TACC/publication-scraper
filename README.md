@@ -29,7 +29,6 @@ The the minimum command options required to run the program is shown below.
 > poetry run pubscraper -i input.csv
 ```
 
-If -f or --format is not specified, the default format is json.
 
 ```console
 > poetry run pubscraper --help
