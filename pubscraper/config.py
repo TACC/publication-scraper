@@ -5,7 +5,7 @@ LOGGER_LEVEL = "INFO"
 
 ELSEVIER_URL = "https://api.elsevier.com/content/search/scopus"
 IEEE_URL = "https://ieeexplore.ieee.org/api/v1/search/articles"
-MDPI_URL = "https://api.mdpi.com/v1/articles"
+MDPI_URL = "https://api.crossref.org/works"
 PUBMED_SEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 PUBMED_SUMMARY_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
 SPRINGER_URL = "https://api.springernature.com/openaccess/json"

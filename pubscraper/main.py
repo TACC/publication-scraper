@@ -116,11 +116,8 @@ def set_log_file(ctx, param, value):
 @click.option(
     "--format",
     "-f",
-    type=click.Choice(
-        ['json', 'csv'],
-        case_sensitive=False,
-    ),
-    default=['json'],
+    type=click.Choice(['json', 'csv'],case_sensitive=False,),
+    default="json",
     show_default=True,
     help="Select the output format: csv or json."
 )
@@ -223,7 +220,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
     with open(f'output.{format}', 'w') as f:
         if format == 'csv':
-            f.write(dataset.export('csv'))  # Export to CSV
+            f.write(dataset.export(format)) 
         elif format == 'json':
             json.dump(authors_and_pubs, f, indent=4)
 
