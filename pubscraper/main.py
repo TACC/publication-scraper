@@ -148,8 +148,10 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
     try:
         with open(input_file, newline="") as csvfile:
             name_reader = csv.reader(csvfile)
+            next(name_reader)  # skip header row
             for row in name_reader:
-                author_names.append(row[0])
+                name = f"{row[0]} {row[1]}"
+                author_names.append(name)
     except FileNotFoundError:
         logger.error(f"Couldn't read input file {input_file}, exiting")
         exit(1)
