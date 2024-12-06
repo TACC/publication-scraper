@@ -141,13 +141,13 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
 name = "click-loglevel"
-version = "0.5.0"
+version = "0.5.1"
 description = "Log level parameter type for Click"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "click-loglevel-0.5.0.tar.gz", hash = "sha256:fcc98a136a96479b4768494df25017114ba1cb525dac0bed619209b3578fd4f3"},
-    {file = "click_loglevel-0.5.0-py3-none-any.whl", hash = "sha256:897070fd4bf5b503edb5a1ecc0551448647901f4fac83a01c9f00aa28ad86d60"},
+    {file = "click_loglevel-0.5.1-py3-none-any.whl", hash = "sha256:519e90c7991cf4d0b9a70f037b74197eb3ee079923f590c786fb93dd61af820a"},
+    {file = "click_loglevel-0.5.1.tar.gz", hash = "sha256:6bfcb27435e1b859cc08d479a1b32cd8518f83b4d313cfe7d7142ee62b841cf4"},
 ]
 
 [package.dependencies]
@@ -430,6 +430,26 @@ urllib3 = ">=1.25.10,<3.0"
 tests = ["coverage (>=6.0.0)", "flake8", "mypy", "pytest (>=7.0.0)", "pytest-asyncio", "pytest-cov", "pytest-httpserver", "tomli", "tomli-w", "types-PyYAML", "types-requests"]
 
 [[package]]
+name = "tablib"
+version = "3.7.0"
+description = "Format agnostic tabular data library (XLS, JSON, YAML, CSV, etc.)"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "tablib-3.7.0-py3-none-any.whl", hash = "sha256:9a6930037cfe0f782377963ca3f2b1dae3fd4cdbf0883848f22f1447e7bb718b"},
+    {file = "tablib-3.7.0.tar.gz", hash = "sha256:f9db84ed398df5109bd69c11d46613d16cc572fb9ad3213f10d95e2b5f12c18e"},
+]
+
+[package.extras]
+all = ["odfpy", "openpyxl (>=2.6.0)", "pandas", "pyyaml", "tabulate", "xlrd", "xlwt"]
+cli = ["tabulate"]
+ods = ["odfpy"]
+pandas = ["pandas"]
+xls = ["xlrd", "xlwt"]
+xlsx = ["openpyxl (>=2.6.0)"]
+yaml = ["pyyaml"]
+
+[[package]]
 name = "urllib3"
 version = "2.2.3"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
@@ -449,4 +469,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "306ce76a9f77fac4ee3e9de1b3ada05b935c276ff899a910de6fadbe92f918ae"
+content-hash = "7010ec94afc15cd1e77669eb3f72f0eaf781716e2524f77c5d6fa22639a399ba"
