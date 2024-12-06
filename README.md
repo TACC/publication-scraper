@@ -51,7 +51,7 @@ Options:
   --help                          Show this message and exit.
 ```
 
-Examples of output file varied by format givin (-f or --format)
+#### Examples of output files varied by specfied format (-f or --format)
 
 Json output file (default format is json)
 ```console
