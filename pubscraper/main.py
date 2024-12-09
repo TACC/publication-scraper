@@ -129,7 +129,7 @@ def set_log_file(ctx, param, value):
 #     "-d",
 #     default=False,
 #     # show_default=True,
-#     help="Select the latest date to pull publications. Example input: 2024, 2024/05, 2024/05/10",
+#     help="Select the latest date to pull publications. Example input: 2024, 2024-05, 2024-05-10",
 # )
 
 # TODO: batch author names to circumvent rate limits?
