@@ -1,9 +1,10 @@
 import json
 import logging
-import csv
+import time
 import os
 import tablib
 
+from openpyxl import load_workbook
 import click
 from click_loglevel import LogLevel
 
@@ -65,7 +66,11 @@ def set_log_file(ctx, param, value):
     help="Set the log file",
 )
 @click.option(
-    "-i", "--input_file", type=str, default="input.csv", help="Specify input file"
+    "-i",
+    "--input_file",
+    type=str,
+    default="example_input.xlsx",
+    help="Specify input file",
 )
 @click.option("-o", "--output_file", default="output", help="Specify output file")
 @click.option(
@@ -143,15 +148,21 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
         click.secho("  PLOS", fg="blue")
         return 0
 
-    author_names = []
     logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
     try:
-        with open(input_file, newline="") as csvfile:
-            name_reader = csv.reader(csvfile)
-            next(name_reader)  # skip header row
-            for row in name_reader:
-                name = f"{row[0]} {row[1]}"
-                author_names.append(name)
+        authors_workbook = load_workbook(filename=input_file, read_only=True)
+        worksheet = authors_workbook["Sheet1"]
+        rows = worksheet.rows
+
+        name_dict = {}
+        if worksheet.max_row > 1:
+            next(rows)  # skip header row
+            for row in rows:
+                institution = row[0].value
+                author_name = f"{row[1].value} {row[2].value}"
+                name_dict[author_name] = [author_name, institution]
+
+        logging.debug(f"number of names in name_dict: {len(name_dict.keys())}")
     except FileNotFoundError:
         logger.error(f"Couldn't read input file {input_file}, exiting")
         exit(1)
@@ -172,7 +183,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
     authors_and_pubs = []
 
-    for author in author_names:
+    for author in name_dict.keys():
         results = {author: []}
         # FIXME: these names are too similar and confusing
         authors_pubs = []
@@ -185,6 +196,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             results.update({author: authors_pubs})
 
         authors_and_pubs.append(results)
+        time.sleep(0.4)
 
     """
     Using TabLib to format data in specified format
@@ -200,7 +212,16 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
     dataset = tablib.Dataset()
 
-    dataset.headers = ['From', 'Author', 'DOI', 'Journal', 'Content Type', 'Publication Date', 'Title', 'Authors']
+    dataset.headers = [
+        "From",
+        "Author",
+        "DOI",
+        "Journal",
+        "Content Type",
+        "Publication Date",
+        "Title",
+        "Authors",
+    ]
 
     # Loop through each author and their publications in authors_and_pubs
     for author_result in authors_and_pubs:
@@ -211,23 +232,25 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             for pub in publications:
                 if isinstance(pub, dict):  # Only process dictionary entries
                     # Safely fetch values using .get to avoid KeyError, defaulting to 'N/A' if the key is missing
-                    dataset.append([
-                        pub.get('from', 'N/A'),
-                        author,
-                        pub.get('doi', 'N/A'),
-                        pub.get('journal', 'N/A'),
-                        pub.get('content_type', 'N/A'),
-                        pub.get('publication_date', 'N/A'),
-                        pub.get('title', 'N/A'),
-                        pub.get('authors', 'N/A')
-                    ])
+                    dataset.append(
+                        [
+                            pub.get("from", "N/A"),
+                            author,
+                            pub.get("doi", "N/A"),
+                            pub.get("journal", "N/A"),
+                            pub.get("content_type", "N/A"),
+                            pub.get("publication_date", "N/A"),
+                            pub.get("title", "N/A"),
+                            pub.get("authors", "N/A"),
+                        ]
+                    )
 
-    with open(f'{output_file}.{format}', 'w') as f:
-        if format == 'csv':
-            f.write(dataset.export(format)) 
-        elif format == 'json':
+    with open(f"{output_file}.{format}", "w") as f:
+        if format == "csv":
+            f.write(dataset.export(format))
+        elif format == "json":
             json.dump(authors_and_pubs, f, indent=4)
-    
+
     logger.info(f"Data successfully exported to {output_file}.{format}")
 
     return 0
