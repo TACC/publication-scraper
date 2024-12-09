@@ -3,6 +3,12 @@ import json
 import logging
 
 from pubscraper.APIClasses.Base import Base
+import pubscraper.config as config
+
+LOG_FORMAT = config.LOGGER_FORMAT_STRING
+LOG_LEVEL = config.LOGGER_LEVEL
+logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
+logger = logging.getLogger(__name__)
 
 # NOTE: we might want to limit results to works published after TACC was founded
 
@@ -16,7 +22,7 @@ This is a slow process, and we should think about better solutions
 
 class CrossRef(Base):
     def __init__(self):
-        self.base_url = "http://api.crossref.org/works"
+        self.base_url = config.CROSSREF_URL
 
     # TODO: should these extract methods be squished to one method w a switch? ask erik
     def _extract_journal(self, publication_item):
