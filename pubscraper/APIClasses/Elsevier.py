@@ -1,6 +1,7 @@
 import requests
 import json
 import logging
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
@@ -85,11 +86,19 @@ class Elsevier(Base):
         publications = []
         for record in data.get("search-results", {}).get("entry", []):
             # Get basic publication details
+            # Standardize the publication date
+            raw_publication_date = record.get("prism:coverDate", "No date available")
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
+
             title = record.get("dc:title", "No title available")
             publication_name = record.get(
                 "prism:publicationName", "No journal available"
             )
-            publication_date = record.get("prism:coverDate", "No date available")
+
             content_type = record.get("subtypeDescription", "No type available")
             doi = record.get("prism:doi", "No DOI available")
 
