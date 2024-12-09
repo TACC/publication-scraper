@@ -129,7 +129,7 @@ class PubMed(Base):
             for author_object in summary_object["authors"]:
                 author_list.append(author_object["name"])
             
-            # Standardize the publication date
+            # Standardize the publication date to "YYYY-MM-DD"
             raw_publication_date = summary_object["sortdate"]
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")

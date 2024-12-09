@@ -52,7 +52,7 @@ class MDPI(Base):
                 f"{author.get('given', '')} {author.get('family', '')}"
                 for author in item.get("author", [])
             ]
-            # Pull both date-time and date-parts and Standardize the publication date
+            # Standardize the publication date to "YYYY-MM-DD"
             published_data = item.get("published-print", {}) or item.get("published-online", {})
             raw_publication_date = published_data.get("date-time", None)
             if not raw_publication_date:

@@ -86,7 +86,7 @@ class Elsevier(Base):
         publications = []
         for record in data.get("search-results", {}).get("entry", []):
             # Get basic publication details
-            # Standardize the publication date
+            # Standardize the publication date to "YYYY-MM-DD"
             raw_publication_date = record.get("prism:coverDate", "No date available")
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")

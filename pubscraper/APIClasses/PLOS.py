@@ -53,7 +53,7 @@ class PLOS(Base):
             journal = doc.get("journal", "No journal available")
             article_type = doc.get("article_type", "No article type available")
             
-            # Standardize the publication date
+            # Standardize the publication date to "YYYY-MM-DD"
             raw_publication_date = doc.get("publication_date", "No date available")
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")

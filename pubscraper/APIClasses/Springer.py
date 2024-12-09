@@ -79,7 +79,8 @@ class Springer(Base):
         for record in data.get("records", []):
             title = record.get("title", "No title available")
             publication_name = record.get("publicationName", "No journal available")
-            # Standardize the publication date
+            
+            # Standardize the publication date to "YYYY-MM-DD"
             raw_publication_date = record.get("publicationDate", "No date available")
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")

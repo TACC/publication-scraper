@@ -80,7 +80,7 @@ class ArXiv(Base):
             # Check if the exact author name is in the authors list
             if author_name_standardized in authors:
                 raw_publication_date = self._get_text(entry, "{http://www.w3.org/2005/Atom}published")  # Extract the raw publication date
-                # Standardize the publication date
+                # Standardize the publication date to "YYYY-MM-DD"
                 try:
                     publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
                 except Exception as e:

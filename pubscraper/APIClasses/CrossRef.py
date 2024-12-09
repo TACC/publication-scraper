@@ -120,7 +120,7 @@ class CrossRef(Base):
         publications = []
 
         for publication_item in data["message"]["items"]:
-            # Standardize the publication date
+            # Standardize the publication date to "YYYY-MM-DD"
             raw_publication_date = self._extract_publication_date(publication_item)
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
