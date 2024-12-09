@@ -117,12 +117,19 @@ def set_log_file(ctx, param, value):
     "--format",
     "-f",
     type=click.Choice(
-        ["json", "csv"],
+        ["json", "csv", "xlsx"],
         case_sensitive=False,
     ),
     default="json",
     show_default=True,
-    help="Select the output format: csv or json.",
+    help="Select the output format from: csv, xlsx, or json.",
+)
+@click.option(
+    "--date",
+    "-d",
+    # default="json",
+    # show_default=True,
+    help="Select the latest date to pull publications. Example input: 2024, 2024/05, 2024/05/10",
 )
 
 # TODO: batch author names to circumvent rate limits?
