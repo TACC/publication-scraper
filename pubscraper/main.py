@@ -222,11 +222,15 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
                         pub.get('authors', 'N/A')
                     ])
 
-    with open(f'{output_file}.{format}', 'w') as f:
-        if format == 'csv':
-            f.write(dataset.export(format)) 
-        elif format == 'json':
-            json.dump(authors_and_pubs, f, indent=4)
+    if format == 'xlsx':
+        with open(f"output.{format}", "wb") as f:
+            f.write(dataset.export('xlsx'))
+    else:
+        with open(f'output.{format}', 'w') as f:
+            if format == 'csv':
+                f.write(dataset.export('csv'))
+            elif format == 'json':
+                json.dump(authors_and_pubs, f, indent=4)
     
     logger.info(f"Data successfully exported to {output_file}.{format}")
 
