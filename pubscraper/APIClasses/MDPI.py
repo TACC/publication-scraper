@@ -1,6 +1,7 @@
 import requests
 import json
 import logging
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
@@ -51,18 +52,24 @@ class MDPI(Base):
                 f"{author.get('given', '')} {author.get('family', '')}"
                 for author in item.get("author", [])
             ]
-            # Pull both date-time and date-parts
+            # Standardize the publication date to "YYYY-MM-DD"
             published_data = item.get("published-print", {}) or item.get("published-online", {})
-            published_date = published_data.get("date-time", None)
-            if not published_date:
-                published_date = "/".join(map(str, published_data.get("date-parts", [["Unknown"]])[0]))
+            raw_publication_date = published_data.get("date-time", None)
+            if not raw_publication_date:
+                raw_publication_date = "/".join(map(str, published_data.get("date-parts", [["Unknown"]])[0]))
+            
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
 
             # Create a dictionary with the relevant information
             publication = {
                 "from": "MDPI",
                 "journal": item.get("container-title", ["No Journal"])[0],
                 "content_type": item.get("type", "Unknown"),
-                "publication_date": published_date,
+                "publication_date": publication_date,
                 "title": item.get("title", ["No Title"])[0],
                 "authors": ", ".join(authors) if authors else "Unknown",
                 "doi": item.get("DOI", "No DOI"),

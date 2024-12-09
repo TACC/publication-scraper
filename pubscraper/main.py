@@ -4,6 +4,9 @@ import csv
 import os
 import tablib
 
+from dateutil.parser import parse
+from datetime import datetime
+
 import click
 from click_loglevel import LogLevel
 
@@ -117,16 +120,24 @@ def set_log_file(ctx, param, value):
     "--format",
     "-f",
     type=click.Choice(
-        ["json", "csv"],
+        ["json", "csv", "xlsx"],
         case_sensitive=False,
     ),
     default="json",
     show_default=True,
-    help="Select the output format: csv or json.",
+    help="Select the output format from: csv, xlsx, or json.",
+)
+@click.option(
+    "--cutoff_date",
+    "-cd",
+    type=str,
+    default= None,
+    show_default=True,
+    help="Specify the latest date to pull publications. Example input: 2024 or 2024-05 or 2024-05-10."
 )
 
 # TODO: batch author names to circumvent rate limits?
-def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format):
+def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format, cutoff_date):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
@@ -180,10 +191,19 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             api = available_apis[api_name]
             pubs_found = api.get_publications_by_author(author, number)
             if pubs_found is not None:
-                authors_pubs += pubs_found
+                for pub in pubs_found:
+                    # Extract the publication date and parse it using the helper function
+                    publication_date_str = pub.get("publication_date", "")
+                    publication_date = parse(publication_date_str).strftime("%Y-%m-%d")
 
-            results.update({author: authors_pubs})
+                    # If cutoff date is provided, only include the publication if it is after the cutoff date, 
+                    if cutoff_date:
+                        if publication_date and publication_date > cutoff_date:
+                            authors_pubs.append(pub)
+                    else: 
+                        authors_pubs.append(pub)
 
+        results.update({author: authors_pubs})
         authors_and_pubs.append(results)
 
     """

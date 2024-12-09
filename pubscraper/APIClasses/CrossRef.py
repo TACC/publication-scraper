@@ -1,6 +1,7 @@
 import requests
 import json
 import logging
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
@@ -119,8 +120,16 @@ class CrossRef(Base):
         publications = []
 
         for publication_item in data["message"]["items"]:
+            # Standardize the publication date to "YYYY-MM-DD"
+            raw_publication_date = self._extract_publication_date(publication_item)
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
+
+
             journal = self._extract_journal(publication_item)
-            publication_date = self._extract_publication_date(publication_item)
             title = self._extract_title(publication_item)
             authors = self._extract_authors(publication_item)
             doi = publication_item["DOI"]

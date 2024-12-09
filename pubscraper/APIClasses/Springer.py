@@ -1,6 +1,7 @@
 import requests
 import logging
 import json
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
@@ -78,10 +79,17 @@ class Springer(Base):
         for record in data.get("records", []):
             title = record.get("title", "No title available")
             publication_name = record.get("publicationName", "No journal available")
-            publication_date = record.get("publicationDate", "No date available")
+            
+            # Standardize the publication date to "YYYY-MM-DD"
+            raw_publication_date = record.get("publicationDate", "No date available")
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
+
             content_type = record.get("contentType", "No type available")
             doi = record.get("doi", "No DOI available")
-
             creators = record.get("creators", [])
             authors = [creator.get("creator", "") for creator in creators]
 

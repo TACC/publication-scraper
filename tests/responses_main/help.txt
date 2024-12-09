@@ -14,6 +14,8 @@ Options:
                                   ArXiv, MDPI, Elsevier, Springer, Wiley,
                                   CrossRef, PLOS]
   --list                          List APIs available for querying
-  -f, --format [json|csv]         Select the output format: csv or json.
-                                  [default: json]
+  -f, --format [json|csv|xlsx]    Select the output format from: csv, xlsx, or
+                                  json.  [default: json]
+  -cd, --cutoff_date TEXT         Specify the latest date to pull publications.
+                                  Example input: 2024 or 2024-05 or 2024-05-10.
   --help                          Show this message and exit.

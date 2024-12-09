@@ -3,6 +3,7 @@ import urllib.parse
 import logging
 import xml.etree.ElementTree as ET
 import json
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
@@ -106,11 +107,18 @@ class Wiley(Base):
                 if doi_elememnt is not None and doi_elememnt.text
                 else "No DOI available"
             )
-            publication_date = (
+            raw_publication_date = (
                 pub_date_elem.text.strip()
                 if pub_date_elem is not None and pub_date_elem.text
                 else "No date available"
             )
+            # Standardize the publication date to "YYYY-MM-DD"
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
+                
             part_of = (
                 part_of_elem.text.strip()
                 if part_of_elem is not None and part_of_elem.text
