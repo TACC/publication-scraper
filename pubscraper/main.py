@@ -23,7 +23,7 @@ from pubscraper.APIClasses.PLOS import PLOS
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
 LOG_LEVEL = config.LOGGER_LEVEL
 logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 
 def set_logging_level(ctx, param, value):

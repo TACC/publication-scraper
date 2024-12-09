@@ -12,5 +12,6 @@ SPRINGER_URL = "https://api.springernature.com/openaccess/json"
 WILEY_URL = "https://onlinelibrary.wiley.com/action/sru"
 ARXIV_URL = "http://export.arxiv.org/api/query"
 PLOS_URL = "https://api.plos.org/search"
+CROSSREF_URL = "https://api.crossref.org/works"
 
-API_LIST = ["Elsevier", "IEEE", "MDPI", "PubMed", "Springer", "Wiley", "arXiv", "PLOS"]
+API_LIST = ["Elsevier", "IEEE", "MDPI", "PubMed", "Springer", "Wiley", "arXiv", "PLOS", "CrossRef"]
