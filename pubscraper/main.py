@@ -26,6 +26,17 @@ LOG_LEVEL = config.LOGGER_LEVEL
 logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
 logger = logging.getLogger()
 
+APIS = {
+    "PubMed": PubMed(),
+    "ArXiv": ArXiv(),
+    "MDPI": MDPI(),
+    "Elsevier": Elsevier(),
+    "Springer": Springer(),
+    "Wiley": Wiley(),
+    "CrossRef": CrossRef(),
+    "PLOS": PLOS(),
+}
+
 
 def set_logging_level(ctx, param, value):
     """
@@ -84,29 +95,11 @@ def set_log_file(ctx, param, value):
     "--apis",
     "-a",
     type=click.Choice(
-        [
-            "PubMed",
-            "ArXiv",
-            "MDPI",
-            "Elsevier",
-            "Springer",
-            "Wiley",
-            "CrossRef",
-            "PLOS",
-        ],
+        [api for api in APIS.keys()],
         case_sensitive=False,
     ),
     multiple=True,
-    default=[
-        "PubMed",
-        "ArXiv",
-        "MDPI",
-        "Elsevier",
-        "Springer",
-        "Wiley",
-        "CrossRef",
-        "PLOS",
-    ],
+    default=[api for api in APIS.keys()],
     show_default=True,
     help="Specify APIs to query",
 )
@@ -138,14 +131,8 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
     if list_apis:
         click.secho("Available endpoints:", underline=True)
-        click.secho("  Pubmed", fg="blue")
-        click.secho("  ArXiv", fg="blue")
-        click.secho("  MDPI", fg="blue")
-        click.secho("  Elsevier", fg="blue")
-        click.secho("  Springer", fg="blue")
-        click.secho("  Wiley", fg="blue")
-        click.secho("  CrossRef", fg="blue")
-        click.secho("  PLOS", fg="blue")
+        for endpoint in APIS.keys():
+            click.secho(f" {endpoint}", fg="blue")
         return 0
 
     logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
@@ -170,17 +157,6 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
     logger.debug(f"Querying the following APIs: {apis}")
     logger.debug(f"Requesting {number} publications for each author")
 
-    available_apis = {
-        "PubMed": PubMed(),
-        "ArXiv": ArXiv(),
-        "MDPI": MDPI(),
-        "Elsevier": Elsevier(),
-        "Springer": Springer(),
-        "Wiley": Wiley(),
-        "CrossRef": CrossRef(),
-        "PLOS": PLOS(),
-    }
-
     authors_and_pubs = []
 
     for author in name_dict.keys():
@@ -188,7 +164,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
         # FIXME: these names are too similar and confusing
         authors_pubs = []
         for api_name in apis:
-            api = available_apis[api_name]
+            api = APIS[api_name]
             pubs_found = api.get_publications_by_author(author, number)
             if pubs_found is not None:
                 authors_pubs += pubs_found
