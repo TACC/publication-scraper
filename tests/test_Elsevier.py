@@ -4,10 +4,9 @@ import logging
 import json
 
 from pubscraper.APIClasses import Elsevier
+import pubscraper.config as config
 
-logging.basicConfig(level=logging.DEBUG)
-
-BASE_URL = "https://api.elsevier.com/content/search/scopus"
+BASE_URL = config.ELSEVIER_URL
 
 with open("secrets.json") as f:
     secrets = json.load(f)
@@ -65,7 +64,6 @@ def test_partial_empty_input(mock_api):
         status=200,
     )
     results = Elsevier.search_multiple_authors(["Albert", ""])
-
     assert len(results) == 1
     assert "Albert" in results
     assert len(mock_api.calls) == 1

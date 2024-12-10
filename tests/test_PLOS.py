@@ -1,13 +1,12 @@
 import pytest
 import responses
-from pubscraper.APIClasses import PLOS
 import logging
 import json
 
-logging.basicConfig(level=logging.DEBUG)
+from pubscraper.APIClasses import PLOS
+import pubscraper.config as config
 
-BASE_URL = "https://api.plos.org/search"
-
+BASE_URL = config.PLOS_URL
 
 @pytest.fixture
 def mock_api():
