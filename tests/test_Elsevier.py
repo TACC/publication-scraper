@@ -1,12 +1,16 @@
 import pytest
 import responses
 import logging
+import json
 
 from pubscraper.APIClasses import Elsevier
+import pubscraper.config as config
 
-logging.basicConfig(level=logging.DEBUG)
+BASE_URL = config.ELSEVIER_URL
 
-BASE_URL = "https://api.elsevier.com/content/search/scopus"
+with open("secrets.json") as f:
+    secrets = json.load(f)
+    api_key = secrets["Elsevier"]
 
 @pytest.fixture
 def mock_api():
@@ -26,227 +30,221 @@ def test_skip_empty_name(mock_api):
     assert len(mock_api.calls) == 0  # No requests should have been made
 
 
-# def test_no_input(mock_api):
-#     """Test that providing no input returns an empty result."""
-#     results = Elsevier.search_multiple_authors([])
-#     assert results == {}
-#     assert len(mock_api.calls) == 0  # No requests should have been made
+def test_no_input(mock_api):
+    """Test that providing no input returns an empty result."""
+    results = Elsevier.search_multiple_authors([])
+    assert results == {}
+    assert len(mock_api.calls) == 0  # No requests should have been made
 
 
-# def test_partial_empty_input(mock_api):
-#     """Test handling of partial empty input in author list."""
+def test_partial_empty_input(mock_api):
+    """Test handling of partial empty input in author list."""
 
-#     # Mock response for "albert"
-#     mock_api.add(
-#         responses.GET,
-#         BASE_URL,
-#         match=[
-#             responses.matchers.query_param_matcher(
-#                 {"query": 'AUTHOR-NAME(Albert)', "count": "10", "apiKey": "mock_api_key"}
-#             )
-#         ],
-#         body=mock_Elsevier_response(
-#             [
-#                 {
-#                     "title": "Sample Paper",
-#                     "author": [{"name": "Albert"}],
-#                     "published": "2024-01-01",
-#                 }
-#             ]
-#         ),
-#         status=200,
-#     )
-#     results = Elsevier.search_multiple_authors(["Albert", ""])
-
-#     assert len(results) == 1
-#     assert "Albert" in results
-#     assert len(mock_api.calls) == 1
-
-
-# def test_search_all_names(mock_api):
-#     mock_api.add(
-#         responses.GET,
-#         BASE_URL,
-#         match=[
-#             responses.matchers.query_param_matcher(
-#                 {"query": 'AUTHOR-NAME(Albert)', "count": "10", "apiKey": "mock_api_key"}
-#             )
-#         ],
-#         body=mock_Elsevier_response(
-#             [
-#                 {
-#                     "title": "Sample Paper",
-#                     "author": [{"name": "Albert"}],
-#                     "published": "2024-01-01",
-#                 }
-#             ]
-#         ),
-#         status=200,
-#     )
-#     mock_api.add(
-#         responses.GET,
-#         BASE_URL,
-#         match=[
-#             responses.matchers.query_param_matcher(
-#                 {"query": 'AUTHOR-NAME(Joe)', "count": "10", "apiKey": "mock_api_key"}
-#             )
-#         ],
-#         body=mock_Elsevier_response(
-#             [
-#                 {
-#                     "title": "Sample Paper",
-#                     "author": [{"name": "Joe"}],
-#                     "published": "2024-01-01",
-#                 }
-#             ]
-#         ),
-#         status=200,
-#     )
-#     mock_api.add(
-#         responses.GET,
-#         BASE_URL,
-#         match=[
-#             responses.matchers.query_param_matcher(
-#                 {"query": 'AUTHOR-NAME(Allen)', "count": "10", "apiKey": "mock_api_key"}
-#             )
-#         ],
-#         body=mock_Elsevier_response(
-#             [
-#                 {
-#                     "title": "Sample Paper",
-#                     "author": [{"name": "Allen"}],
-#                     "published": "2024-01-01",
-#                 }
-#             ]
-#         ),
-#         status=200,
-#     )
-
-#     results = Elsevier.search_multiple_authors(["Albert", "Joe", "Allen"])
-#     assert len(results) == 3
-#     assert "Albert" in results
-#     assert "Joe" in results
-#     assert "Allen" in results
+    # Mock response for "albert"
+    mock_api.add(
+        responses.GET,
+        BASE_URL,
+        match=[
+            responses.matchers.query_param_matcher(
+                {"query": "AUTHOR-NAME(Albert)", "count": "10", "apiKey": api_key}
+            )
+        ],
+        body=mock_Elsevier_response(
+            [
+                {
+                    "prism:doi": "doi1",
+                    "dc:title": "Sample Paper 1",
+                    "prism:coverDate": "2024-01-01",
+                    "prism:publicationName": "Sample Journal",
+                    "subtypeDescription": "Research Article",
+                    "author": [{"authname": "Albert"}],                     
+                }
+            ]
+        ),
+        status=200,
+    )
+    results = Elsevier.search_multiple_authors(["Albert", ""])
+    assert len(results) == 1
+    assert "Albert" in results
+    assert len(mock_api.calls) == 1
 
 
-# def test_no_results_for_name(mock_api):
-#     """Test that an author with no results returns None."""
-#     mock_api.add(
-#         responses.GET,
-#         BASE_URL,
-#         match=[
-#             responses.matchers.query_param_matcher(
-#                 {"query": 'AUTHOR-NAME(Magert O. Adekunle)', "count": "10", "apiKey": "mock_api_key"}
-#             )
-#         ],
-#         body=mock_Elsevier_response([]),
-#         status=200,
-#     )
+def test_search_all_names(mock_api):
+    mock_api.add(
+        responses.GET,
+        BASE_URL,
+        match=[
+            responses.matchers.query_param_matcher(
+                {"query": "AUTHOR-NAME(Albert)", "count": "10", "apiKey": api_key}
+            )
+        ],
+        body=mock_Elsevier_response(
+            [
+                {
+                    "prism:doi": "doi1",
+                    "dc:title": "Sample Paper 1",
+                    "prism:coverDate": "2024-01-01",
+                    "prism:publicationName": "Sample Journal",
+                    "subtypeDescription": "Research Article",
+                    "author": [{"authname": "Albert"}],  
+                }
+            ]
+        ),
+        status=200,
+    )
+    mock_api.add(
+        responses.GET,
+        BASE_URL,
+        match=[
+            responses.matchers.query_param_matcher(
+                {"query": "AUTHOR-NAME(Joe)", "count": "10", "apiKey": api_key}
+            )
+        ],
+        body=mock_Elsevier_response(
+            [
+                {
+                    "prism:doi": "doi1",
+                    "dc:title": "Sample Paper 1",
+                    "prism:coverDate": "2024-01-01",
+                    "prism:publicationName": "Sample Journal",
+                    "subtypeDescription": "Research Article",
+                    "author": [{"authname": "Joe"}],                   
+                }
+            ]
+        ),
+        status=200,
+    )
+    mock_api.add(
+        responses.GET,
+        BASE_URL,
+        match=[
+            responses.matchers.query_param_matcher(
+                {"query": "AUTHOR-NAME(Allen)", "count": "10", "apiKey": api_key}
+            )
+        ],
+        body=mock_Elsevier_response(
+            [
+                {
+                    "prism:doi": "doi1",
+                    "dc:title": "Sample Paper",
+                    "prism:coverDate": "2024-01-01",
+                    "prism:publicationName": "Sample Journal",
+                    "subtypeDescription": "Research Article",
+                    "author": [{"authname": "Allen"}],
+                }
+            ]
+        ),
+        status=200,
+    )
 
-#     results = Elsevier.search_multiple_authors(["Magert O. Adekunle"])
-#     assert results.get("Magert O. Adekunle") == []
-
-
-# def test_limit_number_of_results(mock_api):
-#     """Test limiting the number of results using `rows`."""
-#     mock_api.add(
-#         responses.GET,
-#         BASE_URL,
-#         match=[
-#             responses.matchers.query_param_matcher(
-#                 {"query": 'AUTHOR-NAME(Timothy C. Moore)', "count": "2", "apiKey": "mock_api_key"}
-#             )
-#         ],
-#         body=json.dumps({
-#             "response": {
-#                 "docs": [
-#                     {
-#                         "id": "doi1",
-#                         "title_display": "Sample Paper 1",
-#                         "author_display": ["Allen"],
-#                         "publication_date": "2024-01-01",
-#                         "journal": "Sample Journal",
-#                         "article_type": "Research Article"
-#                     },
-#                     {
-#                         "id": "doi2",
-#                         "title_display": "Sample Paper 2",
-#                         "author_display": ["Allen"],
-#                         "publication_date": "2024-01-01",
-#                         "journal": "Sample Journal",
-#                         "article_type": "Research Article"
-#                     }
-#                 ]
-#             }
-#         }),
-#         status=200,
-#         content_type="application/json"
-#     )
-    
-#     results = Elsevier.search_multiple_authors(["Timothy C. Moore"], limit=2)
-#     assert len(results["Timothy C. Moore"]) == 2
-
-
-
-# def test_initials_lastname():
-#     """Test searching with initials and last name finds a specific paper."""
-#     results = Elsevier.search_multiple_authors(["Randy J. nelson"])
-#     publications_found = results["Randy J. nelson"]
-#     assert any("Disrupted Circadian Rhythms and Substance Use Disorders: A Narrative Review" in pub["title"] for pub in publications_found)
-
-
-# def test_fullname():
-#     """Test searching with full name finds a specific paper."""
-#     results = Elsevier.search_multiple_authors(["Randy Nelson"])
-#     publications_found = results["Randy Nelson"]
-#     assert any("Disrupted Circadian Rhythms and Substance Use Disorders: A Narrative Review" in pub["title"] for pub in publications_found)
-
-
-# def test_result_parity():
-#     """Test that results are the same when searching with full name or initials."""
-#     results_one = Elsevier.search_multiple_authors(["Randy J. Nelson"])
-#     results_two = Elsevier.search_multiple_authors(["Randy J. Nelson"])
-#     results_three = Elsevier.search_multiple_authors(["Randy Nelson"])
-#     assert (
-#         results_one["Randy J. Nelson"] == results_two["Randy J. Nelson"] == results_three["Randy Nelson"]
-#     )
+    results = Elsevier.search_multiple_authors(["Albert", "Joe", "Allen"])
+    assert len(results) == 3
+    assert "Albert" in results
+    assert "Joe" in results
+    assert "Allen" in results
 
 
+def test_no_results_for_name(mock_api):
+    """Test that an author with no results returns None."""
+    mock_api.add(
+        responses.GET,
+        BASE_URL,
+        match=[
+            responses.matchers.query_param_matcher(
+                {
+                    "query": "AUTHOR-NAME(Magert O. Adekunle)",
+                    "count": "10",
+                    "apiKey": api_key,
+                }
+            )
+        ],
+        body=mock_Elsevier_response([]),
+        status=200,
+    )
 
-# def test_single_author_query(mock_api):
-#     """Test querying a single author and getting expected results."""
-    
-#     # Mock response for "Jane Doe"
-#     mock_api.add(
-#         responses.GET,
-#         BASE_URL,
-#         match=[
-#             responses.matchers.query_param_matcher(
-#                 {"query": 'author:"Jane Doe"', "count": "10", "apiKey": "mock_api_key"}
-#             )
-#         ],
-#         body=json.dumps(
-#             mock_Elsevier_response(
-#                 [
-#                     {
-#                         "title": "Research on AI",
-#                         "author": [{"name": "Jane Doe"}],
-#                         "published": "2023-12-01",
-#                         "journal": "AI Research Journal",
-#                     }
-#                 ]
-#             )
-#         ),
-#         status=200,
-#         content_type="application/json",
-#     )
+    results = Elsevier.search_multiple_authors(["Magert O. Adekunle"])
+    assert results.get("Magert O. Adekunle") == []
 
-#     # Call the function
-#     results = Elsevier.search_multiple_authors(["Jane Doe"])
 
-#     # Assertions
-#     assert len(results) == 1  # One author
-#     assert "Jane Doe" in results  # Key matches the queried author
-#     assert len(results["Jane Doe"]) == 1  # One result for the author
-#     assert results["Jane Doe"][0]["title"] == "Research on AI"  # Verify result details
-#     assert results["Jane Doe"][0]["journal"] == "AI Research Journal"  # Verify journal
+def test_limit_number_of_results(mock_api):
+    """Test limiting the number of results using `rows`."""
+    mock_api.add(
+        responses.GET,
+        BASE_URL,
+        match=[
+            responses.matchers.query_param_matcher(
+                {
+                    "query": "AUTHOR-NAME(Timothy C. Moore)",
+                    "count": "2",
+                    "apiKey": api_key,
+                }
+            )
+        ],
+        body=json.dumps(
+            {
+                "search-results": {
+                    "entry": [
+                        {
+                            "prism:doi": "doi1",
+                            "dc:title": "Sample Paper 1",
+                            "prism:coverDate": "2024-01-01",
+                            "prism:publicationName": "Sample Journal",
+                            "subtypeDescription": "Research Article",
+                            "author": [{"authname": "Timothy C. Moore"}],
+                        },
+                        {
+                            "prism:doi": "doi2",
+                            "dc:title": "Sample Paper 2",
+                            "prism:coverDate": "2024-01-01",
+                            "prism:publicationName": "Sample Journal",
+                            "subtypeDescription": "Research Article",
+                            "author": [{"authname": "Timothy C. Moore"}],
+                        },
+                    ]
+                }
+            }
+        ),
+        status=200,
+    )
+
+    results = Elsevier.search_multiple_authors(["Timothy C. Moore"], limit=2)
+    assert len(results["Timothy C. Moore"]) == 2
+    assert results["Timothy C. Moore"][0]["title"] == "Sample Paper 1"
+    assert results["Timothy C. Moore"][1]["title"] == "Sample Paper 2"
+
+
+def test_initials_lastname(mock_api):
+    """Test searching with initials and last name finds a specific paper."""
+    mock_api.add(
+        responses.GET,
+        BASE_URL,
+        match=[
+            responses.matchers.query_param_matcher(
+                {
+                    "query": "AUTHOR-NAME(Randy J. Nelson)",
+                    "count": "10",
+                    "apiKey": api_key,
+                }
+            )
+        ],
+        body=json.dumps(
+            {
+                "search-results": {
+                    "entry": [
+                        {
+                            "prism:doi": "doi1",
+                            "dc:title": "Disrupted Circadian Rhythms and Substance Use Disorders: A Narrative Review",
+                            "prism:coverDate": "2024-01-01",
+                            "prism:publicationName": "Sample Journal",
+                            "subtypeDescription": "Research Article",
+                            "author": [{"authname": "Randy J. Nelson"}],
+                        },
+                    ]
+                }
+            }
+        ),
+        status=200,
+    )
+    results = Elsevier.search_multiple_authors(["Randy J. Nelson"])
+    assert len(results["Randy J. Nelson"]) > 0
+    assert (results["Randy J. Nelson"][0]["title"] == "Disrupted Circadian Rhythms and Substance Use Disorders: A Narrative Review")

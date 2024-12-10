@@ -1,8 +1,15 @@
 import requests
 import json
 import logging
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
+import pubscraper.config as config
+
+LOG_FORMAT = config.LOGGER_FORMAT_STRING
+LOG_LEVEL = config.LOGGER_LEVEL
+logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
+logger = logging.getLogger(__name__)
 
 # NOTE: we might want to limit results to works published after TACC was founded
 
@@ -16,7 +23,7 @@ This is a slow process, and we should think about better solutions
 
 class CrossRef(Base):
     def __init__(self):
-        self.base_url = "http://api.crossref.org/works"
+        self.base_url = config.CROSSREF_URL
 
     # TODO: should these extract methods be squished to one method w a switch? ask erik
     def _extract_journal(self, publication_item):
@@ -113,8 +120,16 @@ class CrossRef(Base):
         publications = []
 
         for publication_item in data["message"]["items"]:
+            # Standardize the publication date to "YYYY-MM-DD"
+            raw_publication_date = self._extract_publication_date(publication_item)
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
+
+
             journal = self._extract_journal(publication_item)
-            publication_date = self._extract_publication_date(publication_item)
             title = self._extract_title(publication_item)
             authors = self._extract_authors(publication_item)
             doi = publication_item["DOI"]

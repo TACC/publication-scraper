@@ -2,9 +2,15 @@ import xml.etree.ElementTree as ET
 import json
 import logging
 import requests
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
+
+LOG_FORMAT = config.LOGGER_FORMAT_STRING
+LOG_LEVEL = config.LOGGER_LEVEL
+logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
+logger = logging.getLogger(__name__)
 
 
 class ArXiv(Base):
@@ -73,6 +79,14 @@ class ArXiv(Base):
 
             # Check if the exact author name is in the authors list
             if author_name_standardized in authors:
+                raw_publication_date = self._get_text(entry, "{http://www.w3.org/2005/Atom}published")  # Extract the raw publication date
+                # Standardize the publication date to "YYYY-MM-DD"
+                try:
+                    publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+                except Exception as e:
+                    logging.info(f"Error parsing publication date: {e}")
+                    publication_date = None  # Fallback if parsing fails
+
                 paper = {
                     "from": "ArXiv",
                     "title": self._get_text(
@@ -83,9 +97,7 @@ class ArXiv(Base):
                         "{http://www.w3.org/2005/Atom}title",
                         "arXiv",
                     ),
-                    "publication_date": self._get_text(
-                        entry, "{http://www.w3.org/2005/Atom}published"
-                    ),
+                    "publication_date": publication_date,
                     "content_type": self._get_text(
                         entry, "{http://www.w3.org/2005/Atom}category", "preprint"
                     ),

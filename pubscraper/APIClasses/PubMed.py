@@ -2,9 +2,15 @@ import requests
 import json
 import time
 import logging
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
+
+LOG_FORMAT = config.LOGGER_FORMAT_STRING
+LOG_LEVEL = config.LOGGER_LEVEL
+logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
+logger = logging.getLogger(__name__)
 
 
 class PubMed(Base):
@@ -122,11 +128,19 @@ class PubMed(Base):
             author_list = []
             for author_object in summary_object["authors"]:
                 author_list.append(author_object["name"])
+            
+            # Standardize the publication date to "YYYY-MM-DD"
+            raw_publication_date = summary_object["sortdate"]
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
 
             pub = {
                 "from": "PubMed",
                 "journal": summary_object["fulljournalname"],
-                "publication_date": summary_object["sortdate"],
+                "publication_date": publication_date,
                 "title": summary_object["title"],
                 "authors": ",".join(author_list),
                 "doi": self._extract_DOI(summary_object),

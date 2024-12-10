@@ -1,14 +1,15 @@
 import requests
 import json
 import logging
+from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
 
-format_str = (
-    "[%(asctime)s] %(filename)s:%(funcName)s:%(lineno)d - %(levelname)s: %(message)s"
-)
-logging.basicConfig(level=logging.DEBUG, format=format_str)
+LOG_FORMAT = config.LOGGER_FORMAT_STRING
+LOG_LEVEL = config.LOGGER_LEVEL
+logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
+logger = logging.getLogger(__name__)
 
 
 class PLOS(Base):
@@ -51,7 +52,15 @@ class PLOS(Base):
             doi = doc.get("id", "No ID available")
             journal = doc.get("journal", "No journal available")
             article_type = doc.get("article_type", "No article type available")
-            publication_date = doc.get("publication_date", "No date available")
+            
+            # Standardize the publication date to "YYYY-MM-DD"
+            raw_publication_date = doc.get("publication_date", "No date available")
+            try:
+                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+            except Exception as e:
+                logging.info(f"Error parsing publication date: {e}")
+                publication_date = None
+            
             title = doc.get("title_display", "No title available")
             authors = doc.get("author_display", [])
 

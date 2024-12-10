@@ -5,6 +5,8 @@ import os
 import tablib
 
 from openpyxl import load_workbook
+from dateutil.parser import parse
+
 import click
 from click_loglevel import LogLevel
 
@@ -24,7 +26,7 @@ from pubscraper.APIClasses.PLOS import PLOS
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
 LOG_LEVEL = config.LOGGER_LEVEL
 logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
-logger = logging.getLogger()
+logger = logging.getLogger(__name__)
 
 APIS = {
     "PubMed": PubMed(),
@@ -115,16 +117,24 @@ def set_log_file(ctx, param, value):
     "--format",
     "-f",
     type=click.Choice(
-        ["json", "csv"],
+        ["json", "csv", "xlsx"],
         case_sensitive=False,
     ),
     default="json",
     show_default=True,
-    help="Select the output format: csv or json.",
+    help="Select the output format from: csv, xlsx, or json.",
+)
+@click.option(
+    "--cutoff_date",
+    "-cd",
+    type=str,
+    default= None,
+    show_default=True,
+    help="Specify the latest date to pull publications. Example input: 2024 or 2024-05 or 2024-05-10."
 )
 
 # TODO: batch author names to circumvent rate limits?
-def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format):
+def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format, cutoff_date):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
@@ -167,10 +177,19 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             api = APIS[api_name]
             pubs_found = api.get_publications_by_author(author, number)
             if pubs_found is not None:
-                authors_pubs += pubs_found
+                for pub in pubs_found:
+                    # Extract the publication date and parse it using the helper function
+                    publication_date_str = pub.get("publication_date", "")
+                    publication_date = parse(publication_date_str).strftime("%Y-%m-%d")
 
-            results.update({author: authors_pubs})
+                    # If cutoff date is provided, only include the publication if it is after the cutoff date, 
+                    if cutoff_date:
+                        if publication_date and publication_date > cutoff_date:
+                            authors_pubs.append(pub)
+                    else: 
+                        authors_pubs.append(pub)
 
+        results.update({author: authors_pubs})
         authors_and_pubs.append(results)
         time.sleep(0.4)
 
@@ -208,25 +227,27 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             for pub in publications:
                 if isinstance(pub, dict):  # Only process dictionary entries
                     # Safely fetch values using .get to avoid KeyError, defaulting to 'N/A' if the key is missing
-                    dataset.append(
-                        [
-                            pub.get("from", "N/A"),
-                            author,
-                            pub.get("doi", "N/A"),
-                            pub.get("journal", "N/A"),
-                            pub.get("content_type", "N/A"),
-                            pub.get("publication_date", "N/A"),
-                            pub.get("title", "N/A"),
-                            pub.get("authors", "N/A"),
-                        ]
-                    )
+                    dataset.append([
+                        pub.get('from', 'N/A'),
+                        author,
+                        pub.get('doi', 'N/A'),
+                        pub.get('journal', 'N/A'),
+                        pub.get('content_type', 'N/A'),
+                        pub.get('publication_date', 'N/A'),
+                        pub.get('title', 'N/A'),
+                        pub.get('authors', 'N/A')
+                    ])
 
-    with open(f"{output_file}.{format}", "w") as f:
-        if format == "csv":
-            f.write(dataset.export(format))
-        elif format == "json":
-            json.dump(authors_and_pubs, f, indent=4)
-
+    if format == 'xlsx':
+        with open(f"output.{format}", "wb") as f:
+            f.write(dataset.export('xlsx'))
+    else:
+        with open(f'output.{format}', 'w') as f:
+            if format == 'csv':
+                f.write(dataset.export('csv'))
+            elif format == 'json':
+                json.dump(authors_and_pubs, f, indent=4)
+    
     logger.info(f"Data successfully exported to {output_file}.{format}")
 
     return 0
