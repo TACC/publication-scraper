@@ -80,10 +80,10 @@ def set_log_file(ctx, param, value):
     "-i",
     "--input_file",
     type=click.Path(exists=True),
-    default="example_input.xlsx",
+    default="data/example_input.xlsx",
     help="Specify input file",
 )
-@click.option("-o", "--output_file", default="output", help="Specify output file")
+@click.option("-o", "--output_file", default="data/output", help="Specify output file")
 @click.option(
     "-n",
     "--number",

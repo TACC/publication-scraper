@@ -33,7 +33,7 @@ if [ -z "${DOCKER_IMAGE}" ]; then
     docker build -t "${IMAGENAME}:${IMAGEVERSION}" "${BUILD_DIR}"
 fi
 
-DOCKER_RUN="docker run -t --rm --env-file ${BUILD_DIR}/.env -v $(pwd):/publication-scraper/data ${IMAGENAME}:${IMAGEVERSION} "
+DOCKER_RUN="docker run -t --rm --env-file ${BUILD_DIR}/.env -v $(pwd)/data:/publication-scraper/data ${IMAGENAME}:${IMAGEVERSION} "
 
 echo "${DOCKER_RUN} $@" 1>&2
 ${DOCKER_RUN} "$@"
