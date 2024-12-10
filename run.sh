@@ -2,22 +2,21 @@
 
 set -euo pipefail
 
-SCRAPER_COMMAND=""
 IMAGENAME="joeleehen/pubscraper"
 IMAGEVERSION=${IMAGEVERSION:-latest}
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 FORCE_DOCKER=${FORCE_DOCKER:-0}
 
 die() {
-  echo "$!" 1>&2
-  exit 1
+    echo "$!" 1>&2
+    exit 1
 }
 
 realpath() {
-  echo "$(
-    cd "$(dirname "$1")"
-    pwd
-  )"
+    echo "$(
+        cd "$(dirname "$1")"
+        pwd
+    )"
 }
 
 # should we run installed version or from docker image?
@@ -31,10 +30,10 @@ DOCKER_IMAGE=$(docker images -q "${IMAGENAME}:${IMAGEVERSION}")
 
 # if not, build it
 if [ -z "${DOCKER_IMAGE}" ]; then
-  docker build -t "${IMAGENAME}:${IMAGEVERSION}" "${BUILD_DIR}"
+    docker build -t "${IMAGENAME}:${IMAGEVERSION}" "${BUILD_DIR}"
 fi
 
-DOCKER_RUN="docker run -t --rm -v $(pwd):/publication-scraper/data ${IMAGENAME}:${IMAGEVERSION} "
+DOCKER_RUN="docker run -t --rm --env-file ${BUILD_DIR}/.env -v $(pwd):/publication-scraper/data ${IMAGENAME}:${IMAGEVERSION} "
 
-echo "${DOCKER_RUN}${SCRAPER_COMMAND} $@" 1>&2
-${DOCKER_RUN}${SCRAPER_COMMAND} "$@"
+echo "${DOCKER_RUN} $@" 1>&2
+${DOCKER_RUN} "$@"

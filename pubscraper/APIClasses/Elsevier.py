@@ -1,6 +1,9 @@
 import requests
 import json
 import logging
+import os
+
+from dotenv import load_dotenv
 
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
@@ -11,12 +14,10 @@ class Elsevier(Base):
         """
         Initialize the Elsevier API client.
         """
-        with open("secrets.json") as f:
-            secrets = json.load(f)
-            api_key = secrets["Elsevier"]
+        load_dotenv()
 
         self.base_url = config.ELSEVIER_URL
-        self.api_key = api_key
+        self.api_key = os.getenv("ELSEVIER")
 
     def _standardize_author_name(self, author_name):
         """
