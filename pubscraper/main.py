@@ -5,7 +5,6 @@ import os
 import tablib
 
 from dateutil.parser import parse
-from datetime import datetime
 
 import click
 from click_loglevel import LogLevel

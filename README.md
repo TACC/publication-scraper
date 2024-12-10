@@ -47,22 +47,27 @@ Options:
   --log-file PATH                 Set the log file
   -i, --input_file TEXT           Specify input file
   -o, --output_file TEXT          Specify output file
-  -n, --number INTEGER            Specify max number of publications to
-                                  receive for each author
-  -a, --apis [PubMed|ArXiv|MDPI|Elsevier|Springer|Wiley|CrossRef]
-                                  [default: PubMed, ArXiv, MDPI, Elsevier,
-                                  Springer, Wiley, CrossRef]
-  -f, --format [json|csv]         Select the output format: csv or json.
-                                  [default: json]
+  -n, --number INTEGER            Specify max number of publications to receive
+                                  for each author
+  -a, --apis [PubMed|ArXiv|MDPI|Elsevier|Springer|Wiley|CrossRef|PLOS]
+                                  Specify APIs to query  [default: PubMed,
+                                  ArXiv, MDPI, Elsevier, Springer, Wiley,
+                                  CrossRef, PLOS]
+  --list                          List APIs available for querying
+  -f, --format [json|csv|xlsx]    Select the output format from: csv, xlsx, or
+                                  json.  [default: json]
+  -cd, --cutoff_date TEXT         Specify the latest date to pull publications.
+                                  Example input: 2024 or 2024-05 or 2024-05-10.
   --help                          Show this message and exit.
 ```
 
-#### Output format can be specified with the `--format` flag
+#### Output format can be specified with the `--format` or `-f` flag
 
 Json output file (default format is json)
 ```console
 > poetry run pubscraper -i input.csv 
 > poetry run pubscraper -i input.csv -f json
+> poetry run pubscraper -i input.csv --format json
 ```
 
 ```console
@@ -102,8 +107,8 @@ output.json
 
 CSV output file 
 ```console
-> poetry run pubscraper -i input.csv 
 > poetry run pubscraper -i input.csv -f cvs
+> poetry run pubscraper -i input.csv --format cvs
 ```
 
 ```console
@@ -114,6 +119,24 @@ PubMed,James Carson,10.1186/s12889-024-20291-5,BMC Public Health,N/A,2024/10/22 
 PubMed,James Carson,10.1002/cnm.3559,International Journal for Numerical Methods in Biomedical Engineering,N/A,2021/12/27 00:00,Automating fractional flow reserve (FFR) calculation from CT scans: A rapid workflow using unsupervised learning and computational fluid dynamics,"Chakshu NK,Carson JM,Sazonov I,Nithiarasu P"
 Elsevier,Kelsey Beavers,10.1016/j.jcis.2015.10.053,Journal of Colloid and Interface Science,Article,2016-02-01,High conversion of HAuCl<inf>4</inf> into gold nanorods: A re-seeding approach,Canonico-May S.A.
 Springer,Kelsey Beavers,10.1186/s12874-024-02252-z,BMC Medical Research Methodology,Article,2024-06-03,Use of systems thinking and adapted group model building methods to understand patterns of technology use among older adults with type 1 diabetes: a preliminary process evaluation,"Kahkoska, Anna R., Smith, Cambray, Young, Laura A., Hassmiller Lich, Kristen"
+...
+```
+
+
+XLSX output file 
+```console
+> poetry run pubscraper -i input.csv -f xlsx
+> poetry run pubscraper -i input.csv --format xlsx
+```
+
+```console
+output.xlsx
+
+From	Author	DOI	Journal	Content Type	Publication Date	Title	Authors
+PubMed	Dan Stanzione	10.1038/s41592-024-02296-5	Nature Methods	N/A	2024-05-07	Author Correction: brainlife.io: a decentralized and open-source cloud platform to support neuroscience research	Hayashi S,Caron BA,Heinsfeld AS,Vinci-Booher S,McPherson B,Bullock DN,Bertò G,Niso G,Hanekamp S,Levitas D,Ray K,MacKenzie A,Avesani P,Kitchell L,Leong JK,Nascimento-Silva F,Koudoro S,Willis H,Jolly JK,Pisner D,Zuidema TR,Kurzawski JW,Mikellidou K,Bussalb A,Chaumon M,George N,Rorden C,Victory C,Bhatia D,Aydogan DB,Yeh FC,Delogu F,Guaje J,Veraart J,Fischer J,Faskowitz J,Fabrega R,Hunt D,McKee S,Brown ST,Heyman S,Iacovella V,Mejia AF,Marinazzo D,Craddock RC,Olivetti E,Hanson JL,Garyfallidis E,Stanzione D,Carson J,Henschel R,Hancock DY,Stewart CA,Schnyer D,Eke DO,Poldrack RA,Bollmann S,Stewart A,Bridge H,Sani I,Freiwald WA,Puce A,Port NL,Pestilli F
+PubMed	Dan Stanzione	10.1038/s41592-024-02237-2	Nature Methods	N/A	2024-04-11	brainlife.io: a decentralized and open-source cloud platform to support neuroscience research	Hayashi S,Caron BA,Heinsfeld AS,Vinci-Booher S,McPherson B,Bullock DN,Bertò G,Niso G,Hanekamp S,Levitas D,Ray K,MacKenzie A,Avesani P,Kitchell L,Leong JK,Nascimento-Silva F,Koudoro S,Willis H,Jolly JK,Pisner D,Zuidema TR,Kurzawski JW,Mikellidou K,Bussalb A,Chaumon M,George N,Rorden C,Victory C,Bhatia D,Aydogan DB,Yeh FC,Delogu F,Guaje J,Veraart J,Fischer J,Faskowitz J,Fabrega R,Hunt D,McKee S,Brown ST,Heyman S,Iacovella V,Mejia AF,Marinazzo D,Craddock RC,Olivetti E,Hanson JL,Garyfallidis E,Stanzione D,Carson J,Henschel R,Hancock DY,Stewart CA,Schnyer D,Eke DO,Poldrack RA,Bollmann S,Stewart A,Bridge H,Sani I,Freiwald WA,Puce A,Port NL,Pestilli F
+PubMed	Dan Stanzione	10.1371/journal.pcbi.1011270	PLOS Computational Biology	N/A	2024-02-07	CyVerse: Cyberinfrastructure for open science	Swetnam TL,Antin PB,Bartelme R,Bucksch A,Camhy D,Chism G,Choi I,Cooksey AM,Cosi M,Cowen C,Culshaw-Maurer M,Davey R,Davey S,Devisetty U,Edgin T,Edmonds A,Fedorov D,Frady J,Fonner J,Gillan JK,Hossain I,Joyce B,Lang K,Lee T,Littin S,McEwen I,Merchant N,Micklos D,Nelson A,Ramsey A,Roberts S,Sarando P,Skidmore E,Song J,Sprinkle MM,Srinivasan S,Stanzione D,Strootman JD,Stryeck S,Tuteja R,Vaughn M,Wali M,Wall M,Walls R,Wang L,Wickizer T,Williams J,Wregglesworth J,Lyons E
+PubMed	Dan Stanzione		ArXiv	N/A	2023-08-11	brainlife.io: A decentralized and open source cloud platform to support neuroscience research	Hayashi S,Caron BA,Heinsfeld AS,Vinci-Booher S,McPherson B,Bullock DN,Bertò G,Niso G,Hanekamp S,Levitas D,Ray K,MacKenzie A,Kitchell L,Leong JK,Nascimento-Silva F,Koudoro S,Willis H,Jolly JK,Pisner D,Zuidema TR,Kurzawski JW,Mikellidou K,Bussalb A,Rorden C,Victory C,Bhatia D,Baran Aydogan D,Yeh FC,Delogu F,Guaje J,Veraart J,Bollman S,Stewart A,Fischer J,Faskowitz J,Chaumon M,Fabrega R,Hunt D,McKee S,Brown ST,Heyman S,Iacovella V,Mejia AF,Marinazzo D,Craddock RC,Olivetti E,Hanson JL,Avesani P,Garyfallidis E,Stanzione D,Carson J,Henschel R,Hancock DY,Stewart CA,Schnyer D,Eke DO,Poldrack RA,George N,Bridge H,Sani I,Freiwald WA,Puce A,Port NL,Pestilli F
 ...
 ```
 
