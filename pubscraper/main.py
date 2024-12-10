@@ -79,7 +79,7 @@ def set_log_file(ctx, param, value):
 @click.option(
     "-i",
     "--input_file",
-    type=str,
+    type=click.Path(exists=True),
     default="example_input.xlsx",
     help="Specify input file",
 )
