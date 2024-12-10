@@ -9,7 +9,7 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-COPY README.md LICENSE secrets.json /publication-scraper/
+COPY README.md LICENSE /publication-scraper/
 COPY pubscraper /publication-scraper/pubscraper/
 
 RUN ls
@@ -42,6 +42,6 @@ COPY --from=poetry /publication-scraper/dist/*.whl ./
 
 RUN pip install *.whl
 
-COPY README.md LICENSE secrets.json /pubscraper/
+COPY README.md LICENSE /pubscraper/
 
 CMD [ "pubscraper", "--help" ]
