@@ -1,6 +1,9 @@
 import requests
 import logging
 import json
+import os
+
+from dotenv import load_dotenv
 from dateutil.parser import parse
 
 from pubscraper.APIClasses.Base import Base
@@ -17,12 +20,10 @@ class Springer(Base):
         """
         Initialize the Springer (springernature) API client.
         """
-        with open("secrets.json") as f:
-            secrets = json.load(f)
-            api_key = secrets["Springer"]
+        load_dotenv()
 
         self.base_url = config.SPRINGER_URL
-        self.api_key = api_key
+        self.api_key = os.getenv("SPRINGER")
 
     def _standardize_author_name(self, author_name):
         """Standardize the author's name to ensure consistency."""

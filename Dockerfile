@@ -21,16 +21,16 @@ LABEL maintainer="Joseph Hendrix <jlh7459@my.utexas.edu>"
 
 # Update OS
 RUN apt-get update && apt-get install -y \
-    vim-tiny \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  vim-tiny \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Configure Python/Pip
 ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONFAULTHANDLER=1 \
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100
+  PYTHONDONTWRITEBYTECODE=1 \
+  PYTHONFAULTHANDLER=1 \
+  PIP_NO_CACHE_DIR=off \
+  PIP_DISABLE_PIP_VERSION_CHECK=on \
+  PIP_DEFAULT_TIMEOUT=100
 
 WORKDIR /publication-scraper
 

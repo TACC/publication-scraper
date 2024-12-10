@@ -11,6 +11,8 @@ python = "^3.12"
 requests = "^2.32.3"
 click = "^8.1.7"
 click-loglevel = "^0.5.0"
+openpyxl = "^3.1.5"
+python-dotenv = "^1.0.1"
 tablib = {extras = ["all"], version = "^3.7.0"}
 python-dateutil = "^2.9.0.post0"
 

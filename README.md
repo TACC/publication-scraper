@@ -20,7 +20,7 @@ author, institution, and date range.
 > poetry install
 ```
 ## Usage
-**NOTE: you must first create a `secrets.json` containing your API keys for each endpoint! See [secrets.sample](https://github.com/TACC/publication-scraper/blob/cli_additions/secrets.sample) for example config.**
+**NOTE: you must first create a `.env` containing your API keys for each endpoint! See [.env.sample](https://github.com/TACC/publication-scraper/blob/docker_IO/.env.sample) for example config.**
 
 By default, author names are read in from `input.csv` and API results are written to `output.json`.
 

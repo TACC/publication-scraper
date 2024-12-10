@@ -1,9 +1,10 @@
 import json
 import logging
-import csv
+import time
 import os
 import tablib
 
+from openpyxl import load_workbook
 from dateutil.parser import parse
 
 import click
@@ -26,6 +27,17 @@ LOG_FORMAT = config.LOGGER_FORMAT_STRING
 LOG_LEVEL = config.LOGGER_LEVEL
 logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
 logger = logging.getLogger(__name__)
+
+APIS = {
+    "PubMed": PubMed(),
+    "ArXiv": ArXiv(),
+    "MDPI": MDPI(),
+    "Elsevier": Elsevier(),
+    "Springer": Springer(),
+    "Wiley": Wiley(),
+    "CrossRef": CrossRef(),
+    "PLOS": PLOS(),
+}
 
 
 def set_logging_level(ctx, param, value):
@@ -67,9 +79,13 @@ def set_log_file(ctx, param, value):
     help="Set the log file",
 )
 @click.option(
-    "-i", "--input_file", type=str, default="input.csv", help="Specify input file"
+    "-i",
+    "--input_file",
+    type=click.Path(exists=True),
+    default="data/example_input.xlsx",
+    help="Specify input file",
 )
-@click.option("-o", "--output_file", default="output", help="Specify output file")
+@click.option("-o", "--output_file", default="data/output", help="Specify output file")
 @click.option(
     "-n",
     "--number",
@@ -81,29 +97,11 @@ def set_log_file(ctx, param, value):
     "--apis",
     "-a",
     type=click.Choice(
-        [
-            "PubMed",
-            "ArXiv",
-            "MDPI",
-            "Elsevier",
-            "Springer",
-            "Wiley",
-            "CrossRef",
-            "PLOS",
-        ],
+        [api for api in APIS.keys()],
         case_sensitive=False,
     ),
     multiple=True,
-    default=[
-        "PubMed",
-        "ArXiv",
-        "MDPI",
-        "Elsevier",
-        "Springer",
-        "Wiley",
-        "CrossRef",
-        "PLOS",
-    ],
+    default=[api for api in APIS.keys()],
     show_default=True,
     help="Specify APIs to query",
 )
@@ -143,25 +141,25 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
     if list_apis:
         click.secho("Available endpoints:", underline=True)
-        click.secho("  Pubmed", fg="blue")
-        click.secho("  ArXiv", fg="blue")
-        click.secho("  MDPI", fg="blue")
-        click.secho("  Elsevier", fg="blue")
-        click.secho("  Springer", fg="blue")
-        click.secho("  Wiley", fg="blue")
-        click.secho("  CrossRef", fg="blue")
-        click.secho("  PLOS", fg="blue")
+        for endpoint in APIS.keys():
+            click.secho(f" {endpoint}", fg="blue")
         return 0
 
-    author_names = []
     logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
     try:
-        with open(input_file, newline="") as csvfile:
-            name_reader = csv.reader(csvfile)
-            next(name_reader)  # skip header row
-            for row in name_reader:
-                name = f"{row[0]} {row[1]}"
-                author_names.append(name)
+        authors_workbook = load_workbook(filename=input_file, read_only=True)
+        worksheet = authors_workbook["Sheet1"]
+        rows = worksheet.rows
+
+        name_dict = {}
+        if worksheet.max_row > 1:
+            next(rows)  # skip header row
+            for row in rows:
+                institution = row[0].value
+                author_name = f"{row[1].value} {row[2].value}"
+                name_dict[author_name] = [author_name, institution]
+
+        logging.debug(f"number of names in name_dict: {len(name_dict.keys())}")
     except FileNotFoundError:
         logger.error(f"Couldn't read input file {input_file}, exiting")
         exit(1)
@@ -169,25 +167,14 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
     logger.debug(f"Querying the following APIs: {apis}")
     logger.debug(f"Requesting {number} publications for each author")
 
-    available_apis = {
-        "PubMed": PubMed(),
-        "ArXiv": ArXiv(),
-        "MDPI": MDPI(),
-        "Elsevier": Elsevier(),
-        "Springer": Springer(),
-        "Wiley": Wiley(),
-        "CrossRef": CrossRef(),
-        "PLOS": PLOS(),
-    }
-
     authors_and_pubs = []
 
-    for author in author_names:
+    for author in name_dict.keys():
         results = {author: []}
         # FIXME: these names are too similar and confusing
         authors_pubs = []
         for api_name in apis:
-            api = available_apis[api_name]
+            api = APIS[api_name]
             pubs_found = api.get_publications_by_author(author, number)
             if pubs_found is not None:
                 for pub in pubs_found:
@@ -204,6 +191,7 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
         results.update({author: authors_pubs})
         authors_and_pubs.append(results)
+        time.sleep(0.4)
 
     """
     Using TabLib to format data in specified format
@@ -219,7 +207,16 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
 
     dataset = tablib.Dataset()
 
-    dataset.headers = ['From', 'Author', 'DOI', 'Journal', 'Content Type', 'Publication Date', 'Title', 'Authors']
+    dataset.headers = [
+        "From",
+        "Author",
+        "DOI",
+        "Journal",
+        "Content Type",
+        "Publication Date",
+        "Title",
+        "Authors",
+    ]
 
     # Loop through each author and their publications in authors_and_pubs
     for author_result in authors_and_pubs:
