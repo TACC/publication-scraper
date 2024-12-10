@@ -145,20 +145,25 @@ PubMed	Dan Stanzione		ArXiv	N/A	2023-08-11	brainlife.io: A decentralized and ope
 Adding `--cutoff_date` or `-cd` to command options will the specify the latest date to pull publications. 
 It can automatically recognize and parse various date formats such as YYYY-MM-DD, YYYY-MM, YYYY.
 
-    - For a publication with a date of "2024-05-10", it will be parsed as datetime(2024, 5, 10).
-    - For a publication with a date of "2024-05", it will be parsed as datetime(2024, 5, 1), with the day defaulting to 1.
-    - For a publication with a date of "2024", it will be parsed as datetime(2024, 1, 1), with the month and day defaulting to 1.
+* For a publication with a date of "2024-05-10", it will be parsed as datetime(2024, 5, 10).
+* For a publication with a date of "2024-05", it will be parsed as datetime(2024, 5, 1), with the day defaulting to 1.
+* For a publication with a date of "2024", it will be parsed as datetime(2024, 1, 1), with the month and day defaulting to 1.
 
 Cutoff date output file 
+
 ```console
 > poetry run pubscraper -i input.csv -f csv -cd 2024-05
+```
+
+```console
+output.csv
+
 From,Author,DOI,Journal,Content Type,Publication Date,Title,Authors
 PubMed,Dan Stanzione,10.1038/s41592-024-02296-5,Nature Methods,N/A,2024-05-07,Author Correction: brainlife.io: a decentralized and open-source cloud platform to support neuroscience research,"Hayashi S,Caron BA,Heinsfeld AS,Vinci-Booher S,McPherson B,Bullock DN,Bertò G,Niso G,Hanekamp S,Levitas D,Ray K,MacKenzie A,Avesani P,Kitchell L,Leong JK,Nascimento-Silva F,Koudoro S,Willis H,Jolly JK,Pisner D,Zuidema TR,Kurzawski JW,Mikellidou K,Bussalb A,Chaumon M,George N,Rorden C,Victory C,Bhatia D,Aydogan DB,Yeh FC,Delogu F,Guaje J,Veraart J,Fischer J,Faskowitz J,Fabrega R,Hunt D,McKee S,Brown ST,Heyman S,Iacovella V,Mejia AF,Marinazzo D,Craddock RC,Olivetti E,Hanson JL,Garyfallidis E,Stanzione D,Carson J,Henschel R,Hancock DY,Stewart CA,Schnyer D,Eke DO,Poldrack RA,Bollmann S,Stewart A,Bridge H,Sani I,Freiwald WA,Puce A,Port NL,Pestilli F"
 Springer,Dan Stanzione,10.1007/s00784-024-05968-w,Clinical Oral Investigations,Article,2024-10-07,Performance of large language artificial intelligence models on solving restorative dentistry and endodontics student assessments,"Künzle, Paul, Paris, Sebastian"
 Springer,Dan Stanzione,10.1007/s00395-024-01072-y,Basic Research in Cardiology,Article,2024-10-01,β3-Adrenergic receptor overexpression in cardiomyocytes preconditions mitochondria to withstand ischemia–reperfusion injury,"Fernández-Tocino, Miguel, Pun-Garcia, Andrés, Gómez, Mónica, Clemente-Moragón, Agustín, Oliver, Eduardo, Villena-Gutierrez, Rocío, Trigo-Anca, Sofía, Díaz-Guerra, Anabel, Sanz-Rosa, David, Prados, Belén, Campo, Lara, Andrés, Vicente, Fuster, Valentín, Pompa, José Luis, Cádiz, Laura, Ibañez, Borja"
 Springer,Dan Stanzione,10.1007/s44290-024-00034-6,Discover Civil Engineering,Article,2024-08-05,Geophysical and geoenvironmental engineering assessment of contaminated workstation soils in a metamorphic environment,"Ale, Temitayo Olamide, Ale, Taiwo Ayomide, Faseki, Oluyemi Emmanuel, Ajidahun, Johnson, Oluyinka, Ololade Toyin"
-
-``
+```
 
 ## Development
 To update the version, use the `poetry version <major|minor|patch>` command (aided by the poetry-bumpversion plugin):
