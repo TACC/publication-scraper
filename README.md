@@ -142,7 +142,7 @@ PubMed	Dan Stanzione		ArXiv	N/A	2023-08-11	brainlife.io: A decentralized and ope
 
 #### Output format can be specified with the `--cutoff_date` or `-cd` flag
 
-Adding `--cutoff_date` or `-cd` to command options will the specify the latest date to pull publications. 
+Adding `--cutoff_date` or `-cd` to command options will specify the latest date to pull publications. 
 It can automatically recognize and parse various date formats such as YYYY-MM-DD, YYYY-MM, YYYY.
 
 * For a publication with a date of "2024-05-10", it will be parsed as datetime(2024, 5, 10).
