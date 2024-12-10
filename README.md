@@ -38,6 +38,8 @@ James,Carson,TACC,etc
 Use the  `--help` flag for an overview of available option flags:
 ```console
 > poetry run pubscraper --help
+```
+```console
 Usage: pubscraper [OPTIONS]
 
 Options:
