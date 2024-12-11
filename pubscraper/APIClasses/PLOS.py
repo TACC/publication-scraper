@@ -26,10 +26,10 @@ class PLOS(Base):
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
+        logging.debug(f"requesting {rows} publications from {author_name}")
+
         if not author_name.strip():
-            logging.warning(
-                "Received empty string for author name in search query, returning None"
-            )
+            logging.warning("Received empty string for author name in search query, returning None")
             return None
 
         # Prepare the query parameters
@@ -45,6 +45,7 @@ class PLOS(Base):
 
         # Parse the JSON response
         data = response.json()
+        logging.debug(json.dumps(data, indent=2))
 
         # Extract publication records
         publications = []
@@ -92,7 +93,7 @@ def search_multiple_authors(authors, rows=10):
     all_results = {}  # Dictionary to hold results for all authors
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
+        logging.debug(f"Searching for publications by {author}...")
         if not author.strip():
             logging.warning("Received empty string for author name, continuing...")
             continue
