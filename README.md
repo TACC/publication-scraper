@@ -14,7 +14,7 @@ author, institution, and date range.
 > cd publication-scraper
 > bash run.sh
 ```
-**NOTE: You must first create a `.env` file containing your API keys for each endpoint! See [.env.sample](https://github.com/TACC/publication-scraper/blob/development/.env.sample) for example config. The container will not build without a valid `.env` file.**
+**NOTE: You must first create a `.env` file containing your API keys for each endpoint! See [.env.sample](https://github.com/TACC/publication-scraper/blob/development/.env.sample) for example config.**
 ## Usage
 Execute the script with `run.sh`, which will automatically build the `pubscraper` Docker container (if required) and run the main work script inside the container.
 ```console
