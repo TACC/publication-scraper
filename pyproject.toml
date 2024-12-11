@@ -34,3 +34,4 @@ pythonpath = ["pubscraper/APIClasses"]
 testpaths = ["tests"]
 
 [tool.poetry_bumpversion.file."pubscraper/version.py"]
+[tool.poetry_bumpversion.file.".env"]
