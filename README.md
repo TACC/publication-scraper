@@ -6,40 +6,19 @@ author, institution, and date range.
 
 ## Prerequisites
 - Git
-- Python >=3.12
-- Poetry (using [asdf-poetry](https://github.com/asdf-community/asdf-poetry) is recommended)
-- poetry-bumpversion plugin
-  ```console
-  > poetry self add poetry-bumpversion
-  ```
+- Docker
 ---
 ## Installation
 ```console
 > git clone git@github.com:tacc/publication-scraper.git
 > cd publication-scraper
-> poetry install
+> bash run.sh
 ```
+**NOTE: You must first create a `.env` file containing your API keys for each endpoint! See [.env.sample](https://github.com/TACC/publication-scraper/blob/development/.env.sample) for example config. The container will not build without a valid `.env` file.**
 ## Usage
-**NOTE: you must first create a `.env` containing your API keys for each endpoint! See [.env.sample](https://github.com/TACC/publication-scraper/blob/docker_IO/.env.sample) for example config.**
-
-By default, author names are read in from `input.csv` and API results are written to `output.json`.
-
-The minimum command options required to run the program is shown below.
+Execute the script with `run.sh`, which will automatically build the `pubscraper` Docker container (if required) and run the main work script inside the container.
 ```console
-> poetry run pubscraper -i input.csv
-```
-
-The tool expects `input.csv` to appear as follows:
-```csv
-first,last,institution,etc
-Dan,Stanzione,TACC,etc
-James,Carson,TACC,etc
-```
-Use the  `--help` flag for an overview of available option flags:
-```console
-> poetry run pubscraper --help
-```
-```console
+> bash run.sh
 Usage: pubscraper [OPTIONS]
 
 Options:
@@ -62,14 +41,24 @@ Options:
                                   Example input: 2024 or 2024-05 or 2024-05-10.
   --help                          Show this message and exit.
 ```
+To run the scraper with the default options (using the included sample input), invoke the `pubscraper` command:
+```console
+> bash run.sh pubscraper
+```
+By default, the script will request 10 publications from each API for each author, writing the results to `output.json`.
+
+The tool expects an Excel spreadsheet as input, appearing as follows:
+root_institution_name| first_name| last_name|...
+---|---|---|---
+The University of Texas| James| Carson| ...
+The University of Texas| Kelsey| Beavers| ...
 
 #### Output format can be specified with the `--format` or `-f` flag
 
 Json output file (default format is json)
 ```console
-> poetry run pubscraper -i input.csv 
-> poetry run pubscraper -i input.csv -f json
-> poetry run pubscraper -i input.csv --format json
+> bash run.sh pubscraper -f json
+> bash run.sh pubscraper --format json
 ```
 
 ```console
@@ -109,8 +98,8 @@ output.json
 
 CSV output file 
 ```console
-> poetry run pubscraper -i input.csv -f csv
-> poetry run pubscraper -i input.csv --format csv
+> bash run.sh pubscraper -f csv
+> bash run.sh pubscraper --format csv
 ```
 
 ```console
@@ -127,8 +116,8 @@ Springer,Kelsey Beavers,10.1186/s12874-024-02252-z,BMC Medical Research Methodol
 
 XLSX output file 
 ```console
-> poetry run pubscraper -i input.csv -f xlsx
-> poetry run pubscraper -i input.csv --format xlsx
+> bash run.sh pubscraper -f xlsx
+> bash run.sh pubscraper --format xlsx
 ```
 
 ```console
@@ -154,7 +143,7 @@ It can automatically recognize and parse various date formats such as YYYY-MM-DD
 Cutoff date output file 
 
 ```console
-> poetry run pubscraper -i input.csv -f csv -cd 2024-05
+> bash run.sh pubscraper -f csv -cd 2024-05
 ```
 
 ```console
@@ -168,6 +157,23 @@ Springer,Dan Stanzione,10.1007/s44290-024-00034-6,Discover Civil Engineering,Art
 ```
 
 ## Development
+### Development Prerequisites
+- Python >=3.12
+- Poetry (using [asdf-poetry](https://github.com/asdf-community/asdf-poetry) is recommended)
+- poetry-bumpversion plugin
+  ```console
+  > poetry self add poetry-bumpversion
+  ```
+
+Before developing, first install the script with developmend dependencies:
+```console
+poetry install --with dev
+```
+Invoke the script with poetry to run during development:
+```console
+poetry run pubscraper
+```
+
 To update the version, use the `poetry version <major|minor|patch>` command (aided by the poetry-bumpversion plugin):
 ```console
 > poetry version patch
