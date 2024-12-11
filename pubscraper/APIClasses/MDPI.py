@@ -60,7 +60,7 @@ class MDPI(Base):
                     # Parse the date-time and extract the date in "YYYY-MM-DD" format
                     publication_date = parse(raw_date_time).strftime("%Y-%m-%d")
                 except Exception as e:
-                    logging.info(f"Error parsing date-time: {e}")
+                    logging.warning(f"Error parsing date-time: {e}")
                     return None
             else:
                 logging.info("No valid `date-time` available.")
