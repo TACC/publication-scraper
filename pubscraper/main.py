@@ -179,8 +179,10 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             if pubs_found is not None:
                 for pub in pubs_found:
                     # Extract the publication date and parse it using the helper function
+
                     publication_date_str = pub.get("publication_date", "")
-                    publication_date = parse(publication_date_str).strftime("%Y-%m-%d")
+                    if publication_date_str is not None:
+                        publication_date = parse(publication_date_str).strftime("%Y-%m-%d")
 
                     # If cutoff date is provided, only include the publication if it is after the cutoff date, 
                     if cutoff_date:

@@ -21,39 +21,15 @@ class Wiley(Base):
         """
         self.base_url = config.WILEY_URL
 
-    def _standardize_author_name(self, author_name):
-        """
-        Standardize author names to handle variations.
-        """
-        name_parts = author_name.split()
-
-        # Capitalize each part of the name
-        name_parts = [part.capitalize() for part in name_parts]
-
-        # If the author has a middle initial, ensure it is followed by a dot
-        if len(name_parts) == 3 and len(name_parts[1]) == 1:
-            middle_name = name_parts[1]
-            # Ensure the middle initial ends with a dot
-            if not middle_name.endswith("."):
-                middle_name += "."
-            return f"{name_parts[0]} {middle_name} {name_parts[2]}"
-        elif len(name_parts) == 2:
-            return f"{name_parts[0]} {name_parts[1]}"
-        else:
-            return " ".join(name_parts)
-
     def get_publications_by_author(self, author_name, rows=10):
+        logging.debug(f"requesting {rows} publications from {author_name}")
+
         if not author_name.strip():
-            logging.warning(
-                "Received empty string for author name in search query, returning None"
-            )
+            logging.warning("Received empty string for author name in search query, returning None")
             return None
 
-        # Standardize the author name for query
-        author_name_standardized = self._standardize_author_name(author_name)
-        encoded_author = urllib.parse.quote(author_name_standardized)
-
-        # Construct the full URL
+        # Standardize the author name for query and Construct the full URL
+        encoded_author = urllib.parse.quote(author_name)
         query = f"?query=dc.contributor={encoded_author}&maximumRecords={rows}"
         full_url = self.base_url + query
 
@@ -69,14 +45,16 @@ class Wiley(Base):
             logging.error(f"Wiley API Request error: {e}")
             return []
 
-        # Parse the response
         return self._parse_response(response.text)
 
     def _parse_response(self, xml_data):
         """
         Parse the XML response to extract publication details.
         """
+        # Log the raw response for debugging
         root = ET.fromstring(xml_data)
+        logging.debug(root)
+
         namespaces = {
             "zs": "http://docs.oasis-open.org/ns/search-ws/sruResponse",
             "dc": "http://purl.org/dc/elements/1.1/",
@@ -116,7 +94,7 @@ class Wiley(Base):
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
             except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
+                logging.warning(f"Error parsing publication date: {e}")
                 publication_date = None
                 
             part_of = (
@@ -144,7 +122,7 @@ def search_multiple_authors(authors, limit=10):
     all_results = {}
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
+        logging.debug(f"Searching for publications by {author}...")
         if not author.strip():  # Skip empty author names
             logging.warning("Received empty string for author name, continuing...")
             continue

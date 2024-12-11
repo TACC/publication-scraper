@@ -25,24 +25,6 @@ class Springer(Base):
         self.base_url = config.SPRINGER_URL
         self.api_key = os.getenv("SPRINGER")
 
-    def _standardize_author_name(self, author_name):
-        """Standardize the author's name to ensure consistency."""
-        name_parts = author_name.split()
-
-        # Capitalize each part of the name
-        name_parts = [part.capitalize() for part in name_parts]
-
-        # If the author has a middle initial, ensure it is followed by a dot
-        if len(name_parts) == 3 and len(name_parts[1]) == 1:
-            middle_name = name_parts[1]
-            if not middle_name.endswith("."):
-                middle_name += "."
-            return f"{name_parts[0]} {middle_name} {name_parts[2]}"
-        elif len(name_parts) == 2:
-            return f"{name_parts[0]} {name_parts[1]}"
-        else:
-            return " ".join(name_parts)
-
     def get_publications_by_author(self, author_name, rows=10):
         """
         Retrieve publications from Springer by author name, with flexible search options.
@@ -50,16 +32,15 @@ class Springer(Base):
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
+        logging.debug(f"requesting {rows} publications from {author_name}")
+
         if not author_name.strip():
-            logging.warning(
-                "Received empty string for author name in search query, returning None"
-            )
+            logging.warning("Received empty string for author name in search query, returning None")
             return None
 
         # Standardize the author name for query
-        normalized_name = self._standardize_author_name(author_name)
         params = {
-            "q": normalized_name,
+            "q": author_name,
             "p": rows,
             "api_key": self.api_key,
         }
@@ -74,6 +55,7 @@ class Springer(Base):
 
         # Parse the JSON response
         data = response.json()
+        logging.debug(json.dumps(data, indent=2))
 
         # Extract publication records
         publications = []
@@ -86,7 +68,7 @@ class Springer(Base):
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
             except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
+                logging.warning(f"Error parsing publication date: {e}")
                 publication_date = None
 
             content_type = record.get("contentType", "No type available")
@@ -120,7 +102,7 @@ def search_multiple_authors(authors, limit=10):
     all_results = {}
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
+        logging.debug(f"Searching for publications by {author}...")
         if not author.strip():
             logging.warning("Received empty string for author name, continuing...")
             continue

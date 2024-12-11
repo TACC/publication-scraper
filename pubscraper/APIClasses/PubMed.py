@@ -55,9 +55,7 @@ class PubMed(Base):
 
         # Error handling when interacting with PubMed APIs.
         try:
-            response = requests.get(
-                self.search_url, params=params, timeout=10
-            )  # Send the request to the PubMed API
+            response = requests.get(self.search_url, params=params, timeout=10)  # Send the request to the PubMed API
             response.raise_for_status()  # Raises HTTP Error for bad responses
         except requests.exceptions.RequestException as e:
             logging.error(f"PubMed API Request error: {e}")
@@ -111,9 +109,7 @@ class PubMed(Base):
 
         # Error handling when interacting with PubMed APIs.
         try:
-            response = requests.get(
-                self.search_url, params=params, timeout=10
-            )  # Send the request to the PubMed API
+            response = requests.get(self.search_url, params=params, timeout=10)  # Send the request to the PubMed API
             response.raise_for_status()  # Raises HTTP Error for bad responses
         except requests.exceptions.RequestException as e:
             logging.error(f"Error fetching summaries from PubMed: {e}")
@@ -134,7 +130,7 @@ class PubMed(Base):
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
             except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
+                logging.warning(f"Error parsing publication date: {e}")
                 publication_date = None
 
             pub = {
@@ -174,12 +170,10 @@ def search_multiple_authors(authors, rows=10):
     all_results = {}
 
     for author in authors:
-        logging.info(f"Searching for publications by {author}...")
-
+        logging.debug(f"Searching for publications by {author}...")
         if author == "":
             logging.warning("received empty string for author name, continuing...")
             continue
-
         try:
             publications = pubmed.get_publications_by_author(author, rows)
             all_results[author] = publications

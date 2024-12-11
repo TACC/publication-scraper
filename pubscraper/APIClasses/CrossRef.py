@@ -54,15 +54,18 @@ class CrossRef(Base):
     def _extract_publication_date(self, publication_item):
         logging.debug(json.dumps(publication_item, indent=2))
         try:
-            date_list = publication_item["published-print"]["date-parts"][0]
-            date_list = [str(date) for date in date_list]
-            logging.debug(f"Successfully extracted date_list: {date_list}")
-            date_string = "/".join(date_list)
-            return date_string
-        except KeyError:  # query does NOT contain publication date
-            logging.debug(f"Error fetching published-print from {publication_item} \n")
+            # Extract the `date-time` field from the `created` key
+            date_time = publication_item.get("created", {}).get("date-time", None)
+            if date_time:
+                logging.debug(f"Successfully extracted date-time: {date_time}")
+                return date_time
+            else:
+                logging.debug(f"No valid `date-time` found in {publication_item}")
+                return None
+        except Exception as e:
+            logging.error(f"Error extracting `date-time`: {e}")
             return None
-
+        
     def _extract_title(self, publication_item):
         try:
             title = publication_item["title"][0]
@@ -101,16 +104,16 @@ class CrossRef(Base):
         params = {
             "query.author": author_name.replace(" ", "+"),
             "rows": rows,
-            "select": "author,title,container-title,published-print,DOI",
             "offset": offset,
             "mailto": "jlh7459@my.utexas.edu",
         }
-
-        response = requests.get(self.base_url, params=params)
-
-        if response.status_code != 200:
-            logging.error(f"Error fetching data from PubMed: {response.status_code}")
-            return 0, None
+        
+        try:
+            response = requests.get(self.base_url, params=params, timeout=10)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            logging.error(f"CrossRef API request error: {e}")
+            return []
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
@@ -120,14 +123,16 @@ class CrossRef(Base):
         publications = []
 
         for publication_item in data["message"]["items"]:
-            # Standardize the publication date to "YYYY-MM-DD"
+            # Extract and standardize the publication date to "YYYY-MM-DD"
             raw_publication_date = self._extract_publication_date(publication_item)
-            try:
-                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
-            except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
+            if raw_publication_date:
+                try:
+                    publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
+                except Exception as e:
+                    logging.warning(f"Error parsing publication date: {e}")
+                    publication_date = None
+            else:
                 publication_date = None
-
 
             journal = self._extract_journal(publication_item)
             title = self._extract_title(publication_item)
@@ -200,14 +205,11 @@ def search_multiple_authors(authors: list[str], rows: int = 10):
 
     for author in authors:
         logging.debug(f"Searching for publications by {author}...")
-
         if author == "":
             logging.warning("Received empty string for author name, continuing...")
             continue
-
         try:
             publications = crossref.get_publications_by_author(author, rows)
-
             all_results[author] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}, {e}")

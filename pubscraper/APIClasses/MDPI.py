@@ -27,6 +27,8 @@ class MDPI(Base):
         :param offset: Offset for paginated results (default is 0).
         :return: A list of dictionaries containing publication details.
         """
+        logging.debug(f"requesting {rows} publications from {author_name}")
+
         params = {
             "query.author": author_name.replace(" ", "+"),
             "rows": rows,
@@ -43,26 +45,26 @@ class MDPI(Base):
 
         # Parse the JSON response
         data = response.json()
+        logging.debug(json.dumps(data, indent=2))
 
         publications = []
 
         # Extract publication records
         for item in data.get("message", {}).get("items", []):
-            authors = [
-                f"{author.get('given', '')} {author.get('family', '')}"
-                for author in item.get("author", [])
-            ]
-            # Standardize the publication date to "YYYY-MM-DD"
-            published_data = item.get("published-print", {}) or item.get("published-online", {})
-            raw_publication_date = published_data.get("date-time", None)
-            if not raw_publication_date:
-                raw_publication_date = "/".join(map(str, published_data.get("date-parts", [["Unknown"]])[0]))
+            authors = [f"{author.get('given', '')} {author.get('family', '')}"for author in item.get("author", [])]
             
-            try:
-                publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
-            except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
-                publication_date = None
+            # Standardize the publication date to "YYYY-MM-DD"
+            raw_date_time = item.get("created", {}).get("date-time", None)
+            if raw_date_time:
+                try:
+                    # Parse the date-time and extract the date in "YYYY-MM-DD" format
+                    publication_date = parse(raw_date_time).strftime("%Y-%m-%d")
+                except Exception as e:
+                    logging.warning(f"Error parsing date-time: {e}")
+                    return None
+            else:
+                logging.warning("No valid `date-time` available.")
+                return None
 
             # Create a dictionary with the relevant information
             publication = {
@@ -89,7 +91,7 @@ def search_multiple_authors(authors, rows=10):
     all_results = {} 
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
+        logging.debug(f"Searching for publications by {author}...")
         if not author.strip():
             logging.warning("Received empty string for author name, continuing...")
             continue
