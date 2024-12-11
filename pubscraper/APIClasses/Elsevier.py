@@ -20,7 +20,6 @@ class Elsevier(Base):
         Initialize the Elsevier API client.
         """
         load_dotenv()
-
         self.base_url = config.ELSEVIER_URL
         self.api_key = os.getenv("ELSEVIER")
 
@@ -53,6 +52,8 @@ class Elsevier(Base):
         :param rows: The number of results to return (default is 10)
         :return: A list of dictionaries containing publication details
         """
+        logging.debug(f"requesting {rows} publications from {author_name}")
+
         if not author_name.strip():
             logging.warning("Received empty string for author name, skipping search.")
             return None
@@ -72,9 +73,7 @@ class Elsevier(Base):
 
         # Error handling when interacting with Elsevier APIs, Raises HTTP Error for bad responses
         try:
-            response = requests.get(
-                self.base_url, headers=headers, params=params, timeout=10
-            )
+            response = requests.get(self.base_url, headers=headers, params=params, timeout=10)
             response.raise_for_status()
         except requests.exceptions.RequestException as e:
             logging.error(f"Elsevier API Request error: {e}")
@@ -82,11 +81,17 @@ class Elsevier(Base):
 
         # Log the raw response for debugging
         data = response.json()
+        logging.debug(json.dumps(data, indent=2))
+
+        # Check if total results are greater than 0, will still get 200 even if theres publication
+        total_results = int(data.get("search-results", {}).get("opensearch:totalResults", 0))
+        if total_results == 0:
+            logging.debug(f"No publications found for {author_name}.")
+            return []
 
         # Extract publication records
         publications = []
         for record in data.get("search-results", {}).get("entry", []):
-            # Get basic publication details
             # Standardize the publication date to "YYYY-MM-DD"
             raw_publication_date = record.get("prism:coverDate", "No date available")
             try:
@@ -96,10 +101,7 @@ class Elsevier(Base):
                 publication_date = None
 
             title = record.get("dc:title", "No title available")
-            publication_name = record.get(
-                "prism:publicationName", "No journal available"
-            )
-
+            publication_name = record.get("prism:publicationName", "No journal available")
             content_type = record.get("subtypeDescription", "No type available")
             doi = record.get("prism:doi", "No DOI available")
 
@@ -124,6 +126,7 @@ class Elsevier(Base):
                 "doi": doi,
             }
             publications.append(publication)
+        logging.debug(f"found {len(publications)} valid publications for author {author_name}")
 
         return publications
 
@@ -139,8 +142,8 @@ def search_multiple_authors(authors, limit=10):
     all_results = {}  # Dictionary to hold results for all authors
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
-        if author == "":
+        logging.debug(f"Searching for publications by {author}...")
+        if not author.strip():
             logging.warning("Received empty string for author name, continuing...")
             continue
         try:
@@ -149,7 +152,7 @@ def search_multiple_authors(authors, limit=10):
             all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")
-            all_results[author] = []  # On error, return an empty list for the author
+            all_results[author] = []
 
     return all_results
 
