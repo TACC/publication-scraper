@@ -1,16 +1,15 @@
 import pytest
 import responses
-import logging
 import json
+import os
 
 from pubscraper.APIClasses import Elsevier
+from dotenv import load_dotenv
 import pubscraper.config as config
 
 BASE_URL = config.ELSEVIER_URL
-
-with open("secrets.json") as f:
-    secrets = json.load(f)
-    api_key = secrets["Elsevier"]
+load_dotenv()
+api_key = os.getenv("ELSEVIER")
 
 @pytest.fixture
 def mock_api():
