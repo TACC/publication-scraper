@@ -27,6 +27,8 @@ class MDPI(Base):
         :param offset: Offset for paginated results (default is 0).
         :return: A list of dictionaries containing publication details.
         """
+        logging.debug(f"requesting {rows} publications from {author_name}")
+
         params = {
             "query.author": author_name.replace(" ", "+"),
             "rows": rows,
@@ -43,6 +45,7 @@ class MDPI(Base):
 
         # Parse the JSON response
         data = response.json()
+        logging.debug(json.dumps(data, indent=2))
 
         publications = []
 
@@ -88,7 +91,7 @@ def search_multiple_authors(authors, rows=10):
     all_results = {} 
 
     for author in authors:
-        print(f"Searching for publications by {author}...")
+        logging.debug(f"Searching for publications by {author}...")
         if not author.strip():
             logging.warning("Received empty string for author name, continuing...")
             continue

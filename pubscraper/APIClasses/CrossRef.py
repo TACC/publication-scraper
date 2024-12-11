@@ -105,12 +105,13 @@ class CrossRef(Base):
             "offset": offset,
             "mailto": "jlh7459@my.utexas.edu",
         }
-
-        response = requests.get(self.base_url, params=params)
-
-        if response.status_code != 200:
-            logging.error(f"Error fetching data from PubMed: {response.status_code}")
-            return 0, None
+        
+        try:
+            response = requests.get(self.base_url, params=params, timeout=10)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            logging.error(f"CrossRef API request error: {e}")
+            return []
 
         data = response.json()
         logging.debug(json.dumps(data, indent=2))
@@ -125,7 +126,7 @@ class CrossRef(Base):
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
             except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
+                logging.debug(f"Error parsing publication date: {e}")
                 publication_date = None
 
 
@@ -200,14 +201,11 @@ def search_multiple_authors(authors: list[str], rows: int = 10):
 
     for author in authors:
         logging.debug(f"Searching for publications by {author}...")
-
         if author == "":
             logging.warning("Received empty string for author name, continuing...")
             continue
-
         try:
             publications = crossref.get_publications_by_author(author, rows)
-
             all_results[author] = publications
         except Exception as e:
             logging.error(f"Error fetching data for {author}, {e}")
