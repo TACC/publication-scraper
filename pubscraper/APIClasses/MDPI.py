@@ -63,7 +63,7 @@ class MDPI(Base):
                     logging.warning(f"Error parsing date-time: {e}")
                     return None
             else:
-                logging.info("No valid `date-time` available.")
+                logging.warning("No valid `date-time` available.")
                 return None
 
             # Create a dictionary with the relevant information

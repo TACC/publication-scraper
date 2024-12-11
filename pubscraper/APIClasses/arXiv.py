@@ -20,17 +20,6 @@ class ArXiv(Base):
         """
         self.base_url = config.ARXIV_URL
 
-    def _standardize_author_name(self, author_name):
-        """Standardize the author's name to ensure consistency."""
-        name_parts = author_name.split()
-
-        # Capitalize each part of the name
-        name_parts = [part.capitalize() for part in name_parts]
-        if len(name_parts) == 2:
-            return f"{name_parts[0]} {name_parts[1]}"
-        else:
-            return " ".join(name_parts)
-
     def get_publications_by_author(self, author_name, start=0, max_results=10):
         """ "
         Retrieve publications from PLOS by author name.
@@ -44,10 +33,8 @@ class ArXiv(Base):
             logging.warning("Received empty string for author name in search query, returning None")
             return None
 
-        # Standardize the author name for query
-        author_name_standardized = self._standardize_author_name(author_name)
         params = {
-            "search_query": f'au:"{author_name_standardized}"',
+            "search_query": f'au:"{author_name}"',
             "start": start,
             "max_results": max_results,
         }
@@ -70,7 +57,7 @@ class ArXiv(Base):
             authors = [self._get_text(author, "{http://www.w3.org/2005/Atom}name") for author in entry.findall("{http://www.w3.org/2005/Atom}author")]
 
             # Check if the exact author name is in the authors list
-            if author_name_standardized in authors:
+            if author_name in authors:
                 raw_publication_date = self._get_text(entry, "{http://www.w3.org/2005/Atom}published")  # Extract the raw publication date
                 # Standardize the publication date to "YYYY-MM-DD"
                 try:
@@ -89,7 +76,7 @@ class ArXiv(Base):
                     "publication_date": publication_date,
                     "content_type": self._get_text(entry, "{http://www.w3.org/2005/Atom}category", "preprint"),
                     "authors": authors,
-                    "doi": self._get_text(entry, "{http://arxiv.org/schemas/atom}doi", ""),
+                    "doi": self._get_text(entry, "{http://arxiv.org/schemas/atom}doi", "")
                 }
                 publications.append(paper)
         logging.debug(f"Retrieved {len(publications)} publications by {author_name} from CrossRef" )

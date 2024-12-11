@@ -59,7 +59,7 @@ class PLOS(Base):
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
             except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
+                logging.warning(f"Error parsing publication date: {e}")
                 publication_date = None
             
             title = doc.get("title_display", "No title available")

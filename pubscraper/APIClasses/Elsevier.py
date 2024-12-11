@@ -23,28 +23,6 @@ class Elsevier(Base):
         self.base_url = config.ELSEVIER_URL
         self.api_key = os.getenv("ELSEVIER")
 
-    def _standardize_author_name(self, author_name):
-        """
-        Standardize author names to handle variations like "T C Moore", "Timothy C Moore", and "Timothy C. Moore".
-        :param author_name: The name to standardize
-        :return: Standardized author name in the format "Timothy C. Moore"
-        """
-        name_parts = author_name.split()
-
-        # Capitalize each part of the name
-        name_parts = [part.capitalize() for part in name_parts]
-
-        # If the author has a middle initial, ensure it is followed by a dot
-        if len(name_parts) == 3 and len(name_parts[1]) == 1:
-            # Make sure the middle initial is followed by a dot
-            middle_name = name_parts[1] + "."
-            return f"{name_parts[0]} {middle_name} {name_parts[2]}"
-        elif len(name_parts) == 2:  # No middle name, just first and last name
-            return f"{name_parts[0]} {name_parts[1]}"
-        else:
-            # Handle other cases (like middle name fully spelled out)
-            return " ".join(name_parts)
-
     def get_publications_by_author(self, author_name, rows=10):
         """
         Retrieve publications from Elsevier by author name.
@@ -58,12 +36,9 @@ class Elsevier(Base):
             logging.warning("Received empty string for author name, skipping search.")
             return None
 
-        # Normalize the author name
-        normalized_name = self._standardize_author_name(author_name)
-
         # Prepare the query parameters
         params = {
-            "query": f"AUTHOR-NAME({normalized_name})",
+            "query": f"AUTHOR-NAME({author_name})",
             "count": rows,
             "apiKey": self.api_key,
         }
@@ -97,7 +72,7 @@ class Elsevier(Base):
             try:
                 publication_date = parse(raw_publication_date).strftime("%Y-%m-%d")
             except Exception as e:
-                logging.info(f"Error parsing publication date: {e}")
+                logging.warning(f"Error parsing publication date: {e}")
                 publication_date = None
 
             title = record.get("dc:title", "No title available")
