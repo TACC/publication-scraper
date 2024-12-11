@@ -176,19 +176,16 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
         for api_name in apis:
             api = APIS[api_name]
             pubs_found = api.get_publications_by_author(author, number)
-            if pubs_found is not None:
+            if pubs_found:
                 for pub in pubs_found:
-                    # Extract the publication date and parse it using the helper function
-
                     publication_date_str = pub.get("publication_date", "")
-                    if publication_date_str is not None:
-                        publication_date = parse(publication_date_str).strftime("%Y-%m-%d")
-
-                    # If cutoff date is provided, only include the publication if it is after the cutoff date, 
+                    
+                    # If a cutoff date is provided, check if the publication date is after it
                     if cutoff_date:
+                        publication_date = parse(publication_date_str).strftime("%Y-%m-%d") if publication_date_str else ""
                         if publication_date and publication_date > cutoff_date:
                             authors_pubs.append(pub)
-                    else: 
+                    else:
                         authors_pubs.append(pub)
 
         results.update({author: authors_pubs})
