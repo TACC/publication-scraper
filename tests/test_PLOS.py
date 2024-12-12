@@ -1,6 +1,5 @@
 import pytest
 import responses
-import logging
 import json
 
 from pubscraper.APIClasses import PLOS
@@ -12,7 +11,6 @@ BASE_URL = config.PLOS_URL
 def mock_api():
     with responses.RequestsMock() as rsps:
         yield rsps
-
 
 def mock_PLOS_response(entries):
     """Helper function to generate mock JSON response."""
