@@ -112,7 +112,7 @@ def set_log_file(ctx, param, value):
     "list_apis",
     is_flag=True,
     default=False,
-    help="List APIs available for querying",
+    help="Display APIs configured for search queries",
 )
 @click.option(
     "--format",
@@ -182,7 +182,7 @@ def main(
 
     for author in name_dict.keys():
         results = {author: []}
-        # FIXME: these names are too similar and confusing
+        # FIXME: we should filter by date before the API queries (if the API supports date filtering)
         authors_pubs = []
         for api_name in apis:
             api = APIS[api_name]
@@ -190,10 +190,14 @@ def main(
             if pubs_found:
                 for pub in pubs_found:
                     publication_date_str = pub.get("publication_date", "")
-                    
+
                     # If a cutoff date is provided, check if the publication date is after it
                     if cutoff_date:
-                        publication_date = parse(publication_date_str).strftime("%Y-%m-%d") if publication_date_str else ""
+                        publication_date = (
+                            parse(publication_date_str).strftime("%Y-%m-%d")
+                            if publication_date_str
+                            else ""
+                        )
                         if publication_date and publication_date > cutoff_date:
                             authors_pubs.append(pub)
                     else:
