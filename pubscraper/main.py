@@ -190,14 +190,10 @@ def main(
             if pubs_found:
                 for pub in pubs_found:
                     publication_date_str = pub.get("publication_date", "")
-
+                    
                     # If a cutoff date is provided, check if the publication date is after it
                     if cutoff_date:
-                        publication_date = (
-                            parse(publication_date_str).strftime("%Y-%m-%d")
-                            if publication_date_str
-                            else ""
-                        )
+                        publication_date = parse(publication_date_str).strftime("%Y-%m-%d") if publication_date_str else ""
                         if publication_date and publication_date > cutoff_date:
                             authors_pubs.append(pub)
                     else:
