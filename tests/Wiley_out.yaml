@@ -5,18 +5,18 @@ responses:
     content_type: text/plain
     headers:
       CF-Cache-Status: DYNAMIC
-      CF-Ray: 8f0efe24fd126c57-DFW
-      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dwilliam&cookieSet=1
+      CF-Ray: 8f0f0a8f1dd5e756-DFW
+      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=2&query=dc.contributor%3Drichard+feynman&cookieSet=1
       P3P: CP="NOI DSP ADM OUR IND OTC"
-      Set-Cookie: JSESSIONID=E5A4F7F0495E4B0AD8005E3D9AB93968; Path=/; Secure; HttpOnly,
-        MAID=i9lcCglJQ7+TrqQ+XDmteg==; path=/; domain=.onlinelibrary.wiley.com; secure;
-        HttpOnly; expires=Wed, 08 Oct 2025 16:11:52 GMT, MACHINE_LAST_SEEN=2024-12-12T08%3A11%3A52.556-08%3A00;
+      Set-Cookie: JSESSIONID=17A3EAC754106C930D522DD4850AFF6A; Path=/; Secure; HttpOnly,
+        MAID=Jbz/7YudaQT2Vu80bU5YmQ==; path=/; domain=.onlinelibrary.wiley.com; secure;
+        HttpOnly; expires=Wed, 08 Oct 2025 16:20:21 GMT, MACHINE_LAST_SEEN=2024-12-12T08%3A20%3A21.059-08%3A00;
         path=/; domain=.onlinelibrary.wiley.com; secure; HttpOnly; expires=Wed, 08
-        Oct 2025 16:11:52 GMT, JSESSIONID=E5A4F7F0495E4B0AD8005E3D9AB93968; path=/;
+        Oct 2025 16:20:21 GMT, JSESSIONID=17A3EAC754106C930D522DD4850AFF6A; path=/;
         domain=.onlinelibrary.wiley.com; secure; HttpOnly; SameSite=None, I2KBRCK=1;
         path=/; domain=.onlinelibrary.wiley.com; secure; HttpOnly; expires=Fri, 12
-        Dec 2025 16:11:52 GMT, __cf_bm=B6oGcT4gqX.O_21NJ_SyFXB9ciKXzpROq90S2lpv0CQ-1734019912-1.0.1.1-uC91gmPkvEH0RX6KgnSAD5W9HgWKF5KrpzTCvOlg8CIqH2wdEx_WyphCrN1848qweRYB1D33LrFHzlvdhhZNGJK0DWqtN_B9i9vJdTEY_y8;
-        path=/; expires=Thu, 12-Dec-24 16:41:52 GMT; domain=.onlinelibrary.wiley.com;
+        Dec 2025 16:20:21 GMT, __cf_bm=EU9lgeeZQ1JX1rG6MLbWVpvUVfExkLhRxiBrREx0d90-1734020421-1.0.1.1-O7TfgSrZNN90wFZWPbJ5LEpkoh8wC2oP1N3WR0cH53APTXkp1UAMsqcTpoZ0VpwTBEp20otZu_Y.zHoC5bIMqcogYH2tDJpWnfxvEt0LlSE;
+        path=/; expires=Thu, 12-Dec-24 16:50:21 GMT; domain=.onlinelibrary.wiley.com;
         HttpOnly; Secure; SameSite=None
       Strict-Transport-Security: max-age=15552000
       Vary: Accept-Encoding
@@ -26,345 +26,106 @@ responses:
       alt-svc: h3=":443"; ma=86400
     method: GET
     status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?query=dc.contributor=william&maximumRecords=10
+    url: https://onlinelibrary.wiley.com/action/sru?query=dc.contributor=richard%20feynman&maximumRecords=2
 - response:
     auto_calculate_content_length: false
     body: ''
     content_type: text/plain
     headers:
-      CF-RAY: 8f0efe25ce366c57-DFW
-      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dwilliam
+      CF-RAY: 8f0f0a8feeaae756-DFW
+      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=2&query=dc.contributor%3Drichard+feynman
       Strict-Transport-Security: max-age=15552000
       Vary: Accept-Encoding
       alt-svc: h3=":443"; ma=86400
     method: GET
     status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dwilliam&cookieSet=1
+    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=2&query=dc.contributor%3Drichard+feynman&cookieSet=1
 - response:
     auto_calculate_content_length: false
-    body: ''
-    content_type: text/plain
+    body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><zs:searchRetrieveResponse xmlns:zs=\"\
+      http://docs.oasis-open.org/ns/search-ws/sruResponse\"><zs:numberOfRecords>409</zs:numberOfRecords><zs:records><zs:record><zs:recordSchema>info:srw/cql-context-set/11/prism-v2.1</zs:recordSchema><zs:recordXMLEscaping>xml</zs:recordXMLEscaping><zs:recordData><dc:dc\
+      \ xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\"\
+      \ xmlns:prism=\"http://prismstandard.org/namespaces/basic/2.1/\"><dc:identifier>10.1002/phbl.19580140102</dc:identifier><dcterms:isPartOf>Physikalische\
+      \ Bl\xE4tter</dcterms:isPartOf><dc:title>Der Wert der Wissenschaft</dc:title><dc:contributor>Richard\
+      \ P. Feynman</dc:contributor><dcterms:issued>1958</dcterms:issued><dc:rft.volume>14</dc:rft.volume><dc:rft.issue>1</dc:rft.issue><dc:date>1958-01-01</dc:date><dc:rft.spage>3</dc:rft.spage><prism:url>https://onlinelibrary.wiley.com/action/fedSearchRedirect?doi=10.1002%2Fphbl.19580140102</prism:url></dc:dc></zs:recordData><zs:recordPosition>1</zs:recordPosition></zs:record><zs:record><zs:recordSchema>info:srw/cql-context-set/11/prism-v2.1</zs:recordSchema><zs:recordXMLEscaping>xml</zs:recordXMLEscaping><zs:recordData><dc:dc\
+      \ xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\"\
+      \ xmlns:prism=\"http://prismstandard.org/namespaces/basic/2.1/\"><dc:identifier>10.1002/j.1875-9114.1994.tb02784.x</dc:identifier><dcterms:isPartOf>Pharmacotherapy:\
+      \ The Journal of Human Pharmacology and Drug Therapy</dcterms:isPartOf><dc:title>EDITORIAL</dc:title><dc:contributor>Richard\
+      \ Feynman</dc:contributor><dc:contributor>Richard T. Scheife</dc:contributor><dc:contributor>William\
+      \ A. Miller</dc:contributor><dcterms:issued>1994</dcterms:issued><dc:rft.volume>14</dc:rft.volume><dc:rft.issue>1</dc:rft.issue><dc:date>1994-01-02</dc:date><dc:rft.spage>1</dc:rft.spage><prism:url>https://onlinelibrary.wiley.com/action/fedSearchRedirect?doi=10.1002%2Fj.1875-9114.1994.tb02784.x</prism:url></dc:dc></zs:recordData><zs:recordPosition>2</zs:recordPosition></zs:record></zs:records><zs:nextRecordPosition>3</zs:nextRecordPosition><zs:echoedSearchRetrieveRequest><zs:version>2.0</zs:version><zs:query>dc.product=pericles\
+      \ and dc.website=pericles and dc.contributor=richard feynman</zs:query><zs:startRecord>1</zs:startRecord><zs:maximumRecords>2</zs:maximumRecords><zs:recordXMLEscaping>xml</zs:recordXMLEscaping></zs:echoedSearchRetrieveRequest><zs:facetedResults\
+      \ xmlns:fr=\"http://docs.oasis-open.org/ns/search-ws/facetedResults\"><fr:facet><fr:index>dc.date</fr:index><fr:terms><fr:term><fr:actualTerm>2021</fr:actualTerm><fr:count>24</fr:count></fr:term><fr:term><fr:actualTerm>2020</fr:actualTerm><fr:count>21</fr:count></fr:term><fr:term><fr:actualTerm>2008</fr:actualTerm><fr:count>19</fr:count></fr:term><fr:term><fr:actualTerm>2015</fr:actualTerm><fr:count>17</fr:count></fr:term><fr:term><fr:actualTerm>2023</fr:actualTerm><fr:count>17</fr:count></fr:term><fr:term><fr:actualTerm>2014</fr:actualTerm><fr:count>16</fr:count></fr:term><fr:term><fr:actualTerm>2019</fr:actualTerm><fr:count>16</fr:count></fr:term><fr:term><fr:actualTerm>2024</fr:actualTerm><fr:count>16</fr:count></fr:term><fr:term><fr:actualTerm>2010</fr:actualTerm><fr:count>15</fr:count></fr:term><fr:term><fr:actualTerm>2017</fr:actualTerm><fr:count>15</fr:count></fr:term><fr:term><fr:actualTerm>2007</fr:actualTerm><fr:count>14</fr:count></fr:term><fr:term><fr:actualTerm>2018</fr:actualTerm><fr:count>13</fr:count></fr:term><fr:term><fr:actualTerm>2022</fr:actualTerm><fr:count>13</fr:count></fr:term><fr:term><fr:actualTerm>2013</fr:actualTerm><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm>1993</fr:actualTerm><fr:count>10</fr:count></fr:term><fr:term><fr:actualTerm>2009</fr:actualTerm><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>2016</fr:actualTerm><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>2001</fr:actualTerm><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>2002</fr:actualTerm><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>2004</fr:actualTerm><fr:count>8</fr:count></fr:term></fr:terms></fr:facet><fr:facet><fr:index>dcterms.isPartOf</fr:index><fr:terms><fr:term><fr:actualTerm>The\
+      \ FASEB Journal</fr:actualTerm><fr:query>15306860</fr:query><fr:count>18</fr:count></fr:term><fr:term><fr:actualTerm>Alzheimer's\
+      \ &amp; Dementia</fr:actualTerm><fr:query>15525279</fr:query><fr:count>16</fr:count></fr:term><fr:term><fr:actualTerm>Anaesthesia</fr:actualTerm><fr:query>13652044</fr:query><fr:count>12</fr:count></fr:term><fr:term><fr:actualTerm>Cancer</fr:actualTerm><fr:query>10970142</fr:query><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm>Wiley\
+      \ Online Books</fr:actualTerm><fr:query>books</fr:query><fr:count>10</fr:count></fr:term><fr:term><fr:actualTerm>Annals\
+      \ of the New York Academy of Sciences</fr:actualTerm><fr:query>17496632</fr:query><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>Monthly\
+      \ Notices of the Royal Astronomical Society</fr:actualTerm><fr:query>13652966</fr:query><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>Journal\
+      \ of Veterinary Internal Medicine</fr:actualTerm><fr:query>19391676</fr:query><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>Catheterization\
+      \ and Cardiovascular Diagnosis</fr:actualTerm><fr:query>10970304</fr:query><fr:count>7</fr:count></fr:term><fr:term><fr:actualTerm>BJS\
+      \ (British Journal of Surgery)</fr:actualTerm><fr:query>13652168</fr:query><fr:count>7</fr:count></fr:term><fr:term><fr:actualTerm>Annals\
+      \ of Neurology</fr:actualTerm><fr:query>15318249</fr:query><fr:count>7</fr:count></fr:term><fr:term><fr:actualTerm>Catheterization\
+      \ and Cardiovascular Interventions</fr:actualTerm><fr:query>1522726x</fr:query><fr:count>6</fr:count></fr:term><fr:term><fr:actualTerm>Family\
+      \ Process</fr:actualTerm><fr:query>15455300</fr:query><fr:count>6</fr:count></fr:term><fr:term><fr:actualTerm>Arthritis\
+      \ &amp; Rheumatology</fr:actualTerm><fr:query>23265205</fr:query><fr:count>6</fr:count></fr:term><fr:term><fr:actualTerm>Journal\
+      \ of Marriage and Family</fr:actualTerm><fr:query>17413737</fr:query><fr:count>5</fr:count></fr:term><fr:term><fr:actualTerm>International\
+      \ Journal of Geriatric Psychiatry</fr:actualTerm><fr:query>10991166</fr:query><fr:count>4</fr:count></fr:term><fr:term><fr:actualTerm>Global\
+      \ Change Biology</fr:actualTerm><fr:query>13652486</fr:query><fr:count>4</fr:count></fr:term><fr:term><fr:actualTerm>Journal\
+      \ of Community Psychology</fr:actualTerm><fr:query>15206629</fr:query><fr:count>4</fr:count></fr:term><fr:term><fr:actualTerm>Hepatology</fr:actualTerm><fr:query>15273350</fr:query><fr:count>4</fr:count></fr:term><fr:term><fr:actualTerm>Journal\
+      \ of Pediatric Gastroenterology and Nutrition</fr:actualTerm><fr:query>15364801</fr:query><fr:count>4</fr:count></fr:term></fr:terms></fr:facet><fr:facet><fr:index>dc.contributor</fr:index><fr:terms><fr:term><fr:actualTerm>Heyman,\
+      \ Richard E</fr:actualTerm><fr:count>34</fr:count></fr:term><fr:term><fr:actualTerm>Feinman,\
+      \ Richard D</fr:actualTerm><fr:count>17</fr:count></fr:term><fr:term><fr:actualTerm>Slep,\
+      \ Amy M Smith</fr:actualTerm><fr:count>17</fr:count></fr:term><fr:term><fr:actualTerm>Feldman,\
+      \ Richard</fr:actualTerm><fr:count>13</fr:count></fr:term><fr:term><fr:actualTerm>Brown,\
+      \ S</fr:actualTerm><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm>Khan,\
+      \ S</fr:actualTerm><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm>Patel,\
+      \ N</fr:actualTerm><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm>Feldman,\
+      \ Henry A</fr:actualTerm><fr:count>10</fr:count></fr:term><fr:term><fr:actualTerm>Feldman,\
+      \ Richard S</fr:actualTerm><fr:count>10</fr:count></fr:term><fr:term><fr:actualTerm>Feldman,\
+      \ Robert L</fr:actualTerm><fr:count>10</fr:count></fr:term><fr:term><fr:actualTerm>Pepine,\
+      \ Carl J</fr:actualTerm><fr:count>10</fr:count></fr:term><fr:term><fr:actualTerm>Conti,\
+      \ C Richard</fr:actualTerm><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>Feldman,\
+      \ Hume A</fr:actualTerm><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>Patel,\
+      \ M</fr:actualTerm><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>Smith,\
+      \ C</fr:actualTerm><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>Watkins,\
+      \ Richard</fr:actualTerm><fr:count>9</fr:count></fr:term><fr:term><fr:actualTerm>Abbott,\
+      \ Tom</fr:actualTerm><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>Ahmed,\
+      \ A</fr:actualTerm><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>Bidd,\
+      \ Heena</fr:actualTerm><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>Brown,\
+      \ H</fr:actualTerm><fr:count>8</fr:count></fr:term></fr:terms></fr:facet><fr:facet><fr:index>dc.subject</fr:index><fr:terms><fr:term><fr:actualTerm>COVID-19</fr:actualTerm><fr:count>7</fr:count></fr:term><fr:term><fr:actualTerm>cosmology:\
+      \ observations</fr:actualTerm><fr:count>7</fr:count></fr:term><fr:term><fr:actualTerm>large-scale\
+      \ structure of Universe</fr:actualTerm><fr:count>7</fr:count></fr:term><fr:term><fr:actualTerm>cosmology:\
+      \ theory</fr:actualTerm><fr:count>6</fr:count></fr:term><fr:term><fr:actualTerm>distance\
+      \ scale</fr:actualTerm><fr:count>6</fr:count></fr:term><fr:term><fr:actualTerm>galaxies:\
+      \ kinematics and dynamics</fr:actualTerm><fr:count>6</fr:count></fr:term><fr:term><fr:actualTerm>galaxies:\
+      \ statistics</fr:actualTerm><fr:count>6</fr:count></fr:term><fr:term><fr:actualTerm>Alzheimer's\
+      \ disease</fr:actualTerm><fr:count>5</fr:count></fr:term><fr:term><fr:actualTerm>intimate\
+      \ partner violence</fr:actualTerm><fr:count>5</fr:count></fr:term><fr:term><fr:actualTerm>SARS-CoV-2</fr:actualTerm><fr:count>4</fr:count></fr:term><fr:term><fr:actualTerm>aggression</fr:actualTerm><fr:count>4</fr:count></fr:term><fr:term><fr:actualTerm>coronary\
+      \ artery disease</fr:actualTerm><fr:count>4</fr:count></fr:term><fr:term><fr:actualTerm>Abundance</fr:actualTerm><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm>Insulin\
+      \ resistance</fr:actualTerm><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm>Metabolic\
+      \ syndrome</fr:actualTerm><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm>angiogenesis</fr:actualTerm><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm>community-acquired\
+      \ pneumonia</fr:actualTerm><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm>couple\
+      \ relationship</fr:actualTerm><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm>couples</fr:actualTerm><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm>dental\
+      \ education</fr:actualTerm><fr:count>3</fr:count></fr:term></fr:terms></fr:facet><fr:facet><fr:index>dc.type</fr:index><fr:terms><fr:term><fr:actualTerm>Research\
+      \ Article</fr:actualTerm><fr:query>article</fr:query><fr:count>295</fr:count></fr:term><fr:term><fr:actualTerm>Abstract</fr:actualTerm><fr:query>abstract</fr:query><fr:count>19</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>researcharticle</fr:query><fr:count>19</fr:count></fr:term><fr:term><fr:actualTerm>Chapter\
+      \ Item</fr:actualTerm><fr:query>chapter</fr:query><fr:count>13</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>meetingreport</fr:query><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm>Miscellaneous</fr:actualTerm><fr:query>miscellaneous</fr:query><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>reviewarticle</fr:query><fr:count>11</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>shortcommunication</fr:query><fr:count>8</fr:count></fr:term><fr:term><fr:actualTerm>Editorial</fr:actualTerm><fr:query>editorial</fr:query><fr:count>5</fr:count></fr:term><fr:term><fr:actualTerm>Letter</fr:actualTerm><fr:query>letter</fr:query><fr:count>5</fr:count></fr:term><fr:term><fr:actualTerm>Erratum\
+      \ Chapter</fr:actualTerm><fr:query>erratum</fr:query><fr:count>3</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>casestudy</fr:query><fr:count>2</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>clinicalmessage</fr:query><fr:count>2</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>technicalnote</fr:query><fr:count>2</fr:count></fr:term><fr:term><fr:actualTerm>Back\
+      \ Matter</fr:actualTerm><fr:query>backmatter</fr:query><fr:count>1</fr:count></fr:term><fr:term><fr:actualTerm/><fr:query>bookreview</fr:query><fr:count>1</fr:count></fr:term><fr:term><fr:actualTerm>Article\
+      \ Commentary</fr:actualTerm><fr:query>commentary</fr:query><fr:count>1</fr:count></fr:term></fr:terms></fr:facet></zs:facetedResults></zs:searchRetrieveResponse>"
+    content_type: text/plain; charset=utf-8
     headers:
       CF-Cache-Status: DYNAMIC
-      CF-Ray: 8f0efe260eb66c57-DFW
+      CF-Ray: 8f0f0a903ee3e756-DFW
       Cache-Control: no-cache
-      Location: /action/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dwilliam
-      Set-Cookie: JSESSIONID=E5A4F7F0495E4B0AD8005E3D9AB93968; path=/; secure; HttpOnly;
+      Set-Cookie: JSESSIONID=17A3EAC754106C930D522DD4850AFF6A; path=/; secure; HttpOnly;
         SameSite=None; expires=Thu, 01 Jan 1970 00:00:00 GMT
-      Strict-Transport-Security: max-age=15552000
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Webstats-RespID: 218d2e28f0c43fd09bab9765f2bde771
-      X-XSS-Protection: 1; mode=block
-      alt-svc: h3=":443"; ma=86400
-    method: GET
-    status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dwilliam
-- response:
-    auto_calculate_content_length: false
-    body: '<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta
-      http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible"
-      content="IE=Edge"><meta name="robots" content="noindex,nofollow"><meta name="viewport"
-      content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe
-      UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe
-      UI Emoji,Segoe UI Symbol,Noto Color Emoji}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem
-      auto;max-width:60rem;padding-left:1.5rem}@media (width <= 720px){.main-content{margin-top:4rem}}.h2{font-size:1.5rem;font-weight:500;line-height:2.25rem}@media
-      (width <= 720px){.h2{font-size:1.25rem;line-height:1.5rem}}#challenge-error-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+);background-repeat:no-repeat;background-size:contain;padding-left:34px}@media
-      (prefers-color-scheme:dark){body{background-color:#222;color:#d9d9d9}}</style><meta
-      http-equiv="refresh" content="390"></head><body class="no-js"><div class="main-wrapper"
-      role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable
-      JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId:
-      ''3'',cZone: "onlinelibrary.wiley.com",cType: ''managed'',cRay: ''8f0efe26bf766c57'',cH:
-      ''9dKSRFrPXuj.x6W3XMiXVFdonC0ZpHT2cVJwhr_KAQw-1734019912-1.2.1.1-vPbW46Gf7KBNtZSAbjHBfDoXUe8jKM7oKiawwhMHsR0VMNAeuPrPzysnAyC4OdvP'',cUPMDTk:
-      "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dwilliam&__cf_chl_tk=qjboDk2jOeCjxETp1JcOsKOjeVUT1h365jjpnIbBLws-1734019912-1.0.1.1-JvO703z89S.mfSSqtOPBXxE3RcV1d7OIOmrpvAz2sq4",cFPWv:
-      ''g'',cITimeS: ''1734019912'',cTTimeMs: ''1000'',cMTimeMs: ''390000'',cTplC:
-      0,cTplV: 5,cTplB: ''cf'',cK: "",fa: "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dwilliam&__cf_chl_f_tk=qjboDk2jOeCjxETp1JcOsKOjeVUT1h365jjpnIbBLws-1734019912-1.0.1.1-JvO703z89S.mfSSqtOPBXxE3RcV1d7OIOmrpvAz2sq4",md:
-      "38udyY6xBv4D6W7l_r5eWWGW3M.lmb.EgG6wYOdmrBg-1734019912-1.2.1.1-DKwpU1TyBaExlCVficc69mSRW3NWlaQrwkLaOF7bWK_gj64eWsw.qPyCxZIydRc4_8iUey6cjcv20ZnQDnJikwey849I.FofXkk4Cjt.Ad01TIvj2tcC8UIlN6sq3wG0hyGskllCYKTiGXkYopgPrGeA6u3gDAYEYji54aUfJKcC_I_mz.E3ATqKgiYqWl.6V18Lf.4eWYaQFnMIqwvFUfyZh1hvMhb9NGZhBizM0rFFAsoxtnpxA0D_1z3Gosj_ols3ZrzzaeQRMR4rLo8TiKeZ5RZmKkYEt.4hLSjjQYTqJkzK9OPM7hbMChSpvY18iEiupQRM4SDwAReDkrxVuX.O0H1LoPpPdzS8SxA2IQu2K72za9Xy1lkDUOypTl1Ci.uLUzg7pKLb80jfzngyt25mxTBkOoRVkd_fq4h8j6zjI2XX.EubsJz3XAojXJ.ERi7T28pbtlx_1rXvY_LY2EkYHHDvrk7DulY5A17yyi8arPYTD8sO9U.t94D8n6u3yF64tmOWTWge51pN0K7.Co_ij2ERqrCJmxPA4gJ4BeDlEQu_C9myMASXK7qGprBnNFJuwsVP9DXOPe8JbIDDJjF0u9x8.KflaXP4yw8UsxhTtdqueZGcF5efmgzhPrqWCXmiXUKTiODwVapuSirGdhZX9O0Liw0aa_M7HNKCsmGWWYZ99cbYd.06t2yrS3x5jDRtHQloCI05FYFu.W5gdHTk_mpGo6EreIVLWK0ufdHMd6nIJh0NoFyLk8GYEPec5ewhzOIwUQ.Aio8KHquPK08Gt5wWGEOPtZMAsgeF7wgv86bcWtAXF4d1dAeS6FkuPyjkXMtD7G05fHfF_VWzuLasmhH7UjoA0QA0JQxwTG3IN2HuYPqWaYd1rRuXdkzlhxJ50i2jnz44DwJqmYEdHYjTmIsoqdx_0KibYWl6gg5Khv4D_mVB3lxVJLRcMsyfXW_MwkbswHeNo_ABQrg9IOVItZcbry78S3ZkyNK.oFI9HmEKwkXAkKa..sJwrm7QknAFdz2XSBPaDUw2Efnvrzu54rH73pkbiKF11cV_l7oOsBVqSeUIeNOWugT0fRp3CDx5KdD7Q8jsTyx5Gua7gOaFWhf5F2MHYgirBlhymdELD1nnMIPaXHGZlkKyFzwS10mmW2B.aMfkbqGU9uAbDfTvc9eQM4b24dFh_BHmvNdXn9l4rNI0iRhSqOsFLQoTy0M4oMt0fPrVWo21uoRzVIg8imwaXFsUsCVmHyr7RGZqyF7O0bKBpAV.1JMeo.bCU9iP9pOGu.eM3Z4ow8_6sBzlkaCsc5rG2YZZCcaLBF760BQXgdRHwO.8GW4nL0eJ2UG81XZ716XVCRsnQCtBlypoCbODNKU7q_fGukkbbPC30jrSsF7SnRh5FJzquwo5CI86GeRIeFca8noiJh1is2adDRNry9RQcbU4MZmgAoypO9YC29o7q9XOP_jEn5xGI.ajfq5bxWDLwSjUaSz8WWjAP_WNunyN3R2u_KZoDt7okjZEFGq0WV1FXfSw6auIBYzx5hngKBviKJfwCYPxK7sK1s3DT02YYkSlDSHezwOV7GrmL56cLmTzivSOjUzaaqsF_kTiOh0VBGOCfsgcnQVIPyen4VE6cBPYdBpZcKfjAQvNIlZO4adYqOskp.VmqBezWiloxdhoHAs__niq37WW2Blvg_tbx3nxslaSQNEMTRGBwZk0DU0V_YoXt1R6QattEvwF0VcCMjGKfxfj9J1oe.w1m5sa_eusrRgfCpzrF1pUZ8gjuPTkxJXJrMmsBU.uSE8laz.IimqPZ2AFpXxeUOwIykR8TedhbVX3yZ4soPTKFM9.0bxAhcHS1sRDAW9c26s9LDHsm6XEsSUTmXzvUcLJV39a23tvkeQ2VCOGr.vM_OwnWRCDFPli3ZAKD_ErqzD.yWZ_DvsPOeMXEAcl5ytzElMYdunF6Ek51kEvHuw5e4QFS8xp7zOgoHtOn.vLUwGc.yKuTAQcMTtJuKciYi6oDifsy6XxXYycbi3sdFr8nexxddybLWkwPZrcNqehQhs8Mk56VcRYdIdwfGeM8eAHVaARO4.91mw0TlJiHdGwghfbPmPMsj8k_d_fGdoSJFI14K8bXP9N33eVOnG_ZIxM_oG4jFS5InOx_iGrlyrpc2Q5NbqG4uGOKkHkDcjmyLjo.TZ.gBQLYaxOAOWxi.JNOe0rfpCiBWn6LhAs5.VRUCAxxkm_nhm8sGOEtdbersk8oJLhVCrrgy.RAIzq2g99UEPzIFM_Q7yq.IwtDhy27NYuKYoka38Ns.2ZZSTe2ZWmukA2xy2m8BF1hg27H22mBCxSphBlXB2F8iOqizfXWYzMXYNycCt_iHiiEvghRXsNmKHwhby0nDE0c1K6zC2PFOGIK8DgMVPYxRyJEXuYGNYy2wW013avt0lH49Tfr2eVgU97iTjlXzO_kiLNW5vueSIrccehp4X4Wz5pmpgv1s.UNYPqjJ8zPwohk9.imnaLtIoDZdO8hXA5pXhk0OdgcnF5VmipwRTiBw1AV_Q.7kQryuEpFrksI5kldklvGj8kQXwe0a6Of2jfReVfaCjXRetT8I.xTc8cAtAyFtvuOIaQdWsAJ682Sg6g2lhYUr2Jv91nLAuDAitU8P2EIHuzGkXeErrNnERojGX1g3wuKqrXK9fJpUC2Dfcf0n75thm8jcoiSRWtMjLoabH3dUR7TFKlCCHdldP8p4o",mdrd:
-      "PqcW7cgIrL93t5EC7177XzHgrc_TlNFGasWiB8_f2w4-1734019912-1.2.1.1-ORsYKCj_T7cbkj_pjUx2FVxM61I6OLZDp3YrUymdxXNZhRxSydLumbV2kInfQCpqG3296N2UjzceKG2w0pJOsMwNF9uOBJBVNzkexjkWj0swvpZkq0W1U5apsGVXODaS1hL83ScWWNsctwB3bAMtAbUqoJD.T_hBZOTY1kVplnxVq_xVdSoIClmZK6iJaRFMYhi7KnBuSw0YFqAKwoBrcLdXTlyuVj8osFdfHC7TwGXk8qnyK6.gGP0NVVrWJRWkpGsKDxEF63JfPiN6zLfRFi_iWBaXtMSPKP2Z4vanjws5hD5rwCSI74d9o0rMdJ6LoaElFgfpFcORRA0a9LLZ8ZfD95uzABCUcMN4vFCZJe8ioiS9FjEGj0A_c1U.pYe_c8lwiCffvKwo3n2WnVBYW5.ejNIZw3roB4FxIpFosGZDB92ef.D9UrW7gcRrTGb0dqbLuxPZzQKa7tZXr7121vpF4UvVo4l1hVZi8CJKs8D0LWtX5FrgVOl93axBOupvE0wqNxwQwT8HMYIMCtVD8gRh94r56Ncc7Ci9CNyPb0JSiBaO6_IWAC9J0ffY2NqOHJX.oGafJOdZavW15jWz6OVzzXIcX1FkEFaw270xDbEQSngVe_XDPkPxMVrs8AkBqn9EdNgGlgCk8d6cJc5AVnhWo.LkdbNGCSJU8YHVfJxJhSaE1k50oezEJcxPDEeBl8XL7iFfu7O2Xje4lXq94mctX3h9o4oEn2mFoTZYd_vFyd6x1iyLhtGn3Ht_Ws817yjajMYUV8jw1E9CuLeVwg.ysDv7z1sm.gaUSnIHgSgTiRdbqdC4vK1KrHsk_ZK81Dn6DCoo.Osl3.dB.u7j2Mcm7PnNW28wQ0ymuwo40_5eIYqyOE0Qhs80JIvGRTw90C1xkiKeSB.rLre0OliccJDqEJSvqtF.ewD9ZFSKHO6i_ljoTQaFejWIoLC3f0JAkK8lZuK1r6fhhUwFLQ2JZsFx_ydGDM5QMCnfMNpw1SPxcKpXB9xO7uHg6Ff_NyTbWb7m3aWt8zVmLzuznhSv6DkRgqRVoOIQP55h2UZycBtjGKheOv7PEWkfEQTZvezhiHdSI3QMbYxjUSi9.x0bXFmrSrsS.rYrav2al1lnBJSDJQvCUlUNKG0wKzGCaArhdZTZl9XOqZNIghTp4XQT8FhT_gIqBSxfmXD82GXgN59jaG59DQhOoaGmUjowK3SNz.D6p_.ORmPy9xDvnyOwanx76rDp1SwabCGZ8ueInJa2Y2d_9qXkB4XGUS5QGBZRKzx7wz0x8AG.W4S5hXNvIDPLGeIQpFIDsrDpuuLN6Gt5Ddmi1sY_rns2oV3xkUEs.bllZN.1oduuBKz7NxE7p4XCcxDEsWbNe92nM0MvXYQdIYd9s0h4CCs8_6rcXsdav_uieOuHz5l3HLylYfttgycQcVnwdu9tU8u8St5FB0U9L9yCdHNJayjSZx6s8J5AFjnaPtIq.gCeNkEKVjepABMseR5sEjibBtokPoQwjzBR4OwsOW8Um_OIy0ZuX285k_sOi35EO7L3Ge.A1WkufBd9T.dbvaYhTGvai6yf1ED6qYXHblLjXz3PhCZKh_foB1dCChQSVxiEVNCWUVEWvxF8PxC9S8v8rkSqJtueQCN9NjjfecUSl4veOPC4xqY2oypHkn2fUwddyjNTdcr85DqloUjFHSuk5NxcPUYtxkjJh3BrooRvxjK9F45BWLUVeNQG1tWc9zsk8BlWkkn2BLZWCGnJg5OJtt9CSMLz6C03G3_cMh0IEVXgl96H4H699MlUrfLpwqVy04RbSHwXY6d5.KvdMbbTNoxW8uORn.Obik3mq7JF4pQQR4DV1MKz6asfNNtvGWXIP_UgbtaEictVja8UZhLhMT1RizG_fTNcpYZDZ1LgCmoGuCVpp653AdSVlpJLge10Ymx4wBEfXT6ABpP9nn9jA1EnbGUO_36GV76k3qIuvN2Ox5kafVfX_oI0V30JlnO2kbPl7Xa4YXDeVnhUd2.UFGEM1.a1zaKTg6xNxV9o6SRnVDBPOlxw9QKpVSfB789x3VZrsmsPQqPyuDvvN6S2XwxnooTNa4Y0de4SXuMKuNWeyqwvj5QmFm_3AqfmJDILSQy6AwFvcoFvGSxAfalbBp_TnbpG7V8qFL2K9uuYEbH9YdU779RSHtTGKW4C.zz62mlHmkXVsaad66mHNl9e.HrfLcKJLWaB0rdnmlrxScu4DkE_Qu_CAN06Y3p2dFRs2McGjkLe4DBUs91a33U_gIrQd0XvjKW8oab126yxR5OuoejAT0NxSOmB.5cQjCqaH.pYH9mJBw"};var
-      cpo = document.createElement(''script'');cpo.src = ''/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=8f0efe26bf766c57'';window._cf_chl_opt.cOgUHash
-      = location.hash === '''' && location.href.indexOf(''#'') !== -1 ? ''#'' : location.hash;window._cf_chl_opt.cOgUQuery
-      = location.search === '''' && location.href.slice(0, location.href.length -
-      window._cf_chl_opt.cOgUHash.length).indexOf(''?'') !== -1 ? ''?'' : location.search;if
-      (window.history && window.history.replaceState) {var ogU = location.pathname
-      + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null,
-      null, "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dwilliam&__cf_chl_rt_tk=qjboDk2jOeCjxETp1JcOsKOjeVUT1h365jjpnIbBLws-1734019912-1.0.1.1-JvO703z89S.mfSSqtOPBXxE3RcV1d7OIOmrpvAz2sq4"
-      + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null,
-      null, ogU);}}document.getElementsByTagName(''head'')[0].appendChild(cpo);}());</script></body></html>'
-    content_type: text/plain
-    headers:
-      Accept-CH: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile,
-        Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List,
-        Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile,
-        UA-Model, UA-Platform-Version, UA-Platform, UA
-      CF-RAY: 8f0efe26bf766c57-DFW
-      Cache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0,
-        pre-check=0
-      Critical-CH: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile,
-        Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List,
-        Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile,
-        UA-Model, UA-Platform-Version, UA-Platform, UA
-      Cross-Origin-Embedder-Policy: require-corp
-      Cross-Origin-Opener-Policy: same-origin
-      Cross-Origin-Resource-Policy: same-origin
-      Expires: Thu, 01 Jan 1970 00:00:01 GMT
-      Origin-Agent-Cluster: ?1
-      Permissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()
-      Referrer-Policy: same-origin
       Strict-Transport-Security: max-age=15552000
       Transfer-Encoding: chunked
       Vary: Accept-Encoding
-      X-Content-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      alt-svc: h3=":443"; ma=86400
-      cf-chl-out: z1CjQFoCHtjk3nYfdBLBMdRwvUB4ptdVRDT/t1algzvopXgBoZYq/zuR1zw2Tkx7hidjZ3OmwWMUDuwafx/AGZYHl3Mx0ZmEjDBxzqh+LZjTGEdO1XTgWZKk+Ohni7he8JiFoBQPH2oEpzaQOlJHZA==$DdBSQraCaojYhwzapDxeUg==
-      cf-mitigated: challenge
-    method: GET
-    status: 403
-    url: https://onlinelibrary.wiley.com/action/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dwilliam
-- response:
-    auto_calculate_content_length: false
-    body: ''
-    content_type: text/plain
-    headers:
-      CF-Cache-Status: DYNAMIC
-      CF-Ray: 8f0efe271c88462c-DFW
-      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Djoe&cookieSet=1
-      P3P: CP="NOI DSP ADM OUR IND OTC"
-      Set-Cookie: JSESSIONID=DFB1ABEB5D412F47D071ED69B3F2B695; Path=/; Secure; HttpOnly,
-        MAID=ScfgWsnAb1786QmTHMo06g==; path=/; domain=.onlinelibrary.wiley.com; secure;
-        HttpOnly; expires=Wed, 08 Oct 2025 16:11:53 GMT, MACHINE_LAST_SEEN=2024-12-12T08%3A11%3A53.285-08%3A00;
-        path=/; domain=.onlinelibrary.wiley.com; secure; HttpOnly; expires=Wed, 08
-        Oct 2025 16:11:53 GMT, JSESSIONID=DFB1ABEB5D412F47D071ED69B3F2B695; path=/;
-        domain=.onlinelibrary.wiley.com; secure; HttpOnly; SameSite=None, I2KBRCK=1;
-        path=/; domain=.onlinelibrary.wiley.com; secure; HttpOnly; expires=Fri, 12
-        Dec 2025 16:11:53 GMT, __cf_bm=.IWfza.nyQwQdEJaVmYPvFhfrRjqucKBTTNW5xCLL58-1734019913-1.0.1.1-gKcTi87lHIFx2KFGNG5vzJvbL2mjpoCrayqbT5rTSSs7hdKbM8laN6WpsXpCEIPX8DeRV5lJf8JHJep1N7hR3zGmIdqFxr87FIhZpOLGYzQ;
-        path=/; expires=Thu, 12-Dec-24 16:41:53 GMT; domain=.onlinelibrary.wiley.com;
-        HttpOnly; Secure; SameSite=None
-      Strict-Transport-Security: max-age=15552000
-      Vary: Accept-Encoding
       X-Content-Type-Options: nosniff
       X-Frame-Options: SAMEORIGIN
+      X-Webstats-RespID: 47da1d0a34bd315d3ae005c9994822a1
       X-XSS-Protection: 1; mode=block
       alt-svc: h3=":443"; ma=86400
     method: GET
-    status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?query=dc.contributor=joe&maximumRecords=10
-- response:
-    auto_calculate_content_length: false
-    body: ''
-    content_type: text/plain
-    headers:
-      CF-RAY: 8f0efe2abac4462c-DFW
-      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Djoe
-      Strict-Transport-Security: max-age=15552000
-      Vary: Accept-Encoding
-      alt-svc: h3=":443"; ma=86400
-    method: GET
-    status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Djoe&cookieSet=1
-- response:
-    auto_calculate_content_length: false
-    body: ''
-    content_type: text/plain
-    headers:
-      CF-Cache-Status: DYNAMIC
-      CF-Ray: 8f0efe2b0b60462c-DFW
-      Cache-Control: no-cache
-      Location: /action/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Djoe
-      Set-Cookie: JSESSIONID=DFB1ABEB5D412F47D071ED69B3F2B695; path=/; secure; HttpOnly;
-        SameSite=None; expires=Thu, 01 Jan 1970 00:00:00 GMT
-      Strict-Transport-Security: max-age=15552000
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Webstats-RespID: a897b4ae5870385c19fefeeff383f1a2
-      X-XSS-Protection: 1; mode=block
-      alt-svc: h3=":443"; ma=86400
-    method: GET
-    status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Djoe
-- response:
-    auto_calculate_content_length: false
-    body: '<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta
-      http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible"
-      content="IE=Edge"><meta name="robots" content="noindex,nofollow"><meta name="viewport"
-      content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe
-      UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe
-      UI Emoji,Segoe UI Symbol,Noto Color Emoji}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem
-      auto;max-width:60rem;padding-left:1.5rem}@media (width <= 720px){.main-content{margin-top:4rem}}.h2{font-size:1.5rem;font-weight:500;line-height:2.25rem}@media
-      (width <= 720px){.h2{font-size:1.25rem;line-height:1.5rem}}#challenge-error-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+);background-repeat:no-repeat;background-size:contain;padding-left:34px}@media
-      (prefers-color-scheme:dark){body{background-color:#222;color:#d9d9d9}}</style><meta
-      http-equiv="refresh" content="390"></head><body class="no-js"><div class="main-wrapper"
-      role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable
-      JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId:
-      ''3'',cZone: "onlinelibrary.wiley.com",cType: ''managed'',cRay: ''8f0efe2c1cfc462c'',cH:
-      ''ODZW9jCOAdoGEkG57GcSMUEjkMtlW9F56JpFs8uEKd4-1734019913-1.2.1.1-j1yaMgvK56nq5SJGaxh4aZJYusQVEBprJt_CiT8_9ku4SJt6xo_Gu19EHafINqNi'',cUPMDTk:
-      "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Djoe&__cf_chl_tk=02GDw2FyVwF_ogiLtP1R9y73Cr1ypwtOdKzBmKvqpq0-1734019913-1.0.1.1-B69KW5AspzQ7vSa5ATtBs6Q5TW.e1WrwdcfUAWw9mmU",cFPWv:
-      ''g'',cITimeS: ''1734019913'',cTTimeMs: ''1000'',cMTimeMs: ''390000'',cTplC:
-      0,cTplV: 5,cTplB: ''cf'',cK: "",fa: "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Djoe&__cf_chl_f_tk=02GDw2FyVwF_ogiLtP1R9y73Cr1ypwtOdKzBmKvqpq0-1734019913-1.0.1.1-B69KW5AspzQ7vSa5ATtBs6Q5TW.e1WrwdcfUAWw9mmU",md:
-      "Xf.gJs4m9l518QYa.3DnywArBVqbcFbp0WpbaRNYrkc-1734019913-1.2.1.1-QKDJhDt_H0RsOak9acez3yi1ppK2bHZ5vY1FHAyFoCXTfZm6zqPkRNIajtnYcuyIhSBw519JoxvQNnnZMKRA0XWoGQRAFKzyIfLfLX0jxxvDf.zhA6URAW63GLCcbmZcLI_jXe95PmCIyMmXqdkl49e91PY5SiJYmPIxjswwzyy_fpMixYQcHcrnqp9Vi9RUbd6HtQfyDCrhmA0bUKPn71w20qiRD.BJRESjQhvNhPcpQW4ryWPggl4.EkstQ4Zz71VRliCOJGnhwCQ3SvdlJHd07YFpx6Gn8HajuHKYCxe1.1yt2wIFmbtYZdeVUGE2PXDKrWMgdvKtMOW88b4AjnPHjimnfboCJqNmfnxk._uAbUR2CUC7jpM.jrqNdh4aAkuouTk2N3iUmrDMSh6Z1VPkuWRVsGyP9u5VKcRDK2b025mlN0AqVEIKpCgq5Nwz1N0uuSiLkfMR1F2UpMNfwQcQ403TPraHEGw8BbqnK.AfTAgRnDGaEocGcdOqoI2Uw.iH8Hnjq7zzaQ2cEGm6sobrAYCffiSqHD_3TRk52Tkp7g_5jSimnYQmI2ZJvjlBEEhxnT32q9kVvUJxFu0c3AQEJcuI5x1vtAU1CgFpyb4ZhHzqNq7T.KWr9bKYa.QTxhaxEJNRiDqzvwk65iqY_PGT6VAbu1UPvT.k67ctdUultGgyC1XuAkQZH95rQv_5X2rDvmAReaFey2wkb1VOFCC6ZIOLDpsI39BO90bn1ZlrcPBqId7e9Iw6f8hEdwNhe2AItVEykjcSaQcxsTZ7uUov2pmqX51tibldqSDrxJp.dSW4p2pjowROZeGI_2Q0g0SkGycxbCHxOuL2vzWjCD2mYFoljb8.QMYPc0r2g3FGJ0Ex1PX_BA1MYHwV.QYV3h2Lh8Nu33i7UdfRTN5nJYXcFR8XG0_tuVYtX_CxJcxR.kLbNvc34rHxkh9xm66O3tdFG6EIyNTEO6sQH1R95Aiww5LIhvbU1k0INHKkClGe_qNlNF5aVGXZ4CqYPjOzuC36NHvDPb3MCb0bPFIurhNqFma8wzATQ2VjeaYnxphIU7Wse9YQrRXv8KZ_BdaBGUKf8pTBApd8CNwD0Wx2K1JWEYVyI6Ih1q1OfLTX3ErNLGjUtGK4m4cOB0ZUuiJG4GFouY7QczPboqGpxd3qWG.23iGr7PosVBJTVW.Cj8HagSMKmU_hV5PYPh53EgExfj4uBoZvPvJ5RicCM5hRBFr2.IGFJkKkEGGi1iLhvNjc.a.nXje30YHpJ14xt4ow6OGiYK0_5oAciPAvvSMykzs5rnpxEIIToqZWCjx.d8qcOGJ2q6xOq6leSFvU5JJHgnzcwCDIWVRHqEE42GF5Cc7xCj9gN1Gt.5Df1xwRX3CnKfC7x6LEid.Ux2Y_KfSDNf_Q3znK_tugAnhYIG8VyNMsqKudjpsKtMm5aKxufWj4teuaqoLR0UJqPbrEPDSkt73TkwcCAfaa2Q0hdDDfFN.iB4.vS78SIeg8P1CKSPmacA_rUJFVHFoaU0rIlXTavfJLsqaEpL1sQ3oZadUys7zncRCitRc0xoXFEhPb2y622tX3aR8kJQgZ.yXLWJsG9twTLrYTyRNMf6gLWVUzKwENqeeGZRxb8qTjOigG65FlFZtwBgr8VXiiJrCsngZOzWcTJKqocFJf3RbGFlZKPW1k9rP5zsutk5t0atojK8iubsWSIb.NzXyaSBsDS99Be62QW6AWZpdEFMMgHqUmcn7wV75n.T3.GJAKlzlx.clasdwDAjm7uApg2_44feInVWMCsxtS1w5Jsz1NKno06ydLfCVAHXnkSD71HrB0tkN5.VA3N8htIPQjUnJGbV6Z041MbgHOioBGsHIyzGzjLvSoreLNyeFEELlclli7An_Jn6._VLwV0ZxMHyf3N6rhASjtz0_dilA8MvOgV5upkahrrz0rKlomZRk1wUV7yCjfGBi4k5ofRhMJ3Jfxjb4UcFhWKNafTdCbcR3H6EgooM6goG8tfUflNYoE51cpBKCiabODkTBmTTOZ1O3gTBV0hGpEq7_DKj5fS9G3qdxM7UdLwD6AXqFQJBgocYa9woHXSmFvgIjOirYeax.e.3BU_esfjKHWcW5RqV2hWxZPdJ2.KTjFEcKng7SLMbJh1RWnjOV_sIcLo0qADFsO8oFfJukr7sPm.iF9y9xZV1Xzc3Qo7vbpj_hvYakhCO9OOwo_wbuVrTUzKPtR1N.4rmw5DJocJxn6ravK9eBEerM3RQAYqNZjZ.SuDHeLVFPboWMcizxzbAXla16trnhnn7.yAgiKGulMcJQgK8aHnzZJ4wpFXXtMMc88j5WYefcwa4OkFWHhfHCAN9wjKXa4J9RIWsHBiDPiV4WxDPzLBoWEPcA_ZYzQbANOZ0bMakckocxiLr9Dcd_Op75jjQSPe7PRvjmJ.m5INOiznAMOu.MgKL2ogwCVGqDe2Lyz3VB2MKBPzxi2E5TYMUUyXRy1HkyQTR6kQEKWpKeQEy79OzlNIsFAyCXbXK2C8Aj4qKSJbKdCER7Tc75P4ICx269NC0RzW5Vja135E5BRSii3LZ7xYvcgoIlchtJ5xI2yWBb.xOT4b9KhrqZGPw.lYBb9Pa6yWI.5aAjkkfhpn2ftjZwlSGSNd2f6wNoHTodVZenpWFatefcdJZ1RUcnXMcXKceK_fHSHRXjRhRyYBqM7FfGH.A",mdrd:
-      "i_l2m6ZYablFe1a4kw57BzlFhGiKhsMB6LhQyuk_WCo-1734019913-1.2.1.1-uRsGZCpQzwoohLBB1eQC5AvjRNDt.hQQhnUBUZr.T3uC9dIif7WZt9pRmBk.npebhs_hZcbfN5VHVTfNtNW5DonHgOYs2FUZBZcRGtBuqCqYZyaIVMJu4WkGbWDRFia5BUp2ilwR8lMfCRCE2_qUTXW4A4_qwKCY598JOZihaWqMtSr.VHMOcZ3.KmDLnguaM6xokMgt4ToCOm8agLzNFnrrnAhS0tXKq8lJKufoa3Dm1z6ipNYKbLVAqwDm7UUitpJA1UTYL2RTDuqgKWSYHP9DfRsZNaWnxX4W9xEFEPloItsEvFCnbHZJrJLcVizKBjFS6vtyOLFRyZeKq.y_kfx4s0icYysT3zAOsskV020TUN5E8IVuY2jXd6pn7Pf3okHWqvdKsd5wmL1c5tTrI5t5gykdVkLzCBne7Q1sfJS0Tdh.HBtDf9eF.jXmTJWwJIQNSziiHq4VJmku.b47RUMffaS1VqnFZFoLNNLZCW79jLmysdjbLk7GJe179Z4FQQvyRVw.Zu6i39vT3fRjPurHYGYRAsROy2T4maWs1Wy.WYkf9fvdHQjXjcm9gs2Xeys8VOF2MVTsW._._L74ZMmmXNcIA.FWpZdgNjHTiXebk7zjg2CSafoWIcdQaxR6iNiKayr_E.VU0OMx4iQayzSuVLDiA_DPvq_pQiqQVbKJbdwUFOeLL_kE4.hrbFhjd8.XWD2TvhP5SCK.HGbP7cNGa_xQZWO5G4HYbMOXrUbQ0Nh66SYbDtK82wEY_GQNxSfcEJlImQIIk6qxVwOHzyyudjncuCeeiDSUiLbUj0Bq58ubBdC_93ft9eiyuJBdwpQKnARxTnb1aiHIYCiRV1.4gvNLxRVyLSdmMniZsmfceWEXXdxHkpIV2rtw0ZPcgg5qTPTMwmD_NhsopecC2yQQO512qbjKrJTXygdqmzvI6Ovp1DQdpTviBMtasd.LfxwOZ_voBqukm0WxHpUgdxqNZzjzl7rMB1r4sk888xxZuwD5PMjrFVMvCyizz1lyTdO4fiZgJC52cS3WFSDdsfQ_xMEVz6xuBb0r3NfDBaZyMROgmeYJagD3NnlLWgmaO1PAwJ69H.7Z.IDxJdDOjFvXYXqko6MyqxpDP4WiPWQT9Nw8aFE6WiX9w5n7OiOUhXeoUg3AmPgU1nzuMYWF4qJT9hbVM2PqfnE13MTgODjBRx.idA0NDZM6Cdk3iX2YathBDDcFGTjviU44hZuJ2RtZE4vXtNMwxaYDynxgh9a6Y871wZYFJTYvhbKZFrZJdlM90Ha6L7jHxJGMOVHmP00BSel0nEhDyIH9OdCNkI0DQbTjiqgSWFYDLt9cCmJq1HCPE8aoYb3Ig3GJF5vJD5s4wi6lEgsHJXs9t6J4dY6x8t.ksfPgnUfHk7uXv_E_7qfIXbZVmVu8hzCuAV4BRPv.J7tzjIhKNFh6LqK_EHCZDp3tIELvppHrpnpVi.OKwBimi9RTPNDvdfX0uymu.ghI3kE41QVuAYD79WEqJ01IDE00erskznrh18XcCQ0QqCEGX9K5mfI_AmDOk4YSdGI93ANjYIu59HWasf7tr6KEhYGyevMQm_jXrCfESBhvpfnV2ornIl4Mo_BH8iFmFcx2rMnwpapP6Wf59pV.wKfEyST_DD_JITB2U.wJeOfzTN3IFdbYWHBpT4mpRVIep0OV0g.vE9VhtQ0qioq2ve_mWsrLjj4RVkA5E8wpf8YiVSc7LvL6busRNid2h9ZxlOXjQeQM_sdpZ0CSPJyIz7eg3..e9s7xbyOU4lB_CnLkgHOy.d7LDsvB3RsoLjGZ7aH8YGqXD9xUsiWV7oqUY5rLtgw.TSjR5TG5m5Q6Oeuy5Y13q.OM24YIfnA1Spgv9KaCAbLyAzX3S1iCNEhexVC2obmzY7qDNLpbPxEPbt8G21i.Bsah5nRhJCViogzWq.nDgBxB_R9o2ffk5FpgBHDZ5lMO2XV.fUtV493wVPesjrn33AH0Tg59VtzJeHCvwKWDmmQpn.Bj98GnNi4NRs9QtpCwEhxKn4k3o_H8k3RlfgtL1XAgR0C42JY1JuFz8GpH3yDvhwr8PQtO8VG76kdBJLO1ng1Mbt4TJ8uZU6vWdtRcKnvLmT1kmc6nsN_82lWg8dsH3b9Zk8KU91IY3ampzpk7Slp.ExAvYJ6k4HOUdXLOjconXLtzLLL1tHGbDYV8TFUgIvgfFiP_r3xb9C9q9igO2POzZr1utQWPop0xb3KiZ.5RlZUMrfU59aJH7iRHHh_Lk8esvs7zZhE9GH0yMZ7sA7dcS2LjcPhaXZsj"};var
-      cpo = document.createElement(''script'');cpo.src = ''/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=8f0efe2c1cfc462c'';window._cf_chl_opt.cOgUHash
-      = location.hash === '''' && location.href.indexOf(''#'') !== -1 ? ''#'' : location.hash;window._cf_chl_opt.cOgUQuery
-      = location.search === '''' && location.href.slice(0, location.href.length -
-      window._cf_chl_opt.cOgUHash.length).indexOf(''?'') !== -1 ? ''?'' : location.search;if
-      (window.history && window.history.replaceState) {var ogU = location.pathname
-      + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null,
-      null, "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Djoe&__cf_chl_rt_tk=02GDw2FyVwF_ogiLtP1R9y73Cr1ypwtOdKzBmKvqpq0-1734019913-1.0.1.1-B69KW5AspzQ7vSa5ATtBs6Q5TW.e1WrwdcfUAWw9mmU"
-      + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null,
-      null, ogU);}}document.getElementsByTagName(''head'')[0].appendChild(cpo);}());</script></body></html>'
-    content_type: text/plain
-    headers:
-      Accept-CH: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile,
-        Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List,
-        Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile,
-        UA-Model, UA-Platform-Version, UA-Platform, UA
-      CF-RAY: 8f0efe2c1cfc462c-DFW
-      Cache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0,
-        pre-check=0
-      Critical-CH: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile,
-        Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List,
-        Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile,
-        UA-Model, UA-Platform-Version, UA-Platform, UA
-      Cross-Origin-Embedder-Policy: require-corp
-      Cross-Origin-Opener-Policy: same-origin
-      Cross-Origin-Resource-Policy: same-origin
-      Expires: Thu, 01 Jan 1970 00:00:01 GMT
-      Origin-Agent-Cluster: ?1
-      Permissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()
-      Referrer-Policy: same-origin
-      Strict-Transport-Security: max-age=15552000
-      Transfer-Encoding: chunked
-      Vary: Accept-Encoding
-      X-Content-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      alt-svc: h3=":443"; ma=86400
-      cf-chl-out: aDjLsLGvNO68b8f9wuWhfw5uozhL9ctihwmChlyG5OPVyG1LHPERM/ZhWZMruJIWrFllk0T2emwKNSl6m+lMcDpIS9KMZDeBOg3cdRIFKIpNL3UnYl7VEOy64/j7yHts06Mj+FsUhlPoDlIzbuAWvw==$+M/Ns+GLHqDZ4nmUZPXYiQ==
-      cf-mitigated: challenge
-    method: GET
-    status: 403
-    url: https://onlinelibrary.wiley.com/action/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Djoe
-- response:
-    auto_calculate_content_length: false
-    body: ''
-    content_type: text/plain
-    headers:
-      CF-Cache-Status: DYNAMIC
-      CF-Ray: 8f0efe2c9ea33156-DFW
-      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dallen&cookieSet=1
-      P3P: CP="NOI DSP ADM OUR IND OTC"
-      Set-Cookie: JSESSIONID=58BB336DEBC44F5E6633A82E401DD2DD; Path=/; Secure; HttpOnly,
-        MAID=LvgiC/JqGbRQ+HZfMzhSQQ==; path=/; domain=.onlinelibrary.wiley.com; secure;
-        HttpOnly; expires=Wed, 08 Oct 2025 16:11:53 GMT, MACHINE_LAST_SEEN=2024-12-12T08%3A11%3A53.780-08%3A00;
-        path=/; domain=.onlinelibrary.wiley.com; secure; HttpOnly; expires=Wed, 08
-        Oct 2025 16:11:53 GMT, JSESSIONID=58BB336DEBC44F5E6633A82E401DD2DD; path=/;
-        domain=.onlinelibrary.wiley.com; secure; HttpOnly; SameSite=None, I2KBRCK=1;
-        path=/; domain=.onlinelibrary.wiley.com; secure; HttpOnly; expires=Fri, 12
-        Dec 2025 16:11:53 GMT, __cf_bm=gd2Qa0ZbDqQtj.4z_zni1z6jyvAEq_38unv1UDq457E-1734019913-1.0.1.1-Ct0zDBXVkRg3lzK2iPHMZI4XIkA3lNwdg4kumTc9njdrNwU8PF_epb_XwutkKX5Uf4RAr1..i75MXL3gUnHJZpyGYsV3G._wFPCUO_m7Ih4;
-        path=/; expires=Thu, 12-Dec-24 16:41:53 GMT; domain=.onlinelibrary.wiley.com;
-        HttpOnly; Secure; SameSite=None
-      Strict-Transport-Security: max-age=15552000
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-XSS-Protection: 1; mode=block
-      alt-svc: h3=":443"; ma=86400
-    method: GET
-    status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?query=dc.contributor=allen&maximumRecords=10
-- response:
-    auto_calculate_content_length: false
-    body: ''
-    content_type: text/plain
-    headers:
-      CF-RAY: 8f0efe2d6fd53156-DFW
-      Location: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dallen
-      Strict-Transport-Security: max-age=15552000
-      Vary: Accept-Encoding
-      alt-svc: h3=":443"; ma=86400
-    method: GET
-    status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dallen&cookieSet=1
-- response:
-    auto_calculate_content_length: false
-    body: ''
-    content_type: text/plain
-    headers:
-      CF-Cache-Status: DYNAMIC
-      CF-Ray: 8f0efe2db86c3156-DFW
-      Cache-Control: no-cache
-      Location: /action/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dallen
-      Set-Cookie: JSESSIONID=58BB336DEBC44F5E6633A82E401DD2DD; path=/; secure; HttpOnly;
-        SameSite=None; expires=Thu, 01 Jan 1970 00:00:00 GMT
-      Strict-Transport-Security: max-age=15552000
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Webstats-RespID: b5c05c32fe3b2e9d0e3f7c9149b5b69b
-      X-XSS-Protection: 1; mode=block
-      alt-svc: h3=":443"; ma=86400
-    method: GET
-    status: 302
-    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=10&query=dc.contributor%3Dallen
-- response:
-    auto_calculate_content_length: false
-    body: '<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta
-      http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible"
-      content="IE=Edge"><meta name="robots" content="noindex,nofollow"><meta name="viewport"
-      content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe
-      UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe
-      UI Emoji,Segoe UI Symbol,Noto Color Emoji}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem
-      auto;max-width:60rem;padding-left:1.5rem}@media (width <= 720px){.main-content{margin-top:4rem}}.h2{font-size:1.5rem;font-weight:500;line-height:2.25rem}@media
-      (width <= 720px){.h2{font-size:1.25rem;line-height:1.5rem}}#challenge-error-text{background-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+);background-repeat:no-repeat;background-size:contain;padding-left:34px}@media
-      (prefers-color-scheme:dark){body{background-color:#222;color:#d9d9d9}}</style><meta
-      http-equiv="refresh" content="390"></head><body class="no-js"><div class="main-wrapper"
-      role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable
-      JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt={cvId:
-      ''3'',cZone: "onlinelibrary.wiley.com",cType: ''managed'',cRay: ''8f0efe2ec99f3156'',cH:
-      ''CNuatc96gBzVee45ayDc59ogbEEJSC7XVM_hcIpPyzg-1734019914-1.2.1.1-rLpDaJMttxc0ShQySH1cqCoUp00uQLBvrlt6G7M5aRTPwJtRvBAxtkB8ebHA6_Lm'',cUPMDTk:
-      "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dallen&__cf_chl_tk=.o4i_z4XkgRZ29HIXh3QQLiDv0Yqzyq77get7sz70nQ-1734019914-1.0.1.1-fxCj9uKyBrAlZhPXjflKsfNB5Yevfw_qrL.9lm57N9g",cFPWv:
-      ''g'',cITimeS: ''1734019914'',cTTimeMs: ''1000'',cMTimeMs: ''390000'',cTplC:
-      0,cTplV: 5,cTplB: ''cf'',cK: "",fa: "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dallen&__cf_chl_f_tk=.o4i_z4XkgRZ29HIXh3QQLiDv0Yqzyq77get7sz70nQ-1734019914-1.0.1.1-fxCj9uKyBrAlZhPXjflKsfNB5Yevfw_qrL.9lm57N9g",md:
-      "brYHlx6gQN23T2KhHl.p9rPMgOb.nypcCqrTZPV9QLs-1734019914-1.2.1.1-1gMHikVnGMuOuA3hZ45cJONdjw8bM4MOhAKdKNKZkpguX.vjm37vUzntoHTaDO6dyuhyIwjVyUR8FC3tOCp.Rp7pv.fR__6dBYQT.o35XS3Yl5_9yyxfvRFkQjwSGT5NSYAnxVnJElhtkmNWOmgmEyi79EQD.e1J5IwNrLTsuuL43omvxK2ItVac_Y3HxC09rphkCfnTT8cakD2tewazfD9AGY6oxSe36V.0SsHFmeTfPw9CydppQo_CHqn7Qj0GO9Tj_UVqQW1t8.1L_fyIrzjSGap6FMH1XDlvAsr2TcxTmvL88h_uYe72XOfMm.50Gst3OCF5ehGPQAU9Lnx345wI_Scz1nY51bhdbOLlfetnN_XybvEgCOvlqoINB5mqV8PhQ7vkHiJig6fzNeLoggaEEoSej.eAJNA_oqB5n3XAh8Hdbh7UjtGEJ0nVKPQSIiIb.C2sUtKz2Gvf.z9MPfUYlkrEXS45EPysS.wan8ifR5DbTwenvavaM_mzQz_DAah2oq4.YHQOhNwvBCScjFUrkMIV.aGNgAdSQNXkdOJYBM66y3RS9ELGTltRSr8YFIoDWOLhfGkpifvUEUqZ5DmJVDw4b7ekX_o7HzssnzAIYYiQCQXKJTqPn570svwab1sjHkztBx_UXSNXTzyl74piuzFWLzV8Rjfl.LJIbytxcutJI2aojicVZcQunep4uJCaoOwLe3WlkZM_26v3HdGk6Ey1Az7f35zlsk53x0gXm1kIDARNnStMwRwbL.SsLAtsSXpAgPGvrYDm7IuGeI3eRRpQKxJKWPZBFIw00YN85_TOA9vxfZT1zTwPXFUP02KbTursPe854kyvviyf4hagPpXSwmy1DfLR2FIajyGKyf4OJDkdn23LM1Z6fMjJQ.pgqLo10G8VSi.rm80OPaikJlg47s.HIJ980LSw3jGOW668xixLbyZcuzaBmZbEZlRMa4jgRz8y6bxtcoCPDErOqTTr4cmMq6w_dxrW2Nipjx3Zm8i8Y35aq8YLSDa5Nxub1Lg79_a3KssnLM_myEn8GUZRhWAuCRUL29MejdG4S73gBWzrufF5THzfimjZaAp7K2ykFjQ9B1RQOLmREVS7WYhqYaEw9n944LAENJkccmotvjer5PnY3Z8FAp_h5CDwkbAeYgxwbQyYsN_6zak5sX78BsXb9WFrORbFjF.yfbMXqDRoYWjfYBnInVci78t1VcqRAUyfRk8jQfSTeMiP8HoNno2cljgGxOoeopBL_BOrE43e.fzfQzZpuS1inlbUjdh2AqtGjU8bbAXFIBT.14bjhOCmrjgDEXToC9CN8htKwwReot64oQMK7pCsRubRRAGE8F9oj4ddAPprJEKUysNS2PEH2YMyQXIYSdQbUH.FWk5Yq1EikowuDkzjWfFkQp.HEpp8BW.YcPHKenP3Y8pyT9nMjwWOE3HzQI3.R.Uix5KBIDSf2oW5J.d70tcIrs2QW_mTz8AWJjVYG5855tR34kBrqsxmx.m0MPv4fCMGzYp4ijwRBzdWUk0l3NQSl5MpgtAjoEIngIUuHBCJyV_b4qM9g31jxmMX6REQyVNg2FR7qLl9WblS2l428ObXmsPWJPjf3OkjXKgmHKSm11AUa1YpxQ3yLY8fG2_K8KGtT1oqIrqspqT.FLYbvT.TTwx0CMhxFESTgu8vRxHXL4sD51LqqTR2AwsLo1vvqteFSMU8IlI_twgec8uf5VhVIt59XQEP4_on3qtjI0TxE7KVJWJHsIdGgQhcYfD5ath28rBEAJaYHiMwMxf7xpgaVWpX8DF6aZahLU1wBrSEYJHmKxZ8lXT10vocwIXOE7GN10coyPKiRO61EZX4hPEof0D4dQVp6rFUj4pS7hA18UG4bfOZXK5tGmsyWPS0BGH4NltaNvjXz3hHlThBSfikZjw85VVFMqNNaWMEVJNpqDa41YdasDol1qcU2ErjGaQty7IAamNTftpK0BnK5rSgIEjhmCKrzOKSDmdtmAS8mLb0B61LHwpE3e818QM9zdD0zOb7zcGZ2MWtq3Wfq2r4AzQ2c0BHkjgXqQ5q75Td_v3OIdV73y0It1PfJTMzweQ9QrOi_F7lhWmUseZOaUll4dNoF0S6tQ389R837CZ_78GGdtFA8bg1qsuJ.WPreHVp6xoACoKnwKDnj3Wzk3ALzm1ogh5oIb9FiFJKvZYY3lJxpwnqMPMEGVY.EVp9HwUxJqbXFHkkXT2CVWa_2sdXVtEgDgfJlmGm_LKu3v6pOgK.Y5GuqOYphtUKIsB6C8m1XJai.mQWTBVnNC9BcylKhdptxOu5epAPPn3xeLYRZYYEkc7C92OMWDhIAPKdEMcXdEipLhV7z.ubY_BYtJUTokdauH4EDueVSYEf_d00bu01vB9A1Af4pT4kVe1.erudgS80zw7zRkRTGqDLkfqN8_jQT4t1xpVuzMDQHKIsM3Wyxqi60TAxm4Kz4jHcHuGoWRtU0gxMgl2A9nq88M3V3ESymskoT.PRldiuPKJxnAbR.Y.jhpWlBsT9h4qJqArsH3iA95Z9xir7YyyID.bWh8aPG2_P7O001a3zThk_BNxTkY6hb.VGD3pNo5n.CulE1b5SHxe2XyuGrfTxBosiAB3DAe8nkg.eQ98rK6HF1NDKnpGFERWRXKsjf2m6tWnlpBFviHUqgN6HGKm94KR3bP8OjLRhT0s2JoV.LHgegrs9cEQRyh_Ffk_oUtc",mdrd:
-      "B0Mhpo_RbuGTXYAAY3BmyE52dkWWLlB50fsJCSxmpvs-1734019914-1.2.1.1-cbH3gIAzWgCOiS1A7FqS7bJHVKuhv87pg0oBI.WMPzZUd.JeIXZ90HhnP6EUI4guWLfcJv8M6aD31Tl1u1YlcJsxH_C8FS6GL25EqXu2RQdkibZEPZu_wH0GEzA85DpqNaSmP788_UtYMDmSLpPB83Yc4bivUvu3tAyb5YB6iHUTm2uYjvhsSmO5v56VBBtTindmJarqquchKmxD7NCD4Ay2EtAY079Ue_A_CkID3ru7aQeM5lQYhOxIgURKli6oQmG8yII98j1BQopWZvA4VLnxStY3zk.yTatngb23pjv2g5r9HNumusoID9ElhP2F3uRWF_EbHlvv3uPKo78KqKMVlzm3mmEU741dWRrRjyVGBLQDz2_807g4g7B6nY9Puwauoq1dwSQEYO3j8IBAs_mIGA3Xw9a4DSoroBuaj3VsqS3wpQLt6HsmK0dIgJVtCmYnx45wvxlX8vnNCZHy0L6Y9uYtsfeDax1ELB4aQu1nAaI5IyyTAH.zQ_iLJhFlYxWYaKOZEN82usiT8EkCSs50RP6EiApE1TplJiupPm_OW1hF4NRx5EsXSXAyJl50KOwERQuh9b6tqvRcUc64gjeFaduLYE2sldXxmFqF3qNA99d5SCWAHnxbO5lkUdBY9_ATEQDoaCy5UTXoClLIcrapzLrT7dq9TVt_7414lJZLJGgxfDwSP0Rsreq0C9J0ntwCdMksYqXPh_Edvd43jNPRkk_do1Xw42VPs9M1d4vjTsMFPWr6RdLgIaE6StE8uJxJEgetcis2O._mi7pDxJmxIRxsA349eAXuI0fdgPwgfWyjwcbg8j0aBPyZX.Yn2BfpM9UDP8S0O759WRUk32a5p_bNSmuvLCOqGVo6F8amZmPliMty0yufionxdlLOOJvV9x8dGwYTugP8BwsPFHOXrhTAkLYDD4Z58g_6880K4L1avqI90mM09UYUvuC3Vz.R2o.x4R4gCBQkx3APeJ.d3vXb4mDmeR4W1nBXGwMMIRg165Yz1d9syYgf3J6Vgd_l0xwjhta7ARYw8icp9Dn8puvGmn0SJKrU9dul_jgACKi_c4WW0V1p_p6ZWINWAylitm7j8HqbF6gWiESiVadWWy2ZcA_ikpvsPm2MIJPS8mGYPmYsBu_bRqPJfh8Bu.BZ9om4.9dU2PhzDZgTDHJJOo5VxCw_0UkkOUBnw7yeHFCApL5UDuALWWcbNkEGfGlRdT.e4ym_huOmT3X4mPJH4.6eU9kdHQAxKs_P40S6y75YJBn47jtCic9jPzUvW_wTOWPhjPomGHBLG_RcmzoFplkdbZQ2u0W.sKiY8E0r9e2jq87WJeug5nzFhGOda2uuhlpNKlsKzSM8k7XxGvdo90fneWj9Y8HbEV25vBVBtEigvV8LQ9BbfJLOsnwieznRfNVqDdlCkDdRqvsg9Tpw7WrQSUnN_ZuujvPFN3xOlXHgY4AAwFfb9AnTHjnQvN4BDdjKWKKa11RSEi2O2fjGEhoBofK_oIONz_9dCrtwh2u6BT3SFygGmm11.i9jTKkpCjCgZJczLvhazUMvvy17Sr6CPPsjoOwskLPybMkyd1Nv7IbSJ43ZWgUbp1DF_Zr0cmFE3NOPvIh9vi.rydnbqXPXtFd0b_UrhT7QdM5vonNSjG5Wylfs2nd0fP5Rduri69sQTC_Qjz4eoQL3w3CoCwpd4UNRmCjLrjpcdo1DlAMtmjHYeMwNwSLSSE3953UjUbnF98bFkn..dooz_mq5d4WmhK1OxyNHVXIusmsvCRkJNlpJKrmgdCZnebJ2c1_zOshbTtpsx7xZ3dKB35wql6gqy4p_ZCFWdQkpTRcPcdTR2Ku49FZpnuLQG4DVI824lUzJF1DeuvNVuDz00aLmDyseSSloUK2b5P35FfdZwqBh7PDMVsw9Hhhv.DHumnB9afMNorfd8tL8o1Se6svLmsupQMGVQ2fnkOr5TDOU.iLqTaZydhSzH__p_OlbQ0xE7RSCKJEhZtMXGLlmm0k5Aq74jClHhJBUYfr75PncPRjahotzDwBkZ6wpjxy4X4xHSY6J_iNyTEv__Gyj4iWbnULhMywBTrvJ2bVDsdKhAaH9N5CyaQLuiETTgCvB8Txg5U1j3otlqraz.8clie_HF.odHJhT93R2wKiDRZ7NnlgSKFBUHr8c4o8Z9Sh0.k.VbJohCHvj0hNBXXyCQU95PM9V9Iaqom6eXiMckj0eitYJzRigF_nQ4QvQnLZwDeoQho7_wr7tC5.oqgNbsymcmD1xawUNsz6Kzn8Gg3PSTh2TBWQUa0ntrd_9Ea6."};var
-      cpo = document.createElement(''script'');cpo.src = ''/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=8f0efe2ec99f3156'';window._cf_chl_opt.cOgUHash
-      = location.hash === '''' && location.href.indexOf(''#'') !== -1 ? ''#'' : location.hash;window._cf_chl_opt.cOgUQuery
-      = location.search === '''' && location.href.slice(0, location.href.length -
-      window._cf_chl_opt.cOgUHash.length).indexOf(''?'') !== -1 ? ''?'' : location.search;if
-      (window.history && window.history.replaceState) {var ogU = location.pathname
-      + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null,
-      null, "\/action\/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dallen&__cf_chl_rt_tk=.o4i_z4XkgRZ29HIXh3QQLiDv0Yqzyq77get7sz70nQ-1734019914-1.0.1.1-fxCj9uKyBrAlZhPXjflKsfNB5Yevfw_qrL.9lm57N9g"
-      + window._cf_chl_opt.cOgUHash);cpo.onload = function() {history.replaceState(null,
-      null, ogU);}}document.getElementsByTagName(''head'')[0].appendChild(cpo);}());</script></body></html>'
-    content_type: text/plain
-    headers:
-      Accept-CH: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile,
-        Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List,
-        Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile,
-        UA-Model, UA-Platform-Version, UA-Platform, UA
-      CF-RAY: 8f0efe2ec99f3156-DFW
-      Cache-Control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0,
-        pre-check=0
-      Critical-CH: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile,
-        Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List,
-        Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile,
-        UA-Model, UA-Platform-Version, UA-Platform, UA
-      Cross-Origin-Embedder-Policy: require-corp
-      Cross-Origin-Opener-Policy: same-origin
-      Cross-Origin-Resource-Policy: same-origin
-      Expires: Thu, 01 Jan 1970 00:00:01 GMT
-      Origin-Agent-Cluster: ?1
-      Permissions-Policy: accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()
-      Referrer-Policy: same-origin
-      Strict-Transport-Security: max-age=15552000
-      Transfer-Encoding: chunked
-      Vary: Accept-Encoding
-      X-Content-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      alt-svc: h3=":443"; ma=86400
-      cf-chl-out: 5g18ZI+kG+Z/bywX6h15S5+WXuTz9qppOWkI7ZFf0zUW3DWJWsvJ+enM1Xw4AOYbfLiliXfzszH+VV7U77OqssJP/LV5Io/mLDxtmI2GbE2ipbjh26aQcvIcL9EB0+A5UXEadhlkRPbscvAARafbCg==$BZstaLMVPaRmAdqY5bJ+5g==
-      cf-mitigated: challenge
-    method: GET
-    status: 403
-    url: https://onlinelibrary.wiley.com/action/oidcStart?redirectUri=%2Faction%2Fsru%3FmaximumRecords%3D10%26query%3Ddc.contributor%253Dallen
+    status: 200
+    url: https://onlinelibrary.wiley.com/action/sru?maximumRecords=2&query=dc.contributor%3Drichard+feynman
