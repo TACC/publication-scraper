@@ -11,6 +11,7 @@ BASE_URL = config.ELSEVIER_URL
 load_dotenv()
 api_key = os.getenv("ELSEVIER")
 
+
 @pytest.fixture
 def mock_api():
     with responses.RequestsMock() as rsps:
@@ -18,8 +19,14 @@ def mock_api():
 
 
 def mock_Elsevier_response(entries):
-    """Helper function to generate mock JSON response."""
-    return {"feed": {"entries": entries}}
+    return json.dumps(
+        {
+            "search-results": {
+                "entry": entries,
+                "opensearch:totalResults": str(len(entries)),
+            }
+        }
+    )
 
 
 def test_skip_empty_name(mock_api):
@@ -56,7 +63,7 @@ def test_partial_empty_input(mock_api):
                     "prism:coverDate": "2024-01-01",
                     "prism:publicationName": "Sample Journal",
                     "subtypeDescription": "Research Article",
-                    "author": [{"authname": "Albert"}],                     
+                    "author": [{"authname": "Albert"}],
                 }
             ]
         ),
@@ -85,7 +92,7 @@ def test_search_all_names(mock_api):
                     "prism:coverDate": "2024-01-01",
                     "prism:publicationName": "Sample Journal",
                     "subtypeDescription": "Research Article",
-                    "author": [{"authname": "Albert"}],  
+                    "author": [{"authname": "Albert"}],
                 }
             ]
         ),
@@ -107,7 +114,7 @@ def test_search_all_names(mock_api):
                     "prism:coverDate": "2024-01-01",
                     "prism:publicationName": "Sample Journal",
                     "subtypeDescription": "Research Article",
-                    "author": [{"authname": "Joe"}],                   
+                    "author": [{"authname": "Joe"}],
                 }
             ]
         ),
@@ -179,29 +186,25 @@ def test_limit_number_of_results(mock_api):
                 }
             )
         ],
-        body=json.dumps(
-            {
-                "search-results": {
-                    "entry": [
-                        {
-                            "prism:doi": "doi1",
-                            "dc:title": "Sample Paper 1",
-                            "prism:coverDate": "2024-01-01",
-                            "prism:publicationName": "Sample Journal",
-                            "subtypeDescription": "Research Article",
-                            "author": [{"authname": "Timothy C. Moore"}],
-                        },
-                        {
-                            "prism:doi": "doi2",
-                            "dc:title": "Sample Paper 2",
-                            "prism:coverDate": "2024-01-01",
-                            "prism:publicationName": "Sample Journal",
-                            "subtypeDescription": "Research Article",
-                            "author": [{"authname": "Timothy C. Moore"}],
-                        },
-                    ]
-                }
-            }
+        body=mock_Elsevier_response(
+            [
+                {
+                    "prism:doi": "doi1",
+                    "dc:title": "Sample Paper 1",
+                    "prism:coverDate": "2024-01-01",
+                    "prism:publicationName": "Sample Journal",
+                    "subtypeDescription": "Research Article",
+                    "author": [{"authname": "Timothy C. Moore"}],
+                },
+                {
+                    "prism:doi": "doi1",
+                    "dc:title": "Sample Paper 2",
+                    "prism:coverDate": "2024-01-01",
+                    "prism:publicationName": "Sample Journal",
+                    "subtypeDescription": "Research Article",
+                    "author": [{"authname": "Timothy C. Moore"}],
+                },
+            ]
         ),
         status=200,
     )
@@ -226,24 +229,21 @@ def test_initials_lastname(mock_api):
                 }
             )
         ],
-        body=json.dumps(
-            {
-                "search-results": {
-                    "entry": [
-                        {
-                            "prism:doi": "doi1",
-                            "dc:title": "Disrupted Circadian Rhythms and Substance Use Disorders: A Narrative Review",
-                            "prism:coverDate": "2024-01-01",
-                            "prism:publicationName": "Sample Journal",
-                            "subtypeDescription": "Research Article",
-                            "author": [{"authname": "Randy J. Nelson"}],
-                        },
-                    ]
-                }
-            }
+        body=mock_Elsevier_response(
+            [
+                {
+                    "prism:doi": "doi1",
+                    "dc:title": "Sample Paper 1",
+                    "prism:coverDate": "2024-01-01",
+                    "prism:publicationName": "Sample Journal",
+                    "subtypeDescription": "Research Article",
+                    "author": [{"authname": "Randy J. Nelson"}],
+                },
+            ]
         ),
         status=200,
     )
+
     results = Elsevier.search_multiple_authors(["Randy J. Nelson"])
-    assert len(results["Randy J. Nelson"]) > 0
-    assert (results["Randy J. Nelson"][0]["title"] == "Disrupted Circadian Rhythms and Substance Use Disorders: A Narrative Review")
+    assert len(results["Randy J. Nelson"] ) > 0
+    assert results["Randy J. Nelson"][0]["title"] == "Sample Paper 1"
