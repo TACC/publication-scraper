@@ -14,4 +14,5 @@ ARXIV_URL = "http://export.arxiv.org/api/query"
 PLOS_URL = "https://api.plos.org/search"
 CROSSREF_URL = "https://api.crossref.org/works"
 
-API_LIST = ["Elsevier", "IEEE", "MDPI", "PubMed", "Springer", "Wiley", "arXiv", "PLOS", "CrossRef"]
+WS_NAME = "Sheet1"
+TIME_SLEEP = 0.4

@@ -7,11 +7,7 @@ from dateutil.parser import parse
 from pubscraper.APIClasses.Base import Base
 import pubscraper.config as config
 
-LOG_FORMAT = config.LOGGER_FORMAT_STRING
-LOG_LEVEL = config.LOGGER_LEVEL
-logging.basicConfig(level=LOG_LEVEL, format=LOG_FORMAT)
 logger = logging.getLogger(__name__)
-
 
 class ArXiv(Base):
     def __init__(self):

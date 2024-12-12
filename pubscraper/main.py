@@ -165,7 +165,7 @@ def main(
     logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
     try:
         authors_workbook = load_workbook(filename=input_file, read_only=True)
-        worksheet = authors_workbook["Sheet1"]
+        worksheet = authors_workbook[config.WS_NAME]
         rows = worksheet.rows
 
         name_dict = {}
@@ -211,7 +211,7 @@ def main(
 
         results.update({author: authors_pubs})
         authors_and_pubs.append(results)
-        time.sleep(0.4)
+        time.sleep(config.TIME_SLEEP)
 
     """
     Using TabLib to format data in specified format
