@@ -2,7 +2,6 @@ import json
 import logging
 import time
 import os
-import sys
 import tablib
 
 from openpyxl import load_workbook
@@ -61,6 +60,17 @@ def set_log_file(ctx, param, value):
     return value
 
 
+def list_configured_apis(ctx, param, value):
+    """
+    Callback function for click that lists available APIs
+    """
+    if value:
+        click.secho("Available endpoints:", underline=True)
+        for endpoint in APIS.keys():
+            click.secho(f"  {endpoint}", fg="blue")
+        ctx.exit()
+
+
 @click.command()
 @click.version_option(__version__)
 @click.option(
@@ -112,6 +122,8 @@ def set_log_file(ctx, param, value):
     "list_apis",
     is_flag=True,
     default=False,
+    is_eager=True,
+    callback=list_configured_apis,
     help="Display APIs configured for search queries",
 )
 @click.option(
@@ -149,12 +161,6 @@ def main(
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
-
-    if list_apis:
-        click.secho("Available endpoints:", underline=True)
-        for endpoint in APIS.keys():
-            click.secho(f"  {endpoint}", fg="blue")
-        exit(0)
 
     logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
     try:
