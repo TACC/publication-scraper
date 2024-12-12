@@ -38,7 +38,8 @@ def test_print_version(runner):
 
 def test_bad_input_file(runner):
     result = runner.invoke(main.main, ["-i nonexistent_input.txt"])
-    assert result.exit_code == 1
+    # exit code 2 is most commonly a usage error in Click
+    assert result.exit_code == 2
 
 
 def test_bad_api_selection(runner):
