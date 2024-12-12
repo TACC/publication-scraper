@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+export $(cat .env | grep "VERSION" | xargs)
+
 IMAGENAME="joeleehen/pubscraper"
 IMAGEVERSION=${IMAGEVERSION:-latest}
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
