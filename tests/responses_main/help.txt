@@ -13,7 +13,7 @@ Options:
                                   Specify APIs to query  [default: PubMed,
                                   ArXiv, MDPI, Elsevier, Springer, Wiley,
                                   CrossRef, PLOS]
-  --list                          List APIs available for querying
+  --list                          Display APIs configured for search queries
   -f, --format [json|csv|xlsx]    Select the output format from: csv, xlsx, or
                                   json.  [default: json]
   -cd, --cutoff_date TEXT         Specify the latest date to pull publications.
