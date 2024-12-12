@@ -161,9 +161,11 @@ Springer,Dan Stanzione,10.1007/s44290-024-00034-6,Discover Civil Engineering,Art
 - Python >=3.12
 - Poetry (using [asdf-poetry](https://github.com/asdf-community/asdf-poetry) is recommended)
 - poetry-bumpversion plugin
-  ```console
-  > poetry self add poetry-bumpversion
-  ```
+```console
+> git clone git@github.com:tacc/publication-scraper.git
+> cd publication-scraper
+> poetry self add poetry-bumpversion
+```
 
 Before developing, first install the script with developmend dependencies:
 ```console
