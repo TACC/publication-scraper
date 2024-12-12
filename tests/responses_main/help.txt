@@ -5,7 +5,7 @@ Options:
   --log-level [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
                                   Set the log level  [default: 20]
   --log-file PATH                 Set the log file
-  -i, --input_file TEXT           Specify input file
+  -i, --input_file PATH           Specify input file
   -o, --output_file TEXT          Specify output file
   -n, --number INTEGER            Specify max number of publications to receive
                                   for each author

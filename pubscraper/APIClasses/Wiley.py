@@ -21,11 +21,13 @@ class Wiley(Base):
         """
         self.base_url = config.WILEY_URL
 
-    def get_publications_by_author(self, author_name, rows=10):
+    def _get_publications_by_author(self, author_name, rows=10):
         logging.debug(f"requesting {rows} publications from {author_name}")
 
         if not author_name.strip():
-            logging.warning("Received empty string for author name in search query, returning None")
+            logging.warning(
+                "Received empty string for author name in search query, returning None"
+            )
             return None
 
         # Standardize the author name for query and Construct the full URL
@@ -96,7 +98,7 @@ class Wiley(Base):
             except Exception as e:
                 logging.warning(f"Error parsing publication date: {e}")
                 publication_date = None
-                
+
             part_of = (
                 part_of_elem.text.strip()
                 if part_of_elem is not None and part_of_elem.text
@@ -128,7 +130,7 @@ def search_multiple_authors(authors, limit=10):
             continue
         try:
             # Get publications for each author
-            publications = wiley_api.get_publications_by_author(author, rows=limit)
+            publications = wiley_api._get_publications_by_author(author, rows=limit)
             all_results[author] = publications if publications else []
         except Exception as e:
             logging.error(f"Error fetching data for {author}: {e}")

@@ -2,6 +2,7 @@ import json
 import logging
 import time
 import os
+import sys
 import tablib
 
 from openpyxl import load_workbook
@@ -82,10 +83,10 @@ def set_log_file(ctx, param, value):
     "-i",
     "--input_file",
     type=click.Path(exists=True),
-    default="data/example_input.xlsx",
+    default="example_input.xlsx",
     help="Specify input file",
 )
-@click.option("-o", "--output_file", default="data/output", help="Specify output file")
+@click.option("-o", "--output_file", default="output", help="Specify output file")
 @click.option(
     "-n",
     "--number",
@@ -128,13 +129,23 @@ def set_log_file(ctx, param, value):
     "--cutoff_date",
     "-cd",
     type=str,
-    default= None,
+    default=None,
     show_default=True,
-    help="Specify the latest date to pull publications. Example input: 2024 or 2024-05 or 2024-05-10."
+    help="Specify the latest date to pull publications. Example input: 2024 or 2024-05 or 2024-05-10.",
 )
 
 # TODO: batch author names to circumvent rate limits?
-def main(log_level, log_file, input_file, number, output_file, apis, list_apis, format, cutoff_date):
+def main(
+    log_level,
+    log_file,
+    input_file,
+    number,
+    output_file,
+    apis,
+    list_apis,
+    format,
+    cutoff_date,
+):
     logger.debug(f"Logging is set to level {logging.getLevelName(log_level)}")
     if log_file:
         logger.debug(f"Writing logs to {log_file}")
@@ -142,8 +153,8 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
     if list_apis:
         click.secho("Available endpoints:", underline=True)
         for endpoint in APIS.keys():
-            click.secho(f" {endpoint}", fg="blue")
-        return 0
+            click.secho(f"  {endpoint}", fg="blue")
+        exit(0)
 
     logger.info(f"Querying the following APIs:\n{(", ").join(apis)}")
     try:
@@ -226,27 +237,29 @@ def main(log_level, log_file, input_file, number, output_file, apis, list_apis, 
             for pub in publications:
                 if isinstance(pub, dict):  # Only process dictionary entries
                     # Safely fetch values using .get to avoid KeyError, defaulting to 'N/A' if the key is missing
-                    dataset.append([
-                        pub.get('from', 'N/A'),
-                        author,
-                        pub.get('doi', 'N/A'),
-                        pub.get('journal', 'N/A'),
-                        pub.get('content_type', 'N/A'),
-                        pub.get('publication_date', 'N/A'),
-                        pub.get('title', 'N/A'),
-                        pub.get('authors', 'N/A')
-                    ])
+                    dataset.append(
+                        [
+                            pub.get("from", "N/A"),
+                            author,
+                            pub.get("doi", "N/A"),
+                            pub.get("journal", "N/A"),
+                            pub.get("content_type", "N/A"),
+                            pub.get("publication_date", "N/A"),
+                            pub.get("title", "N/A"),
+                            pub.get("authors", "N/A"),
+                        ]
+                    )
 
-    if format == 'xlsx':
+    if format == "xlsx":
         with open(f"output.{format}", "wb") as f:
-            f.write(dataset.export('xlsx'))
+            f.write(dataset.export("xlsx"))
     else:
-        with open(f'output.{format}', 'w') as f:
-            if format == 'csv':
-                f.write(dataset.export('csv'))
-            elif format == 'json':
+        with open(f"output.{format}", "w") as f:
+            if format == "csv":
+                f.write(dataset.export("csv"))
+            elif format == "json":
                 json.dump(authors_and_pubs, f, indent=4)
-    
+
     logger.info(f"Data successfully exported to {output_file}.{format}")
 
     return 0

@@ -1,5 +1,5 @@
 Available endpoints:
-  Pubmed
+  PubMed
   ArXiv
   MDPI
   Elsevier
