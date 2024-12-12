@@ -1,0 +1,16 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+tests/__pycache__/
+pubscraper/APIClasses/__pycache__/
+pubscraper/__pycache__
+bin/
+lib/
+pyvenv.cfg
+include/
+*/.coverage
+.coverage
+secrets.json
+__pycache__/
+dist/
+.DS_Store
+output.*
+.env

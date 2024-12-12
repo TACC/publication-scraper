@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "pubscraper"
+version = "0.7.0"
+description = "A tool designed to pull publication information from various publishers associated with a given author name"
+authors = ["Magret Adekunle <ma57489@my.utexas.edu>", "Joseph Hendrix <jlh7459@my.utexas.edu"]
+readme = "README.md"
+packages = [{include = "pubscraper"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+click = "^8.1.7"
+click-loglevel = "^0.5.0"
+openpyxl = "^3.1.5"
+python-dotenv = "^1.0.1"
+tablib = {extras = ["all"], version = "^3.7.0"}
+python-dateutil = "^2.9.0.post0"
+
+[tool.poetry.scripts]
+pubscraper = "pubscraper.main:main"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+responses = "^0.25.3"
+pytest-cov = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+pythonpath = ["pubscraper/APIClasses"]
+testpaths = ["tests"]
+
+[tool.poetry_bumpversion.file."pubscraper/version.py"]
+[tool.poetry_bumpversion.file.".env"]

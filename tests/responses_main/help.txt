@@ -1,0 +1,21 @@
+Usage: main [OPTIONS]
+
+Options:
+  --version                       Show the version and exit.
+  --log-level [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
+                                  Set the log level  [default: 20]
+  --log-file PATH                 Set the log file
+  -i, --input_file PATH           Specify input file
+  -o, --output_file TEXT          Specify output file
+  -n, --number INTEGER            Specify max number of publications to receive
+                                  for each author
+  -a, --apis [PubMed|ArXiv|MDPI|Elsevier|Springer|Wiley|CrossRef|PLOS]
+                                  Specify APIs to query  [default: PubMed,
+                                  ArXiv, MDPI, Elsevier, Springer, Wiley,
+                                  CrossRef, PLOS]
+  --list                          Display APIs configured for search queries
+  -f, --format [json|csv|xlsx]    Select the output format from: csv, xlsx, or
+                                  json.  [default: json]
+  -cd, --cutoff_date TEXT         Specify the latest date to pull publications.
+                                  Example input: 2024 or 2024-05 or 2024-05-10.
+  --help                          Show this message and exit.
