@@ -22,7 +22,14 @@ jobs:
         with:
             virtualenvs-in-project: false
             virtualenvs-path: ~/.virtualenvs
-    
+
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          directory: project
+          file_name: .env
+          envkey_ELSEVIER: "dummykey"
+
       - name: Cache Poetry virtualenv
         uses: actions/cache@v3
         id: cache
