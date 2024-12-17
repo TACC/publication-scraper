@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pubscraper"
-version = "0.7.0"
+version = "0.7.1"
 description = "A tool designed to pull publication information from various publishers associated with a given author name"
 authors = ["Magret Adekunle <ma57489@my.utexas.edu>", "Joseph Hendrix <jlh7459@my.utexas.edu"]
 readme = "README.md"
