@@ -245,5 +245,5 @@ def test_initials_lastname(mock_api):
     )
 
     results = Elsevier.search_multiple_authors(["Randy J. Nelson"])
-    assert len(results["Randy J. Nelson"] ) > 0
+    assert len(results["Randy J. Nelson"]) > 0
     assert results["Randy J. Nelson"][0]["title"] == "Sample Paper 1"
