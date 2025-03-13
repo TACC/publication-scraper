@@ -14,13 +14,7 @@ from pubscraper.version import __version__
 import pubscraper.config as config
 
 from pubscraper.APIClasses.PubMed import PubMed
-from pubscraper.APIClasses.arXiv import ArXiv
-from pubscraper.APIClasses.MDPI import MDPI
-from pubscraper.APIClasses.Elsevier import Elsevier
-from pubscraper.APIClasses.Springer import Springer
-from pubscraper.APIClasses.Wiley import Wiley
 from pubscraper.APIClasses.CrossRef import CrossRef
-from pubscraper.APIClasses.PLOS import PLOS
 
 
 LOG_FORMAT = config.LOGGER_FORMAT_STRING
@@ -30,13 +24,7 @@ logger = logging.getLogger(__name__)
 
 APIS = {
     "PubMed": PubMed(),
-    "ArXiv": ArXiv(),
-    "MDPI": MDPI(),
-    "Elsevier": Elsevier(),
-    "Springer": Springer(),
-    "Wiley": Wiley(),
     "CrossRef": CrossRef(),
-    "PLOS": PLOS(),
 }
 
 
