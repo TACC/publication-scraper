@@ -15,6 +15,7 @@ openpyxl = "^3.1.5"
 python-dotenv = "^1.0.1"
 tablib = {extras = ["all"], version = "^3.7.0"}
 python-dateutil = "^2.9.0.post0"
+ratelimit = "^2.2.1"
 
 [tool.poetry.scripts]
 pubscraper = "pubscraper.main:main"
