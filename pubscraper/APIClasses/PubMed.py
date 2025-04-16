@@ -14,9 +14,7 @@ logger = logging.getLogger(__name__)
 class PubMed(Base):
     def __init__(self):
         self.search_url = config.PUBMED_SEARCH_URL
-        self.summary_url = config.PUBMED_SUMMARY_URL
-        self.fetch_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"  # Add efetch URL
-        # Add rate limit info to debug output
+        self.fetch_url = config.PUBMED_FETCH_URL
         logging.debug(f"PubMed API rate limit: 2 requests per second (API limit is 3/second)")
 
     @sleep_and_retry
@@ -89,24 +87,12 @@ class PubMed(Base):
         logging.info(f"No publications found for author: {author_name}")
         return None
 
-    def _extract_DOI(self, summary_object) -> str:
+    def _get_publication_details(self, UIDs, author_name=None):
         """
-        Given a JSON object of a publication, extract and return the DOI
-        :params summary_object: JSON result from PubMed eSummary
-        :return: DOI of the article as a string
-        """
-        articleids = summary_object.get("articleids", [])
-        for id in articleids:
-            if id["idtype"] == "doi":
-                return id["value"]
-
-        return ""
-
-    def _get_detailed_info(self, UIDs):
-        """
-        Get detailed publication information including affiliations using efetch
+        Get detailed publication information using efetch
         :params UIDs: list of UIDs
-        :return: detailed publication data
+        :params author_name: name of author to check affiliations for
+        :return: list of publication dictionaries
         """
         if not UIDs:
             return None
@@ -114,143 +100,69 @@ class PubMed(Base):
         params = {
             "db": "pubmed",
             "id": ",".join(UIDs),
-            "retmode": "xml"  # efetch works better with XML for detailed data
+            "retmode": "xml"
         }
 
         try:
             response = self._make_request(self.fetch_url, params=params)
-            # We'll need to parse XML response to get affiliations
             from xml.etree import ElementTree as ET
             root = ET.fromstring(response.text)
             
-            pub_details = {}
-            for article in root.findall(".//PubmedArticle"):
-                pmid = article.find(".//PMID").text
-                affiliations = []
-                
-                # Get all author affiliations
-                author_list = article.findall(".//Author")
-                for author in author_list:
-                    author_name_elements = []
-                    last_name = author.find("LastName")
-                    fore_name = author.find("ForeName")
-                    if last_name is not None:
-                        author_name_elements.append(last_name.text)
-                    if fore_name is not None:
-                        author_name_elements.append(fore_name.text)
-                    author_name = " ".join(author_name_elements)
-
-                    # Get affiliations for this author
-                    aff_list = author.findall(".//AffiliationInfo/Affiliation")
-                    author_affiliations = [aff.text for aff in aff_list if aff.text]
-                    
-                    if author_affiliations:
-                        affiliations.append({
-                            "author": author_name,
-                            "affiliations": author_affiliations
-                        })
-                
-                pub_details[pmid] = affiliations
-                
-            return pub_details
-        except Exception as e:
-            logging.error(f"Error fetching detailed info: {e}")
-            return None
-
-    def _check_ut_affiliation(self, affiliations):
-        """
-        Check if any affiliation contains UT system keywords
-        :param affiliations: List of affiliation dictionaries
-        :return: Boolean indicating if UT system affiliation is present
-        """
-        if not affiliations:
-            return False
-        
-        for author_info in affiliations:
-            for affiliation in author_info.get('affiliations', []):
-                if not affiliation:
-                    continue
-                if 'university of texas' in affiliation.lower():
-                    logging.debug(f"Found UT affiliation: {affiliation}")
-                    return True
-        
-        return False
-
-    def _get_summary_by_UIDs(self, UIDs):
-        """
-        Given a list of UIDs, retrieve summary information for each UID
-        :params UIDs: a list of UIDs
-        :return: a list of publication objects/dicts holding summary data
-        """
-        if not UIDs:
-            logging.debug("No UIDs provided to fetch summaries")
-            return None
-
-        # Get basic summary data
-        params = {
-            "db": "pubmed",
-            "id": ",".join(UIDs),
-            "retmode": "JSON"
-        }
-
-        try:
-            # Get both summary and detailed (affiliation) data
-            response = self._make_request(self.summary_url, params=params)
-            data = response.json()
-            
-            # Get detailed info including affiliations
-            detailed_info = self._get_detailed_info(UIDs)
-            
             publications = []
-            if "result" in data:
-                result = data["result"]
-                if isinstance(result, dict) and "uids" in result:
-                    for uid in result["uids"]:
-                        try:
-                            summary_object = result[uid]
-                            
-                            # Skip if no detailed info available
-                            if not detailed_info or uid not in detailed_info:
-                                logging.debug(f"No detailed info for publication {uid}")
-                                continue
-                            
-                            # Check for UT system affiliation
-                            affiliations = detailed_info.get(uid, [])
-                            if not self._check_ut_affiliation(affiliations):
-                                logging.debug(f"Publication {uid} has no UT system affiliation")
-                                continue
+            for article in root.findall(".//PubmedArticle"):
+                try:
+                    # Extract only necessary information
+                    title = article.find(".//ArticleTitle").text
+                    journal = article.find(".//Journal/Title").text
+                    doi = next((id_elem.text for id_elem in article.findall(".//ArticleId") if id_elem.get("IdType") == "doi"), "")
+                    
+                    # Get publication date
+                    pub_date = article.find(".//PubDate")
+                    year = pub_date.find("Year")
+                    month = pub_date.find("Month")
+                    day = pub_date.find("Day")
+                    publication_date = f"{year.text if year is not None else ''}-{month.text if month is not None else ''}-{day.text if day is not None else ''}"
+                    
+                    # Get authors and affiliations
+                    authors = []
+                    affiliations = []
+                    for author in article.findall(".//Author"):
+                        last_name = author.find("LastName")
+                        fore_name = author.find("ForeName")
+                        author_name = " ".join(filter(None, [fore_name.text if fore_name is not None else '', last_name.text if last_name is not None else '']))
+                        authors.append(author_name)
 
-                            # Get basic publication info
-                            author_list = []
-                            if "authors" in summary_object:
-                                for author in summary_object.get("authors", []):
-                                    if isinstance(author, dict) and "name" in author:
-                                        author_list.append(author["name"])
+                        # Get affiliations for this author
+                        aff_list = author.findall(".//AffiliationInfo/Affiliation")
+                        author_affiliations = [aff.text for aff in aff_list if aff.text]
+                        
+                        if author_affiliations:
+                            affiliations.append({
+                                "author": author_name,
+                                "affiliations": author_affiliations
+                            })
 
-                            # Get publication date
-                            publication_date = None
-                            if "sortdate" in summary_object:
-                                try:
-                                    publication_date = parse(summary_object["sortdate"]).strftime("%Y-%m-%d")
-                                except Exception as e:
-                                    logging.warning(f"Error parsing date: {e}")
+                    # Check for UT system affiliation
+                    if not self._check_ut_affiliation(affiliations, author_name):
+                        continue
 
-                            pub = {
-                                "from": "PubMed",
-                                "journal": summary_object.get("fulljournalname", ""),
-                                "publication_date": publication_date,
-                                "title": summary_object.get("title", ""),
-                                "authors": ",".join(author_list) if author_list else "",
-                                "affiliations": affiliations,
-                                "doi": self._extract_DOI(summary_object),
-                            }
-                            publications.append(pub)
-                        except Exception as e:
-                            logging.warning(f"Error processing publication {uid}: {e}")
-                            continue
+                    pub = {
+                        "from": "PubMed",
+                        "journal": journal,
+                        "publication_date": publication_date,
+                        "title": title,
+                        "authors": ",".join(authors),
+                        "affiliations": affiliations,
+                        "doi": doi
+                    }
+                    publications.append(pub)
+                    
+                except Exception as e:
+                    logging.warning(f"Error processing article: {e}")
+                    continue
 
             if publications:
-                logging.info(f"Successfully processed {len(publications)} publications with UT system affiliations")
+                logging.info(f"Successfully processed {len(publications)} publications")
                 return publications
             else:
                 logging.warning("No publications with UT system affiliations found")
@@ -260,13 +172,37 @@ class PubMed(Base):
             logging.error(f"Error fetching data from PubMed: {e}")
             return None
 
+    def _check_ut_affiliation(self, affiliations, author_name=None):
+        """
+        Check if any affiliation contains UT system keywords
+        If author_name is provided, check only that specific author's affiliation
+        :param affiliations: List of affiliation dictionaries
+        :param author_name: Optional name of the specific author to check
+        :return: Boolean indicating if UT system affiliation is present
+        """
+        if not affiliations:
+            return False
+        
+        for author_info in affiliations:
+            # If author_name is provided, only check that specific author
+            if author_name and not author_info['author'].lower().startswith(author_name.lower().split()[0].lower()):
+                continue
+                
+            for affiliation in author_info.get('affiliations', []):
+                if not affiliation:
+                    continue
+                if 'university of texas' in affiliation.lower():
+                    logging.debug(f"Found UT affiliation for {author_info['author']}: {affiliation}")
+                    return True
+        
+        return False
+
     def get_publications_by_author(self, author_name, rows=10):
         """
-        Given the name of an author, search PubMed Central for
-        works written by that author name
+        Given the name of an author, search PubMed for works written by that author
         :params author_name: name of author to search
         :params rows: maximum number of publications to return (default is 10)
-        :return: a list of publication objects/dicts holding summary data for each publication
+        :return: a list of publication objects/dicts holding data for each publication
         """
         logging.debug(f"Fetching publications for author: {author_name}")
         UIDs = self._get_UIDs_by_author(author_name, rows)
@@ -274,10 +210,10 @@ class PubMed(Base):
             logging.info(f"No publications found for {author_name}")
             return None
         
-        summary_info = self._get_summary_by_UIDs(UIDs)
-        if summary_info:
-            logging.debug(f"Successfully retrieved {len(summary_info)} publication summaries")
-        return summary_info
+        publications = self._get_publication_details(UIDs, author_name)
+        if publications:
+            logging.debug(f"Successfully retrieved {len(publications)} publications")
+        return publications
 
 
 def search_multiple_authors(authors, rows=10):
